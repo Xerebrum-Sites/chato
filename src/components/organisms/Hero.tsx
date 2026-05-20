@@ -41,7 +41,8 @@ export function Hero() {
     let step = 0;
     const run = () => {
       if (step < incomingMessages.length) {
-        setVisibleMessages((prev) => [...prev, incomingMessages[step].id]);
+        const id = incomingMessages[step].id;
+        setVisibleMessages((prev) => [...prev, id]);
         step++;
       } else if (step === incomingMessages.length) {
         setTimeout(() => setTelegramVisible(true), 400);
