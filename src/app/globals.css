@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-violet-50: #f5f3ff;
-  --color-violet-100: #ede9fe;
-  --color-violet-200: #ddd6fe;
-  --color-violet-300: #c4b5fd;
-  --color-violet-400: #a78bfa;
-  --color-violet-500: #8b5cf6;
-  --color-violet-600: #7c3aed;
-  --color-violet-700: #6d28d9;
-  --color-violet-800: #5b21b6;
-  --color-violet-900: #4c1d95;
+  /* Paleta de marca extraída del logo: naranja → coral → magenta */
+  --color-violet-50:  #fff8f2;
+  --color-violet-100: #ffe8d0;
+  --color-violet-200: #ffd0a8;
+  --color-violet-300: #ffb080;
+  --color-violet-400: #e87868;
+  --color-violet-500: #d44060;
+  --color-violet-600: #be146e;   /* magenta del logo — color CTA primario */
+  --color-violet-700: #9a0d58;   /* hover */
+  --color-violet-800: #780948;
+  --color-violet-900: #4d0530;
 
   --color-cyan-400: #22d3ee;
   --color-cyan-500: #06b6d4;
@@ -44,30 +45,30 @@
     background: #f1f1f1;
   }
   ::-webkit-scrollbar-thumb {
-    background: #7c3aed;
+    background: #be146e;
     border-radius: 3px;
   }
 
   :focus-visible {
-    outline: 2px solid #7c3aed;
+    outline: 2px solid #be146e;
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
 
 @utility gradient-primary {
-  background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 50%, #06b6d4 100%);
+  background: linear-gradient(135deg, #ff9600 0%, #e65a64 50%, #be146e 100%);
 }
 
 @utility gradient-text {
-  background: linear-gradient(135deg, #6d28d9, #06b6d4);
+  background: linear-gradient(135deg, #ff9600, #be146e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 @utility gradient-bg {
-  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 30%, #cffafe 100%);
+  background: linear-gradient(135deg, #fff8f2 0%, #ffe8d0 30%, #e0f7fa 100%);
 }
 
 @utility glass {
@@ -78,11 +79,11 @@
 }
 
 @utility shadow-glow {
-  box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 40px rgba(190, 20, 110, 0.25);
 }
 
 @utility shadow-glow-sm {
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 0 20px rgba(190, 20, 110, 0.18);
 }
 
 @utility text-balance {

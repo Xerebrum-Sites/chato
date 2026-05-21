@@ -14,7 +14,7 @@ const conversations: { channel: Channel; label: string; customerMsg: string; own
   { channel: "web", label: "Web Chat", customerMsg: "¿Cuál es el precio del plan mensual?", ownerReply: "El Básico arranca en solo $9/mes 🚀" },
 ];
 
-const channelHex: Record<Channel, string> = { whatsapp: "#25D366", instagram: "#C13584", facebook: "#1877F2", web: "#7C3AED" };
+const channelHex: Record<Channel, string> = { whatsapp: "#25D366", instagram: "#C13584", facebook: "#1877F2", web: "#be146e" };
 const channelBg: Record<Channel, string> = {
   whatsapp: "bg-[#25D366]",
   instagram: "bg-gradient-to-br from-[#f09433] to-[#bc1888]",
@@ -45,7 +45,7 @@ function SvgIcon({ cx, cy, id }: { cx: number; cy: number; id: string }) {
 }
 
 function RobotIcon({ cx, cy }: { cx: number; cy: number }) {
-  const c = "#7C3AED";
+  const c = "#be146e";
   return (
     <g opacity={0.52}>
       <rect x={cx - 0.8} y={cy - 13} width={1.6} height={4} fill={c} />
@@ -86,7 +86,7 @@ const BG_CH = [
   { id: "whatsapp",  color: "#25D366", label: "WhatsApp",  y: 222 },
   { id: "instagram", color: "#C13584", label: "Instagram", y: 278 },
   { id: "facebook",  color: "#1877F2", label: "Facebook",  y: 352 },
-  { id: "web",       color: "#7C3AED", label: "Web Chat",  y: 408 },
+  { id: "web",       color: "#be146e", label: "Web Chat",  y: 408 },
 ] as const;
 // avg y = (222+278+352+408)/4 = 1260/4 = 315 ✓
 
@@ -112,9 +112,9 @@ function FlowBackground() {
       ];
     }),
     // Bot output — 2 paths, periodic
-    ["bg-bot-0", "#7C3AED", "3.0s", "1.5s",  3.0, 0.28],
-    ["bg-bot-1", "#7C3AED", "3.0s", "7.0s",  3.0, 0.28],
-    ["bg-bot-0", "#7C3AED", "3.0s", "12.5s", 3.0, 0.28],
+    ["bg-bot-0", "#be146e", "3.0s", "1.5s",  3.0, 0.28],
+    ["bg-bot-1", "#be146e", "3.0s", "7.0s",  3.0, 0.28],
+    ["bg-bot-0", "#be146e", "3.0s", "12.5s", 3.0, 0.28],
     // Human output — Telegram blue, larger, less frequent
     ["bg-hum-0", "#2AABEE", "3.2s", "4.5s",  4.0, 0.40],
     ["bg-hum-1", "#2AABEE", "3.2s", "14.5s", 4.0, 0.40],
@@ -145,7 +145,7 @@ function FlowBackground() {
         {/* ── Section labels ────────────────────────────── */}
         <text x={LX}    y={42} textAnchor="middle" fontSize={8.5} fill="#9CA3AF" fillOpacity={0.48}
           fontFamily="system-ui,sans-serif" fontWeight={500} letterSpacing="1.5">MENSAJES</text>
-        <text x={HUB.x} y={42} textAnchor="middle" fontSize={8.5} fill="#7C3AED" fillOpacity={0.30}
+        <text x={HUB.x} y={42} textAnchor="middle" fontSize={8.5} fill="#be146e" fillOpacity={0.30}
           fontFamily="system-ui,sans-serif" fontWeight={600} letterSpacing="1.5">CHATÓ HUB</text>
         <text x={RX}    y={42} textAnchor="middle" fontSize={8.5} fill="#9CA3AF" fillOpacity={0.48}
           fontFamily="system-ui,sans-serif" fontWeight={500} letterSpacing="1.5">RESPUESTAS</text>
@@ -165,13 +165,13 @@ function FlowBackground() {
 
         {/* ── HUB → BOT branch (output independiente, sube) ── */}
         <line x1={HUB.x + 28} y1={HUB.y} x2={BOT_FRK} y2={HUB.y}
-          stroke="#7C3AED" strokeOpacity={0.10} strokeWidth={1.2} />
+          stroke="#be146e" strokeOpacity={0.10} strokeWidth={1.2} />
         <line x1={BOT_FRK} y1={HUB.y} x2={BOT_FRK} y2={BOT.y}
-          stroke="#7C3AED" strokeOpacity={0.08} strokeWidth={1.2} />
+          stroke="#be146e" strokeOpacity={0.08} strokeWidth={1.2} />
         <line x1={BOT_FRK} y1={BOT.y} x2={BX - 16} y2={BOT.y}
-          stroke="#7C3AED" strokeOpacity={0.08} strokeWidth={1.2} />
+          stroke="#be146e" strokeOpacity={0.08} strokeWidth={1.2} />
         <line x1={BX + 16} y1={BOT.y} x2={CR} y2={BOT.y}
-          stroke="#7C3AED" strokeOpacity={0.07} strokeWidth={1.2} />
+          stroke="#be146e" strokeOpacity={0.07} strokeWidth={1.2} />
 
         {/* ── HUB → HUMAN branch (output independiente, baja) ─ */}
         <line x1={HUB.x + 28} y1={HUB.y} x2={HUM_FRK} y2={HUB.y}
@@ -196,14 +196,14 @@ function FlowBackground() {
         {/* ── Junction dots ─────────────────────────────── */}
         {/* Left backbone junctions */}
         {BG_CH.map((ch, i) => <circle key={`jl-${i}`} cx={CL} cy={ch.y} r={2.2} fill={ch.color} fillOpacity={0.20} />)}
-        <circle cx={CL}    cy={HUB.y} r={2.5} fill="#7C3AED" fillOpacity={0.20} />
+        <circle cx={CL}    cy={HUB.y} r={2.5} fill="#be146e" fillOpacity={0.20} />
         {/* Branch junction dots — bot y human son salidas separadas del hub */}
-        <circle cx={BOT_FRK} cy={HUB.y} r={2.2} fill="#7C3AED" fillOpacity={0.22} />
-        <circle cx={BOT_FRK} cy={BOT.y} r={2.2} fill="#7C3AED" fillOpacity={0.20} />
+        <circle cx={BOT_FRK} cy={HUB.y} r={2.2} fill="#be146e" fillOpacity={0.22} />
+        <circle cx={BOT_FRK} cy={BOT.y} r={2.2} fill="#be146e" fillOpacity={0.20} />
         <circle cx={HUM_FRK} cy={HUB.y} r={2.2} fill="#2AABEE" fillOpacity={0.22} />
         <circle cx={HUM_FRK} cy={HUM.y} r={2.2} fill="#2AABEE" fillOpacity={0.20} />
         {/* Right backbone junctions */}
-        <circle cx={CR}    cy={BOT.y} r={2.2} fill="#7C3AED" fillOpacity={0.18} />
+        <circle cx={CR}    cy={BOT.y} r={2.2} fill="#be146e" fillOpacity={0.18} />
         <circle cx={CR}    cy={HUM.y} r={2.2} fill="#2AABEE" fillOpacity={0.18} />
         {BG_CH.map((ch, i) => <circle key={`jr-${i}`} cx={CR} cy={ch.y} r={2.2} fill={ch.color} fillOpacity={0.18} />)}
 
@@ -219,30 +219,30 @@ function FlowBackground() {
         ))}
 
         {/* ── CHATÓ HUB ─────────────────────────────────── */}
-        <circle cx={HUB.x} cy={HUB.y} r={32} stroke="#7C3AED" strokeWidth={1.5} fill="none" strokeOpacity={0}>
+        <circle cx={HUB.x} cy={HUB.y} r={32} stroke="#be146e" strokeWidth={1.5} fill="none" strokeOpacity={0}>
           <animate attributeName="r"              values="32;54;32"     dur="4s" repeatCount="indefinite" />
           <animate attributeName="stroke-opacity" values="0.12;0;0.12"  dur="4s" repeatCount="indefinite" />
         </circle>
-        <circle cx={HUB.x} cy={HUB.y} r={44} fill="#7C3AED" fillOpacity={0.04} />
-        <circle cx={HUB.x} cy={HUB.y} r={28} fill="#7C3AED" fillOpacity={0.08} />
-        <circle cx={HUB.x} cy={HUB.y} r={20} fill="#7C3AED" fillOpacity={0.10} />
-        <text x={HUB.x} y={HUB.y + 36} textAnchor="middle" fontSize={8} fill="#7C3AED"
+        <circle cx={HUB.x} cy={HUB.y} r={44} fill="#be146e" fillOpacity={0.04} />
+        <circle cx={HUB.x} cy={HUB.y} r={28} fill="#be146e" fillOpacity={0.08} />
+        <circle cx={HUB.x} cy={HUB.y} r={20} fill="#be146e" fillOpacity={0.10} />
+        <text x={HUB.x} y={HUB.y + 36} textAnchor="middle" fontSize={8} fill="#be146e"
           fillOpacity={0.30} fontFamily="system-ui,sans-serif" fontWeight={600} letterSpacing="1">
           HUB
         </text>
         {/* Small hub icon — "C" for Cható */}
-        <text x={HUB.x} y={HUB.y + 5} textAnchor="middle" fontSize={13} fill="#7C3AED"
+        <text x={HUB.x} y={HUB.y + 5} textAnchor="middle" fontSize={13} fill="#be146e"
           fillOpacity={0.38} fontFamily="system-ui,sans-serif" fontWeight={800}>C</text>
 
         {/* ── BOT node (top path, violet) ───────────────── */}
-        <circle cx={BOT.x} cy={BOT.y} r={22} fill="#7C3AED" fillOpacity={0.05} />
-        <circle cx={BOT.x} cy={BOT.y} r={15} fill="#7C3AED" fillOpacity={0.10} />
+        <circle cx={BOT.x} cy={BOT.y} r={22} fill="#be146e" fillOpacity={0.05} />
+        <circle cx={BOT.x} cy={BOT.y} r={15} fill="#be146e" fillOpacity={0.10} />
         <RobotIcon cx={BOT.x} cy={BOT.y} />
-        <text x={BOT.x} y={BOT.y - 26} textAnchor="middle" fontSize={8} fill="#7C3AED"
+        <text x={BOT.x} y={BOT.y - 26} textAnchor="middle" fontSize={8} fill="#be146e"
           fillOpacity={0.42} fontFamily="system-ui,sans-serif" fontWeight={600} letterSpacing="1">
           BOT / IA
         </text>
-        <text x={BOT.x} y={BOT.y + 30} textAnchor="middle" fontSize={7.5} fill="#7C3AED"
+        <text x={BOT.x} y={BOT.y + 30} textAnchor="middle" fontSize={7.5} fill="#be146e"
           fillOpacity={0.22} fontFamily="system-ui,sans-serif" fontWeight={500} letterSpacing="1">
           AUTO-RESPUESTA
         </text>
