@@ -12,7 +12,7 @@ const links = {
     { label: "Contacto", href: "#" },
   ],
   Legal: [
-    { label: "Privacidad", href: "#" },
+    { label: "Privacidad", href: "/privacidad" },
     { label: "Términos", href: "#" },
     { label: "Cookies", href: "#" },
   ],
