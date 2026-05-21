@@ -154,9 +154,9 @@ async function main() {
   await sharp(bgPng)
     .composite([{ input: logoPng, top: logoTop, left: logoLeft }])
     .png({ quality: 100, compressionLevel: 6 })
-    .toFile(join(root, "public/og-image.png"));
+    .toFile(join(root, "public/og-image-v2.png"));
 
-  console.log(`✓ public/og-image.png generated (${W}×${H})`);
+  console.log(`✓ public/og-image-v2.png generated (${W}×${H})`);
 }
 
 main().catch((e) => {

@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 const SITE_URL = "https://chato.xerebrumgroup.com";
-const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/og-image-v2.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
