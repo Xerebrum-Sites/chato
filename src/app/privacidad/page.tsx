@@ -210,7 +210,7 @@ export default function PrivacidadPage() {
       <header className="border-b border-gray-100 bg-white sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <a href="/">
-            <img src="/logo.svg" alt="Cható" className="h-9 w-auto" />
+            <img src="/logo.svg?v=2" alt="Cható" className="h-9 w-auto" />
           </a>
           <a href="/" className="text-sm text-gray-500 hover:text-violet-600 transition-colors">
             ← Volver al inicio

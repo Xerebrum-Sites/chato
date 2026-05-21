@@ -36,7 +36,7 @@ export function Navbar() {
         {/* Logo — grande al inicio, se achica al scrollear */}
         <a href="/" className="flex items-center">
           <img
-            src="/logo.svg"
+            src="/logo.svg?v=2"
             alt="Cható"
             className={`w-auto transition-all duration-300 ${scrolled ? "h-9" : "h-14"}`}
           />

@@ -56,7 +56,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="/" className="flex items-center mb-4">
-              <img src="/logo_negative.svg" alt="Cható" className="h-10 w-auto" />
+              <img src="/logo_negative.svg?v=2" alt="Cható" className="h-10 w-auto" />
             </a>
             <p className="text-sm leading-relaxed mb-6 max-w-xs">
               Omnicanalidad accesible para pequeños comercios. Centraliza todos tus canales en Telegram.
