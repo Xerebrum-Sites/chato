@@ -138,10 +138,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {children}
-        <Script
-          src="https://chato-api.xerebrumgroup.com/api/chat/text/widget.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
