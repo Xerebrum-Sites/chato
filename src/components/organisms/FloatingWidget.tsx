@@ -4,8 +4,10 @@ import { useState, useRef, useEffect } from "react";
 
 const WHATSAPP_NUMBER = "1234567890";
 const WHATSAPP_MESSAGE = "Hola! Me interesa Cható. ¿Pueden darme más información?";
-const CHAT_API = "https://chato-api.xerebrumgroup.com/api/chat/text/messages";
-const SESSION_KEY = "chato_session_text";
+const TENANT_SLUG = "chato";
+const CHAT_API = `https://chato-api.xerebrumgroup.com/api/chat/${TENANT_SLUG}/messages`;
+const STATUS_API = `https://chato-api.xerebrumgroup.com/api/chat/${TENANT_SLUG}/status`;
+const SESSION_KEY = `chato_session_${TENANT_SLUG}`;
 
 type Role = "user" | "bot";
 interface Message { id: number; text: string; role: Role }
@@ -19,6 +21,7 @@ export function FloatingWidget() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [isOnline, setIsOnline] = useState<boolean | null>(null);
   const msgEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const msgCounter = useRef(0);
@@ -76,11 +79,29 @@ export function FloatingWidget() {
     send({ text }, text);
   }
 
-  function openChat() {
+  async function openChat() {
     setChatOpen(true);
     setMenuOpen(false);
+    // Check online status
+    try {
+      const res = await fetch(STATUS_API);
+      const data = await res.json();
+      setIsOnline(data.online);
+      if (!data.online && messages.length === 0) {
+        setTimeout(() => {
+          addMessage(
+            data.reason === "outside_schedule"
+              ? "Estamos fuera de horario de atención. Podés dejarnos un mensaje y te respondemos en cuanto estemos disponibles."
+              : "En este momento no estamos disponibles. Podés contactarnos por WhatsApp o volver más tarde.",
+            "bot"
+          );
+        }, 400);
+        return;
+      }
+    } catch {
+      setIsOnline(true); // assume online if status check fails
+    }
     if (messages.length === 0) {
-      // Trigger initial greeting
       setTimeout(() => {
         addMessage("¡Hola! ¿En qué podemos ayudarte?", "bot");
         setButtons([
@@ -181,8 +202,16 @@ export function FloatingWidget() {
             <div className="flex-1">
               <p className="text-white font-semibold text-sm">Soporte Cható</p>
               <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-white/80 text-xs">En línea</span>
+                {isOnline === null ? (
+                  <span className="w-2 h-2 rounded-full bg-white/40" />
+                ) : isOnline ? (
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                ) : (
+                  <span className="w-2 h-2 rounded-full bg-red-400" />
+                )}
+                <span className="text-white/80 text-xs">
+                  {isOnline === null ? "Conectando..." : isOnline ? "En línea" : "Fuera de línea"}
+                </span>
               </div>
             </div>
             <button
@@ -245,8 +274,8 @@ export function FloatingWidget() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Escribí tu mensaje..."
-                disabled={loading}
+                placeholder={isOnline === false ? "No disponible ahora..." : "Escribí tu mensaje..."}
+                disabled={loading || isOnline === false}
                 className="flex-1 bg-gray-100 rounded-full px-4 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-300 disabled:opacity-60"
               />
               <button
