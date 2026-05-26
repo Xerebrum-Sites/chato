@@ -129,7 +129,7 @@ export function Pricing() {
   useEffect(() => {
     async function init() {
       const [plansData, country, brlRate] = await Promise.all([
-        fetch(`${API_URL}/api/public/plans`).then((r) => r.json() as Promise<PlanData[]>).catch(() => []),
+        fetch(`${API_URL}/api/public/plans`).then((r) => r.json()).then((d) => Array.isArray(d) ? d : []).catch(() => []) as Promise<PlanData[]>,
         detectCountry(),
         fetchUsdToBrl(),
       ]);
