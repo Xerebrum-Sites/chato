@@ -6,8 +6,11 @@ const WHATSAPP_NUMBER = "1234567890";
 const WHATSAPP_MESSAGE = "Hola! Me interesa Cható. ¿Pueden darme más información?";
 const TENANT_SLUG = "chato";
 const CHAT_API = `https://chato-api.xerebrumgroup.com/api/chat/${TENANT_SLUG}/messages`;
+const POLL_API = `https://chato-api.xerebrumgroup.com/api/chat/${TENANT_SLUG}/poll`;
 const STATUS_API = `https://chato-api.xerebrumgroup.com/api/chat/${TENANT_SLUG}/status`;
 const SESSION_KEY = `chato_session_${TENANT_SLUG}`;
+const CURSOR_KEY = `chato_cursor_${TENANT_SLUG}`;
+const POLL_INTERVAL_MS = 2000;
 
 type Role = "user" | "bot";
 interface Message { id: number; text: string; role: Role }
@@ -25,12 +28,22 @@ export function FloatingWidget() {
   const msgEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const msgCounter = useRef(0);
+  const cursorRef = useRef<string | null>(null);
+  const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
   // Load session from localStorage
   useEffect(() => {
     setSessionId(localStorage.getItem(SESSION_KEY));
+    cursorRef.current = localStorage.getItem(CURSOR_KEY);
+  }, []);
+
+  // Stop the poller when the component unmounts.
+  useEffect(() => {
+    return () => {
+      if (pollTimerRef.current) clearInterval(pollTimerRef.current);
+    };
   }, []);
 
   // Scroll to bottom on new messages
@@ -47,6 +60,48 @@ export function FloatingWidget() {
     setMessages((prev) => [...prev, { id: ++msgCounter.current, text, role }]);
   }
 
+  function bumpCursor(ts: string | null | undefined) {
+    if (!ts) return;
+    const current = cursorRef.current;
+    if (!current || ts > current) {
+      cursorRef.current = ts;
+      localStorage.setItem(CURSOR_KEY, ts);
+    }
+  }
+
+  async function pollOnce(sid: string | null) {
+    const id = sid ?? sessionId;
+    if (!id) return;
+    try {
+      const cursor = cursorRef.current;
+      const url =
+        POLL_API +
+        "?session_id=" +
+        encodeURIComponent(id) +
+        (cursor ? "&last_delivered_at=" + encodeURIComponent(cursor) : "");
+      const res = await fetch(url, { method: "GET", credentials: "omit" });
+      if (!res.ok) return;
+      const data = await res.json();
+      const msgs: { content: string; role: string; buttons: ApiButton[]; created_at: string }[] =
+        data.messages ?? [];
+      let lastButtons: ApiButton[] | null = null;
+      for (const m of msgs) {
+        if (m.content) addMessage(m.content, "bot");
+        if (m.buttons && m.buttons.length) lastButtons = m.buttons;
+      }
+      if (lastButtons) setButtons(lastButtons);
+      bumpCursor(data.last_delivered_at);
+    } catch {
+      /* swallow — next tick will retry */
+    }
+  }
+
+  function startPolling(sid: string | null) {
+    if (pollTimerRef.current) return;
+    pollOnce(sid);
+    pollTimerRef.current = setInterval(() => pollOnce(null), POLL_INTERVAL_MS);
+  }
+
   async function send(payload: { text?: string; button_payload?: string }, userLabel: string) {
     addMessage(userLabel, "user");
     setButtons([]);
@@ -59,11 +114,13 @@ export function FloatingWidget() {
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
-      const newSessionId = data.session_id;
+      const newSessionId = data.session_id as string;
       setSessionId(newSessionId);
       localStorage.setItem(SESSION_KEY, newSessionId);
-      addMessage(data.reply, "bot");
-      if (data.buttons?.length) setButtons(data.buttons);
+      // Do NOT bump the cursor with data.last_delivered_at: the bot
+      // reply the pipeline just persisted is exactly what the poller
+      // has to deliver on its next tick.
+      startPolling(newSessionId);
     } catch {
       addMessage("Error al conectar. Intentá de nuevo.", "bot");
     } finally {
@@ -82,6 +139,10 @@ export function FloatingWidget() {
   async function openChat() {
     setChatOpen(true);
     setMenuOpen(false);
+    // If a session already exists, start polling so any messages an
+    // agent may have sent while the widget was closed get rendered
+    // before the user types again.
+    if (sessionId) startPolling(sessionId);
     // Check online status
     try {
       const res = await fetch(STATUS_API);
