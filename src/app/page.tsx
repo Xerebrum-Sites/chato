@@ -7,8 +7,11 @@ import { Features } from "@/components/organisms/Features";
 import { UseCases } from "@/components/organisms/UseCases";
 import { Pricing } from "@/components/organisms/Pricing";
 import { CtaSection } from "@/components/organisms/CtaSection";
+import Script from "next/script";
 import { Footer } from "@/components/organisms/Footer";
-import { FloatingWidget } from "@/components/organisms/FloatingWidget";
+
+const WIDGET_SRC =
+  "https://chato-api.xerebrumgroup.com/api/chat/chato/widget.js";
 
 export default function Home() {
   return (
@@ -25,7 +28,11 @@ export default function Home() {
         <CtaSection />
       </main>
       <Footer />
-      <FloatingWidget />
+      {/* The floating button + chat panel come from the public widget so
+          chato.xerebrumgroup.com renders exactly the same UI a tenant gets
+          on their own site — single source of truth for the look and the
+          per-tenant config. */}
+      <Script src={WIDGET_SRC} strategy="afterInteractive" />
     </>
   );
 }
