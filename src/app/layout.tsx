@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     locale: "es_AR",
     title: "Cható – Todos tus canales, un solo lugar",
     description:
-      "Centraliza WhatsApp, Instagram, Facebook y Web Chat en Telegram. Responde sin salir de tu app favorita. Desde $9/mes.",
+      "Centraliza WhatsApp, Instagram, Facebook y Web Chat en un solo lugar. Responde sin salir de tu app favorita.",
     images: [
       {
         url: OG_IMAGE,
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     creator: "@Xerebrum",
     title: "Cható – Todos tus canales, un solo lugar",
     description:
-      "Centraliza WhatsApp, Instagram, Facebook y Web Chat en Telegram. Desde $9/mes.",
+      "Centraliza WhatsApp, Instagram, Facebook y Web Chat en un solo lugar.",
     images: [OG_IMAGE],
   },
 };

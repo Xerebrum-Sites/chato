@@ -2,7 +2,6 @@ const stats = [
   { value: "+500", label: "comercios activos" },
   { value: "5", label: "canales integrados" },
   { value: "< 2min", label: "para configurar" },
-  { value: "$9/mes", label: "desde" },
 ];
 
 export function LogoStrip() {

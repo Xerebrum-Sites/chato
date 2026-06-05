@@ -11,7 +11,7 @@ const conversations: { channel: Channel; label: string; customerMsg: string; own
   { channel: "whatsapp", label: "WhatsApp", customerMsg: "¿Tienen la talla M disponible?", ownerReply: "¡Sí! La tenemos en azul y negro 🎉" },
   { channel: "instagram", label: "Instagram", customerMsg: "¿A qué hora cierran hoy?", ownerReply: "Cerramos a las 20hs, ¡te esperamos!" },
   { channel: "facebook", label: "Facebook", customerMsg: "Quiero hacer un pedido de delivery", ownerReply: "¡Claro! ¿Cuál es tu dirección? 😊" },
-  { channel: "web", label: "Web Chat", customerMsg: "¿Cuál es el precio del plan mensual?", ownerReply: "El Básico arranca en solo $9/mes 🚀" },
+  { channel: "web", label: "Web Chat", customerMsg: "¿Cuál es el precio del plan mensual?", ownerReply: "¡Claro! Te envío más información sobre nuestros planes 📋" },
 ];
 
 const channelHex: Record<Channel, string> = { whatsapp: "#25D366", instagram: "#C13584", facebook: "#1877F2", web: "#be146e" };
@@ -184,8 +184,7 @@ export function Hero() {
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl">
             Comienza con Telegram como tu hub central. Cuando crezcas, accede a tu propio dashboard con analytics,
-            equipos y automatizaciones. Ambos modos disponibles desde{" "}
-            <strong className="text-gray-900">$9/mes.</strong>
+            equipos y automatizaciones. Ambos modos disponibles en todos nuestros planes.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <Button href="https://chato-app.xerebrumgroup.com/signin" size="lg">
