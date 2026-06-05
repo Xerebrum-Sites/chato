@@ -4,6 +4,7 @@ import { LogoStrip } from "@/components/organisms/LogoStrip";
 import { ModeComparison } from "@/components/organisms/ModeComparison";
 import { HowItWorks } from "@/components/organisms/HowItWorks";
 import { TelegramSection } from "@/components/organisms/TelegramSection";
+import { AdvancedModeShowcase } from "@/components/organisms/AdvancedModeShowcase";
 import { Features } from "@/components/organisms/Features";
 import { OptionalTools } from "@/components/organisms/OptionalTools";
 import { UseCases } from "@/components/organisms/UseCases";
@@ -25,6 +26,7 @@ export default function Home() {
         <ModeComparison />
         <HowItWorks />
         <TelegramSection />
+        <AdvancedModeShowcase />
         <Features />
         <OptionalTools />
         <UseCases />

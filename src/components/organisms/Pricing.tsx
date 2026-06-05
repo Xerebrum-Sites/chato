@@ -198,21 +198,29 @@ export function Pricing() {
             14 días gratis para probar.
           </p>
 
-          {/* Currency toggle */}
+          {/* Currency toggle with flags */}
           <div className="flex items-center justify-center gap-2 mt-6">
-            {(["ARS", "USD", "BRL"] as Currency[]).map((c) => (
-              <button
-                key={c}
-                onClick={() => setCurrency(c)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  currency === c
-                    ? "bg-violet-700 text-white shadow"
-                    : "bg-white border border-gray-200 text-gray-500 hover:border-violet-300"
-                }`}
-              >
-                {currencyLabel[c]}
-              </button>
-            ))}
+            {(["ARS", "USD", "BRL"] as Currency[]).map((c) => {
+              const flags: Record<Currency, string> = {
+                ARS: "🇦🇷",
+                USD: "🇺🇸",
+                BRL: "🇧🇷",
+              };
+              return (
+                <button
+                  key={c}
+                  onClick={() => setCurrency(c)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                    currency === c
+                      ? "bg-violet-700 text-white shadow"
+                      : "bg-white border border-gray-200 text-gray-500 hover:border-violet-300"
+                  }`}
+                >
+                  <span className="text-base">{flags[c]}</span>
+                  {c === "BRL" ? "Real" : currencyLabel[c].split(" ")[1]}
+                </button>
+              );
+            })}
           </div>
         </div>
 

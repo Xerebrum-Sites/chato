@@ -27,7 +27,7 @@ export function TelegramSection() {
   const active = channels.find((c) => c.id === activeChannel)!;
 
   return (
-    <section id="telegram" className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section id="modo-simple" className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#2AABEE]/5 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-violet-500/5 blur-3xl" />
@@ -37,22 +37,23 @@ export function TelegramSection() {
           {/* Left: Explanation */}
           <div>
             <Badge className="mb-6" variant="cyan">
-              <span className="text-[#2AABEE]">★</span> Diferenciador único
+              ✨ Rápido y accesible
             </Badge>
 
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-6 leading-tight">
-              <span className="text-[#2AABEE]">Telegram</span> como tu centro de{" "}
-              <span className="gradient-text">comando total</span>
+              Modo Simple:{" "}
+              <span className="gradient-text">todo centralizado</span>
             </h2>
 
             <p className="text-gray-600 text-lg mb-6 leading-relaxed">
-              Mientras tus competidores usan apps especializadas que debes aprender y pagar por separado,
-              Cható convierte <strong>Telegram</strong> — una app que ya usas — en el hub central de todos tus canales.
+              Sin aprender nuevas herramientas. Sin complicaciones.
+              Centraliza WhatsApp, Instagram, Facebook y tu web en un único lugar de trabajo,
+              utilizando la plataforma de mensajería que prefieras.
             </p>
 
             <p className="text-gray-500 mb-8 leading-relaxed">
-              Tus clientes te escriben donde prefieren. Tú respondes siempre desde el mismo lugar.
-              Sin aprender nuevas herramientas, sin cambiar hábitos.
+              Tus clientes te escriben donde prefieren. Tú respondes siempre desde el mismo hub.
+              Una bandeja unificada, un contexto completo, sin duplicados.
             </p>
 
             <ul className="space-y-3 mb-8">
@@ -69,7 +70,7 @@ export function TelegramSection() {
             </ul>
 
             <Button href="#registro" size="lg">
-              Probar con mi Telegram
+              Empezar ahora
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

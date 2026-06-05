@@ -5,7 +5,7 @@ import { Button } from "@/components/atoms/Button";
 
 const navLinks = [
   { label: "Características", href: "#caracteristicas" },
-  { label: "Telegram Hub", href: "#telegram" },
+  { label: "Cómo funciona", href: "#como-funciona" },
   { label: "Casos de uso", href: "#casos" },
   { label: "Precios", href: "#precios" },
 ];
