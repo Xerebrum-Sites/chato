@@ -174,17 +174,17 @@ export function Hero() {
         <div>
           <Badge variant="violet" className="mb-6">
             <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
-            Omnicanalidad accesible para tu negocio
+            Omnicanalidad lista para escalar
           </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] tracking-tight mb-6 text-balance">
-            Todos tus canales,{" "}
-            <span className="gradient-text">un solo lugar:</span>{" "}
-            <span className="text-[#2AABEE]">Telegram</span>
+            Centraliza tus canales{" "}
+            <span className="gradient-text">y escala</span>{" "}
+            a tu ritmo
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl">
-            Cható centraliza WhatsApp, Instagram, Facebook y web chat en tu Telegram.
-            Responde a todos tus clientes sin cambiar de app, sin complicaciones y{" "}
-            <strong className="text-gray-900">desde $9/mes.</strong>
+            Comienza con Telegram como tu hub central. Cuando crezcas, accede a tu propio dashboard con analytics,
+            equipos y automatizaciones. Ambos modos disponibles desde{" "}
+            <strong className="text-gray-900">$9/mes.</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <Button href="https://chato-app.xerebrumgroup.com/signin" size="lg">

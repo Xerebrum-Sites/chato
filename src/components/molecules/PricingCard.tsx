@@ -5,10 +5,12 @@ interface PricingCardProps {
   price: string;
   period: string;
   description: string;
-  features: string[];
+  baseFeatures: string[];
+  advancedFeatures?: string[];
   highlighted?: boolean;
   badge?: string;
   cta?: string;
+  slug?: string;
 }
 
 export function PricingCard({
@@ -16,7 +18,8 @@ export function PricingCard({
   price,
   period,
   description,
-  features,
+  baseFeatures,
+  advancedFeatures,
   highlighted = false,
   badge,
   cta = "Empezar gratis",
@@ -54,24 +57,63 @@ export function PricingCard({
         <p className={`text-sm ${highlighted ? "text-violet-200" : "text-gray-500"}`}>{description}</p>
       </div>
 
-      <ul className="space-y-3 mb-8">
-        {features.map((feature) => (
-          <li key={feature} className="flex items-start gap-2.5">
-            <span
-              className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                highlighted ? "bg-violet-500 text-white" : "bg-violet-100 text-violet-600"
-              }`}
-            >
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-            </span>
-            <span className={`text-sm ${highlighted ? "text-violet-100" : "text-gray-600"}`}>
-              {feature}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <div className="space-y-6 mb-8">
+        {/* Base Features */}
+        <div>
+          <h4 className={`text-xs font-black uppercase tracking-wider mb-3 ${
+            highlighted ? "text-violet-200" : "text-gray-600"
+          }`}>
+            Incluye
+          </h4>
+          <ul className="space-y-2">
+            {baseFeatures.map((feature) => (
+              <li key={feature} className="flex items-start gap-2.5">
+                <span
+                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                    highlighted ? "bg-violet-500 text-white" : "bg-violet-100 text-violet-600"
+                  }`}
+                >
+                  <svg viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </span>
+                <span className={`text-sm ${highlighted ? "text-violet-100" : "text-gray-600"}`}>
+                  {feature}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Advanced Features (if present) */}
+        {advancedFeatures && advancedFeatures.length > 0 && (
+          <div className={`pt-4 ${highlighted ? "border-t border-violet-500" : "border-t border-gray-100"}`}>
+            <h4 className={`text-xs font-black uppercase tracking-wider mb-3 ${
+              highlighted ? "text-cyan-300" : "text-gray-600"
+            }`}>
+              Modo Avanzado
+            </h4>
+            <ul className="space-y-2">
+              {advancedFeatures.map((feature) => (
+                <li key={feature} className="flex items-start gap-2.5">
+                  <span
+                    className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                      highlighted ? "bg-cyan-400 text-violet-900" : "bg-cyan-100 text-cyan-600"
+                    }`}
+                  >
+                    <svg viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </span>
+                  <span className={`text-sm ${highlighted ? "text-cyan-100" : "text-gray-600"}`}>
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
 
       <Button
         href="#registro"

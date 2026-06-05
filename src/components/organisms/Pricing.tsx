@@ -19,33 +19,40 @@ interface PlanData {
 const PLAN_CONFIG: Record<string, {
   displayName: string;
   description: string;
-  features: string[];
+  baseFeatures: string[];
+  advancedFeatures?: string[];
   highlighted: boolean;
   badge?: string;
   cta: string;
 }> = {
   starter: {
     displayName: "Starter",
-    description: "Para emprendedores que están dando sus primeros pasos con IA.",
-    features: [
-      "1 canal de atención",
-      "Prompt personalizado",
-      "Conversaciones ilimitadas",
-      "14 días gratis",
+    description: "Para emprendedores que usan Modo Simple.",
+    baseFeatures: [
+      "✓ Modo Simple (Telegram)",
+      "✓ Hasta 3 canales",
+      "✓ Etiquetas y seguimiento",
+      "✓ Respuestas rápidas",
+      "✓ 14 días gratis",
     ],
     highlighted: false,
     cta: "Empezar gratis",
   },
   pro: {
     displayName: "Pro",
-    description: "Para negocios activos con múltiples canales y bot de respuesta.",
-    features: [
-      "Hasta 3 canales (WhatsApp, IG, Web...)",
-      "Bot con IA activado",
-      "Documentos y base de conocimiento (RAG)",
-      "Horarios automáticos de atención",
-      "Prompt personalizado",
-      "14 días gratis",
+    description: "Para negocios que crecen. Con dashboard avanzado.",
+    baseFeatures: [
+      "✓ Modo Simple (Telegram)",
+      "✓ Modo Avanzado (Dashboard)",
+      "✓ Hasta 5 canales",
+      "✓ Hasta 3 agentes",
+      "✓ Analytics básicos",
+    ],
+    advancedFeatures: [
+      "✓ Automatizaciones con IA",
+      "✓ Base de conocimiento (RAG)",
+      "✓ Horarios automáticos",
+      "✓ 14 días gratis",
     ],
     highlighted: true,
     badge: "Más popular",
@@ -53,14 +60,19 @@ const PLAN_CONFIG: Record<string, {
   },
   business: {
     displayName: "Business",
-    description: "Sin límites. Para equipos que escalan en todos los canales.",
-    features: [
-      "Canales ilimitados",
-      "Bot con IA en todos los canales",
-      "RAG ilimitado",
-      "Horarios automáticos",
-      "Soporte prioritario",
-      "Prompt personalizado",
+    description: "Sin límites. Para equipos y agencias.",
+    baseFeatures: [
+      "✓ Modo Simple (Telegram)",
+      "✓ Modo Avanzado (Dashboard completo)",
+      "✓ Canales ilimitados",
+      "✓ Agentes ilimitados",
+      "✓ Analytics avanzados",
+    ],
+    advancedFeatures: [
+      "✓ Automatizaciones avanzadas con IA",
+      "✓ RAG ilimitado",
+      "✓ Prioridad en soporte",
+      "✓ SLA personalizado",
     ],
     highlighted: false,
     cta: "Hablar con ventas",
@@ -161,7 +173,8 @@ export function Pricing() {
         : formatPrice(apiPlan?.price_ars ?? null, apiPlan?.price_usd ?? null, currency, usdToBrl),
       period: loading ? "" : getPeriodLabel(apiPlan?.price_usd ?? null, currency),
       description: config.description,
-      features: config.features,
+      baseFeatures: config.baseFeatures,
+      advancedFeatures: config.advancedFeatures,
       highlighted: config.highlighted,
       badge: config.badge,
       cta: config.cta,
@@ -173,15 +186,16 @@ export function Pricing() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <Badge variant="green" className="mb-4">
-            Precios simples
+            Precios transparentes
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
-            Tan accesible como debería ser{" "}
-            <span className="gradient-text">la tecnología</span>
+            Comienza pequeño,{" "}
+            <span className="gradient-text">escala sin límites</span>
           </h2>
-          <p className="text-lg text-gray-500 max-w-xl mx-auto">
-            Sin tarifas por canal. Sin contratos anuales. Sin sorpresas en la factura.
-            14 días gratis en todos los planes.
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            Todos los planes incluyen Modo Simple. El Modo Avanzado se desbloquea en Pro.
+            Herramientas opcionales (Reservas, Catálogo, etc.) disponibles en cualquier plan.
+            14 días gratis para probar.
           </p>
 
           {/* Currency toggle */}
@@ -204,16 +218,28 @@ export function Pricing() {
 
         <div className="grid lg:grid-cols-3 gap-6 items-center">
           {displayPlans.map((plan) => (
-            <PricingCard key={plan.slug} {...plan} />
+            <PricingCard
+              key={plan.slug}
+              name={plan.name}
+              price={plan.price}
+              period={plan.period}
+              description={plan.description}
+              baseFeatures={plan.baseFeatures}
+              advancedFeatures={plan.advancedFeatures}
+              highlighted={plan.highlighted}
+              badge={plan.badge}
+              cta={plan.cta}
+              slug={plan.slug}
+            />
           ))}
         </div>
 
         {/* FAQ mini */}
         <div className="mt-14 grid sm:grid-cols-3 gap-6 text-center">
           {[
-            { q: "¿Necesito tarjeta para probar?", a: "No. Los 14 días de prueba son completamente gratis y sin tarjeta." },
-            { q: "¿Puedo cancelar cuando quiera?", a: "Sí. Sin permanencia, sin penalizaciones. Cancelas en un clic." },
-            { q: "¿Qué pasa si supero el límite?", a: "Te avisamos antes. Puedes subir de plan o pagar solo las conversaciones extra." },
+            { q: "¿Necesito tarjeta para probar?", a: "No. Los 14 días de prueba son completamente gratis y sin tarjeta de crédito." },
+            { q: "¿Puedo cambiar de plan?", a: "Sí, cuando quieras. Sube a un plan superior o baja si necesitas menos. Pago prorrateado." },
+            { q: "¿Cómo funcionan los add-ons?", a: "Se añaden a tu factura. Activa solo los que usas (Reservas, Catálogo, Encuestas, etc.)." },
           ].map(({ q, a }) => (
             <div key={q} className="bg-white rounded-2xl p-5 border border-gray-100">
               <p className="font-semibold text-gray-900 text-sm mb-2">{q}</p>

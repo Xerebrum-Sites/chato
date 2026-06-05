@@ -1,9 +1,11 @@
 import { Navbar } from "@/components/organisms/Navbar";
 import { Hero } from "@/components/organisms/Hero";
 import { LogoStrip } from "@/components/organisms/LogoStrip";
+import { ModeComparison } from "@/components/organisms/ModeComparison";
 import { HowItWorks } from "@/components/organisms/HowItWorks";
 import { TelegramSection } from "@/components/organisms/TelegramSection";
 import { Features } from "@/components/organisms/Features";
+import { OptionalTools } from "@/components/organisms/OptionalTools";
 import { UseCases } from "@/components/organisms/UseCases";
 import { Pricing } from "@/components/organisms/Pricing";
 import { CtaSection } from "@/components/organisms/CtaSection";
@@ -20,9 +22,11 @@ export default function Home() {
       <main>
         <Hero />
         <LogoStrip />
+        <ModeComparison />
         <HowItWorks />
         <TelegramSection />
         <Features />
+        <OptionalTools />
         <UseCases />
         <Pricing />
         <CtaSection />
