@@ -206,8 +206,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right: Chat window + People using Cható */}
-        <div className="flex justify-center lg:justify-end relative lg:gap-8">
+        {/* Right: Chat window */}
+        <div className="flex justify-center lg:justify-end">
           <div className="w-full max-w-sm">
             <div className="flex items-center justify-center gap-1.5 mb-4">
               {conversations.map((c, i) => (
@@ -310,15 +310,6 @@ export function Hero() {
             </div>
 
             <div className="mt-2 mx-6 h-4 bg-gradient-to-r from-violet-200/30 to-cyan-200/30 rounded-full blur-xl" />
-          </div>
-
-          {/* People using Cható - Real photograph with unified inbox */}
-          <div className="hidden lg:flex lg:w-96 items-center justify-center">
-            <img
-              src="/hero-people.jpg"
-              alt="Personas reales usando Cható - Bandeja unificada de canales"
-              className="w-full h-auto rounded-2xl drop-shadow-2xl"
-            />
           </div>
         </div>
       </div>
