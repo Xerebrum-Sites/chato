@@ -1,0 +1,107 @@
+<svg viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F4A460;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D2A679;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Hands holding phone -->
+  <!-- Left hand -->
+  <path d="M 80 200 Q 70 250 75 350 Q 78 400 90 450" fill="url(#skinGrad)" stroke="#D2A679" stroke-width="2"/>
+  <!-- Fingers left hand -->
+  <circle cx="85" cy="200" r="8" fill="url(#skinGrad)"/>
+  <circle cx="75" cy="210" r="7" fill="url(#skinGrad)"/>
+  <circle cx="70" cy="225" r="7" fill="url(#skinGrad)"/>
+
+  <!-- Right hand -->
+  <path d="M 320 200 Q 330 250 325 350 Q 322 400 310 450" fill="url(#skinGrad)" stroke="#D2A679" stroke-width="2"/>
+  <!-- Fingers right hand -->
+  <circle cx="315" cy="200" r="8" fill="url(#skinGrad)"/>
+  <circle cx="325" cy="210" r="7" fill="url(#skinGrad)"/>
+  <circle cx="330" cy="225" r="7" fill="url(#skinGrad)"/>
+
+  <!-- Phone body -->
+  <rect x="120" y="180" width="160" height="320" rx="20" fill="url(#phoneGrad)" stroke="#333" stroke-width="2"/>
+
+  <!-- Phone screen -->
+  <rect x="130" y="195" width="140" height="290" rx="15" fill="#f8f9fa" stroke="#555" stroke-width="1"/>
+
+  <!-- Status bar -->
+  <rect x="130" y="195" width="140" height="25" fill="#667eea" rx="15"/>
+  <text x="200" y="212" font-size="10" fill="white" text-anchor="middle" font-weight="bold">Cható</text>
+
+  <!-- Bandeja unificada - WhatsApp -->
+  <g>
+    <rect x="140" y="235" width="120" height="35" rx="8" fill="#25D366"/>
+    <circle cx="150" cy="252" r="10" fill="white"/>
+    <text x="150" y="256" font-size="8" fill="#25D366" text-anchor="middle" font-weight="bold">💬</text>
+    <text x="205" y="252" font-size="11" fill="white" font-weight="bold">WhatsApp</text>
+    <text x="205" y="263" font-size="8" fill="rgba(255,255,255,0.8)">5 mensajes</text>
+  </g>
+
+  <!-- Bandeja unificada - Instagram -->
+  <g>
+    <rect x="140" y="280" width="120" height="35" rx="8" fill="#E4405F"/>
+    <circle cx="150" cy="297" r="10" fill="white"/>
+    <text x="150" y="301" font-size="8" fill="#E4405F" text-anchor="middle" font-weight="bold">📸</text>
+    <text x="205" y="297" font-size="11" fill="white" font-weight="bold">Instagram</text>
+    <text x="205" y="308" font-size="8" fill="rgba(255,255,255,0.8)">3 mensajes</text>
+  </g>
+
+  <!-- Bandeja unificada - Facebook -->
+  <g>
+    <rect x="140" y="325" width="120" height="35" rx="8" fill="#1877F2"/>
+    <circle cx="150" cy="342" r="10" fill="white"/>
+    <text x="150" y="346" font-size="8" fill="#1877F2" text-anchor="middle" font-weight="bold">f</text>
+    <text x="205" y="342" font-size="11" fill="white" font-weight="bold">Facebook</text>
+    <text x="205" y="353" font-size="8" fill="rgba(255,255,255,0.8)">2 mensajes</text>
+  </g>
+
+  <!-- Bandeja unificada - Web Chat -->
+  <g>
+    <rect x="140" y="370" width="120" height="35" rx="8" fill="#be146e"/>
+    <circle cx="150" cy="387" r="10" fill="white"/>
+    <text x="150" y="391" font-size="8" fill="#be146e" text-anchor="middle" font-weight="bold">💻</text>
+    <text x="205" y="387" font-size="11" fill="white" font-weight="bold">Web Chat</text>
+    <text x="205" y="398" font-size="8" fill="rgba(255,255,255,0.8)">1 mensaje</text>
+  </g>
+
+  <!-- Interaction emojis -->
+  <!-- Top left -->
+  <g>
+    <circle cx="60" cy="120" r="18" fill="#FFD700" stroke="#FFC700" stroke-width="2"/>
+    <text x="60" y="130" font-size="20" text-anchor="middle">😊</text>
+  </g>
+
+  <!-- Top right -->
+  <g>
+    <circle cx="340" cy="130" r="16" fill="#FF69B4" stroke="#FF1493" stroke-width="2"/>
+    <text x="340" y="138" font-size="18" text-anchor="middle">❤️</text>
+  </g>
+
+  <!-- Bottom left -->
+  <g>
+    <circle cx="70" cy="480" r="16" fill="#87CEEB" stroke="#4682B4" stroke-width="2"/>
+    <text x="70" y="488" font-size="18" text-anchor="middle">📱</text>
+  </g>
+
+  <!-- Bottom right -->
+  <g>
+    <circle cx="330" cy="490" r="16" fill="#98D8C8" stroke="#6CB9A8" stroke-width="2"/>
+    <text x="330" y="498" font-size="18" text-anchor="middle">✨</text>
+  </g>
+
+  <!-- Notification badges -->
+  <circle cx="285" cy="230" r="12" fill="#FF6B6B"/>
+  <text x="285" y="237" font-size="10" fill="white" text-anchor="middle" font-weight="bold">10</text>
+
+  <!-- Label -->
+  <text x="200" y="560" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">Bandeja Unificada</text>
+  <text x="200" y="580" font-size="11" fill="#666" text-anchor="middle">Todos tus canales en un lugar</text>
+</svg>

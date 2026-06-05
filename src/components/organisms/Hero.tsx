@@ -206,21 +206,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right: Chat window + People */}
-        <div className="flex justify-center lg:justify-end relative">
-          {/* People images - positioned absolutely */}
-          <div className="hidden lg:flex absolute -right-20 top-0 bottom-0 flex-col justify-around pointer-events-none">
-            <div className="w-32 h-40 rounded-2xl bg-gradient-to-br from-red-200 to-pink-300 shadow-lg flex items-end justify-center overflow-hidden">
-              <div className="text-6xl">👩‍💼</div>
-            </div>
-            <div className="w-28 h-36 rounded-2xl bg-gradient-to-br from-orange-200 to-yellow-300 shadow-lg flex items-end justify-center overflow-hidden">
-              <div className="text-5xl">👨‍💻</div>
-            </div>
-            <div className="w-32 h-40 rounded-2xl bg-gradient-to-br from-purple-200 to-pink-400 shadow-lg flex items-end justify-center overflow-hidden">
-              <div className="text-6xl">👩‍🔬</div>
-            </div>
-          </div>
-
+        {/* Right: Chat window + People using Cható */}
+        <div className="flex justify-center lg:justify-end relative lg:gap-8">
           <div className="w-full max-w-sm">
             <div className="flex items-center justify-center gap-1.5 mb-4">
               {conversations.map((c, i) => (
@@ -323,6 +310,15 @@ export function Hero() {
             </div>
 
             <div className="mt-2 mx-6 h-4 bg-gradient-to-r from-violet-200/30 to-cyan-200/30 rounded-full blur-xl" />
+          </div>
+
+          {/* People using Cható - Image */}
+          <div className="hidden lg:flex lg:w-80 items-center justify-center">
+            <img
+              src="/hero-people.svg"
+              alt="Personas usando Cható con bandeja unificada"
+              className="w-full h-auto drop-shadow-xl"
+            />
           </div>
         </div>
       </div>
