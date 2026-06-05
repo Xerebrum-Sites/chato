@@ -11,7 +11,7 @@ export function LogoStrip() {
         <p className="text-center text-sm text-gray-400 font-medium uppercase tracking-widest mb-8">
           Confiado por emprendedores en toda Latinoamérica
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-3xl font-black gradient-text">{stat.value}</p>
