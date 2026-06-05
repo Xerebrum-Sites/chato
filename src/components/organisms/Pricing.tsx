@@ -199,28 +199,37 @@ export function Pricing() {
           </p>
 
           {/* Currency toggle with flags */}
-          <div className="flex items-center justify-center gap-2 mt-6">
-            {(["ARS", "USD", "BRL"] as Currency[]).map((c) => {
-              const flags: Record<Currency, string> = {
-                ARS: "🇦🇷",
-                USD: "🇺🇸",
-                BRL: "🇧🇷",
-              };
-              return (
-                <button
-                  key={c}
-                  onClick={() => setCurrency(c)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
-                    currency === c
-                      ? "bg-violet-700 text-white shadow"
-                      : "bg-white border border-gray-200 text-gray-500 hover:border-violet-300"
-                  }`}
-                >
-                  <span className="text-base">{flags[c]}</span>
-                  {c === "BRL" ? "Real" : currencyLabel[c].split(" ")[1]}
-                </button>
-              );
-            })}
+          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap justify-center">
+            <button
+              onClick={() => setCurrency("ARS")}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
+                currency === "ARS"
+                  ? "bg-red-700 text-white shadow-md"
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-red-300"
+              }`}
+            >
+              🇦🇷 ARS
+            </button>
+            <button
+              onClick={() => setCurrency("USD")}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
+                currency === "USD"
+                  ? "bg-blue-700 text-white shadow-md"
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-blue-300"
+              }`}
+            >
+              🇺🇸 USD
+            </button>
+            <button
+              onClick={() => setCurrency("BRL")}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
+                currency === "BRL"
+                  ? "bg-green-700 text-white shadow-md"
+                  : "bg-white border border-gray-200 text-gray-600 hover:border-green-300"
+              }`}
+            >
+              🇧🇷 Real
+            </button>
           </div>
         </div>
 

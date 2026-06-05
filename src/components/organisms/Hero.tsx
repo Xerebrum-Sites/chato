@@ -125,6 +125,25 @@ function FlowBackground() {
             </animateMotion>
           </circle>
         ))}
+
+        {/* Personas/Avatares simples */}
+        {/* Persona 1 - Arriba derecha */}
+        <g opacity={0.8}>
+          <circle cx={1200} cy={150} r={20} fill="#e65a64" />
+          <circle cx={1200} cy={200} r={30} fill="#e65a64" />
+        </g>
+
+        {/* Persona 2 - Centro derecha */}
+        <g opacity={0.7}>
+          <circle cx={1320} cy={280} r={18} fill="#ff9600" />
+          <circle cx={1320} cy={330} r={28} fill="#ff9600" />
+        </g>
+
+        {/* Persona 3 - Abajo derecha */}
+        <g opacity={0.75}>
+          <circle cx={1100} cy={420} r={19} fill="#be146e" />
+          <circle cx={1100} cy={475} r={29} fill="#be146e" />
+        </g>
       </svg>
     </div>
   );
