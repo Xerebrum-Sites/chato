@@ -198,7 +198,7 @@ export function Pricing() {
             14 días gratis para probar.
           </p>
 
-          {/* Currency toggle with flags */}
+          {/* Currency toggle with flag icons */}
           <div className="flex items-center justify-center gap-3 mt-6 flex-wrap justify-center">
             <button
               onClick={() => setCurrency("ARS")}
@@ -208,7 +208,12 @@ export function Pricing() {
                   : "bg-white border border-gray-200 text-gray-600 hover:border-red-300"
               }`}
             >
-              🇦🇷 ARS
+              <svg className="w-4 h-4" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="900" height="600" fill="#4B7BDC"/>
+                <rect y="200" width="900" height="200" fill="white"/>
+                <rect y="400" width="900" height="200" fill="#E3B448"/>
+              </svg>
+              ARS
             </button>
             <button
               onClick={() => setCurrency("USD")}
@@ -218,7 +223,17 @@ export function Pricing() {
                   : "bg-white border border-gray-200 text-gray-600 hover:border-blue-300"
               }`}
             >
-              🇺🇸 USD
+              <svg className="w-4 h-4" viewBox="0 0 7410 3900" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="7410" height="3900" fill="#B22234"/>
+                <rect y="300" width="7410" height="300" fill="white"/>
+                <rect y="900" width="7410" height="300" fill="white"/>
+                <rect y="1500" width="7410" height="300" fill="white"/>
+                <rect y="2100" width="7410" height="300" fill="white"/>
+                <rect y="2700" width="7410" height="300" fill="white"/>
+                <rect y="3300" width="7410" height="300" fill="white"/>
+                <rect width="2964" height="2106" fill="#3C3B6B"/>
+              </svg>
+              USD
             </button>
             <button
               onClick={() => setCurrency("BRL")}
@@ -228,7 +243,12 @@ export function Pricing() {
                   : "bg-white border border-gray-200 text-gray-600 hover:border-green-300"
               }`}
             >
-              🇧🇷 Real
+              <svg className="w-4 h-4" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="900" height="600" fill="#009B3A"/>
+                <polygon points="450,100 750,300 450,500 150,300" fill="#FFC62E"/>
+                <circle cx="450" cy="300" r="80" fill="#002776"/>
+              </svg>
+              Real
             </button>
           </div>
         </div>

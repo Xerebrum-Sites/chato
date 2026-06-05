@@ -126,24 +126,6 @@ function FlowBackground() {
           </circle>
         ))}
 
-        {/* Personas/Avatares simples */}
-        {/* Persona 1 - Arriba derecha */}
-        <g opacity={0.8}>
-          <circle cx={1200} cy={150} r={20} fill="#e65a64" />
-          <circle cx={1200} cy={200} r={30} fill="#e65a64" />
-        </g>
-
-        {/* Persona 2 - Centro derecha */}
-        <g opacity={0.7}>
-          <circle cx={1320} cy={280} r={18} fill="#ff9600" />
-          <circle cx={1320} cy={330} r={28} fill="#ff9600" />
-        </g>
-
-        {/* Persona 3 - Abajo derecha */}
-        <g opacity={0.75}>
-          <circle cx={1100} cy={420} r={19} fill="#be146e" />
-          <circle cx={1100} cy={475} r={29} fill="#be146e" />
-        </g>
       </svg>
     </div>
   );
@@ -224,8 +206,21 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right: Chat window */}
-        <div className="flex justify-center lg:justify-end">
+        {/* Right: Chat window + People */}
+        <div className="flex justify-center lg:justify-end relative">
+          {/* People images - positioned absolutely */}
+          <div className="hidden lg:flex absolute -right-20 top-0 bottom-0 flex-col justify-around pointer-events-none">
+            <div className="w-32 h-40 rounded-2xl bg-gradient-to-br from-red-200 to-pink-300 shadow-lg flex items-end justify-center overflow-hidden">
+              <div className="text-6xl">👩‍💼</div>
+            </div>
+            <div className="w-28 h-36 rounded-2xl bg-gradient-to-br from-orange-200 to-yellow-300 shadow-lg flex items-end justify-center overflow-hidden">
+              <div className="text-5xl">👨‍💻</div>
+            </div>
+            <div className="w-32 h-40 rounded-2xl bg-gradient-to-br from-purple-200 to-pink-400 shadow-lg flex items-end justify-center overflow-hidden">
+              <div className="text-6xl">👩‍🔬</div>
+            </div>
+          </div>
+
           <div className="w-full max-w-sm">
             <div className="flex items-center justify-center gap-1.5 mb-4">
               {conversations.map((c, i) => (
