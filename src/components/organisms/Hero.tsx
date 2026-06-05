@@ -312,12 +312,12 @@ export function Hero() {
             <div className="mt-2 mx-6 h-4 bg-gradient-to-r from-violet-200/30 to-cyan-200/30 rounded-full blur-xl" />
           </div>
 
-          {/* People using Cható - Image */}
-          <div className="hidden lg:flex lg:w-80 items-center justify-center">
+          {/* People using Cható - Real photograph with unified inbox */}
+          <div className="hidden lg:flex lg:w-96 items-center justify-center">
             <img
-              src="/hero-people.svg"
-              alt="Personas usando Cható con bandeja unificada"
-              className="w-full h-auto drop-shadow-xl"
+              src="/hero-people.jpg"
+              alt="Personas reales usando Cható - Bandeja unificada de canales"
+              className="w-full h-auto rounded-2xl drop-shadow-2xl"
             />
           </div>
         </div>
