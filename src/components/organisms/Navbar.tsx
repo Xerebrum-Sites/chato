@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/atoms/Button";
+import { URLS } from "@/lib/config";
 
 const navLinks = [
   { label: "Características", href: "#caracteristicas" },
@@ -33,7 +34,7 @@ export function Navbar() {
           scrolled ? "h-16" : "h-24"
         }`}
       >
-        {/* Logo — grande al inicio, se achica al scrollear */}
+        {/* Logo - grande al inicio, se achica al scrollear */}
         <a href="/" className="flex items-center">
           <img
             src="/logo.svg?v=2"
@@ -59,12 +60,12 @@ export function Navbar() {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://chato-app.xerebrumgroup.com/signin"
+            href={URLS.signIn}
             className="text-sm font-medium text-gray-600 hover:text-violet-600 transition-colors"
           >
             Iniciar sesión
           </a>
-          <Button href="https://chato-app.xerebrumgroup.com/signin" size="sm">
+          <Button href={URLS.signIn} size="sm">
             Empezar gratis
           </Button>
         </div>
@@ -101,7 +102,7 @@ export function Navbar() {
             </a>
           ))}
           <div className="pt-3 border-t border-gray-100">
-            <Button href="https://chato-app.xerebrumgroup.com/signin" size="md" className="w-full justify-center">
+            <Button href={URLS.signIn} size="md" className="w-full justify-center">
               Empezar gratis
             </Button>
           </div>

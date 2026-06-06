@@ -15,7 +15,7 @@ const channels: { id: Channel; label: string; color: string; message: string; se
 ];
 
 const benefits = [
-  "Una sola app para gestionar todo — Telegram ya la tienes instalada",
+  "Una sola app para gestionar todo - Telegram ya la tienes instalada",
   "Notificaciones en tiempo real sin depender de apps de terceros",
   "Historial completo de conversaciones por canal",
   "Responde igual de rápido desde el móvil o el escritorio",

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
 import { ChannelIcon } from "@/components/atoms/ChannelIcon";
+import { URLS } from "@/lib/config";
 
 type Channel = "whatsapp" | "instagram" | "facebook" | "web";
 
@@ -24,7 +25,7 @@ const channelBg: Record<Channel, string> = {
 
 // ─── Abstract Flow Background ─────────────────────────────────────────────────
 // Red de líneas ortogonales con puntos animados en colores de marca.
-// Sin participantes explícitos — solo la idea de flujo.
+// Sin participantes explícitos - solo la idea de flujo.
 
 const STREAMS = [215, 305, 400, 470] as const;   // y positions
 const VERTS   = [380, 720, 1060] as const;        // x positions
@@ -42,21 +43,21 @@ const PATHS = [
 type DotCfg = { path: string; color: string; r: number; op: number; dur: string; begin: string };
 
 const DOTS: DotCfg[] = [
-  // pa — naranja, izq→der, y=215
+  // pa - naranja, izq→der, y=215
   { path: "pa", color: "#ff9600", r: 3,   op: 0.58, dur: "3.8s", begin: "0s"   },
   { path: "pa", color: "#fdc800", r: 2.5, op: 0.35, dur: "3.8s", begin: "2s"   },
-  // pb — magenta, der→izq, y=305
+  // pb - magenta, der→izq, y=305
   { path: "pb", color: "#be146e", r: 3,   op: 0.52, dur: "3.5s", begin: "0.8s" },
   { path: "pb", color: "#9a0d58", r: 2,   op: 0.30, dur: "3.5s", begin: "5s"   },
-  // pc — coral, izq→der con bajada a y=400
+  // pc - coral, izq→der con bajada a y=400
   { path: "pc", color: "#e65a64", r: 3.5, op: 0.48, dur: "5.5s", begin: "1.5s" },
   { path: "pc", color: "#ff9600", r: 2.5, op: 0.30, dur: "5.5s", begin: "10s"  },
-  // pd — dorado, der→izq con subida a y=215
+  // pd - dorado, der→izq con subida a y=215
   { path: "pd", color: "#fdc800", r: 3,   op: 0.45, dur: "4.8s", begin: "3s"   },
-  // pe — coral, izq→der con subida a y=305
+  // pe - coral, izq→der con subida a y=305
   { path: "pe", color: "#e65a64", r: 3,   op: 0.45, dur: "5.0s", begin: "2.5s" },
   { path: "pe", color: "#be146e", r: 2,   op: 0.28, dur: "5.0s", begin: "9s"   },
-  // pf — magenta oscuro, der→izq con subida a y=400
+  // pf - magenta oscuro, der→izq con subida a y=400
   { path: "pf", color: "#9a0d58", r: 3.5, op: 0.42, dur: "4.2s", begin: "1s"   },
   { path: "pf", color: "#ff9600", r: 2.5, op: 0.32, dur: "4.2s", begin: "7s"   },
 ];
@@ -85,7 +86,7 @@ function FlowBackground() {
           </radialGradient>
         </defs>
 
-        {/* Líneas horizontales — guías de flujo */}
+        {/* Líneas horizontales - guías de flujo */}
         {STREAMS.map((y, i) => {
           const colors = ["#ff9600", "#be146e", "#e65a64", "#fdc800"];
           return (
@@ -95,7 +96,7 @@ function FlowBackground() {
           );
         })}
 
-        {/* Líneas verticales — conectores */}
+        {/* Líneas verticales - conectores */}
         {VERTS.map((x, i) => (
           <line key={`v${i}`}
             x1={x} y1={STREAMS[0]} x2={x} y2={STREAMS[STREAMS.length - 1]}
@@ -103,7 +104,7 @@ function FlowBackground() {
             strokeDasharray="4 7" />
         ))}
 
-        {/* Tramos de cruce — refuerzo visual en los cambios de nivel */}
+        {/* Tramos de cruce - refuerzo visual en los cambios de nivel */}
         <line x1={720}  y1={215} x2={720}  y2={400} stroke="#e65a64" strokeOpacity={0.08} strokeWidth={1} />
         <line x1={380}  y1={215} x2={380}  y2={305} stroke="#fdc800" strokeOpacity={0.08} strokeWidth={1} />
         <line x1={1060} y1={305} x2={1060} y2={400} stroke="#e65a64" strokeOpacity={0.08} strokeWidth={1} />
@@ -187,7 +188,7 @@ export function Hero() {
             equipos y automatizaciones. Ambos modos disponibles en todos nuestros planes.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
-            <Button href="https://chato-app.xerebrumgroup.com/signin" size="lg">
+            <Button href={URLS.signIn} size="lg">
               Empezar gratis 14 días
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

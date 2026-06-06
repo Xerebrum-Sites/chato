@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { PricingCard } from "@/components/molecules/PricingCard";
+import { URLS } from "@/lib/config";
 
-const API_URL = "https://chato-api.xerebrumgroup.com";
+const API_URL = URLS.api;
 
 interface PlanData {
   id: string;
