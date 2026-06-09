@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
 import { ChannelIcon } from "@/components/atoms/ChannelIcon";
+import { DemoForm } from "@/components/organisms/DemoForm";
 import { URLS } from "@/lib/config";
 
 type Channel = "whatsapp" | "instagram" | "facebook" | "web";
@@ -137,6 +138,15 @@ function FlowBackground() {
 export function Hero() {
   const [convIdx, setConvIdx] = useState(0);
   const [phase, setPhase] = useState(0);
+  const [demoOpen, setDemoOpen] = useState(false);
+  const [demoEnabled, setDemoEnabled] = useState(true);
+
+  useEffect(() => {
+    fetch(`${URLS.api}/api/public/demo/config`, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : { enabled: true }))
+      .then((d) => setDemoEnabled(d.enabled !== false))
+      .catch(() => setDemoEnabled(true));
+  }, []);
 
   useEffect(() => {
     const timeouts: ReturnType<typeof setTimeout>[] = [];
@@ -194,8 +204,19 @@ export function Hero() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Button>
-            <Button href="#como-funciona" variant="outline" size="lg">Ver cómo funciona</Button>
+            {demoEnabled ? (
+              <button
+                type="button"
+                onClick={() => setDemoOpen(true)}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-base font-semibold border-2 border-violet-600 text-violet-700 hover:bg-violet-50 transition-colors"
+              >
+                Solicitar demo
+              </button>
+            ) : (
+              <Button href="#como-funciona" variant="outline" size="lg">Ver cómo funciona</Button>
+            )}
           </div>
+          <DemoForm open={demoOpen} onClose={() => setDemoOpen(false)} />
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <div className="flex -space-x-2">
               {["🧕", "👨‍💼", "👩‍🍳", "🧑‍🔧"].map((emoji, i) => (

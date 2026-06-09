@@ -14,7 +14,13 @@ interface PlanData {
   features: Record<string, unknown>;
   price_ars: number | null;
   price_usd: number | null;
+  annual_discount_pct?: number;
+  price_annual_ars?: number | null;
+  price_annual_usd?: number | null;
+  is_visible_landing?: boolean;
 }
+
+type BillingCycle = "monthly" | "annual";
 
 // Map backend slugs to landing display config
 const PLAN_CONFIG: Record<string, {
@@ -98,9 +104,23 @@ function formatPrice(priceArs: number | null, priceUsd: number | null, currency:
   return `$${priceUsd}`;
 }
 
-function getPeriodLabel(priceUsd: number | null, currency: Currency): string {
+function getPeriodLabel(priceUsd: number | null, cycle: BillingCycle): string {
   if (priceUsd === 0 || priceUsd === null) return "";
-  return "/mes";
+  return cycle === "annual" ? "/año" : "/mes";
+}
+
+function pickPriceForCycle(
+  plan: PlanData | undefined,
+  cycle: BillingCycle,
+): { priceArs: number | null; priceUsd: number | null } {
+  if (!plan) return { priceArs: null, priceUsd: null };
+  if (cycle === "monthly") {
+    return { priceArs: plan.price_ars, priceUsd: plan.price_usd };
+  }
+  return {
+    priceArs: plan.price_annual_ars ?? plan.price_ars,
+    priceUsd: plan.price_annual_usd ?? plan.price_usd,
+  };
 }
 
 async function detectCountry(): Promise<string> {
@@ -136,6 +156,7 @@ async function fetchUsdToBrl(): Promise<number> {
 export function Pricing() {
   const [plans, setPlans] = useState<PlanData[]>([]);
   const [currency, setCurrency] = useState<Currency>("ARS");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [usdToBrl, setUsdToBrl] = useState(5.8);
   const [loading, setLoading] = useState(true);
 
@@ -162,25 +183,35 @@ export function Pricing() {
     BRL: "🇧🇷 BRL",
   };
 
-  // Merge API data with display config
-  const displayPlans = (["starter", "pro", "business"] as const).map((slug) => {
-    const apiPlan = plans.find((p) => p.slug === slug);
-    const config = PLAN_CONFIG[slug];
-    return {
-      slug,
-      name: config.displayName,
-      price: loading
-        ? "..."
-        : formatPrice(apiPlan?.price_ars ?? null, apiPlan?.price_usd ?? null, currency, usdToBrl),
-      period: loading ? "" : getPeriodLabel(apiPlan?.price_usd ?? null, currency),
-      description: config.description,
-      baseFeatures: config.baseFeatures,
-      advancedFeatures: config.advancedFeatures,
-      highlighted: config.highlighted,
-      badge: config.badge,
-      cta: config.cta,
-    };
-  });
+  // Merge API data with display config. Plans hidden from the landing
+  // (is_visible_landing === false) are silently skipped.
+  const visiblePlans = plans.filter((p) => p.is_visible_landing !== false);
+  const displayPlans = (["starter", "pro", "business"] as const)
+    .map((slug) => ({ slug, apiPlan: visiblePlans.find((p) => p.slug === slug) }))
+    .filter(({ apiPlan }) => apiPlan !== undefined)
+    .map(({ slug, apiPlan }) => {
+      const config = PLAN_CONFIG[slug];
+      const priced = pickPriceForCycle(apiPlan, billingCycle);
+      const discountPct = apiPlan?.annual_discount_pct ?? 0;
+      return {
+        slug,
+        name: config.displayName,
+        price: loading
+          ? "..."
+          : formatPrice(priced.priceArs, priced.priceUsd, currency, usdToBrl),
+        period: loading ? "" : getPeriodLabel(priced.priceUsd, billingCycle),
+        description: config.description,
+        baseFeatures: config.baseFeatures,
+        advancedFeatures: config.advancedFeatures,
+        highlighted: config.highlighted,
+        badge: config.badge,
+        cta: config.cta,
+        annualSavings:
+          billingCycle === "annual" && discountPct > 0
+            ? `Ahorrás ${discountPct.toFixed(0)}%`
+            : null,
+      };
+    });
 
   return (
     <section id="precios" className="py-24 bg-gray-50">
@@ -252,6 +283,39 @@ export function Pricing() {
               Real
             </button>
           </div>
+
+          {/* Billing cycle toggle: monthly ↔ annual (annual shows discount) */}
+          <div className="flex items-center justify-center mt-6">
+            <div className="inline-flex items-center bg-white border border-gray-200 rounded-full p-1 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setBillingCycle("monthly")}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                  billingCycle === "monthly"
+                    ? "bg-violet-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Mensual
+              </button>
+              <button
+                type="button"
+                onClick={() => setBillingCycle("annual")}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
+                  billingCycle === "annual"
+                    ? "bg-violet-600 text-white shadow-md"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Anual
+                {billingCycle !== "annual" && (
+                  <span className="text-[10px] uppercase tracking-wider bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">
+                    Ahorrás
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 items-center">
@@ -268,6 +332,7 @@ export function Pricing() {
               badge={plan.badge}
               cta={plan.cta}
               slug={plan.slug}
+              annualSavings={plan.annualSavings}
             />
           ))}
         </div>

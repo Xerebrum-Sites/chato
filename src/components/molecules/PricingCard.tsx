@@ -11,6 +11,8 @@ interface PricingCardProps {
   badge?: string;
   cta?: string;
   slug?: string;
+  /** Shown under the price when annual cycle is active and discount > 0. */
+  annualSavings?: string | null;
 }
 
 export function PricingCard({
@@ -23,6 +25,7 @@ export function PricingCard({
   highlighted = false,
   badge,
   cta = "Empezar gratis",
+  annualSavings,
 }: PricingCardProps) {
   return (
     <div
@@ -54,6 +57,11 @@ export function PricingCard({
             </span>
           )}
         </div>
+        {annualSavings && (
+          <p className={`text-xs font-semibold mb-2 ${highlighted ? "text-emerald-300" : "text-emerald-600"}`}>
+            ✨ {annualSavings}
+          </p>
+        )}
         <p className={`text-sm ${highlighted ? "text-violet-200" : "text-gray-500"}`}>{description}</p>
       </div>
 
