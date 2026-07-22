@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { URLS, EMAILS } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad – Cható",
   description: "Política de privacidad de Cható. Conocé cómo recopilamos, usamos y protegemos tus datos.",
 };
 
-const UPDATED = "20 de mayo de 2026";
-const EMAIL = "privacidad@chato.app";
-const SITE = "https://chato.xerebrumgroup.com";
+const UPDATED = "21 de julio de 2026";
+const EMAIL = EMAILS.legal;
+const SITE = URLS.landing;
 
 const sections = [
   {
@@ -37,8 +38,9 @@ const sections = [
         <li>Información de facturación (gestionada por procesadores de pago de terceros; no almacenamos datos de tarjeta)</li>
       </ul>
 
-      <h3>2.2 Mensajes en tránsito</h3>
-      <p>Cható actúa como <strong>enrutador de mensajes</strong> entre los canales de comunicación del negocio (WhatsApp, Instagram, Facebook, Web Chat) y Telegram. Los mensajes recibidos a través de las APIs de Meta son procesados en tiempo real para ser retransmitidos al operador del negocio vía Telegram. <strong>No almacenamos el contenido de los mensajes de forma permanente.</strong> Los mensajes se conservan temporalmente en memoria durante el procesamiento (segundos) y en un buffer de hasta 24 horas para garantizar la entrega en caso de interrupciones.</p>
+      <h3>2.2 Mensajes y conversaciones</h3>
+      <p>Cható centraliza en una bandeja de atención unificada las conversaciones entre el negocio y sus clientes provenientes de distintos canales (WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email). Para prestar el servicio, <strong>almacenamos el contenido de los mensajes</strong> (entrantes y salientes) y sus adjuntos en el espacio de datos privado de cada negocio, de modo que pueda leer, responder y dar seguimiento a cada conversación, con la asistencia opcional de un asistente de IA. El negocio también puede escalar una conversación a un operador humano.</p>
+      <p>Los mensajes se conservan según la política de retención vigente (ver sección 6) y pueden eliminarse a pedido siguiendo nuestra página de <a href="/eliminar-datos">Eliminación de datos</a>.</p>
 
       <h3>2.3 Metadatos de mensajes</h3>
       <ul>
@@ -77,13 +79,13 @@ const sections = [
       </ul>
 
       <h3>3.2 Finalidad</h3>
-      <p>Estos datos se utilizan exclusivamente para enrutar el mensaje al operador del negocio (vía Telegram) y para enviar la respuesta de vuelta al usuario final a través del mismo canal. No utilizamos estos datos para publicidad, perfilado ni los compartimos con terceros fuera del flujo de entrega del mensaje.</p>
+      <p>Estos datos se utilizan exclusivamente para atender la conversación entre el negocio y su cliente: mostrar el mensaje en la bandeja del negocio, permitir la respuesta (manual o asistida por IA) y enviarla de vuelta al usuario final por el mismo canal. No utilizamos estos datos para publicidad, perfilado ni los compartimos con terceros fuera del flujo de atención del mensaje.</p>
 
       <h3>3.3 Cumplimiento de políticas de Meta</h3>
       <p>Cható cumple con las <a href="https://developers.facebook.com/policy/" target="_blank" rel="noopener noreferrer">Políticas para Desarrolladores de Meta</a> y con los <a href="https://www.whatsapp.com/legal/business-policy/" target="_blank" rel="noopener noreferrer">Términos del Servicio de WhatsApp Business</a>. No utilizamos los datos obtenidos a través de estas plataformas para ningún fin distinto al especificado en estas políticas.</p>
 
       <h3>3.4 Eliminación de datos de Meta</h3>
-      <p>Si un usuario final desea que eliminemos los metadatos asociados a su identificador de Meta, puede solicitarlo enviando un correo a <a href="mailto:${EMAIL}">${EMAIL}</a> indicando la plataforma y el número/ID correspondiente. Procesamos las solicitudes en un plazo máximo de 30 días.</p>
+      <p>Si un usuario final desea que eliminemos los datos asociados a su identificador de Meta (contenido de los mensajes, adjuntos e identificadores), puede solicitarlo siguiendo nuestra página de <a href="/eliminar-datos">Eliminación de datos</a> o enviando un correo a <a href="mailto:${EMAIL}">${EMAIL}</a> indicando la plataforma y el número/ID correspondiente. Procesamos las solicitudes en un plazo máximo de 30 días.</p>
     `,
   },
   {
@@ -92,7 +94,7 @@ const sections = [
     content: `
       <p>Utilizamos los datos recopilados para las siguientes finalidades:</p>
       <ul>
-        <li><strong>Prestación del servicio:</strong> Crear y gestionar tu cuenta, enrutar mensajes entre canales y Telegram, enviar notificaciones relacionadas con el servicio.</li>
+        <li><strong>Prestación del servicio:</strong> Crear y gestionar tu cuenta, centralizar y responder las conversaciones de tus canales en una bandeja unificada, enviar notificaciones relacionadas con el servicio.</li>
         <li><strong>Facturación:</strong> Gestionar suscripciones y pagos.</li>
         <li><strong>Soporte:</strong> Responder consultas y resolver incidencias.</li>
         <li><strong>Mejora del producto:</strong> Analizar patrones de uso agregados (sin identificar usuarios) para mejorar la plataforma.</li>
@@ -110,7 +112,7 @@ const sections = [
       <ul>
         <li><strong>Proveedores de infraestructura:</strong> Servicios de hosting y base de datos que procesan datos en nuestro nombre bajo acuerdos de confidencialidad (ej. servidores propios en infraestructura Xerebrum).</li>
         <li><strong>Procesadores de pago:</strong> Para gestionar transacciones de suscripción (no compartimos datos de mensajes).</li>
-        <li><strong>Telegram:</strong> Los mensajes enrutados se envían a través de la API de Telegram Bot al número/chat del operador del negocio.</li>
+        <li><strong>Canales de mensajería:</strong> cuando el negocio escala una conversación a un operador (por ejemplo vía Telegram o Chatwoot), los mensajes se envían a través de la API correspondiente al operador que el negocio haya designado.</li>
         <li><strong>Obligaciones legales:</strong> Cuando sea requerido por ley, orden judicial o para proteger derechos legítimos.</li>
       </ul>
     `,
@@ -124,7 +126,7 @@ const sections = [
           <tr><th>Tipo de dato</th><th>Periodo de conservación</th></tr>
         </thead>
         <tbody>
-          <tr><td>Contenido de mensajes en tránsito</td><td>Máximo 24 horas (buffer de entrega)</td></tr>
+          <tr><td>Contenido de conversaciones y adjuntos</td><td>Según la política de retención (por defecto 90 días desde la última actividad); configurable por la plataforma. Eliminable a pedido.</td></tr>
           <tr><td>Metadatos de mensajes (ID, timestamp, canal)</td><td>90 días desde la fecha del mensaje</td></tr>
           <tr><td>Datos de cuenta</td><td>Durante la vigencia de la cuenta + 30 días tras la cancelación</td></tr>
           <tr><td>Registros de acceso (logs)</td><td>60 días</td></tr>
@@ -158,7 +160,7 @@ const sections = [
         <li><strong>Oposición:</strong> Oponerte al tratamiento de tus datos para determinadas finalidades.</li>
         <li><strong>Limitación:</strong> Solicitar que limitemos el tratamiento de tus datos en ciertas circunstancias.</li>
       </ul>
-      <p>Para ejercer cualquiera de estos derechos, enviá un correo a <a href="mailto:${EMAIL}">${EMAIL}</a> con el asunto "Ejercicio de derechos" indicando tu nombre, el derecho que deseás ejercer y el detalle de la solicitud. Respondemos en un plazo máximo de 30 días hábiles.</p>
+      <p>Para ejercer cualquiera de estos derechos, enviá un correo a <a href="mailto:${EMAIL}">${EMAIL}</a> con el asunto "Ejercicio de derechos" indicando tu nombre, el derecho que deseás ejercer y el detalle de la solicitud. Para la eliminación de datos podés seguir también las instrucciones de la página <a href="/eliminar-datos">Eliminación de datos</a>. Respondemos en un plazo máximo de 30 días hábiles.</p>
     `,
   },
   {
