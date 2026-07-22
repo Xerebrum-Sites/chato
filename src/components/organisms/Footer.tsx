@@ -13,6 +13,7 @@ const links = {
   ],
   Legal: [
     { label: "Privacidad", href: "/privacidad" },
+    { label: "Eliminación de datos", href: "/eliminar-datos" },
     { label: "Términos", href: "#" },
     { label: "Cookies", href: "#" },
   ],
