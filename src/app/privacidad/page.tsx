@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { URLS, EMAILS } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Política de Privacidad – Cható",
@@ -6,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 const UPDATED = "21 de julio de 2026";
-const EMAIL = "privacidad@chato.app";
-const SITE = "https://chato.xerebrumgroup.com";
+const EMAIL = EMAILS.legal;
+const SITE = URLS.landing;
 
 const sections = [
   {

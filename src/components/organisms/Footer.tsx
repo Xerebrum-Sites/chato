@@ -1,3 +1,5 @@
+import { EMAILS } from "@/lib/config";
+
 const links = {
   Producto: [
     { label: "Características", href: "#caracteristicas" },
@@ -9,7 +11,7 @@ const links = {
     { label: "Sobre nosotros", href: "#" },
     { label: "Blog", href: "#" },
     { label: "Afiliados", href: "#" },
-    { label: "Contacto", href: "#" },
+    { label: "Contacto", href: `mailto:${EMAILS.contact}` },
   ],
   Legal: [
     { label: "Privacidad", href: "/privacidad" },

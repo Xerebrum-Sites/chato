@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { URLS } from "@/lib/config";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const SITE_URL = "https://chato.xerebrumgroup.com";
+const SITE_URL = URLS.landing;
 const OG_IMAGE = `${SITE_URL}/og-image-v2.png`;
 
 export const metadata: Metadata = {
