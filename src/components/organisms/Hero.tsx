@@ -195,8 +195,9 @@ export function Hero() {
             a tu ritmo
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl">
-            Empezá con Telegram como tu centro de mensajes. Cuando crezcas, accedé a tu propio panel con
-            analytics, equipos y automatizaciones. Los dos modos están incluidos en todos los planes.
+            Centralizá todos tus canales, sumá agentes IA que responden por vos y activá solo las
+            herramientas que tu negocio necesita. Empezá simple en Telegram y escalá a un panel completo
+            cuando crezcas.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <Button href={URLS.signIn} size="lg">

@@ -4,7 +4,7 @@
  */
 
 import type { LucideIcon } from "lucide-react";
-import { MessageSquare, LayoutDashboard, Sparkles, Puzzle } from "lucide-react";
+import { MessageSquare, LayoutDashboard, Bot, Sparkles, Puzzle } from "lucide-react";
 import { industries } from "@/lib/content";
 
 export interface NavLink {
@@ -27,6 +27,12 @@ export const productLinks: NavLink[] = [
     href: "/modo-avanzado/",
     description: "Panel completo, equipos y automatización",
     icon: LayoutDashboard,
+  },
+  {
+    label: "Agentes IA",
+    href: "/agentes-ia/",
+    description: "Un asistente que atiende por vos, 24/7",
+    icon: Bot,
   },
   {
     label: "Características",

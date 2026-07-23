@@ -31,6 +31,15 @@ import {
   ShieldCheck,
   Layers,
   Ban,
+  ConciergeBell,
+  TrendingUp,
+  LifeBuoy,
+  UserCheck,
+  CalendarCheck,
+  MessagesSquare,
+  BrainCircuit,
+  Sparkles,
+  ArrowLeftRight,
 } from "lucide-react";
 
 // ─── Canales soportados ───────────────────────────────────────────────────────
@@ -295,5 +304,77 @@ export const industries: Industry[] = [
       "Reunís todas las consultas en una bandeja, usás respuestas rápidas para disponibilidad y precios, y derivás a tu equipo cuando hace falta.",
     result: "Respondés a tiempo y con información consistente en cada canal.",
     photoLabel: "Recepcionista de hotel atendiendo huéspedes",
+  },
+];
+
+// ─── Agentes IA ───────────────────────────────────────────────────────────────
+// El Agente IA base (bot + base de conocimiento) está disponible desde el plan
+// Pro. Los agentes especializados llegan con el add-on "Múltiples agentes IA".
+
+export interface AiCapability {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export const aiCapabilities: AiCapability[] = [
+  {
+    icon: MessagesSquare,
+    title: "Responde solo, 24/7",
+    description:
+      "Atiende consultas al instante en todos tus canales, también fuera de horario y cuando estás ocupado.",
+  },
+  {
+    icon: BrainCircuit,
+    title: "Con tu base de conocimiento",
+    description:
+      "Responde con la información real de tu negocio —precios, políticas, catálogo, preguntas frecuentes— que vos cargás (RAG).",
+  },
+  {
+    icon: Sparkles,
+    title: "Con el tono de tu marca",
+    description:
+      "Configurás su personalidad y estilo para que hable como tu negocio, no como un robot genérico.",
+  },
+  {
+    icon: ArrowLeftRight,
+    title: "Escala a una persona",
+    description:
+      "Cuando la consulta lo requiere, deriva la conversación a vos o a tu equipo con todo el contexto de la charla.",
+  },
+];
+
+export interface AiRole {
+  icon: LucideIcon;
+  name: string;
+  description: string;
+}
+
+// Agentes especializados del add-on "Múltiples agentes IA".
+export const aiAgentRoles: AiRole[] = [
+  {
+    icon: ConciergeBell,
+    name: "Recepcionista",
+    description: "Da la bienvenida, responde lo frecuente y deriva cada consulta al área correcta.",
+  },
+  {
+    icon: TrendingUp,
+    name: "Ventas",
+    description: "Asesora sobre productos, arma presupuestos y acompaña la conversación hacia la compra.",
+  },
+  {
+    icon: LifeBuoy,
+    name: "Soporte",
+    description: "Resuelve dudas de posventa y problemas comunes con la información de tu negocio.",
+  },
+  {
+    icon: CalendarCheck,
+    name: "Reservas",
+    description: "Toma y coordina turnos o citas, conectado con tu agenda.",
+  },
+  {
+    icon: UserCheck,
+    name: "Cualificador",
+    description: "Detecta si un contacto es un lead válido y lo prepara antes de pasarlo a una persona.",
   },
 ];

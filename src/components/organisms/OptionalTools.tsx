@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { CalendarCheck, ShoppingBag, ClipboardList, Star, Puzzle, Check } from "lucide-react";
+import { CalendarCheck, ShoppingBag, ClipboardList, Star, Filter, Megaphone, Bot, Puzzle, Check } from "lucide-react";
 import { IconBadge } from "@/components/atoms/IconBadge";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { Stagger, StaggerItem, Reveal } from "@/components/atoms/Reveal";
@@ -24,19 +24,31 @@ interface AddonResponse {
 const SLUG_PRESENTATION: Record<string, { icon: LucideIcon; features: string[] }> = {
   booking: {
     icon: CalendarCheck,
-    features: ["Calendario automático", "Confirmación al instante", "Recordatorios automáticos", "Sincronización en tiempo real"],
+    features: ["Agenda de servicios y staff", "Reserva de citas online", "Recordatorios automáticos", "Sincroniza con Google y Calendly"],
   },
   catalog: {
     icon: ShoppingBag,
-    features: ["Fotos y descripciones", "Búsqueda y filtros", "Pedidos directos", "Sincronización con tu inventario"],
+    features: ["Productos y categorías", "Carrito con link de pago", "Variantes de producto", "Pedidos directos desde el chat"],
   },
   surveys: {
     icon: ClipboardList,
-    features: ["Encuestas personalizadas", "Análisis en tiempo real", "Reportes automáticos", "Integración con CRM"],
+    features: ["Encuestas post-conversación", "Scoring NPS y CSAT", "Reportes automáticos", "Detectás clientes insatisfechos a tiempo"],
   },
   reviews: {
     icon: Star,
-    features: ["Solicitud automática", "Gestión de respuestas", "Integración con reseñas", "Alertas de críticas"],
+    features: ["Pedido automático de reseñas", "En Google Maps y redes", "Mejor reputación online", "Alertas ante críticas"],
+  },
+  sales_pipeline: {
+    icon: Filter,
+    features: ["Funnel con etapas configurables", "Leads con monto y responsable", "Automatizaciones por regla", "Métricas de conversión"],
+  },
+  broadcast: {
+    icon: Megaphone,
+    features: ["Envío masivo por WhatsApp (HSM)", "Segmentación por tags y etapa", "Secuencias drip programadas", "Opt-out automático y métricas de entrega"],
+  },
+  multi_agent: {
+    icon: Bot,
+    features: ["Agentes IA especializados por área", "Router de intenciones automático", "Handoff transparente entre agentes", "Base de conocimiento (RAG) por agente"],
   },
 };
 
@@ -93,7 +105,7 @@ export function OptionalTools() {
               Potenciá tu negocio <span className="gradient-text">a medida que crecés</span>
             </>
           }
-          subtitle="Sumá herramientas específicas según tu necesidad. Cualquier plan puede activar cualquier add-on. Pagás solo por lo que usás."
+          subtitle="Cható es modular: ninguna herramienta es obligatoria. Activás solo las que tu negocio necesita, cuando las necesites, y pagás solo por lo que usás."
           className="mb-16"
         />
 
@@ -152,9 +164,9 @@ export function OptionalTools() {
             <h3 className="text-lg font-black text-gray-900 mb-4">¿Cómo funcionan los add-ons?</h3>
             <ul className="space-y-3 text-gray-600 text-sm">
               {[
-                ["Sin compromisos:", "activás y desactivás cuando quieras."],
-                ["Para cualquier plan:", "Starter, Pro y Business pueden acceder a cualquier herramienta."],
-                ["Se suman a tu factura:", "pagás solo por los que usás, junto con tu plan base."],
+                ["Modulares, no obligatorias:", "activás solo las que tu negocio necesita."],
+                ["Según tu plan:", "algunas vienen incluidas y otras se suman como add-on."],
+                ["Sin compromisos:", "activás y desactivás cuando quieras; pagás solo lo que usás."],
               ].map(([bold, rest]) => (
                 <li key={bold} className="flex items-start gap-3">
                   <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
