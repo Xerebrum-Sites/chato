@@ -177,11 +177,9 @@ export function Pricing() {
     init();
   }, []);
 
-  const currencyLabel: Record<Currency, string> = {
-    ARS: "🇦🇷 ARS",
-    USD: "🇺🇸 USD",
-    BRL: "🇧🇷 BRL",
-  };
+  // Selector de moneda por código (sin banderas de país). El label "R$" cubre
+  // el real; "ARS"/"USD" hablan por sí mismos.
+  const currencyChip: Record<Currency, string> = { ARS: "ARS", USD: "USD", BRL: "R$ BRL" };
 
   // Merge API data with display config. Plans hidden from the landing
   // (is_visible_landing === false) are silently skipped.
@@ -206,6 +204,7 @@ export function Pricing() {
         highlighted: config.highlighted,
         badge: config.badge,
         cta: config.cta,
+        ctaHref: slug === "business" ? "/contacto/" : URLS.signIn,
         annualSavings:
           billingCycle === "annual" && discountPct > 0
             ? `Ahorrás ${discountPct.toFixed(0)}%`
@@ -214,74 +213,37 @@ export function Pricing() {
     });
 
   return (
-    <section id="precios" className="py-24 bg-gray-50">
+    <section id="precios" className="pt-32 lg:pt-40 pb-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <Badge variant="green" className="mb-4">
             Precios transparentes
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
-            Comienza pequeño,{" "}
-            <span className="gradient-text">escala sin límites</span>
+            Empezá en pequeño,{" "}
+            <span className="gradient-text">escalá sin límites</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Todos los planes incluyen Modo Simple. El Modo Avanzado se desbloquea en Pro.
-            Herramientas opcionales (Reservas, Catálogo, etc.) disponibles en cualquier plan.
-            14 días gratis para probar.
+            Todos los planes incluyen el Modo Simple. El Modo Avanzado se desbloquea en Pro.
+            Herramientas opcionales (Reservas, Catálogo y más) disponibles en cualquier plan.
+            14 días gratis para probar, sin tarjeta.
           </p>
 
-          {/* Currency toggle with flag icons */}
-          <div className="flex items-center justify-center gap-3 mt-6 flex-wrap justify-center">
-            <button
-              onClick={() => setCurrency("ARS")}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
-                currency === "ARS"
-                  ? "bg-red-700 text-white shadow-md"
-                  : "bg-white border border-gray-200 text-gray-600 hover:border-red-300"
-              }`}
-            >
-              <svg className="w-4 h-4" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="900" height="600" fill="#4B7BDC"/>
-                <rect y="200" width="900" height="200" fill="white"/>
-                <rect y="400" width="900" height="200" fill="#E3B448"/>
-              </svg>
-              ARS
-            </button>
-            <button
-              onClick={() => setCurrency("USD")}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
-                currency === "USD"
-                  ? "bg-blue-700 text-white shadow-md"
-                  : "bg-white border border-gray-200 text-gray-600 hover:border-blue-300"
-              }`}
-            >
-              <svg className="w-4 h-4" viewBox="0 0 7410 3900" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="7410" height="3900" fill="#B22234"/>
-                <rect y="300" width="7410" height="300" fill="white"/>
-                <rect y="900" width="7410" height="300" fill="white"/>
-                <rect y="1500" width="7410" height="300" fill="white"/>
-                <rect y="2100" width="7410" height="300" fill="white"/>
-                <rect y="2700" width="7410" height="300" fill="white"/>
-                <rect y="3300" width="7410" height="300" fill="white"/>
-                <rect width="2964" height="2106" fill="#3C3B6B"/>
-              </svg>
-              USD
-            </button>
-            <button
-              onClick={() => setCurrency("BRL")}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
-                currency === "BRL"
-                  ? "bg-green-700 text-white shadow-md"
-                  : "bg-white border border-gray-200 text-gray-600 hover:border-green-300"
-              }`}
-            >
-              <svg className="w-4 h-4" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="900" height="600" fill="#009B3A"/>
-                <polygon points="450,100 750,300 450,500 150,300" fill="#FFC62E"/>
-                <circle cx="450" cy="300" r="80" fill="#002776"/>
-              </svg>
-              Real
-            </button>
+          {/* Selector de moneda — códigos, sin banderas de país */}
+          <div className="flex items-center justify-center gap-2 mt-6 flex-wrap">
+            {(["ARS", "USD", "BRL"] as const).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCurrency(c)}
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  currency === c
+                    ? "bg-violet-600 text-white shadow-md"
+                    : "bg-white border border-gray-200 text-gray-600 hover:border-violet-300"
+                }`}
+              >
+                {currencyChip[c]}
+              </button>
+            ))}
           </div>
 
           {/* Billing cycle toggle: monthly ↔ annual (annual shows discount) */}
@@ -332,6 +294,7 @@ export function Pricing() {
               badge={plan.badge}
               cta={plan.cta}
               slug={plan.slug}
+              ctaHref={plan.ctaHref}
               annualSavings={plan.annualSavings}
             />
           ))}

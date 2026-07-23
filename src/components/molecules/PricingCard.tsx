@@ -1,4 +1,5 @@
 import { Button } from "@/components/atoms/Button";
+import { URLS } from "@/lib/config";
 
 interface PricingCardProps {
   name: string;
@@ -11,6 +12,8 @@ interface PricingCardProps {
   badge?: string;
   cta?: string;
   slug?: string;
+  /** Destino del botón (registro por defecto; contacto para planes de ventas). */
+  ctaHref?: string;
   /** Shown under the price when annual cycle is active and discount > 0. */
   annualSavings?: string | null;
 }
@@ -25,6 +28,7 @@ export function PricingCard({
   highlighted = false,
   badge,
   cta = "Empezar gratis",
+  ctaHref = URLS.signIn,
   annualSavings,
 }: PricingCardProps) {
   return (
@@ -124,7 +128,7 @@ export function PricingCard({
       </div>
 
       <Button
-        href="#registro"
+        href={ctaHref}
         variant={highlighted ? "secondary" : "outline"}
         size="md"
         className="w-full justify-center"

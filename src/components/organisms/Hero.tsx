@@ -5,6 +5,7 @@ import { Button } from "@/components/atoms/Button";
 import { Badge } from "@/components/atoms/Badge";
 import { ChannelIcon } from "@/components/atoms/ChannelIcon";
 import { DemoForm } from "@/components/organisms/DemoForm";
+import { Check } from "lucide-react";
 import { URLS } from "@/lib/config";
 
 type Channel = "whatsapp" | "instagram" | "facebook" | "web";
@@ -189,13 +190,13 @@ export function Hero() {
             Omnicanalidad lista para escalar
           </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] tracking-tight mb-6 text-balance">
-            Centraliza tus canales{" "}
-            <span className="gradient-text">y escala</span>{" "}
+            Centralizá tus canales{" "}
+            <span className="gradient-text">y escalá</span>{" "}
             a tu ritmo
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed mb-8 max-w-xl">
-            Comienza con Telegram como tu hub central. Cuando crezcas, accede a tu propio dashboard con analytics,
-            equipos y automatizaciones. Ambos modos disponibles en todos nuestros planes.
+            Empezá con Telegram como tu centro de mensajes. Cuando crezcas, accedé a tu propio panel con
+            analytics, equipos y automatizaciones. Los dos modos están incluidos en todos los planes.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <Button href={URLS.signIn} size="lg">
@@ -213,17 +214,17 @@ export function Hero() {
                 Solicitar demo
               </button>
             ) : (
-              <Button href="#como-funciona" variant="outline" size="lg">Ver cómo funciona</Button>
+              <Button href="/modo-simple/" variant="outline" size="lg">Ver cómo funciona</Button>
             )}
           </div>
           <DemoForm open={demoOpen} onClose={() => setDemoOpen(false)} />
-          <div className="flex items-center gap-4 text-sm text-gray-500">
-            <div className="flex -space-x-2">
-              {["🧕", "👨‍💼", "👩‍🍳", "🧑‍🔧"].map((emoji, i) => (
-                <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-100 to-cyan-100 border-2 border-white flex items-center justify-center text-sm">{emoji}</div>
-              ))}
-            </div>
-            <span><strong className="text-gray-900">+500 comercios</strong> ya centralizan sus chats</span>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-600">
+            {["14 días gratis", "Sin tarjeta de crédito", "Sin permanencia"].map((t) => (
+              <span key={t} className="inline-flex items-center gap-1.5">
+                <Check className="w-4 h-4 text-emerald-500" strokeWidth={2.5} />
+                {t}
+              </span>
+            ))}
           </div>
         </div>
 

@@ -1,14 +1,16 @@
 "use client";
 
+import { LayoutDashboard } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
+import { URLS } from "@/lib/config";
 
 const benefits = [
-  "Dashboard completo con todas tus conversaciones",
+  "Panel completo con todas tus conversaciones",
   "Analytics y reportes en tiempo real por canal",
-  "Gestiona equipos: asigna agentes, monitores conversaciones",
+  "Gestioná equipos: asigná agentes y monitoreá conversaciones",
   "Automatizaciones avanzadas con IA integrada",
-  "Base de conocimiento (RAG) para respuestas inteligentes",
+  "Base de conocimiento (RAG) para respuestas más precisas",
   "Integración con tus herramientas favoritas",
 ];
 
@@ -28,10 +30,10 @@ export function AdvancedModeShowcase() {
               {/* Header */}
               <div className="bg-gradient-to-r from-violet-600 to-violet-800 px-8 py-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center text-white text-lg">
-                    🎛️
+                  <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center text-white">
+                    <LayoutDashboard className="w-5 h-5" strokeWidth={1.75} />
                   </div>
-                  <h3 className="text-xl font-black text-white">Tu Dashboard</h3>
+                  <h3 className="text-xl font-black text-white">Tu Panel</h3>
                 </div>
                 <p className="text-white/90 text-sm">Control total en una interfaz intuitiva</p>
               </div>
@@ -111,7 +113,7 @@ export function AdvancedModeShowcase() {
           {/* Right: Details */}
           <div className="flex flex-col justify-center order-1 lg:order-2">
             <Badge className="mb-6" variant="violet">
-              🚀 Escala sin límites
+              Escalá sin límites
             </Badge>
 
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-6 leading-tight">
@@ -158,7 +160,7 @@ export function AdvancedModeShowcase() {
               </ul>
             </div>
 
-            <Button href="#registro" size="lg">
+            <Button href={URLS.signIn} size="lg">
               Probar Modo Avanzado
               <svg
                 className="w-5 h-5"

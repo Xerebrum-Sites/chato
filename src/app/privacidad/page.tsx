@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { URLS, EMAILS } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -211,12 +212,13 @@ export default function PrivacidadPage() {
       {/* Header */}
       <header className="border-b border-gray-100 bg-white sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a href="/">
+          <Link href="/">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.svg?v=2" alt="Cható" className="h-9 w-auto" />
-          </a>
-          <a href="/" className="text-sm text-gray-500 hover:text-violet-600 transition-colors">
+          </Link>
+          <Link href="/" className="text-sm text-gray-500 hover:text-violet-600 transition-colors">
             ← Volver al inicio
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -271,12 +273,12 @@ export default function PrivacidadPage() {
             <a href={SITE} className="text-violet-600 hover:underline">{SITE}</a>{" "}
             y a la plataforma Cható.
           </p>
-          <a
+          <Link
             href="/"
             className="inline-block mt-6 text-sm font-medium text-violet-600 hover:text-violet-700 transition-colors"
           >
             ← Volver al inicio
-          </a>
+          </Link>
         </div>
       </main>
     </div>

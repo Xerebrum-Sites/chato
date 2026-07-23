@@ -39,3 +39,18 @@ export const EMAILS = {
   /** General contact / support. */
   contact: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? CONTACT_EMAIL_DEFAULT,
 } as const;
+
+// Número real de WhatsApp de contacto (solo dígitos, con código de país sin "+").
+// Puede sobrescribirse por entorno con NEXT_PUBLIC_WHATSAPP_NUMBER.
+const WHATSAPP_NUMBER_DEFAULT = "5493416298933";
+
+/** Datos de contacto comercial usados por la página de Contacto y los CTAs. */
+export const CONTACT = {
+  /** Número en formato E.164 sin "+", para links wa.me. */
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? WHATSAPP_NUMBER_DEFAULT,
+  /** Link listo para usar a WhatsApp con un mensaje inicial. */
+  get whatsappUrl(): string {
+    const text = encodeURIComponent("¡Hola! Quiero saber más sobre Cható.");
+    return `https://wa.me/${this.whatsappNumber}?text=${text}`;
+  },
+} as const;

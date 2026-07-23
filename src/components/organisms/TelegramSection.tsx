@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { ChannelIcon } from "@/components/atoms/ChannelIcon";
 import { Button } from "@/components/atoms/Button";
+import { URLS } from "@/lib/config";
 
 type Channel = "whatsapp" | "instagram" | "facebook" | "web";
 
@@ -37,7 +38,7 @@ export function TelegramSection() {
           {/* Left: Explanation */}
           <div>
             <Badge className="mb-6" variant="cyan">
-              ✨ Rápido y accesible
+              Rápido y accesible
             </Badge>
 
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-6 leading-tight">
@@ -69,7 +70,7 @@ export function TelegramSection() {
               ))}
             </ul>
 
-            <Button href="#registro" size="lg">
+            <Button href={URLS.signIn} size="lg">
               Empezar ahora
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

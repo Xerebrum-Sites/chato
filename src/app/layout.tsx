@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "chat multicanal",
     "centralizar mensajes",
     "bandeja de entrada unificada",
-    "CRM latinoamérica",
+    "CRM para pymes",
   ],
   authors: [{ name: "Xerebrum", url: SITE_URL }],
   creator: "Xerebrum",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: "Cható",
-    locale: "es_AR",
+    locale: "es_419",
     title: "Cható – Todos tus canales, un solo lugar",
     description:
       "Centraliza WhatsApp, Instagram, Facebook y Web Chat en un solo lugar. Responde sin salir de tu app favorita.",
@@ -84,11 +84,9 @@ const jsonLd = {
   inLanguage: "es",
   offers: {
     "@type": "Offer",
-    price: "9",
-    priceCurrency: "USD",
-    priceValidUntil: "2027-01-01",
+    category: "Prueba gratuita de 14 días",
     availability: "https://schema.org/InStock",
-    url: `${SITE_URL}/#precios`,
+    url: `${SITE_URL}/precios/`,
   },
   screenshot: OG_IMAGE,
   featureList: [
