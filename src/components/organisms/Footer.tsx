@@ -4,6 +4,7 @@ import { EMAILS } from "@/lib/config";
 import { footerNav } from "@/lib/nav";
 
 const legalLinks = [
+  { label: "Términos y Condiciones", href: "/terminos/" },
   { label: "Privacidad", href: "/privacidad/" },
   { label: "Eliminación de datos", href: "/eliminar-datos/" },
 ];
