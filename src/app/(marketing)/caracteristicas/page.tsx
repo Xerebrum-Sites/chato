@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { Features } from "@/components/organisms/Features";
-import { ModeComparison } from "@/components/organisms/ModeComparison";
 import { CtaSection } from "@/components/organisms/CtaSection";
 import { URLS } from "@/lib/config";
 
@@ -28,7 +27,6 @@ export default function CaracteristicasPage() {
         imageLabel="Persona usando Cható para organizar sus conversaciones"
       />
       <Features />
-      <ModeComparison />
       <CtaSection />
     </>
   );

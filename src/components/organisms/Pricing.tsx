@@ -34,9 +34,9 @@ const PLAN_CONFIG: Record<string, {
 }> = {
   starter: {
     displayName: "Starter",
-    description: "Para emprendedores que usan Modo Simple.",
+    description: "Para emprendedores que centralizan su atención.",
     baseFeatures: [
-      "✓ Modo Simple (Telegram)",
+      "✓ Bandeja omnicanal",
       "✓ Hasta 3 canales",
       "✓ Etiquetas y seguimiento",
       "✓ Respuestas rápidas",
@@ -47,10 +47,10 @@ const PLAN_CONFIG: Record<string, {
   },
   pro: {
     displayName: "Pro",
-    description: "Para negocios que crecen. Con dashboard avanzado.",
+    description: "Para negocios que crecen con un equipo.",
     baseFeatures: [
-      "✓ Modo Simple (Telegram)",
-      "✓ Modo Avanzado (Dashboard)",
+      "✓ Bandeja omnicanal",
+      "✓ Dashboard y gestión de equipo",
       "✓ Hasta 5 canales",
       "✓ Hasta 3 agentes",
       "✓ Analytics básicos",
@@ -69,8 +69,8 @@ const PLAN_CONFIG: Record<string, {
     displayName: "Business",
     description: "Sin límites. Para equipos y agencias.",
     baseFeatures: [
-      "✓ Modo Simple (Telegram)",
-      "✓ Modo Avanzado (Dashboard completo)",
+      "✓ Bandeja omnicanal completa",
+      "✓ Dashboard y gestión de equipo",
       "✓ Canales ilimitados",
       "✓ Agentes ilimitados",
       "✓ Analytics avanzados",
@@ -224,7 +224,7 @@ export function Pricing() {
             <span className="gradient-text">escalá sin límites</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Todos los planes incluyen el Modo Simple. El Modo Avanzado se desbloquea en Pro.
+            Todos los planes trabajan sobre la misma bandeja omnicanal.
             Herramientas opcionales (Reservas, Catálogo y más) disponibles en cualquier plan.
             14 días gratis para probar, sin tarjeta.
           </p>

@@ -9,9 +9,9 @@ const pillars = [
     icon: MessagesSquare,
     title: "Hub omnicanal",
     description:
-      "Centralizá WhatsApp, Instagram, Facebook y tu web en una sola bandeja. Respondé a todos desde un mismo lugar.",
-    href: "/modo-simple/",
-    cta: "Ver el Hub",
+      "Centralizá WhatsApp, Instagram, Facebook, Telegram y tu web en una sola bandeja. Respondé a todos desde un mismo lugar.",
+    href: "/bandeja-omnicanal/",
+    cta: "Ver la bandeja",
   },
   {
     icon: Bot,

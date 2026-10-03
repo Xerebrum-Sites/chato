@@ -121,7 +121,7 @@ async function main() {
     font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
     font-size="22" font-weight="400"
     fill="#ffffff" fill-opacity="0.60" text-anchor="middle"
-  >WhatsApp  ·  Instagram  ·  Facebook  ·  Web Chat  →  Telegram</text>
+  >WhatsApp  ·  Instagram  ·  Facebook  ·  Telegram  ·  Web Chat</text>
 
   <!-- Bottom row: price + domain -->
   <!-- Price badge background -->
