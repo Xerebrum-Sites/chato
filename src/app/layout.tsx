@@ -15,14 +15,14 @@ const OG_IMAGE = `${SITE_URL}/og-image-v2.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Cható – Omnicanalidad para pequeños comercios desde Telegram",
+    default: "Cható – Bandeja omnicanal para pequeños comercios",
     template: "%s – Cható",
   },
   description:
-    "Centraliza WhatsApp, Instagram, Facebook y Web Chat en Telegram. Responde a todos tus clientes desde un solo lugar. Simple, económico y sin complicaciones.",
+    "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja. Responde a todos tus clientes desde Cható.",
   keywords: [
     "omnicanalidad",
-    "telegram bot",
+    "telegram para empresas",
     "whatsapp business",
     "instagram mensajes",
     "atención al cliente",
@@ -50,14 +50,14 @@ export const metadata: Metadata = {
     locale: "es_419",
     title: "Cható – Todos tus canales, un solo lugar",
     description:
-      "Centraliza WhatsApp, Instagram, Facebook y Web Chat en un solo lugar. Responde sin salir de tu app favorita.",
+      "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja de atención.",
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "Cható – Omnicanalidad desde Telegram",
+        alt: "Cható – Bandeja omnicanal para equipos",
       },
     ],
   },
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     creator: "@Xerebrum",
     title: "Cható – Todos tus canales, un solo lugar",
     description:
-      "Centraliza WhatsApp, Instagram, Facebook y Web Chat en un solo lugar.",
+      "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar.",
     images: [OG_IMAGE],
   },
 };
@@ -78,9 +78,9 @@ const jsonLd = {
   name: "Cható",
   url: SITE_URL,
   description:
-    "Plataforma de mensajería omnicanal que centraliza WhatsApp, Instagram, Facebook y Web Chat en Telegram para pequeños comercios y emprendedores.",
+    "Plataforma de mensajería omnicanal que centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat para pequeños comercios y emprendedores.",
   applicationCategory: "BusinessApplication",
-  operatingSystem: "Web, Telegram",
+  operatingSystem: "Web",
   inLanguage: "es",
   offers: {
     "@type": "Offer",
@@ -94,8 +94,8 @@ const jsonLd = {
     "Integración con Instagram Messenger",
     "Integración con Facebook Messenger",
     "Web Chat personalizable",
-    "Bandeja de entrada en Telegram",
-    "Sin app adicional necesaria",
+    "Bandeja de entrada omnicanal",
+    "Gestión de equipos y agentes IA",
   ],
   publisher: {
     "@type": "Organization",

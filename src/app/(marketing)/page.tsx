@@ -2,7 +2,6 @@ import { Check } from "lucide-react";
 import { Hero } from "@/components/organisms/Hero";
 import { TrustBand } from "@/components/organisms/TrustBand";
 import { Pillars } from "@/components/organisms/Pillars";
-import { ModesTeaser } from "@/components/organisms/ModesTeaser";
 import { HowItWorks } from "@/components/organisms/HowItWorks";
 import { IndustriesTeaser } from "@/components/organisms/IndustriesShowcase";
 import { CtaSection } from "@/components/organisms/CtaSection";
@@ -21,7 +20,6 @@ export default function Home() {
       <Hero />
       <TrustBand />
       <Pillars />
-      <ModesTeaser />
       <HowItWorks />
       <HumanValueBand />
       <IndustriesTeaser />
@@ -50,7 +48,7 @@ function HumanValueBand() {
             Atendé a todos tus clientes <span className="gradient-text">como si tuvieras un equipo entero</span>
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-6">
-            Cható reúne WhatsApp, Instagram, Facebook y tu web en un solo lugar de trabajo. Vos te concentrás en
+            Cható reúne WhatsApp, Instagram, Facebook, Telegram y tu web en un solo lugar de trabajo. Vos te concentrás en
             vender y atender bien; nosotros ponemos orden en los mensajes.
           </p>
           <ul className="space-y-3 mb-8">

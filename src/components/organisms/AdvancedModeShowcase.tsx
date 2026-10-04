@@ -16,7 +16,7 @@ const benefits = [
 
 export function AdvancedModeShowcase() {
   return (
-    <section id="modo-avanzado" className="py-24 bg-white relative overflow-hidden">
+    <section id="bandeja-omnicanal" className="py-24 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-96 h-96 rounded-full bg-violet-500/5 blur-3xl" />
       <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-violet-500/5 blur-3xl" />
@@ -117,8 +117,7 @@ export function AdvancedModeShowcase() {
             </Badge>
 
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-6 leading-tight">
-              Modo Avanzado:{" "}
-              <span className="gradient-text">control total</span>
+              Una bandeja para <span className="gradient-text">todo tu equipo</span>
             </h2>
 
             <p className="text-gray-600 text-lg mb-6 leading-relaxed">
@@ -161,7 +160,7 @@ export function AdvancedModeShowcase() {
             </div>
 
             <Button href={URLS.signIn} size="lg">
-              Probar Modo Avanzado
+              Probar Cható
               <svg
                 className="w-5 h-5"
                 fill="none"

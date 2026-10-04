@@ -103,7 +103,7 @@ export function PricingCard({
             <h4 className={`text-xs font-black uppercase tracking-wider mb-3 ${
               highlighted ? "text-cyan-300" : "text-gray-600"
             }`}>
-              Modo Avanzado
+              Capacidades adicionales
             </h4>
             <ul className="space-y-2">
               {advancedFeatures.map((feature) => (

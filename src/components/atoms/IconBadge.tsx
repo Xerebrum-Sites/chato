@@ -5,7 +5,7 @@ import type { LucideIcon } from "lucide-react";
  *
  * Mantiene la regla de marca: iconos con trazo fino y un solo tono (por defecto
  * el magenta corporativo sobre fondo suave). No usar tonos distintos por capricho;
- * `tone` existe solo para casos puntuales (p.ej. acento cyan del Modo Avanzado).
+ * `tone` existe solo para acentos visuales puntuales.
  */
 
 type Size = "sm" | "md" | "lg";

@@ -19,8 +19,6 @@ import {
   ShoppingBag,
   Building2,
   Plane,
-  MessageSquare,
-  LayoutDashboard,
   Inbox,
   Zap,
   BarChart3,
@@ -46,59 +44,6 @@ import {
 export type ChannelId = "whatsapp" | "instagram" | "facebook" | "web" | "telegram";
 export const supportedChannels: ChannelId[] = ["whatsapp", "instagram", "facebook", "web", "telegram"];
 
-// ─── Modos de uso ─────────────────────────────────────────────────────────────
-export interface Mode {
-  id: "simple" | "avanzado";
-  icon: LucideIcon;
-  title: string;
-  subtitle: string;
-  description: string;
-  audience: string;
-  benefits: string[];
-  href: string;
-  /** Acento visual: el Modo Simple usa el celeste de Telegram; el Avanzado, la marca. */
-  accent: "telegram" | "brand";
-}
-
-export const modes: Mode[] = [
-  {
-    id: "simple",
-    icon: MessageSquare,
-    title: "Modo Simple",
-    subtitle: "Tu centro de mensajes en Telegram",
-    description:
-      "Centralizá todos tus canales en Telegram. Recibís y respondés desde una sola app, sin aprender una interfaz nueva ni sumar complicaciones.",
-    audience: "Ideal para emprendedores y comercios que atienden por su cuenta.",
-    benefits: [
-      "Bandeja unificada dentro de tu Telegram",
-      "Respondé desde el celular o la computadora",
-      "Etiquetas y seguimientos para no perder nada",
-      "Respuestas rápidas personalizadas",
-      "Notificaciones en tiempo real",
-    ],
-    href: "/modo-simple/",
-    accent: "telegram",
-  },
-  {
-    id: "avanzado",
-    icon: LayoutDashboard,
-    title: "Modo Avanzado",
-    subtitle: "Un panel completo con control total",
-    description:
-      "Tu propia bandeja interna con dashboard, analytics, gestión de equipos y automatizaciones. Para crecer sin límites y con visibilidad total.",
-    audience: "Ideal para equipos, agencias y negocios de alto volumen.",
-    benefits: [
-      "Bandeja interna pensada para escalar",
-      "Analytics y reportes por canal",
-      "Gestión de agentes y equipos",
-      "Automatizaciones con IA",
-      "Base de conocimiento (RAG) para respuestas mejores",
-    ],
-    href: "/modo-avanzado/",
-    accent: "brand",
-  },
-];
-
 // ─── Señales de producto (reemplazan la "prueba social" de clientes) ──────────
 export interface Signal {
   icon: LucideIcon;
@@ -119,8 +64,8 @@ export const trustSignals: Signal[] = [
   },
   {
     icon: Layers,
-    title: "Ambos modos incluidos",
-    description: "Modo Simple y Modo Avanzado disponibles en todos los planes.",
+    title: "Una sola experiencia",
+    description: "Todos tus canales y tu equipo trabajan sobre la misma bandeja.",
   },
   {
     icon: ShieldCheck,

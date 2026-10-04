@@ -21,7 +21,7 @@ export function Footer() {
               <img src="/logo_negative.svg?v=2" alt="Cható" className="h-10 w-auto" />
             </Link>
             <p className="text-sm leading-relaxed mb-6 max-w-xs">
-              Centralizá WhatsApp, Instagram, Facebook y Web Chat en un solo lugar. Pensado para
+              Centralizá WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar. Pensado para
               pequeños comercios y emprendedores de habla hispana.
             </p>
             <a

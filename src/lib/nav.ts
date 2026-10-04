@@ -4,7 +4,7 @@
  */
 
 import type { LucideIcon } from "lucide-react";
-import { MessageSquare, LayoutDashboard, Bot, Sparkles, Puzzle } from "lucide-react";
+import { LayoutDashboard, Bot, Sparkles, Puzzle } from "lucide-react";
 import { industries } from "@/lib/content";
 
 export interface NavLink {
@@ -17,15 +17,9 @@ export interface NavLink {
 /** Columna "Producto" del mega menú. */
 export const productLinks: NavLink[] = [
   {
-    label: "Modo Simple",
-    href: "/modo-simple/",
-    description: "Todos tus canales dentro de Telegram",
-    icon: MessageSquare,
-  },
-  {
-    label: "Modo Avanzado",
-    href: "/modo-avanzado/",
-    description: "Panel completo, equipos y automatización",
+    label: "Bandeja omnicanal",
+    href: "/bandeja-omnicanal/",
+    description: "Todos tus canales en un único espacio de trabajo",
     icon: LayoutDashboard,
   },
   {
