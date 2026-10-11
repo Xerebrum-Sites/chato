@@ -116,7 +116,7 @@ export function Hero() {
             className="absolute inset-x-[-9%] top-0 h-[72%] sm:inset-x-0 sm:h-[78%] lg:-right-20 lg:left-0 lg:top-2"
           >
             <Image
-              src="/images/brand/hero-desktop-team.webp"
+              src="/images/brand/hero-desktop-team.webp?v=20261011"
               alt="Responsable de atención trabajando con Cható en una estación de escritorio con dos monitores"
               fill
               priority
