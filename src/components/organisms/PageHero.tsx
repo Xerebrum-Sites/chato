@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import { Reveal } from "@/components/atoms/Reveal";
-import { ImagePlaceholder } from "@/components/atoms/ImagePlaceholder";
 
 /**
  * Hero estándar para páginas interiores (modos, características, casos de uso,
@@ -21,8 +21,9 @@ interface PageHeroProps {
   subtitle: ReactNode;
   primaryCta?: CtaConfig;
   secondaryCta?: CtaConfig;
-  /** Descripción de la foto de persona que irá en el placeholder de la derecha. */
+  /** Texto alternativo de la escena humana de la derecha. */
   imageLabel?: string;
+  imageSrc?: string;
   /** Contenido visual alternativo a la derecha (p.ej. un mockup). Prioriza sobre imageLabel. */
   visual?: ReactNode;
 }
@@ -35,6 +36,7 @@ export function PageHero({
   primaryCta,
   secondaryCta,
   imageLabel,
+  imageSrc = "/images/brand/team-desktop.webp",
   visual,
 }: PageHeroProps) {
   return (
@@ -73,10 +75,15 @@ export function PageHero({
           {visual ? (
             visual
           ) : (
-            <ImagePlaceholder
-              label={imageLabel ?? "Foto de una persona usando Cható"}
-              className="aspect-[4/3] w-full shadow-xl"
-            />
+            <div className="relative min-h-[24rem] sm:min-h-[30rem]">
+              <Image
+                src={imageSrc}
+                alt={imageLabel ?? "Equipo usando Cható desde estaciones de escritorio"}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain"
+              />
+            </div>
           )}
         </Reveal>
       </div>
