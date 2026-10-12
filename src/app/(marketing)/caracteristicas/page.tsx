@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { Features } from "@/components/organisms/Features";
 import { CtaSection } from "@/components/organisms/CtaSection";
+import { FeaturesHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function CaracteristicasPage() {
         subtitle="Las herramientas que tu negocio necesita para atender mejor, sin funciones de más ni curvas de aprendizaje."
         primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
         secondaryCta={{ label: "Ver precios", href: "/precios/" }}
-        imageLabel="Persona usando Cható para organizar sus conversaciones"
+        visual={<FeaturesHeroVisual />}
       />
       <Features />
       <CtaSection />

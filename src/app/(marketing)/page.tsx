@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { Hero } from "@/components/organisms/Hero";
 import { TrustBand } from "@/components/organisms/TrustBand";
 import { Pillars } from "@/components/organisms/Pillars";
+import { MarketplaceSpotlight } from "@/components/organisms/MarketplaceSpotlight";
 import { HowItWorks } from "@/components/organisms/HowItWorks";
 import { IndustriesTeaser } from "@/components/organisms/IndustriesShowcase";
 import { CtaSection } from "@/components/organisms/CtaSection";
@@ -20,6 +21,7 @@ export default function Home() {
       <Hero />
       <TrustBand />
       <Pillars />
+      <MarketplaceSpotlight />
       <HowItWorks />
       <HumanValueBand />
       <IndustriesTeaser />

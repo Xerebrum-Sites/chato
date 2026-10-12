@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { ContactSection } from "@/components/organisms/ContactSection";
+import { ContactHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { CONTACT, URLS } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function ContactoPage() {
         subtitle="¿Querés contratar Cható o tenés dudas? Estamos para ayudarte. Elegí el canal que más te convenga y te respondemos enseguida."
         primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
         secondaryCta={{ label: "Escribinos por WhatsApp", href: CONTACT.whatsappUrl }}
-        imageLabel="Equipo de Cható listo para ayudarte"
+        visual={<ContactHeroVisual />}
       />
       <ContactSection />
     </>

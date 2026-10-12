@@ -23,17 +23,17 @@ const pillars = [
   },
   {
     icon: Blocks,
-    title: "Herramientas modulares",
+    title: "Marketplace de módulos",
     description:
-      "Reservas, catálogo, pipeline de ventas, campañas y más. Activás solo las que tu negocio necesita.",
+      "Reservas, catálogo, pipeline, campañas, agentes especializados y más. La plataforma se expande con vos.",
     href: "/herramientas/",
-    cta: "Ver herramientas",
+    cta: "Explorar el Marketplace",
   },
 ];
 
 /**
  * Tres pilares del producto en la home. Equilibra la comunicación: Cható no es
- * solo el Hub, también son los Agentes IA y las herramientas modulares.
+ * solo el Hub, también son los Agentes IA y un Marketplace extensible.
  */
 export function Pillars() {
   return (
