@@ -7,6 +7,7 @@ import { IconBadge } from "@/components/atoms/IconBadge";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
 import { Stagger, StaggerItem, Reveal } from "@/components/atoms/Reveal";
 import { URLS } from "@/lib/config";
+import { type PricingCurrency, usePricingCurrency } from "@/hooks/usePricingCurrency";
 
 interface AddonResponse {
   id: string;
@@ -56,15 +57,19 @@ function presentationFor(slug: string): { icon: LucideIcon; features: string[] }
   return SLUG_PRESENTATION[slug] ?? { icon: Puzzle, features: [] };
 }
 
-function fmtPrice(priceArs: number, priceUsd: number): string {
-  if (priceArs && priceArs > 0) return `Desde $${priceArs.toLocaleString("es-AR")}/mes`;
-  if (priceUsd && priceUsd > 0) return `Desde $${priceUsd}/mes`;
+function fmtPrice(priceArs: number, priceUsd: number, currency: PricingCurrency | null): string {
+  if (currency === "ARS" && priceArs > 0) {
+    return `Desde ARS $${priceArs.toLocaleString("es-AR")}/mes`;
+  }
+  if (currency === "USD" && priceUsd > 0) return `Desde USD $${priceUsd.toLocaleString("en-US")}/mes`;
+  if (currency === null) return "Consultando precio local…";
   return "Disponible en planes superiores";
 }
 
 export function OptionalTools() {
   const [addons, setAddons] = useState<AddonResponse[]>([]);
   const [loading, setLoading] = useState(true);
+  const currency = usePricingCurrency();
 
   useEffect(() => {
     let alive = true;
@@ -149,7 +154,7 @@ export function OptionalTools() {
                     )}
 
                     <div className="pt-6 border-t border-gray-100 mt-auto">
-                      <p className="text-sm font-bold text-gray-900">{fmtPrice(addon.price_ars, addon.price_usd)}</p>
+                      <p className="text-sm font-bold text-gray-900">{fmtPrice(addon.price_ars, addon.price_usd, currency)}</p>
                       <p className="text-xs text-gray-500 mt-1">Disponible en cualquier plan</p>
                     </div>
                   </div>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Términos y condiciones de uso de Cható: cuentas, planes y facturación, uso aceptable, inteligencia artificial, integraciones y responsabilidad.",
 };
 
-const UPDATED = "27 de agosto de 2026";
+const UPDATED = "12 de octubre de 2026";
 const EMAIL = EMAILS.legal;
 const SITE = URLS.landing;
 const APP = URLS.app;
@@ -18,7 +18,7 @@ const sections = [
     id: "aceptacion",
     title: "1. Aceptación de los términos",
     content: `
-      <p>Estos Términos y Condiciones (los "Términos") rigen el acceso y uso de la plataforma Cható, operada por Xerebrum ("nosotros", "nuestro"), disponible a través de <a href="${SITE}">${SITE}</a> y de la aplicación en <a href="${APP}">${APP}</a>.</p>
+      <p>Estos Términos y Condiciones (los "Términos") rigen el acceso y uso de la plataforma Cható ("nosotros", "nuestro"), disponible a través de <a href="${SITE}">${SITE}</a> y de la aplicación en <a href="${APP}">${APP}</a>.</p>
       <p>Al crear una cuenta, iniciar sesión o utilizar Cható de cualquier forma, aceptás quedar obligado por estos Términos y por nuestra <a href="/privacidad">Política de Privacidad</a>. Si estás aceptando estos Términos en nombre de una empresa u organización, declarás tener la autoridad para vincularla y las referencias a "vos" incluyen a dicha organización.</p>
       <p>Si no estás de acuerdo con alguna parte de estos Términos, no debés utilizar el servicio.</p>
     `,
@@ -55,7 +55,7 @@ const sections = [
       <h3>4.1 Prueba gratuita</h3>
       <p>Ofrecemos un período de prueba de 14 días sin necesidad de tarjeta de crédito. Al finalizar la prueba, deberás elegir un plan pago para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
       <h3>4.2 Planes y precios</h3>
-      <p>Cható ofrece los planes <strong>Starter</strong>, <strong>Pro</strong> y <strong>Business</strong>, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a>, facturables en ciclo mensual o anual y expresados en la moneda disponible según tu país. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
+      <p>Cható ofrece los planes <strong>Starter</strong>, <strong>Pro</strong> y <strong>Business</strong>, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para tarjetas emitidas en Argentina, los precios y cobros se realizan en pesos argentinos (ARS); para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout según el país emisor de la tarjeta. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
       <h3>4.3 Cambios de plan</h3>
       <p>Podés subir o bajar de plan en cualquier momento desde tu cuenta. Los cambios se prorratean automáticamente en tu próxima factura. Los add-ons se facturan de forma adicional según los que actives.</p>
       <h3>4.4 Pagos y renovación</h3>
@@ -120,7 +120,7 @@ const sections = [
     id: "propiedad-intelectual",
     title: "9. Propiedad intelectual",
     content: `
-      <p>La plataforma Cható, su código, diseño, marca, logotipos y documentación son propiedad de Xerebrum y están protegidos por leyes de propiedad intelectual. Estos Términos no te otorgan ningún derecho de propiedad sobre el software, solo una licencia de uso limitada, no exclusiva e intransferible mientras mantengas una cuenta activa.</p>
+      <p>La plataforma Cható, su código, diseño, marca, logotipos y documentación están protegidos por leyes de propiedad intelectual. Estos Términos no te otorgan ningún derecho de propiedad sobre el software, solo una licencia de uso limitada, no exclusiva e intransferible mientras mantengas una cuenta activa.</p>
       <p>Conservás todos los derechos sobre tu propio contenido (marca de tu negocio, catálogos, mensajes) según lo descrito en la sección 6.</p>
     `,
   },
@@ -160,7 +160,7 @@ const sections = [
     id: "indemnizacion",
     title: "13. Indemnización",
     content: `
-      <p>Te comprometés a mantener indemne a Xerebrum, sus directivos, empleados y colaboradores frente a cualquier reclamo, daño o gasto (incluidos honorarios legales razonables) que surja de: (i) tu uso indebido del servicio, (ii) tu incumplimiento de estos Términos, (iii) contenido que hayas cargado a la plataforma, o (iv) tu infracción de derechos de terceros, incluyendo las políticas de las plataformas integradas (Meta, Telegram).</p>
+      <p>Te comprometés a mantener indemne a Cható, sus directivos, empleados y colaboradores frente a cualquier reclamo, daño o gasto (incluidos honorarios legales razonables) que surja de: (i) tu uso indebido del servicio, (ii) tu incumplimiento de estos Términos, (iii) contenido que hayas cargado a la plataforma, o (iv) tu infracción de derechos de terceros, incluyendo las políticas de las plataformas integradas (Meta, Telegram).</p>
     `,
   },
   {

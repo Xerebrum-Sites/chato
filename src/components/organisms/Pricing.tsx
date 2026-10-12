@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { PricingCard } from "@/components/molecules/PricingCard";
 import { URLS } from "@/lib/config";
+import { type PricingCurrency, usePricingCurrency } from "@/hooks/usePricingCurrency";
 
 const API_URL = URLS.api;
 
@@ -86,26 +87,28 @@ const PLAN_CONFIG: Record<string, {
   },
 };
 
-type Currency = "ARS" | "USD" | "BRL";
-
-function formatPrice(priceArs: number | null, priceUsd: number | null, currency: Currency, usdToBrl: number): string {
+function formatPrice(
+  priceArs: number | null,
+  priceUsd: number | null,
+  currency: PricingCurrency,
+): string {
   if (currency === "ARS") {
     if (priceArs === null) return "Gratis";
     if (priceArs === 0) return "Gratis";
-    return `$${priceArs.toLocaleString("es-AR")}`;
+    return `ARS $${priceArs.toLocaleString("es-AR")}`;
   }
-  if (currency === "BRL") {
-    if (priceUsd === null || priceUsd === 0) return "Grátis";
-    const brl = Math.round(priceUsd * usdToBrl);
-    return `R$${brl.toLocaleString("pt-BR")}`;
-  }
-  // USD
   if (priceUsd === null || priceUsd === 0) return "Free";
-  return `$${priceUsd}`;
+  return `USD $${priceUsd.toLocaleString("en-US")}`;
 }
 
-function getPeriodLabel(priceUsd: number | null, cycle: BillingCycle): string {
-  if (priceUsd === 0 || priceUsd === null) return "";
+function getPeriodLabel(
+  priceArs: number | null,
+  priceUsd: number | null,
+  currency: PricingCurrency,
+  cycle: BillingCycle,
+): string {
+  const price = currency === "ARS" ? priceArs : priceUsd;
+  if (price === 0 || price === null) return "";
   return cycle === "annual" ? "/año" : "/mes";
 }
 
@@ -123,63 +126,23 @@ function pickPriceForCycle(
   };
 }
 
-async function detectCountry(): Promise<string> {
-  try {
-    const res = await fetch("/cdn-cgi/trace", { cache: "no-store" });
-    if (!res.ok) throw new Error("no trace");
-    const text = await res.text();
-    const match = text.match(/loc=([A-Z]{2})/);
-    return match?.[1] ?? "XX";
-  } catch {
-    // Fallback: use browser language
-    const lang = navigator.language ?? "en";
-    if (lang.startsWith("es-AR")) return "AR";
-    if (lang.startsWith("pt-BR") || lang.startsWith("pt")) return "BR";
-    return "XX";
-  }
-}
-
-async function fetchUsdToBrl(): Promise<number> {
-  try {
-    const res = await fetch(
-      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json",
-      { cache: "no-store" }
-    );
-    if (!res.ok) throw new Error("no rate");
-    const data = await res.json() as { usd: Record<string, number> };
-    return data.usd?.brl ?? 5.8;
-  } catch {
-    return 5.8;
-  }
-}
-
 export function Pricing() {
   const [plans, setPlans] = useState<PlanData[]>([]);
-  const [currency, setCurrency] = useState<Currency>("ARS");
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
-  const [usdToBrl, setUsdToBrl] = useState(5.8);
   const [loading, setLoading] = useState(true);
+  const currency = usePricingCurrency();
 
   useEffect(() => {
     async function init() {
-      const [plansData, country, brlRate] = await Promise.all([
-        fetch(`${API_URL}/api/public/plans`).then((r) => r.json()).then((d) => Array.isArray(d) ? d : []).catch(() => []) as Promise<PlanData[]>,
-        detectCountry(),
-        fetchUsdToBrl(),
-      ]);
+      const plansData = await fetch(`${API_URL}/api/public/plans`)
+        .then((r) => r.json())
+        .then((d) => (Array.isArray(d) ? d : []))
+        .catch(() => []) as PlanData[];
       setPlans(plansData);
-      setUsdToBrl(brlRate);
-      if (country === "AR") setCurrency("ARS");
-      else if (country === "BR") setCurrency("BRL");
-      else setCurrency("USD");
       setLoading(false);
     }
     init();
   }, []);
-
-  // Selector de moneda por código (sin banderas de país). El label "R$" cubre
-  // el real; "ARS"/"USD" hablan por sí mismos.
-  const currencyChip: Record<Currency, string> = { ARS: "ARS", USD: "USD", BRL: "R$ BRL" };
 
   // Merge API data with display config. Plans hidden from the landing
   // (is_visible_landing === false) are silently skipped.
@@ -194,10 +157,13 @@ export function Pricing() {
       return {
         slug,
         name: config.displayName,
-        price: loading
+        price: loading || currency === null
           ? "..."
-          : formatPrice(priced.priceArs, priced.priceUsd, currency, usdToBrl),
-        period: loading ? "" : getPeriodLabel(priced.priceUsd, billingCycle),
+          : formatPrice(priced.priceArs, priced.priceUsd, currency),
+        period:
+          loading || currency === null
+            ? ""
+            : getPeriodLabel(priced.priceArs, priced.priceUsd, currency, billingCycle),
         description: config.description,
         baseFeatures: config.baseFeatures,
         advancedFeatures: config.advancedFeatures,
@@ -229,21 +195,12 @@ export function Pricing() {
             14 días gratis para probar, sin tarjeta.
           </p>
 
-          {/* Selector de moneda — códigos, sin banderas de país */}
-          <div className="flex items-center justify-center gap-2 mt-6 flex-wrap">
-            {(["ARS", "USD", "BRL"] as const).map((c) => (
-              <button
-                key={c}
-                onClick={() => setCurrency(c)}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                  currency === c
-                    ? "bg-violet-600 text-white shadow-md"
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-violet-300"
-                }`}
-              >
-                {currencyChip[c]}
-              </button>
-            ))}
+          <div className="mt-6 text-sm font-semibold text-gray-600" aria-live="polite">
+            {currency === null
+              ? "Cargando moneda local…"
+              : currency === "ARS"
+                ? "Precios en pesos argentinos para Argentina"
+                : "Precios en dólares para el resto del mundo"}
           </div>
 
           {/* Billing cycle toggle: monthly ↔ annual (annual shows discount) */}
@@ -299,6 +256,10 @@ export function Pricing() {
             />
           ))}
         </div>
+
+        <p className="mt-6 text-center text-xs leading-relaxed text-gray-500 max-w-2xl mx-auto">
+          La moneda y el medio de pago definitivos se confirman en el checkout según el país emisor de la tarjeta.
+        </p>
 
         {/* FAQ mini */}
         <div className="mt-14 grid sm:grid-cols-3 gap-6 text-center">

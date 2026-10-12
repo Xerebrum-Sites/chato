@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Política de privacidad de Cható. Conocé cómo recopilamos, usamos y protegemos tus datos.",
 };
 
-const UPDATED = "21 de julio de 2026";
+const UPDATED = "12 de octubre de 2026";
 const EMAIL = EMAILS.legal;
 const SITE = URLS.landing;
 
@@ -19,7 +19,7 @@ const sections = [
       <p>El responsable del tratamiento de los datos personales recabados a través de este sitio web y de la plataforma Cható es:</p>
       <ul>
         <li><strong>Nombre comercial:</strong> Cható</li>
-        <li><strong>Operado por:</strong> Xerebrum</li>
+        <li><strong>Operado por:</strong> Cható</li>
         <li><strong>Sitio web:</strong> ${SITE}</li>
         <li><strong>Correo de contacto:</strong> <a href="mailto:${EMAIL}">${EMAIL}</a></li>
       </ul>
@@ -111,7 +111,7 @@ const sections = [
     content: `
       <p>Cható no vende ni alquila datos personales. Podemos compartir datos únicamente en estos casos:</p>
       <ul>
-        <li><strong>Proveedores de infraestructura:</strong> Servicios de hosting y base de datos que procesan datos en nuestro nombre bajo acuerdos de confidencialidad (ej. servidores propios en infraestructura Xerebrum).</li>
+        <li><strong>Proveedores de infraestructura:</strong> Servicios de hosting, almacenamiento y base de datos que procesan datos en nuestro nombre bajo acuerdos de confidencialidad.</li>
         <li><strong>Procesadores de pago:</strong> Para gestionar transacciones de suscripción (no compartimos datos de mensajes).</li>
         <li><strong>Canales de mensajería:</strong> cuando el negocio escala una conversación a un operador (por ejemplo vía Telegram o Chatwoot), los mensajes se envían a través de la API correspondiente al operador que el negocio haya designado.</li>
         <li><strong>Obligaciones legales:</strong> Cuando sea requerido por ley, orden judicial o para proteger derechos legítimos.</li>
