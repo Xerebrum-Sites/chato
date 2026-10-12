@@ -19,7 +19,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <main>{children}</main>
       <Footer />
       {/* El botón flotante + panel de chat vienen del widget público para que
-          chato.xerebrumgroup.com renderice la misma UI que recibe cada tenant. */}
+          heychato.com renderice la misma UI que recibe cada tenant. */}
       <Script src={WIDGET_SRC} strategy="afterInteractive" />
     </>
   );

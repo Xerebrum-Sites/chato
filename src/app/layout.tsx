@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     "bandeja de entrada unificada",
     "CRM para pymes",
   ],
-  authors: [{ name: "Xerebrum", url: SITE_URL }],
-  creator: "Xerebrum",
-  publisher: "Xerebrum",
+  authors: [{ name: "Cható", url: SITE_URL }],
+  creator: "Cható",
+  publisher: "Cható",
   robots: {
     index: true,
     follow: true,
@@ -64,7 +64,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@ChatoApp",
-    creator: "@Xerebrum",
     title: "Cható – Todos tus canales, un solo lugar",
     description:
       "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar.",
@@ -99,8 +98,8 @@ const jsonLd = {
   ],
   publisher: {
     "@type": "Organization",
-    name: "Xerebrum",
-    url: "https://xerebrumgroup.com",
+    name: "Cható",
+    url: SITE_URL,
   },
 };
 

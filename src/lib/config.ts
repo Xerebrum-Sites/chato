@@ -3,20 +3,18 @@
  *
  * Change the domain/emails in ONE place: set the NEXT_PUBLIC_* vars per
  * environment (in Dokploy as Build Arguments — they are inlined at build time).
- * The URL defaults below point at the current domain so a missing env var still
- * produces working links; the email defaults are the real heychato.com inboxes.
- * At the heychato.com cutover, only the env values change — no code edits. These
- * values feed the landing, the legal pages (/privacidad, /eliminar-datos) and the
- * URLs you copy into the Meta console.
+ * The defaults use the public HeyChato domains. Deployment values can still be
+ * set per environment as build arguments. These values feed the landing, legal
+ * pages (/privacidad, /eliminar-datos) and the URLs copied into Meta.
  */
 
 function trimTrailingSlash(s: string): string {
   return s.replace(/\/$/, "");
 }
 
-const APP_URL_DEFAULT = "https://chato-app.xerebrumgroup.com";
-const API_URL_DEFAULT = "https://chato-api.xerebrumgroup.com";
-const LANDING_URL_DEFAULT = "https://chato.xerebrumgroup.com";
+const APP_URL_DEFAULT = "https://app.heychato.com";
+const API_URL_DEFAULT = "https://api.heychato.com";
+const LANDING_URL_DEFAULT = "https://heychato.com";
 
 const LEGAL_EMAIL_DEFAULT = "privacidad@heychato.com";
 const CONTACT_EMAIL_DEFAULT = "hola@heychato.com";
