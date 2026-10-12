@@ -3,6 +3,7 @@ import { PageHero } from "@/components/organisms/PageHero";
 import { AdvancedModeShowcase } from "@/components/organisms/AdvancedModeShowcase";
 import { HowItWorks } from "@/components/organisms/HowItWorks";
 import { CtaSection } from "@/components/organisms/CtaSection";
+import { OmnichannelHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function BandejaOmnicanalPage() {
         subtitle="Atendé todos tus canales desde Cható, con historial, asignaciones, automatizaciones y métricas en un mismo espacio de trabajo."
         primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
         secondaryCta={{ label: "Ver precios", href: "/precios/" }}
-        imageLabel="Equipo atendiendo conversaciones desde la bandeja omnicanal de Cható"
+        visual={<OmnichannelHeroVisual />}
       />
       <AdvancedModeShowcase />
       <HowItWorks />

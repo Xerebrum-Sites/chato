@@ -21,7 +21,7 @@ interface PageHeroProps {
   subtitle: ReactNode;
   primaryCta?: CtaConfig;
   secondaryCta?: CtaConfig;
-  /** Texto alternativo de la escena humana de la derecha. */
+  /** Texto alternativo de la pieza visual de la derecha. */
   imageLabel?: string;
   imageSrc?: string;
   /** Contenido visual alternativo a la derecha (p.ej. un mockup). Prioriza sobre imageLabel. */
@@ -36,7 +36,7 @@ export function PageHero({
   primaryCta,
   secondaryCta,
   imageLabel,
-  imageSrc = "/images/brand/team-desktop-v3.webp",
+  imageSrc,
   visual,
 }: PageHeroProps) {
   return (
@@ -74,18 +74,18 @@ export function PageHero({
         <Reveal direction="left" delay={0.1}>
           {visual ? (
             visual
-          ) : (
+          ) : imageSrc ? (
             <div className="relative min-h-[22rem] p-2 sm:min-h-[28rem] sm:p-4 lg:min-h-[31rem]">
               <Image
                 src={imageSrc}
-                alt={imageLabel ?? "Equipo usando Cható desde estaciones de escritorio"}
+                alt={imageLabel ?? "Visual conceptual de Cható"}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-contain p-2 sm:p-3"
               />
             </div>
-          )}
+          ) : null}
         </Reveal>
       </div>
     </section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { AiAgents } from "@/components/organisms/AiAgents";
 import { CtaSection } from "@/components/organisms/CtaSection";
+import { AiHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function AgentesIaPage() {
         subtitle="Respuestas al instante 24/7 con la información real de tu negocio. La IA resuelve lo repetitivo y te pasa la conversación cuando se necesita una persona."
         primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
         secondaryCta={{ label: "Ver herramientas", href: "/herramientas/" }}
-        imageLabel="Comerciante viendo cómo la IA responde a sus clientes"
+        visual={<AiHeroVisual />}
       />
       <AiAgents />
       <CtaSection

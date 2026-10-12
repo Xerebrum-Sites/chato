@@ -225,7 +225,7 @@ export function Pricing() {
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             Todos los planes trabajan sobre la misma bandeja omnicanal.
-            Herramientas opcionales (Reservas, Catálogo y más) disponibles en cualquier plan.
+            Módulos del Marketplace (Reservas, Catálogo y más) disponibles para ampliar cualquier plan.
             14 días gratis para probar, sin tarjeta.
           </p>
 

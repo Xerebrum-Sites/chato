@@ -95,17 +95,17 @@ export function OptionalTools() {
   });
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section id="modulos" className="scroll-mt-24 bg-gray-50 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Herramientas opcionales"
+          badge="Catálogo del Marketplace"
           badgeVariant="green"
           title={
             <>
-              Potenciá tu negocio <span className="gradient-text">a medida que crecés</span>
+              Elegí los módulos que <span className="gradient-text">hacen avanzar tu operación</span>
             </>
           }
-          subtitle="Cható es modular: ninguna herramienta es obligatoria. Activás solo las que tu negocio necesita, cuando las necesites, y pagás solo por lo que usás."
+          subtitle="Activá solo lo que necesitás hoy. El catálogo se expande con nuevas capacidades para que tu plataforma siga creciendo sin perder simplicidad ni contexto."
           className="mb-16"
         />
 
@@ -161,12 +161,12 @@ export function OptionalTools() {
 
         <Reveal className="mt-16 bg-white rounded-2xl border border-gray-200 p-8">
           <div className="max-w-3xl mx-auto">
-            <h3 className="text-lg font-black text-gray-900 mb-4">¿Cómo funcionan los add-ons?</h3>
+            <h3 className="text-lg font-black text-gray-900 mb-4">¿Cómo funciona el Marketplace?</h3>
             <ul className="space-y-3 text-gray-600 text-sm">
               {[
-                ["Modulares, no obligatorias:", "activás solo las que tu negocio necesita."],
-                ["Según tu plan:", "algunas vienen incluidas y otras se suman como add-on."],
-                ["Sin compromisos:", "activás y desactivás cuando quieras; pagás solo lo que usás."],
+                ["Módulos independientes:", "activás solo las capacidades que tu negocio necesita."],
+                ["Una plataforma compartida:", "cada módulo aprovecha los mismos clientes, canales e historial."],
+                ["Expansión continua:", "el catálogo suma nuevas soluciones a medida que Cható evoluciona."],
               ].map(([bold, rest]) => (
                 <li key={bold} className="flex items-start gap-3">
                   <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />

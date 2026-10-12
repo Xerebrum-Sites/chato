@@ -4,7 +4,7 @@
  */
 
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, Bot, Sparkles, Puzzle } from "lucide-react";
+import { LayoutDashboard, Bot, Sparkles, Blocks } from "lucide-react";
 import { industries } from "@/lib/content";
 
 export interface NavLink {
@@ -35,10 +35,10 @@ export const productLinks: NavLink[] = [
     icon: Sparkles,
   },
   {
-    label: "Herramientas opcionales",
+    label: "Marketplace",
     href: "/herramientas/",
-    description: "Reservas, catálogo, encuestas y más",
-    icon: Puzzle,
+    description: "Módulos para expandir Cható cuando los necesitás",
+    icon: Blocks,
   },
 ];
 
@@ -51,6 +51,7 @@ export const solutionLinks: NavLink[] = industries.map((i) => ({
 
 /** Enlaces de nivel superior sin panel (se muestran directos en la barra). */
 export const topLevelLinks: NavLink[] = [
+  { label: "Marketplace", href: "/herramientas/" },
   { label: "Precios", href: "/precios/" },
   { label: "Contacto", href: "/contacto/" },
 ];

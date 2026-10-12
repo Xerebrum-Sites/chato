@@ -15,17 +15,18 @@ export default function CasosDeUsoPage() {
   return (
     <>
       <PageHero
-        badge="Casos de uso"
+        badge="Industrias"
         badgeVariant="green"
         title={
           <>
-            Pensado para <span className="gradient-text">tu industria</span>
+            Cada industria conversa <span className="gradient-text">a su manera</span>
           </>
         }
-        subtitle="No importa el rubro: si tenés clientes que te escriben por más de un canal, Cható ordena tu atención. Mirá cómo se aplica en distintos negocios."
+        subtitle="Moda, gastronomía, salud, servicios y cada rubro tienen recorridos distintos. Cható organiza los canales y adapta la operación a lo que realmente pasa en tu negocio."
         primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
         secondaryCta={{ label: "Hablar con nosotros", href: "/contacto/" }}
-        imageLabel="Distintos comercios y profesionales atendiendo a sus clientes"
+        imageSrc="/images/brand/hero-industries-v1.webp"
+        imageLabel="Ecosistema de industrias conectadas a una estación de trabajo de Cható: moda, gastronomía, salud, belleza, educación, ecommerce, inmobiliaria y turismo"
       />
       <IndustriesShowcase />
       <CtaSection />
