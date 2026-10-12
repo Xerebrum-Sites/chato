@@ -51,15 +51,11 @@ export function MarketplaceSpotlight() {
             className="relative mx-auto aspect-[1.598] w-full max-w-[44rem]"
           >
             <Image
-              src="/images/brand/marketplace-ecosystem-figurative-v1.webp"
+              src="/images/brand/marketplace-ecosystem-figurative-v2.webp"
               alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 52vw"
               className="object-contain"
-              style={{
-                maskImage: "radial-gradient(ellipse 96% 94% at center, black 72%, transparent 100%)",
-                WebkitMaskImage: "radial-gradient(ellipse 96% 94% at center, black 72%, transparent 100%)",
-              }}
             />
           </div>
         </Reveal>
