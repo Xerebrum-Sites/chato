@@ -29,10 +29,26 @@ interface TrialData {
 
 type BillingCycle = "monthly" | "annual";
 
-const PLAN_CONFIG: Record<(typeof PLAN_ORDER)[number], { description: string; highlighted: boolean; badge?: string; cta: string }> = {
-  starter: { description: "Para emprendedores que centralizan su atención.", highlighted: false, cta: "Empezar gratis" },
-  pro: { description: "Para negocios que crecen con un equipo.", highlighted: true, badge: "Más popular", cta: "Empezar gratis" },
-  business: { description: "Sin límites. Para equipos y agencias.", highlighted: false, cta: "Hablar con ventas" },
+const PLAN_CONFIG: Record<(typeof PLAN_ORDER)[number], { description: string; audience: string[]; highlighted: boolean; badge?: string; cta: string }> = {
+  starter: {
+    description: "Para empezar a ordenar la atención.",
+    audience: ["Emprendedores y comercios pequeños", "Una persona atendiendo clientes", "Un canal principal de atención"],
+    highlighted: false,
+    cta: "Empezar gratis",
+  },
+  pro: {
+    description: "Para equipos que quieren crecer ordenados.",
+    audience: ["Equipos de atención en crecimiento", "Negocios con varios canales", "Operaciones que suman IA"],
+    highlighted: true,
+    badge: "Más popular",
+    cta: "Empezar gratis",
+  },
+  business: {
+    description: "Para operaciones que necesitan escalar.",
+    audience: ["Equipos consolidados y agencias", "Operaciones con alta demanda", "Negocios que buscan soporte prioritario"],
+    highlighted: false,
+    cta: "Hablar con ventas",
+  },
 };
 
 function priceFor(plan: PlanData, currency: PricingCurrency, annual = false): number | null {
@@ -58,24 +74,6 @@ function limitLabel(value: unknown, singular: string, plural: string): string {
   if (value === -1) return "Ilimitados";
   if (typeof value !== "number" || value <= 0) return "No incluido";
   return `${value} ${value === 1 ? singular : plural}`;
-}
-
-function cardFeatures(plan: PlanData): string[] {
-  return [
-    "Bandeja omnicanal",
-    limitLabel(plan.features.max_channels, "canal", "canales"),
-    limitLabel(plan.max_human_agents, "agente", "agentes"),
-    enabled(plan.features, "webchat_enabled") ? "Web Chat incluido" : "Web Chat no incluido",
-  ];
-}
-
-function advancedFeatures(plan: PlanData): string[] {
-  return ([
-    ["Automatizaciones con IA", "bot_enabled"],
-    ["Base de conocimiento", "rag_enabled"],
-    ["Horarios automáticos", "schedules_enabled"],
-    ["Soporte prioritario", "priority_support"],
-  ] as const).filter(([, key]) => enabled(plan.features, key)).map(([label]) => label);
 }
 
 const COMPARISON_ROWS: Array<{ label: string; read: (plan: PlanData) => string }> = [
@@ -136,7 +134,7 @@ export function Pricing() {
         <div className="grid items-stretch gap-6 lg:grid-cols-3">
           {displayPlans.map(({ slug, plan }) => {
             const config = PLAN_CONFIG[slug];
-            return <PricingCard key={plan.id} name={plan.name} monthlyPrice={loading || currency === null ? null : priceDisplay(priceFor(plan, currency), currency, "/mes")} annualPrice={loading || currency === null ? null : priceDisplay(priceFor(plan, currency, true), currency, "/año")} showAnnualPrice={billingCycle === "annual"} description={config.description} baseFeatures={cardFeatures(plan)} advancedFeatures={advancedFeatures(plan)} highlighted={config.highlighted} badge={config.badge} cta={config.cta} ctaHref={slug === "business" ? "/contacto/" : URLS.signIn} annualSavings={billingCycle === "annual" && (plan.annual_discount_pct ?? 0) > 0 ? `Ahorrás ${plan.annual_discount_pct?.toFixed(0)}%` : null} trialLabel={trialLabel} />;
+            return <PricingCard key={plan.id} name={plan.name} monthlyPrice={loading || currency === null ? null : priceDisplay(priceFor(plan, currency), currency, "/mes")} annualPrice={loading || currency === null ? null : priceDisplay(priceFor(plan, currency, true), currency, "/año")} showAnnualPrice={billingCycle === "annual"} description={config.description} audience={config.audience} highlighted={config.highlighted} badge={config.badge} cta={config.cta} ctaHref={slug === "business" ? "/contacto/" : URLS.signIn} annualSavings={billingCycle === "annual" && (plan.annual_discount_pct ?? 0) > 0 ? `Ahorrás ${plan.annual_discount_pct?.toFixed(0)}%` : null} trialLabel={trialLabel} />;
           })}
         </div>
 
