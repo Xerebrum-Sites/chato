@@ -40,7 +40,7 @@ function HumanValueBand() {
         <Reveal direction="right">
           <div className="relative min-h-[24rem] p-2 sm:min-h-[32rem] sm:p-4">
             <Image
-              src="/images/brand/team-desktop-v2.webp"
+              src="/images/brand/team-desktop-v3.webp"
               alt="Equipo latino y europeo atendiendo clientes desde estaciones de trabajo de escritorio"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

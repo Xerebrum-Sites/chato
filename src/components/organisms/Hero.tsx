@@ -52,7 +52,7 @@ export function Hero() {
           className="pointer-events-none absolute inset-x-4 inset-y-3 hidden sm:inset-x-6 lg:inset-x-8 lg:block"
         >
           <Image
-            src="/images/brand/hero-desktop-owner-v2.webp"
+            src="/images/brand/hero-desktop-owner-v3.webp"
             alt="Responsable de atención trabajando con Cható desde una estación de escritorio"
             fill
             priority
@@ -125,21 +125,21 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <div className="relative min-h-[34rem] sm:min-h-[41rem] lg:min-h-full">
+        <div className="relative flex min-h-[34rem] flex-col gap-4 sm:min-h-[41rem] sm:gap-5 lg:block lg:min-h-full">
           <motion.div
             style={{ y: photoY }}
             initial={reduceMotion ? false : { opacity: 0, scale: 0.94, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-0 top-0 h-[76%] overflow-hidden rounded-[2rem] sm:h-[80%] lg:hidden"
+            className="relative h-52 w-full shrink-0 sm:h-72 lg:hidden"
           >
             <Image
-              src="/images/brand/hero-desktop-owner-v2.webp"
+              src="/images/brand/hero-desktop-owner-v3.webp"
               alt="Responsable de atención trabajando con Cható desde una estación de escritorio"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[74%_center]"
+              className="object-contain object-center"
             />
           </motion.div>
 
@@ -148,7 +148,7 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 54, rotate: 1.4 }}
             animate={{ opacity: 1, y: 0, rotate: -1.1 }}
             transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute bottom-0 left-1/2 z-10 w-[96%] -translate-x-1/2 sm:bottom-2 sm:w-[88%] lg:bottom-7 lg:left-auto lg:right-2 lg:w-[74%] lg:translate-x-0"
+            className="relative z-10 w-full self-center sm:w-[88%] lg:absolute lg:bottom-7 lg:right-2 lg:w-[74%] lg:self-auto"
           >
             <InboxPreview />
           </motion.div>
