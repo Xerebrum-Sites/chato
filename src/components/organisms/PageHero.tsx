@@ -36,7 +36,7 @@ export function PageHero({
   primaryCta,
   secondaryCta,
   imageLabel,
-  imageSrc = "/images/brand/team-desktop-v2.webp",
+  imageSrc = "/images/brand/team-desktop-v3.webp",
   visual,
 }: PageHeroProps) {
   return (
