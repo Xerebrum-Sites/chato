@@ -3,8 +3,9 @@ import { URLS } from "@/lib/config";
 
 interface PricingCardProps {
   name: string;
-  price: string;
-  period: string;
+  monthlyPrice: PriceDisplay | null;
+  annualPrice?: PriceDisplay | null;
+  showAnnualPrice: boolean;
   description: string;
   baseFeatures: string[];
   advancedFeatures?: string[];
@@ -14,14 +15,23 @@ interface PricingCardProps {
   slug?: string;
   /** Destino del botón (registro por defecto; contacto para planes de ventas). */
   ctaHref?: string;
-  /** Shown under the price when annual cycle is active and discount > 0. */
+  /** Shown with the annual amount when a discount is available. */
   annualSavings?: string | null;
+  trialLabel?: string | null;
+}
+
+export interface PriceDisplay {
+  currency: string;
+  symbol: string;
+  amount: string;
+  period: string;
 }
 
 export function PricingCard({
   name,
-  price,
-  period,
+  monthlyPrice,
+  annualPrice,
+  showAnnualPrice,
   description,
   baseFeatures,
   advancedFeatures,
@@ -30,10 +40,14 @@ export function PricingCard({
   cta = "Empezar gratis",
   ctaHref = URLS.signIn,
   annualSavings,
+  trialLabel,
 }: PricingCardProps) {
+  const mutedText = highlighted ? "text-violet-200" : "text-gray-500";
+  const mainText = highlighted ? "text-white" : "text-gray-900";
+
   return (
     <div
-      className={`relative rounded-2xl p-8 transition-all duration-300 ${
+      className={`relative flex h-full flex-col rounded-2xl p-8 transition-all duration-300 ${
         highlighted
           ? "bg-gradient-to-br from-violet-700 to-violet-900 text-white shadow-2xl shadow-violet-200 scale-[1.02]"
           : "bg-white border border-gray-100 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-50"
@@ -47,29 +61,55 @@ export function PricingCard({
         </div>
       )}
 
-      <div className="mb-6">
-        <h3 className={`font-bold text-lg mb-1 ${highlighted ? "text-violet-200" : "text-gray-500"}`}>
+      <div className="mb-6 min-h-[13rem]">
+        <h3 className={`mb-1 text-lg font-bold ${mutedText}`}>
           {name}
         </h3>
-        <div className="flex items-end gap-1 mb-2">
-          <span className={`text-4xl font-black ${highlighted ? "text-white" : "text-gray-900"}`}>
-            {price}
-          </span>
-          {period && (
-            <span className={`text-sm pb-1.5 ${highlighted ? "text-violet-300" : "text-gray-400"}`}>
-              {period}
+        <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.16em] ${mutedText}`}>
+          Por mes
+        </p>
+        {monthlyPrice ? (
+          <div className="mb-3 flex items-end gap-1">
+            <span className={`text-base font-black leading-none ${mainText}`}>
+              {monthlyPrice.currency} {monthlyPrice.symbol}
             </span>
-          )}
-        </div>
-        {annualSavings && (
-          <p className={`text-xs font-semibold mb-2 ${highlighted ? "text-emerald-300" : "text-emerald-600"}`}>
-            ✨ {annualSavings}
-          </p>
+            <span className={`text-4xl font-black leading-none ${mainText}`}>
+              {monthlyPrice.amount}
+            </span>
+            <span className={`pb-0.5 text-sm ${highlighted ? "text-violet-300" : "text-gray-400"}`}>
+              {monthlyPrice.period}
+            </span>
+          </div>
+        ) : (
+          <div className={`mb-3 text-4xl font-black ${mainText}`}>...</div>
         )}
-        <p className={`text-sm ${highlighted ? "text-violet-200" : "text-gray-500"}`}>{description}</p>
+        {showAnnualPrice && annualPrice && (
+          <div className={`mb-3 rounded-xl px-3 py-2.5 ${highlighted ? "bg-violet-800/60" : "bg-gray-50"}`}>
+            <p className={`mb-1 text-[11px] font-bold uppercase tracking-[0.14em] ${mutedText}`}>
+              Facturación anual
+            </p>
+            <div className="flex items-end gap-1">
+              <span className={`text-sm font-black leading-none ${mainText}`}>
+                {annualPrice.currency} {annualPrice.symbol}
+              </span>
+              <span className={`text-2xl font-black leading-none ${mainText}`}>
+                {annualPrice.amount}
+              </span>
+              <span className={`pb-0.5 text-xs ${highlighted ? "text-violet-300" : "text-gray-400"}`}>
+                {annualPrice.period}
+              </span>
+            </div>
+            {annualSavings && (
+              <p className={`mt-1.5 text-xs font-semibold ${highlighted ? "text-emerald-300" : "text-emerald-600"}`}>
+                ✨ {annualSavings}
+              </p>
+            )}
+          </div>
+        )}
+        <p className={`text-sm ${mutedText}`}>{description}</p>
       </div>
 
-      <div className="space-y-6 mb-8">
+      <div className="mb-8 space-y-6">
         {/* Base Features */}
         <div>
           <h4 className={`text-xs font-black uppercase tracking-wider mb-3 ${
@@ -127,11 +167,17 @@ export function PricingCard({
         )}
       </div>
 
+      {trialLabel && (
+        <p className={`mb-3 text-center text-xs font-semibold ${highlighted ? "text-violet-200" : "text-gray-500"}`}>
+          {trialLabel}
+        </p>
+      )}
+
       <Button
         href={ctaHref}
         variant={highlighted ? "secondary" : "outline"}
         size="md"
-        className="w-full justify-center"
+        className="mt-auto w-full justify-center"
       >
         {cta}
       </Button>

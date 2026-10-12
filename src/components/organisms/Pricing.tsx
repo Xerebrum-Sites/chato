@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/atoms/Badge";
-import { PricingCard } from "@/components/molecules/PricingCard";
+import { PricingCard, type PriceDisplay } from "@/components/molecules/PricingCard";
 import { URLS } from "@/lib/config";
 import { type PricingCurrency, usePricingCurrency } from "@/hooks/usePricingCurrency";
 
 const API_URL = URLS.api;
+const PLAN_ORDER = ["starter", "pro", "business"] as const;
 
 interface PlanData {
   id: string;
@@ -18,261 +19,134 @@ interface PlanData {
   annual_discount_pct?: number;
   price_annual_ars?: number | null;
   price_annual_usd?: number | null;
+  max_human_agents: number;
   is_visible_landing?: boolean;
+}
+
+interface TrialData {
+  trial_days: number;
 }
 
 type BillingCycle = "monthly" | "annual";
 
-// Map backend slugs to landing display config
-const PLAN_CONFIG: Record<string, {
-  displayName: string;
-  description: string;
-  baseFeatures: string[];
-  advancedFeatures?: string[];
-  highlighted: boolean;
-  badge?: string;
-  cta: string;
-}> = {
-  starter: {
-    displayName: "Starter",
-    description: "Para emprendedores que centralizan su atención.",
-    baseFeatures: [
-      "✓ Bandeja omnicanal",
-      "✓ Hasta 3 canales",
-      "✓ Etiquetas y seguimiento",
-      "✓ Respuestas rápidas",
-      "✓ 14 días gratis",
-    ],
-    highlighted: false,
-    cta: "Empezar gratis",
-  },
-  pro: {
-    displayName: "Pro",
-    description: "Para negocios que crecen con un equipo.",
-    baseFeatures: [
-      "✓ Bandeja omnicanal",
-      "✓ Dashboard y gestión de equipo",
-      "✓ Hasta 5 canales",
-      "✓ Hasta 3 agentes",
-      "✓ Analytics básicos",
-    ],
-    advancedFeatures: [
-      "✓ Automatizaciones con IA",
-      "✓ Base de conocimiento (RAG)",
-      "✓ Horarios automáticos",
-      "✓ 14 días gratis",
-    ],
-    highlighted: true,
-    badge: "Más popular",
-    cta: "Empezar gratis",
-  },
-  business: {
-    displayName: "Business",
-    description: "Sin límites. Para equipos y agencias.",
-    baseFeatures: [
-      "✓ Bandeja omnicanal completa",
-      "✓ Dashboard y gestión de equipo",
-      "✓ Canales ilimitados",
-      "✓ Agentes ilimitados",
-      "✓ Analytics avanzados",
-    ],
-    advancedFeatures: [
-      "✓ Automatizaciones avanzadas con IA",
-      "✓ RAG ilimitado",
-      "✓ Prioridad en soporte",
-      "✓ SLA personalizado",
-    ],
-    highlighted: false,
-    cta: "Hablar con ventas",
-  },
+const PLAN_CONFIG: Record<(typeof PLAN_ORDER)[number], { description: string; highlighted: boolean; badge?: string; cta: string }> = {
+  starter: { description: "Para emprendedores que centralizan su atención.", highlighted: false, cta: "Empezar gratis" },
+  pro: { description: "Para negocios que crecen con un equipo.", highlighted: true, badge: "Más popular", cta: "Empezar gratis" },
+  business: { description: "Sin límites. Para equipos y agencias.", highlighted: false, cta: "Hablar con ventas" },
 };
 
-function formatPrice(
-  priceArs: number | null,
-  priceUsd: number | null,
-  currency: PricingCurrency,
-): string {
-  if (currency === "ARS") {
-    if (priceArs === null) return "Gratis";
-    if (priceArs === 0) return "Gratis";
-    return `ARS $${priceArs.toLocaleString("es-AR")}`;
-  }
-  if (priceUsd === null || priceUsd === 0) return "Free";
-  return `USD $${priceUsd.toLocaleString("en-US")}`;
+function priceFor(plan: PlanData, currency: PricingCurrency, annual = false): number | null {
+  if (currency === "ARS") return annual ? plan.price_annual_ars ?? null : plan.price_ars;
+  return annual ? plan.price_annual_usd ?? null : plan.price_usd;
 }
 
-function getPeriodLabel(
-  priceArs: number | null,
-  priceUsd: number | null,
-  currency: PricingCurrency,
-  cycle: BillingCycle,
-): string {
-  const price = currency === "ARS" ? priceArs : priceUsd;
-  if (price === 0 || price === null) return "";
-  return cycle === "annual" ? "/año" : "/mes";
-}
-
-function pickPriceForCycle(
-  plan: PlanData | undefined,
-  cycle: BillingCycle,
-): { priceArs: number | null; priceUsd: number | null } {
-  if (!plan) return { priceArs: null, priceUsd: null };
-  if (cycle === "monthly") {
-    return { priceArs: plan.price_ars, priceUsd: plan.price_usd };
-  }
+function priceDisplay(price: number | null, currency: PricingCurrency, period: string): PriceDisplay | null {
+  if (price === null || price <= 0) return null;
   return {
-    priceArs: plan.price_annual_ars ?? plan.price_ars,
-    priceUsd: plan.price_annual_usd ?? plan.price_usd,
+    currency,
+    symbol: "$",
+    amount: price.toLocaleString(currency === "ARS" ? "es-AR" : "en-US", { maximumFractionDigits: currency === "ARS" ? 0 : 2 }),
+    period,
   };
 }
 
+function enabled(features: Record<string, unknown>, key: string): boolean {
+  return features[key] === true || (typeof features[key] === "number" && features[key] > 0);
+}
+
+function limitLabel(value: unknown, singular: string, plural: string): string {
+  if (value === -1) return "Ilimitados";
+  if (typeof value !== "number" || value <= 0) return "No incluido";
+  return `${value} ${value === 1 ? singular : plural}`;
+}
+
+function cardFeatures(plan: PlanData): string[] {
+  return [
+    "Bandeja omnicanal",
+    limitLabel(plan.features.max_channels, "canal", "canales"),
+    limitLabel(plan.max_human_agents, "agente", "agentes"),
+    enabled(plan.features, "webchat_enabled") ? "Web Chat incluido" : "Web Chat no incluido",
+  ];
+}
+
+function advancedFeatures(plan: PlanData): string[] {
+  return ([
+    ["Automatizaciones con IA", "bot_enabled"],
+    ["Base de conocimiento", "rag_enabled"],
+    ["Horarios automáticos", "schedules_enabled"],
+    ["Soporte prioritario", "priority_support"],
+  ] as const).filter(([, key]) => enabled(plan.features, key)).map(([label]) => label);
+}
+
+const COMPARISON_ROWS: Array<{ label: string; read: (plan: PlanData) => string }> = [
+  { label: "Canales", read: (plan) => limitLabel(plan.features.max_channels, "canal", "canales") },
+  { label: "Agentes humanos", read: (plan) => limitLabel(plan.max_human_agents, "agente", "agentes") },
+  { label: "Web Chat", read: (plan) => enabled(plan.features, "webchat_enabled") ? "Incluido" : "—" },
+  { label: "Automatizaciones con IA", read: (plan) => enabled(plan.features, "bot_enabled") ? "Incluido" : "—" },
+  { label: "Base de conocimiento", read: (plan) => enabled(plan.features, "rag_enabled") ? "Incluida" : "—" },
+  { label: "Agentes IA", read: (plan) => limitLabel(plan.features.max_ai_agents, "agente", "agentes") },
+  { label: "Horarios automáticos", read: (plan) => enabled(plan.features, "schedules_enabled") ? "Incluidos" : "—" },
+  { label: "Soporte prioritario", read: (plan) => enabled(plan.features, "priority_support") ? "Incluido" : "—" },
+  { label: "Almacenamiento incluido", read: (plan) => `${plan.features.included_storage_gb ?? 0} GB` },
+  { label: "Tokens de IA incluidos / mes", read: (plan) => Number(plan.features.included_ai_tokens_monthly ?? 0).toLocaleString("es-AR") },
+];
+
 export function Pricing() {
   const [plans, setPlans] = useState<PlanData[]>([]);
+  const [trialDays, setTrialDays] = useState<number | null>(null);
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
   const [loading, setLoading] = useState(true);
   const currency = usePricingCurrency();
 
   useEffect(() => {
-    async function init() {
-      const plansData = await fetch(`${API_URL}/api/public/plans`)
-        .then((r) => r.json())
-        .then((d) => (Array.isArray(d) ? d : []))
-        .catch(() => []) as PlanData[];
-      setPlans(plansData);
+    async function loadPricing() {
+      const [plansResult, trialResult] = await Promise.all([
+        fetch(`${API_URL}/api/public/plans`).then((response) => response.json()).then((data) => Array.isArray(data) ? data : []).catch(() => []) as Promise<PlanData[]>,
+        fetch(`${API_URL}/api/public/trial-days`).then((response) => response.ok ? response.json() : null).catch(() => null) as Promise<TrialData | null>,
+      ]);
+      setPlans(plansResult);
+      setTrialDays(trialResult?.trial_days ?? null);
       setLoading(false);
     }
-    init();
+    loadPricing();
   }, []);
 
-  // Merge API data with display config. Plans hidden from the landing
-  // (is_visible_landing === false) are silently skipped.
-  const visiblePlans = plans.filter((p) => p.is_visible_landing !== false);
-  const displayPlans = (["starter", "pro", "business"] as const)
-    .map((slug) => ({ slug, apiPlan: visiblePlans.find((p) => p.slug === slug) }))
-    .filter(({ apiPlan }) => apiPlan !== undefined)
-    .map(({ slug, apiPlan }) => {
-      const config = PLAN_CONFIG[slug];
-      const priced = pickPriceForCycle(apiPlan, billingCycle);
-      const discountPct = apiPlan?.annual_discount_pct ?? 0;
-      return {
-        slug,
-        name: config.displayName,
-        price: loading || currency === null
-          ? "..."
-          : formatPrice(priced.priceArs, priced.priceUsd, currency),
-        period:
-          loading || currency === null
-            ? ""
-            : getPeriodLabel(priced.priceArs, priced.priceUsd, currency, billingCycle),
-        description: config.description,
-        baseFeatures: config.baseFeatures,
-        advancedFeatures: config.advancedFeatures,
-        highlighted: config.highlighted,
-        badge: config.badge,
-        cta: config.cta,
-        ctaHref: slug === "business" ? "/contacto/" : URLS.signIn,
-        annualSavings:
-          billingCycle === "annual" && discountPct > 0
-            ? `Ahorrás ${discountPct.toFixed(0)}%`
-            : null,
-      };
-    });
+  const visiblePlans = plans.filter((plan) => plan.is_visible_landing !== false);
+  const displayPlans = PLAN_ORDER.map((slug) => ({ slug, plan: visiblePlans.find((item) => item.slug === slug) })).filter((item): item is { slug: (typeof PLAN_ORDER)[number]; plan: PlanData } => item.plan !== undefined);
+  const trialLabel = trialDays ? `${trialDays} días gratis, sin tarjeta` : null;
 
   return (
-    <section id="precios" className="pt-32 lg:pt-40 pb-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <Badge variant="green" className="mb-4">
-            Precios transparentes
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4">
-            Empezá en pequeño,{" "}
-            <span className="gradient-text">escalá sin límites</span>
-          </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Todos los planes trabajan sobre la misma bandeja omnicanal.
-            Módulos del Marketplace (Reservas, Catálogo y más) disponibles para ampliar cualquier plan.
-            14 días gratis para probar, sin tarjeta.
+    <section id="precios" className="bg-gray-50 pb-24 pt-32 lg:pt-40">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center">
+          <Badge variant="green" className="mb-4">Precios transparentes</Badge>
+          <h2 className="mb-4 text-3xl font-black text-gray-900 sm:text-4xl">Empezá en pequeño, <span className="gradient-text">escalá sin límites</span></h2>
+          <p className="mx-auto max-w-2xl text-lg text-gray-500">
+            Todos los planes trabajan sobre la misma bandeja omnicanal. Sumá módulos del Marketplace para ampliar la plataforma cuando lo necesites.
+            {trialDays ? ` ${trialDays} días gratis para probar, sin tarjeta.` : ""}
           </p>
-
-          <div className="mt-6 text-sm font-semibold text-gray-600" aria-live="polite">
-            {currency === null
-              ? "Cargando moneda local…"
-              : currency === "ARS"
-                ? "Precios en pesos argentinos para Argentina"
-                : "Precios en dólares para el resto del mundo"}
-          </div>
-
-          {/* Billing cycle toggle: monthly ↔ annual (annual shows discount) */}
-          <div className="flex items-center justify-center mt-6">
-            <div className="inline-flex items-center bg-white border border-gray-200 rounded-full p-1 shadow-sm">
-              <button
-                type="button"
-                onClick={() => setBillingCycle("monthly")}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
-                  billingCycle === "monthly"
-                    ? "bg-violet-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                Mensual
-              </button>
-              <button
-                type="button"
-                onClick={() => setBillingCycle("annual")}
-                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2 ${
-                  billingCycle === "annual"
-                    ? "bg-violet-600 text-white shadow-md"
-                    : "text-gray-600 hover:text-gray-900"
-                }`}
-              >
-                Anual
-                {billingCycle !== "annual" && (
-                  <span className="text-[10px] uppercase tracking-wider bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">
-                    Ahorrás
-                  </span>
-                )}
-              </button>
+          <div className="mt-6 flex items-center justify-center">
+            <div className="inline-flex items-center rounded-full border border-gray-200 bg-white p-1 shadow-sm">
+              <button type="button" onClick={() => setBillingCycle("monthly")} className={`rounded-full px-5 py-2 text-sm font-semibold transition-all ${billingCycle === "monthly" ? "bg-violet-600 text-white shadow-md" : "text-gray-600 hover:text-gray-900"}`}>Mensual</button>
+              <button type="button" onClick={() => setBillingCycle("annual")} className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition-all ${billingCycle === "annual" ? "bg-violet-600 text-white shadow-md" : "text-gray-600 hover:text-gray-900"}`}>Anual{billingCycle !== "annual" && <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-emerald-700">Ahorrás</span>}</button>
             </div>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 items-center">
-          {displayPlans.map((plan) => (
-            <PricingCard
-              key={plan.slug}
-              name={plan.name}
-              price={plan.price}
-              period={plan.period}
-              description={plan.description}
-              baseFeatures={plan.baseFeatures}
-              advancedFeatures={plan.advancedFeatures}
-              highlighted={plan.highlighted}
-              badge={plan.badge}
-              cta={plan.cta}
-              slug={plan.slug}
-              ctaHref={plan.ctaHref}
-              annualSavings={plan.annualSavings}
-            />
-          ))}
+        <div className="grid items-stretch gap-6 lg:grid-cols-3">
+          {displayPlans.map(({ slug, plan }) => {
+            const config = PLAN_CONFIG[slug];
+            return <PricingCard key={plan.id} name={plan.name} monthlyPrice={loading || currency === null ? null : priceDisplay(priceFor(plan, currency), currency, "/mes")} annualPrice={loading || currency === null ? null : priceDisplay(priceFor(plan, currency, true), currency, "/año")} showAnnualPrice={billingCycle === "annual"} description={config.description} baseFeatures={cardFeatures(plan)} advancedFeatures={advancedFeatures(plan)} highlighted={config.highlighted} badge={config.badge} cta={config.cta} ctaHref={slug === "business" ? "/contacto/" : URLS.signIn} annualSavings={billingCycle === "annual" && (plan.annual_discount_pct ?? 0) > 0 ? `Ahorrás ${plan.annual_discount_pct?.toFixed(0)}%` : null} trialLabel={trialLabel} />;
+          })}
         </div>
 
-        <p className="mt-6 text-center text-xs leading-relaxed text-gray-500 max-w-2xl mx-auto">
-          La moneda y el medio de pago definitivos se confirman en el checkout según el país emisor de la tarjeta.
-        </p>
+        {displayPlans.length > 0 && <div className="mt-16 overflow-hidden rounded-2xl border border-gray-200 bg-white">
+          <div className="border-b border-gray-100 px-6 py-6 sm:px-8"><h3 className="text-2xl font-black text-gray-900">Compará cada plan en detalle</h3><p className="mt-2 text-sm text-gray-500">Los límites y capacidades se actualizan desde el catálogo de planes.</p></div>
+          <div className="overflow-x-auto"><table className="min-w-[720px] w-full border-collapse text-left"><thead><tr className="border-b border-gray-100 bg-gray-50"><th className="px-6 py-4 text-sm font-bold text-gray-500 sm:px-8">Incluye</th>{displayPlans.map(({ plan }) => <th key={plan.id} className="px-6 py-4 text-sm font-black text-gray-900">{plan.name}</th>)}</tr></thead><tbody>{COMPARISON_ROWS.map((row) => <tr key={row.label} className="border-b border-gray-100 last:border-b-0"><th scope="row" className="whitespace-nowrap px-6 py-4 text-sm font-semibold text-gray-700 sm:px-8">{row.label}</th>{displayPlans.map(({ plan }) => <td key={plan.id} className="px-6 py-4 text-sm text-gray-600">{row.read(plan)}</td>)}</tr>)}</tbody></table></div>
+        </div>}
 
-        {/* FAQ mini */}
-        <div className="mt-14 grid sm:grid-cols-3 gap-6 text-center">
-          {[
-            { q: "¿Necesito tarjeta para probar?", a: "No. Los 14 días de prueba son completamente gratis y sin tarjeta de crédito." },
-            { q: "¿Puedo cambiar de plan?", a: "Sí, cuando quieras. Sube a un plan superior o baja si necesitas menos. Pago prorrateado." },
-            { q: "¿Cómo funcionan los add-ons?", a: "Se añaden a tu factura. Activa solo los que usas (Reservas, Catálogo, Encuestas, etc.)." },
-          ].map(({ q, a }) => (
-            <div key={q} className="bg-white rounded-2xl p-5 border border-gray-100">
-              <p className="font-semibold text-gray-900 text-sm mb-2">{q}</p>
-              <p className="text-gray-500 text-sm">{a}</p>
-            </div>
-          ))}
+        <div className="mt-14 grid gap-6 text-center sm:grid-cols-3">
+          {[{ q: "¿Necesito tarjeta para probar?", a: trialDays ? `No. Los ${trialDays} días de prueba son completamente gratis y sin tarjeta de crédito.` : "No. La prueba es completamente gratis y sin tarjeta de crédito." }, { q: "¿Puedo cambiar de plan?", a: "Sí, cuando quieras. Sube a un plan superior o baja si necesitás menos. Pago prorrateado." }, { q: "¿Cómo funcionan los módulos?", a: "Se suman a tu factura. Activá sólo las capacidades que necesitás." }].map(({ q, a }) => <div key={q} className="rounded-2xl border border-gray-100 bg-white p-5"><p className="mb-2 text-sm font-semibold text-gray-900">{q}</p><p className="text-sm text-gray-500">{a}</p></div>)}
         </div>
       </div>
     </section>
