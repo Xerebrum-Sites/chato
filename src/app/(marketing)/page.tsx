@@ -35,16 +35,16 @@ function HumanValueBand() {
     "Sumá a tu equipo cuando lo necesites, ordenado",
   ];
   return (
-    <section className="py-24 bg-white">
+    <section className="bg-[#fffaf5] py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal direction="right">
-          <div className="relative min-h-[24rem] sm:min-h-[32rem]">
+          <div className="relative min-h-[24rem] p-2 sm:min-h-[32rem] sm:p-4">
             <Image
-              src="/images/brand/team-desktop.webp"
-              alt="Equipo diverso atendiendo clientes desde estaciones de trabajo de escritorio"
+              src="/images/brand/team-desktop-v2.webp"
+              alt="Equipo latino y europeo atendiendo clientes desde estaciones de trabajo de escritorio"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain"
+              className="object-contain p-2 sm:p-3"
             />
           </div>
         </Reveal>

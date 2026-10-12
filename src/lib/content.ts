@@ -183,7 +183,7 @@ export const industries: Industry[] = [
       "Cada solicitud de turno llega ordenada en una sola bandeja. Confirmás respondiendo y el paciente recibe la confirmación —y un recordatorio— en su canal preferido.",
     result: "Agenda ordenada sin sumar personal solo para atender mensajes.",
     photoLabel: "Recepcionista de salud organizando turnos desde una computadora",
-    image: "/images/brand/industry-salud.webp",
+    image: "/images/brand/industry-salud-v2.webp",
     imageAlt: "Recepcionista de un centro de salud organizando turnos en una computadora",
   },
   {
@@ -211,7 +211,7 @@ export const industries: Industry[] = [
       "Sumás a tu equipo como agentes: cada persona atiende su canal asignado con el historial compartido, sin mezclar cuentas personales.",
     result: "Todo el equipo atiende desde sus estaciones de escritorio, ordenado y sin compartir cuentas personales.",
     photoLabel: "Equipo de un salón coordinando turnos desde recepción",
-    image: "/images/brand/industry-belleza.webp",
+    image: "/images/brand/industry-belleza-v2.webp",
     imageAlt: "Equipo diverso de un salón coordinando turnos desde la recepción",
   },
   {
@@ -239,7 +239,7 @@ export const industries: Industry[] = [
       "Unificás preventa y posventa en una bandeja, con etiquetas por estado (#consulta, #pagado, #envío) y respuestas rápidas para las dudas típicas.",
     result: "Seguimiento claro de cada cliente, del carrito a la entrega.",
     photoLabel: "Operador de ecommerce gestionando pedidos desde una computadora",
-    image: "/images/brand/industry-ecommerce.webp",
+    image: "/images/brand/industry-ecommerce-v2.webp",
     imageAlt: "Operador de ecommerce gestionando pedidos en una estación de despacho",
   },
   {
@@ -267,7 +267,7 @@ export const industries: Industry[] = [
       "Reunís todas las consultas en una bandeja, usás respuestas rápidas para disponibilidad y precios, y derivás a tu equipo cuando hace falta.",
     result: "Respondés a tiempo y con información consistente en cada canal.",
     photoLabel: "Recepcionista de hotel gestionando reservas desde una computadora",
-    image: "/images/brand/industry-turismo.webp",
+    image: "/images/brand/industry-turismo-v2.webp",
     imageAlt: "Recepcionista de hotel gestionando una reserva desde la computadora",
   },
 ];
