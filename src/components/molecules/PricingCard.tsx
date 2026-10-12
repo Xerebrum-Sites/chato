@@ -61,7 +61,7 @@ export function PricingCard({
         </div>
       )}
 
-      <div className="mb-6 min-h-[13rem]">
+      <div className="mb-6">
         <h3 className={`mb-1 text-lg font-bold ${mutedText}`}>
           {name}
         </h3>
@@ -84,29 +84,19 @@ export function PricingCard({
           <div className={`mb-3 text-4xl font-black ${mainText}`}>...</div>
         )}
         {showAnnualPrice && annualPrice && (
-          <div className={`mb-3 rounded-xl px-3 py-2.5 ${highlighted ? "bg-violet-800/60" : "bg-gray-50"}`}>
-            <p className={`mb-1 text-[11px] font-bold uppercase tracking-[0.14em] ${mutedText}`}>
-              Facturación anual
-            </p>
-            <div className="flex items-end gap-1">
-              <span className={`text-sm font-black leading-none ${mainText}`}>
-                {annualPrice.currency} {annualPrice.symbol}
-              </span>
-              <span className={`text-2xl font-black leading-none ${mainText}`}>
-                {annualPrice.amount}
-              </span>
-              <span className={`pb-0.5 text-xs ${highlighted ? "text-violet-300" : "text-gray-400"}`}>
-                {annualPrice.period}
-              </span>
-            </div>
+          <div className={`mb-2 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs ${mutedText}`}>
+            <span>Facturación anual:</span>
+            <span className={`font-bold ${mainText}`}>
+              {annualPrice.currency} {annualPrice.symbol}{annualPrice.amount}{annualPrice.period}
+            </span>
             {annualSavings && (
-              <p className={`mt-1.5 text-xs font-semibold ${highlighted ? "text-emerald-300" : "text-emerald-600"}`}>
-                ✨ {annualSavings}
-              </p>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wide ${highlighted ? "bg-emerald-300 text-violet-950" : "bg-emerald-100 text-emerald-700"}`}>
+                {annualSavings}
+              </span>
             )}
           </div>
         )}
-        <p className={`text-sm ${mutedText}`}>{description}</p>
+        <p className={`min-h-10 text-sm ${mutedText}`}>{description}</p>
       </div>
 
       <div className="mb-8 space-y-6">
