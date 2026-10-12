@@ -38,17 +38,35 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-[#fffaf5] pt-24">
+    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-[#fffaf5] pt-20 lg:pt-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_18%,rgba(6,182,212,0.12),transparent_26%),radial-gradient(circle_at_17%_80%,rgba(255,150,0,0.12),transparent_28%)]" />
       <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
       <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-6rem)] max-w-[90rem] items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-6 lg:px-8 lg:py-16">
+      <div className="relative mx-auto min-h-[calc(100vh-5rem)] max-w-7xl px-4 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
+        <motion.div
+          style={{ y: photoY }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.97, x: 28 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className="pointer-events-none absolute inset-x-4 inset-y-3 hidden sm:inset-x-6 lg:inset-x-8 lg:block"
+        >
+          <Image
+            src="/images/brand/hero-desktop-owner-v2.webp"
+            alt="Responsable de atención trabajando con Cható desde una estación de escritorio"
+            fill
+            priority
+            sizes="(min-width: 1024px) 1280px, 100vw"
+            className="object-contain object-center"
+          />
+        </motion.div>
+
+        <div className="relative grid min-h-[calc(100vh-9rem)] items-center gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-4">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, x: -34 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-20 lg:pb-10"
+          className="relative z-20 max-w-xl"
         >
           <Badge variant="violet" className="mb-6 bg-white/80 backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-violet-500 animate-pulse" />
@@ -107,21 +125,21 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <div className="relative min-h-[34rem] sm:min-h-[43rem] lg:min-h-[48rem]">
+        <div className="relative min-h-[34rem] sm:min-h-[41rem] lg:min-h-full">
           <motion.div
             style={{ y: photoY }}
             initial={reduceMotion ? false : { opacity: 0, scale: 0.94, x: 60 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-x-[-9%] top-0 h-[72%] sm:inset-x-0 sm:h-[78%] lg:-right-20 lg:left-0 lg:top-2"
+            className="absolute inset-x-0 top-0 h-[76%] overflow-hidden rounded-[2rem] sm:h-[80%] lg:hidden"
           >
             <Image
-              src="/images/brand/hero-desktop-team.webp?v=20261011"
-              alt="Responsable de atención trabajando con Cható en una estación de escritorio con dos monitores"
+              src="/images/brand/hero-desktop-owner-v2.webp"
+              alt="Responsable de atención trabajando con Cható desde una estación de escritorio"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="object-contain object-center"
+              sizes="100vw"
+              className="object-cover object-[74%_center]"
             />
           </motion.div>
 
@@ -130,10 +148,11 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 54, rotate: 1.4 }}
             animate={{ opacity: 1, y: 0, rotate: -1.1 }}
             transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute bottom-0 left-1/2 z-10 w-[96%] -translate-x-1/2 sm:bottom-2 sm:w-[88%] lg:bottom-3 lg:left-[48%] lg:w-[82%]"
+            className="absolute bottom-0 left-1/2 z-10 w-[96%] -translate-x-1/2 sm:bottom-2 sm:w-[88%] lg:bottom-7 lg:left-auto lg:right-2 lg:w-[74%] lg:translate-x-0"
           >
             <InboxPreview />
           </motion.div>
+        </div>
         </div>
       </div>
     </section>

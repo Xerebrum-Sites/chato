@@ -36,11 +36,11 @@ export function PageHero({
   primaryCta,
   secondaryCta,
   imageLabel,
-  imageSrc = "/images/brand/team-desktop.webp",
+  imageSrc = "/images/brand/team-desktop-v2.webp",
   visual,
 }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden pt-32 lg:pt-40 pb-16 lg:pb-24">
+    <section className="relative overflow-hidden bg-[#fffaf5] pt-28 pb-14 lg:pt-32 lg:pb-20">
       <div className="absolute inset-0 gradient-bg opacity-70" />
       <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-white pointer-events-none" />
 
@@ -75,13 +75,14 @@ export function PageHero({
           {visual ? (
             visual
           ) : (
-            <div className="relative min-h-[24rem] sm:min-h-[30rem]">
+            <div className="relative min-h-[22rem] p-2 sm:min-h-[28rem] sm:p-4 lg:min-h-[31rem]">
               <Image
                 src={imageSrc}
                 alt={imageLabel ?? "Equipo usando Cható desde estaciones de escritorio"}
                 fill
+                priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain"
+                className="object-contain p-2 sm:p-3"
               />
             </div>
           )}

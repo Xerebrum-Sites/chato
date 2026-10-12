@@ -74,8 +74,8 @@ export function IndustriesTeaser() {
                 </div>
               </div>
 
-              <div className="relative order-1 min-h-[22rem] lg:order-2 lg:min-h-[32rem]">
-                <Image src={active.image} alt={active.imageAlt} fill sizes="(max-width: 1024px) 100vw, 58vw" className="object-contain" />
+              <div className="relative order-1 min-h-[22rem] p-2 lg:order-2 lg:min-h-[32rem] lg:p-3">
+                <Image src={active.image} alt={active.imageAlt} fill sizes="(max-width: 1024px) 100vw, 58vw" className="object-contain p-1 sm:p-2" />
               </div>
             </motion.div>
           </AnimatePresence>
@@ -87,7 +87,7 @@ export function IndustriesTeaser() {
 
 export function IndustriesShowcase() {
   return (
-    <section className="overflow-hidden bg-white py-8 lg:py-12">
+    <section className="overflow-hidden bg-[#fffaf5] py-8 lg:py-12">
       <div className="mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:space-y-28 lg:px-8">
         {industries.map((industry, index) => {
           const reversed = index % 2 === 1;
@@ -95,8 +95,8 @@ export function IndustriesShowcase() {
             <div key={industry.id} id={industry.id} className="scroll-mt-28">
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
                 <Reveal direction={reversed ? "left" : "right"} className={reversed ? "lg:order-2" : ""}>
-                  <div className="relative min-h-[22rem] sm:min-h-[30rem]">
-                    <Image src={industry.image} alt={industry.imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain" />
+                  <div className="relative min-h-[22rem] p-2 sm:min-h-[30rem] sm:p-4">
+                    <Image src={industry.image} alt={industry.imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain p-1 sm:p-2" />
                     <div className="absolute bottom-4 left-4 flex items-center gap-2.5 rounded-full border border-white/80 bg-white/90 px-4 py-2.5 shadow-lg backdrop-blur">
                       <IconBadge icon={industry.icon} size="sm" />
                       <span className="text-xs font-bold uppercase tracking-wide text-violet-700">{industry.sector}</span>
