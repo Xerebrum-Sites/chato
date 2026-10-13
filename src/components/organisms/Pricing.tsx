@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Check, X } from "lucide-react";
+import type { ReactNode } from "react";
 import { Badge } from "@/components/atoms/Badge";
 import { PricingCard, type PriceDisplay } from "@/components/molecules/PricingCard";
 import { URLS } from "@/lib/config";
@@ -70,23 +72,35 @@ function enabled(features: Record<string, unknown>, key: string): boolean {
   return features[key] === true || (typeof features[key] === "number" && features[key] > 0);
 }
 
-function limitLabel(value: unknown, singular: string, plural: string): string {
+function statusIcon(included: boolean): ReactNode {
+  return included ? (
+    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-600" aria-label="Incluido" title="Incluido">
+      <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
+    </span>
+  ) : (
+    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-rose-50 text-rose-500" aria-label="No incluido" title="No incluido">
+      <X className="h-3.5 w-3.5" strokeWidth={2.5} aria-hidden="true" />
+    </span>
+  );
+}
+
+function limitLabel(value: unknown, singular: string, plural: string): ReactNode {
   if (value === -1) return "Ilimitados";
-  if (typeof value !== "number" || value <= 0) return "No incluido";
+  if (typeof value !== "number" || value <= 0) return statusIcon(false);
   return `${value} ${value === 1 ? singular : plural}`;
 }
 
-const COMPARISON_ROWS: Array<{ label: string; read: (plan: PlanData) => string }> = [
+const COMPARISON_ROWS: Array<{ label: string; read: (plan: PlanData) => ReactNode }> = [
   { label: "Canales", read: (plan) => limitLabel(plan.features.max_channels, "canal", "canales") },
   { label: "Agentes humanos", read: (plan) => limitLabel(plan.max_human_agents, "agente", "agentes") },
-  { label: "Web Chat", read: (plan) => enabled(plan.features, "webchat_enabled") ? "Incluido" : "—" },
-  { label: "Automatizaciones con IA", read: (plan) => enabled(plan.features, "bot_enabled") ? "Incluido" : "—" },
-  { label: "Base de conocimiento", read: (plan) => enabled(plan.features, "rag_enabled") ? "Incluida" : "—" },
+  { label: "Web Chat", read: (plan) => statusIcon(enabled(plan.features, "webchat_enabled")) },
+  { label: "Automatizaciones con IA", read: (plan) => statusIcon(enabled(plan.features, "bot_enabled")) },
+  { label: "Base de conocimiento", read: (plan) => statusIcon(enabled(plan.features, "rag_enabled")) },
   { label: "Agentes IA", read: (plan) => limitLabel(plan.features.max_ai_agents, "agente", "agentes") },
-  { label: "Horarios automáticos", read: (plan) => enabled(plan.features, "schedules_enabled") ? "Incluidos" : "—" },
-  { label: "Soporte prioritario", read: (plan) => enabled(plan.features, "priority_support") ? "Incluido" : "—" },
+  { label: "Horarios automáticos", read: (plan) => statusIcon(enabled(plan.features, "schedules_enabled")) },
+  { label: "Soporte prioritario", read: (plan) => statusIcon(enabled(plan.features, "priority_support")) },
   { label: "Almacenamiento incluido", read: (plan) => `${plan.features.included_storage_gb ?? 0} GB` },
-  { label: "Tokens de IA incluidos / mes", read: (plan) => Number(plan.features.included_ai_tokens_monthly ?? 0).toLocaleString("es-AR") },
+  { label: "Créditos de IA incluidos / mes", read: (plan) => Number(plan.features.included_ai_tokens_monthly ?? 0).toLocaleString("es-AR") },
 ];
 
 export function Pricing() {
