@@ -3,9 +3,9 @@ import { Pricing } from "@/components/organisms/Pricing";
 import { CtaSection } from "@/components/organisms/CtaSection";
 
 export const metadata: Metadata = {
-  title: "Precios — Planes de Cható con prueba gratis",
+  title: "Precios — Plan base de Cható con prueba gratis",
   description:
-    "Planes Starter, Pro y Business con bandeja omnicanal, automatizaciones y herramientas para equipos. Prueba gratis, sin tarjeta de crédito.",
+    "Un solo plan base con bandeja omnicanal, canales y usuarios sin cargo adicional. Sumá módulos del Marketplace cuando los necesites. Prueba gratis, sin tarjeta de crédito.",
   alternates: { canonical: "/precios/" },
 };
 
