@@ -5,7 +5,7 @@ import { URLS, EMAILS } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Términos y Condiciones – Cható",
   description:
-    "Términos y condiciones de uso de Cható: cuentas, planes y facturación, uso aceptable, inteligencia artificial, integraciones y responsabilidad.",
+    "Términos y condiciones de uso de Cható: cuentas, suscripción y facturación, uso aceptable, inteligencia artificial, integraciones y responsabilidad.",
 };
 
 const UPDATED = "12 de octubre de 2026";
@@ -32,7 +32,7 @@ const sections = [
         <li><strong>Modo Simple:</strong> gestión de la bandeja directamente desde Telegram, sin necesidad de instalar una app adicional.</li>
         <li><strong>Modo Avanzado:</strong> panel de control web con gestión de equipos, automatizaciones, analíticas y agentes de inteligencia artificial.</li>
       </ul>
-      <p>El servicio puede incluir herramientas opcionales ("add-ons") como Reservas, Catálogo o Encuestas, activables según el plan contratado. Nos reservamos el derecho de modificar, agregar o discontinuar funcionalidades del servicio, notificando cambios relevantes con antelación razonable cuando sea posible.</p>
+      <p>El servicio puede incluir herramientas opcionales ("add-ons") como Reservas, Catálogo o Encuestas, activables desde tu cuenta. Nos reservamos el derecho de modificar, agregar o discontinuar funcionalidades del servicio, notificando cambios relevantes con antelación razonable cuando sea posible.</p>
     `,
   },
   {
@@ -50,14 +50,14 @@ const sections = [
   },
   {
     id: "planes-facturacion",
-    title: "4. Prueba gratuita, planes y facturación",
+    title: "4. Prueba gratuita, suscripción y facturación",
     content: `
       <h3>4.1 Prueba gratuita</h3>
-      <p>Ofrecemos un período de prueba de 14 días sin necesidad de tarjeta de crédito. Al finalizar la prueba, deberás elegir un plan pago para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
-      <h3>4.2 Planes y precios</h3>
-      <p>Cható ofrece los planes <strong>Starter</strong>, <strong>Pro</strong> y <strong>Business</strong>, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para tarjetas emitidas en Argentina, los precios y cobros se realizan en pesos argentinos (ARS); para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout según el país emisor de la tarjeta. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
-      <h3>4.3 Cambios de plan</h3>
-      <p>Podés subir o bajar de plan en cualquier momento desde tu cuenta. Los cambios se prorratean automáticamente en tu próxima factura. Los add-ons se facturan de forma adicional según los que actives.</p>
+      <p>Ofrecemos un período de prueba de 14 días sin necesidad de tarjeta de crédito. Al finalizar la prueba, deberás contratar la suscripción para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
+      <h3>4.2 Suscripción y precios</h3>
+      <p>Cható se contrata mediante una suscripción, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para tarjetas emitidas en Argentina, los precios y cobros se realizan en pesos argentinos (ARS); para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout según el país emisor de la tarjeta. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
+      <h3>4.3 Add-ons</h3>
+      <p>Podés activar add-ons desde tu cuenta. Los add-ons se facturan de forma adicional según los que actives.</p>
       <h3>4.4 Pagos y renovación</h3>
       <p>Las suscripciones se renuevan automáticamente al final de cada ciclo salvo que canceles antes de la fecha de renovación. El procesamiento de pagos lo realizan proveedores externos; no almacenamos datos completos de tarjetas de crédito.</p>
       <h3>4.5 Reembolsos</h3>
@@ -129,7 +129,7 @@ const sections = [
     title: "10. Disponibilidad del servicio y soporte",
     content: `
       <p>Nos esforzamos por mantener Cható disponible de forma continua, pero no garantizamos un servicio ininterrumpido o libre de errores. Podemos realizar mantenimientos programados o de emergencia que impliquen interrupciones temporales, procurando notificarlos con antelación cuando sea posible.</p>
-      <p>El nivel de soporte (tiempos de respuesta, canales disponibles) varía según el plan contratado; los planes Business pueden incluir un SLA personalizado acordado por separado.</p>
+      <p>El nivel de soporte (tiempos de respuesta, canales disponibles) varía según lo contratado; cualquier SLA personalizado se acuerda por separado.</p>
     `,
   },
   {
@@ -216,7 +216,7 @@ export default function TerminosPage() {
           <h1 className="text-4xl font-black text-gray-900 mb-4">Términos y Condiciones</h1>
           <p className="text-gray-500 text-sm">Última actualización: <strong className="text-gray-700">{UPDATED}</strong></p>
           <p className="mt-4 text-gray-600 leading-relaxed max-w-2xl">
-            Estos son los términos que rigen el uso de Cható: cómo funcionan las cuentas, los planes y la facturación, qué podés y no podés hacer en la plataforma, y cómo tratamos las respuestas generadas por inteligencia artificial y las integraciones con WhatsApp, Instagram, Facebook y Telegram.
+            Estos son los términos que rigen el uso de Cható: cómo funcionan las cuentas, la suscripción y la facturación, qué podés y no podés hacer en la plataforma, y cómo tratamos las respuestas generadas por inteligencia artificial y las integraciones con WhatsApp, Instagram, Facebook y Telegram.
           </p>
         </div>
 

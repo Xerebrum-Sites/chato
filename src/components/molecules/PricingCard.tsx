@@ -1,23 +1,5 @@
+import { Check } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
-import { URLS } from "@/lib/config";
-
-interface PricingCardProps {
-  name: string;
-  monthlyPrice: PriceDisplay | null;
-  annualPrice?: PriceDisplay | null;
-  showAnnualPrice: boolean;
-  description: string;
-  audience: string[];
-  highlighted?: boolean;
-  badge?: string;
-  cta?: string;
-  slug?: string;
-  /** Destino del botón (registro por defecto; contacto para planes de ventas). */
-  ctaHref?: string;
-  /** Shown with the annual amount when a discount is available. */
-  annualSavings?: string | null;
-  trialLabel?: string | null;
-}
 
 export interface PriceDisplay {
   currency: string;
@@ -26,117 +8,91 @@ export interface PriceDisplay {
   period: string;
 }
 
+interface PricingCardProps {
+  name: string;
+  description: string;
+  /** Precio a mostrar; null cuando todavía no hay precio publicado. */
+  price: PriceDisplay | null;
+  /** El precio aún se está resolviendo (catálogo o moneda). */
+  loading?: boolean;
+  /** Texto del descuento anual (p. ej. «Ahorrás 20%»), solo en ciclo anual. */
+  annualSavings?: string | null;
+  /** Pista bajo el precio mensual: lo que se ahorra pagando anual. */
+  annualHint?: string | null;
+  /** Qué se muestra cuando no hay precio publicado. */
+  unpricedLabel: string;
+  unpricedNote: string;
+  includes: string[];
+  trialLabel?: string | null;
+  cta: string;
+  ctaHref: string;
+}
+
 export function PricingCard({
   name,
-  monthlyPrice,
-  annualPrice,
-  showAnnualPrice,
   description,
-  audience,
-  highlighted = false,
-  badge,
-  cta = "Empezar gratis",
-  ctaHref = URLS.signIn,
+  price,
+  loading = false,
   annualSavings,
+  annualHint,
+  unpricedLabel,
+  unpricedNote,
+  includes,
   trialLabel,
+  cta,
+  ctaHref,
 }: PricingCardProps) {
-  const mutedText = highlighted ? "text-violet-200" : "text-gray-500";
-  const mainText = highlighted ? "text-white" : "text-gray-900";
-
   return (
-    <div
-      className={`relative flex h-full flex-col rounded-2xl p-8 transition-all duration-300 ${
-        highlighted
-          ? "bg-gradient-to-br from-violet-700 to-violet-900 text-white shadow-2xl shadow-violet-200 scale-[1.02]"
-          : "bg-white border border-gray-100 hover:border-violet-200 hover:shadow-lg hover:shadow-violet-50"
-      }`}
-    >
-      {badge && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="bg-gradient-to-r from-cyan-400 to-cyan-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">
-            {badge}
-          </span>
-        </div>
-      )}
+    <div className="relative flex h-full flex-col rounded-2xl border border-violet-200 bg-white p-6 shadow-xl shadow-violet-100 sm:p-10">
+      <div className="mb-8 text-center">
+        <h3 className="mb-1 text-lg font-bold text-violet-700">{name}</h3>
+        <p className="mx-auto mb-6 max-w-md text-sm text-gray-500">{description}</p>
 
-      <div className="mb-6">
-        <h3 className={`mb-1 text-lg font-bold ${mutedText}`}>
-          {name}
-        </h3>
-        <p className={`mb-2 text-xs font-semibold uppercase tracking-[0.16em] ${mutedText}`}>
-          Por mes
-        </p>
-        {monthlyPrice ? (
-          <div className="mb-3 flex items-end gap-1">
-            <span className={`text-base font-black leading-none ${mainText}`}>
-              {monthlyPrice.currency} {monthlyPrice.symbol}
-            </span>
-            <span className={`text-4xl font-black leading-none ${mainText}`}>
-              {monthlyPrice.amount}
-            </span>
-            <span className={`pb-0.5 text-sm ${highlighted ? "text-violet-300" : "text-gray-400"}`}>
-              {monthlyPrice.period}
-            </span>
-          </div>
-        ) : (
-          <div className={`mb-3 text-4xl font-black ${mainText}`}>...</div>
-        )}
-        {showAnnualPrice && annualPrice && (
-          <div className={`mb-2 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs ${mutedText}`}>
-            <span>Facturación anual:</span>
-            <span className={`font-bold ${mainText}`}>
-              {annualPrice.currency} {annualPrice.symbol}{annualPrice.amount}{annualPrice.period}
-            </span>
-            {annualSavings && (
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-black uppercase tracking-wide ${highlighted ? "bg-emerald-300 text-violet-950" : "bg-emerald-100 text-emerald-700"}`}>
-                {annualSavings}
+        <div aria-live="polite" className="flex min-h-24 flex-col items-center justify-center">
+          {loading ? (
+            <div className="h-10 w-48 animate-pulse rounded-lg bg-gray-100" aria-label="Cargando precio" />
+          ) : price ? (
+            <>
+              <div className="flex flex-wrap items-end justify-center gap-x-1.5 gap-y-1">
+                <span className="text-base font-black leading-none text-gray-900">
+                  {price.currency} {price.symbol}
+                </span>
+                <span className="text-5xl font-black leading-none text-gray-900">{price.amount}</span>
+                <span className="pb-0.5 text-sm text-gray-500">{price.period}</span>
+              </div>
+              {annualSavings && (
+                <span className="mt-3 rounded-full bg-emerald-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-emerald-700">
+                  {annualSavings}
+                </span>
+              )}
+              {annualHint && <p className="mt-3 text-xs font-semibold text-emerald-700">{annualHint}</p>}
+            </>
+          ) : (
+            <>
+              <p className="text-4xl font-black text-gray-900">{unpricedLabel}</p>
+              <p className="mt-2 max-w-sm text-sm text-gray-500">{unpricedNote}</p>
+            </>
+          )}
+        </div>
+      </div>
+
+      <div className="mb-8 border-t border-gray-100 pt-8">
+        <h4 className="mb-4 text-xs font-black uppercase tracking-wider text-gray-600">Incluye</h4>
+        <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+          {includes.map((item) => (
+            <li key={item} className="flex items-start gap-2.5">
+              <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-violet-100 text-violet-600">
+                <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
               </span>
-            )}
-          </div>
-        )}
-        <p className={`min-h-10 text-sm ${mutedText}`}>{description}</p>
+              <span className="text-sm text-gray-600">{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <div className="mb-8">
-        <div>
-          <h4 className={`text-xs font-black uppercase tracking-wider mb-3 ${
-            highlighted ? "text-violet-200" : "text-gray-600"
-          }`}>
-            Ideal para
-          </h4>
-          <ul className="space-y-2">
-            {audience.map((item) => (
-              <li key={item} className="flex items-start gap-2.5">
-                <span
-                  className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                    highlighted ? "bg-violet-500 text-white" : "bg-violet-100 text-violet-600"
-                  }`}
-                >
-                  <svg viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </span>
-                <span className={`text-sm ${highlighted ? "text-violet-100" : "text-gray-600"}`}>
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      {trialLabel && price && <p className="mb-3 text-center text-xs font-semibold text-gray-500">{trialLabel}</p>}
 
-      {trialLabel && (
-        <p className={`mb-3 text-center text-xs font-semibold ${highlighted ? "text-violet-200" : "text-gray-500"}`}>
-          {trialLabel}
-        </p>
-      )}
-
-      <Button
-        href={ctaHref}
-        variant={highlighted ? "secondary" : "outline"}
-        size="md"
-        className="mt-auto w-full justify-center"
-      >
+      <Button href={ctaHref} variant={price ? "primary" : "outline"} size="md" className="mt-auto w-full justify-center sm:mx-auto sm:max-w-xs">
         {cta}
       </Button>
     </div>

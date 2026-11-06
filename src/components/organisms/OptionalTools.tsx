@@ -63,7 +63,7 @@ function fmtPrice(priceArs: number, priceUsd: number, currency: PricingCurrency 
   }
   if (currency === "USD" && priceUsd > 0) return `Desde USD $${priceUsd.toLocaleString("en-US")}/mes`;
   if (currency === null) return "Consultando precio local…";
-  return "Disponible en planes superiores";
+  return "Consultá el precio";
 }
 
 export function OptionalTools() {
@@ -155,7 +155,7 @@ export function OptionalTools() {
 
                     <div className="pt-6 border-t border-gray-100 mt-auto">
                       <p className="text-sm font-bold text-gray-900">{fmtPrice(addon.price_ars, addon.price_usd, currency)}</p>
-                      <p className="text-xs text-gray-500 mt-1">Disponible en cualquier plan</p>
+                      <p className="text-xs text-gray-500 mt-1">Se suma a tu plan base</p>
                     </div>
                   </div>
                 </StaggerItem>
