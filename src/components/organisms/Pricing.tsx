@@ -83,8 +83,9 @@ export function Pricing() {
     loadPricing();
   }, []);
 
-  const visiblePlans = plans.filter((plan) => plan.is_visible_landing !== false);
-  const plan = visiblePlans.find((item) => item.slug === BASE_PLAN_SLUG) ?? visiblePlans[0] ?? null;
+  // Solo el plan base: si la API aún publica planes anteriores (trial, starter,
+  // pro, business) no se muestran; la tarjeta cae en el estado «Consultanos».
+  const plan = plans.find((item) => item.slug === BASE_PLAN_SLUG && item.is_visible_landing !== false) ?? null;
 
   const monthlyPrice = priceFor(plan, currency, false);
   const annualPrice = priceFor(plan, currency, true);
