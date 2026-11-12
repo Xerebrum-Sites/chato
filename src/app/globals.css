@@ -1,21 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta de marca extraída del logo: naranja → coral → magenta */
-  --color-violet-50:  #fff8f2;
-  --color-violet-100: #ffe8d0;
-  --color-violet-200: #ffd0a8;
-  --color-violet-300: #ffb080;
-  --color-violet-400: #e87868;
-  --color-violet-500: #d44060;
-  --color-violet-600: #be146e;   /* magenta del logo — color CTA primario */
-  --color-violet-700: #9a0d58;   /* hover */
-  --color-violet-800: #780948;
-  --color-violet-900: #4d0530;
+  /* Sistema Actros: valores oficiales de Paleta-01.svg */
+  --color-actros-night: #0b0b17;
+  --color-actros-navy: #001f34;
+  --color-actros-orange: #ee7d16;
+  --color-actros-magenta: #c61261;
 
-  --color-cyan-400: #22d3ee;
-  --color-cyan-500: #06b6d4;
-  --color-cyan-600: #0891b2;
+  /* Se conservan los alias existentes para no romper componentes compartidos. */
+  --color-violet-50:  #fff4f8;
+  --color-violet-100: #ffe1ed;
+  --color-violet-200: #fbb8d3;
+  --color-violet-300: #ed7daf;
+  --color-violet-400: #dc3b83;
+  --color-violet-500: #c61261;
+  --color-violet-600: #ad1056;
+  --color-violet-700: #8c0d46;
+  --color-violet-800: #680a35;
+  --color-violet-900: #440622;
+
+  /* Alias histórico para los pocos componentes que aún piden un acento secundario. */
+  --color-cyan-400: #ee7d16;
+  --color-cyan-500: #ee7d16;
+  --color-cyan-600: #c61261;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -33,8 +40,8 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #0f0f23;
-    background: #ffffff;
+    color: #001f34;
+    background: #fffdfb;
     line-height: 1.6;
   }
 
@@ -45,30 +52,30 @@
     background: #f1f1f1;
   }
   ::-webkit-scrollbar-thumb {
-    background: #be146e;
+    background: #c61261;
     border-radius: 3px;
   }
 
   :focus-visible {
-    outline: 2px solid #be146e;
+    outline: 2px solid #c61261;
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
 
 @utility gradient-primary {
-  background: linear-gradient(135deg, #ff9600 0%, #e65a64 50%, #be146e 100%);
+  background: linear-gradient(108deg, #ee7d16 0%, #dc4a43 48%, #c61261 100%);
 }
 
 @utility gradient-text {
-  background: linear-gradient(135deg, #ff9600, #be146e);
+  background: linear-gradient(108deg, #ee7d16, #c61261);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 @utility gradient-bg {
-  background: linear-gradient(135deg, #fff8f2 0%, #ffe8d0 30%, #e0f7fa 100%);
+  background: linear-gradient(135deg, #fffaf6 0%, #fff0e5 48%, #fde8f1 100%);
 }
 
 @utility glass {
@@ -79,11 +86,11 @@
 }
 
 @utility shadow-glow {
-  box-shadow: 0 0 40px rgba(190, 20, 110, 0.25);
+  box-shadow: 0 0 40px rgba(198, 18, 97, 0.25);
 }
 
 @utility shadow-glow-sm {
-  box-shadow: 0 0 20px rgba(190, 20, 110, 0.18);
+  box-shadow: 0 0 20px rgba(198, 18, 97, 0.18);
 }
 
 @utility text-balance {
@@ -92,7 +99,7 @@
 
 .hero-orbit {
   position: absolute;
-  border: 1px solid rgba(190, 20, 110, 0.18);
+  border: 1px solid rgba(198, 18, 97, 0.3);
   border-radius: 999px;
   pointer-events: none;
   animation: orbit-drift 12s ease-in-out infinite alternate;
@@ -111,7 +118,7 @@
   height: 15rem;
   left: 36%;
   bottom: 2rem;
-  border-color: rgba(6, 182, 212, 0.2);
+  border-color: rgba(238, 125, 22, 0.28);
   animation-delay: -4s;
 }
 
@@ -121,6 +128,42 @@
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Texturas abstractas del sistema Actros. No representan al personaje Volt. */
+.actros-night {
+  background-color: #0b0b17;
+  color: #ffffff;
+}
+
+.actros-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 42%, #000 18%, transparent 78%);
+  mask-image: radial-gradient(ellipse 72% 62% at 50% 42%, #000 18%, transparent 78%);
+}
+
+.actros-wave {
+  background:
+    radial-gradient(ellipse 62% 34% at 93% 3%, rgba(238, 125, 22, 0.82) 0%, rgba(238, 125, 22, 0.22) 29%, transparent 65%),
+    radial-gradient(ellipse 68% 38% at 76% 18%, rgba(198, 18, 97, 0.8) 0%, rgba(198, 18, 97, 0.16) 37%, transparent 72%),
+    radial-gradient(ellipse 40% 33% at 12% 100%, rgba(0, 31, 52, 0.95) 0%, transparent 75%);
+  filter: saturate(1.08);
+}
+
+.actros-ribbon {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(108deg, rgba(238, 125, 22, 0.95), rgba(198, 18, 97, 0.95));
+  box-shadow: 0 0 44px rgba(198, 18, 97, 0.28);
+}
+
+.actros-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.62) 1px, transparent 1.2px);
+  background-size: 12px 12px;
+  -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+  mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
 }
 
 @keyframes orbit-drift {

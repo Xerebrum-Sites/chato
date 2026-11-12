@@ -11,7 +11,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-gray-950 text-gray-400">
+    <footer className="bg-[#001f34] text-white/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Marca */}
@@ -26,7 +26,7 @@ export function Footer() {
             </p>
             <a
               href={`mailto:${EMAILS.contact}`}
-              className="inline-flex items-center gap-2 px-3 h-9 rounded-lg bg-gray-800 hover:bg-violet-600 text-xs font-medium transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-3 h-9 rounded-lg bg-white/10 hover:bg-[#c61261] text-xs font-medium transition-colors duration-200"
             >
               <Mail className="w-4 h-4" strokeWidth={1.75} />
               {EMAILS.contact}
@@ -42,7 +42,7 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm hover:text-violet-400 transition-colors duration-150"
+                      className="text-sm hover:text-[#ee7d16] transition-colors duration-150"
                     >
                       {item.label}
                     </Link>
@@ -60,7 +60,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm hover:text-violet-400 transition-colors duration-150"
+                    className="text-sm hover:text-[#ee7d16] transition-colors duration-150"
                   >
                     {item.label}
                   </Link>
@@ -70,7 +70,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/15 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs">
             © {new Date().getFullYear()} Actros. Todos los derechos reservados.
           </p>
