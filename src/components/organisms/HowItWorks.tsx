@@ -11,7 +11,7 @@ const steps = [
   },
   {
     icon: LayoutDashboard,
-    title: "Atendé desde Actros",
+    title: "Atendé desde Actroos",
     description: "Cada conversación llega a una bandeja ordenada, con contexto, historial y estado.",
     detail: "Una única fuente de verdad",
   },
@@ -29,7 +29,7 @@ export function HowItWorks() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Así funciona"
-          title={<>Poné en marcha Actros <span className="gradient-text">en pocos pasos</span></>}
+          title={<>Poné en marcha Actroos <span className="gradient-text">en pocos pasos</span></>}
           subtitle="Una sola experiencia para conectar canales, atender clientes y coordinar a tu equipo."
           className="mb-16"
         />

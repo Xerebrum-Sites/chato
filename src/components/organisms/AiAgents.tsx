@@ -103,7 +103,7 @@ export function AiAgents() {
             <p className="text-sm text-gray-500">
               ¿Preferís atención humana? Sumá a tu equipo como agentes en el{" "}
               <Link href="/bandeja-omnicanal/" className="font-semibold text-violet-700 hover:text-violet-800">
-                panel de Actros
+                panel de Actroos
               </Link>
               . La IA y las personas trabajan sobre la misma bandeja.
             </p>

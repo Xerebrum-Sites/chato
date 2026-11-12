@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Sistema Actros: valores oficiales de Paleta-01.svg */
+  /* Sistema Actroos: valores oficiales de Paleta-01.svg */
   --color-actros-night: #0b0b17;
   --color-actros-navy: #001f34;
   --color-actros-orange: #ee7d16;
@@ -130,7 +130,7 @@
   display: none;
 }
 
-/* Texturas abstractas del sistema Actros. No representan al personaje Volt. */
+/* Texturas abstractas del sistema Actroos. No representan al personaje Volt. */
 .actros-night {
   background-color: #0b0b17;
   color: #ffffff;
@@ -164,6 +164,14 @@
   background-size: 12px 12px;
   -webkit-mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
   mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
+}
+
+.actros-contours {
+  background-image:
+    repeating-radial-gradient(ellipse 100% 78% at 102% 108%, transparent 0 13px, rgba(238, 125, 22, 0.5) 14px 15px, transparent 16px 29px),
+    repeating-radial-gradient(ellipse 78% 60% at 100% 107%, transparent 0 18px, rgba(198, 18, 97, 0.38) 19px 20px, transparent 21px 38px);
+  -webkit-mask-image: radial-gradient(ellipse 70% 85% at 100% 100%, #000 0%, transparent 76%);
+  mask-image: radial-gradient(ellipse 70% 85% at 100% 100%, #000 0%, transparent 76%);
 }
 
 @keyframes orbit-drift {

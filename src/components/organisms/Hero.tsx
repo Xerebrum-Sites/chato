@@ -56,7 +56,7 @@ export function Hero() {
         >
           <Image
             src="/images/brand/hero-desktop-owner-v3.webp"
-            alt="Responsable de atención trabajando con Actros desde una estación de escritorio"
+            alt="Responsable de atención trabajando con Actroos desde una estación de escritorio"
             fill
             priority
             sizes="(min-width: 1024px) 1280px, 100vw"
@@ -138,7 +138,7 @@ export function Hero() {
           >
             <Image
               src="/images/brand/hero-desktop-owner-v3.webp"
-              alt="Responsable de atención trabajando con Actros desde una estación de escritorio"
+              alt="Responsable de atención trabajando con Actroos desde una estación de escritorio"
               fill
               priority
               sizes="100vw"

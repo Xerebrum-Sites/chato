@@ -6,9 +6,9 @@ import { FeaturesHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Características — Todo lo que incluye Actros",
+  title: "Características — Todo lo que incluye Actroos",
   description:
-    "Bandeja unificada, respuestas rápidas, etiquetas, analytics, múltiples agentes y alertas. Descubrí todo lo que Actros hace por tu atención al cliente.",
+    "Bandeja unificada, respuestas rápidas, etiquetas, analytics, múltiples agentes y alertas. Descubrí todo lo que Actroos hace por tu atención al cliente.",
   alternates: { canonical: "/caracteristicas/" },
 };
 
@@ -19,7 +19,7 @@ export default function CaracteristicasPage() {
         badge="Características"
         title={
           <>
-            Todo lo que incluye <span className="gradient-text">Actros</span>
+            Todo lo que incluye <span className="gradient-text">Actroos</span>
           </>
         }
         subtitle="Las herramientas que tu negocio necesita para atender mejor, sin funciones de más ni curvas de aprendizaje."

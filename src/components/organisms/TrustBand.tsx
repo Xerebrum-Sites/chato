@@ -9,8 +9,10 @@ import { supportedChannels, trustSignals } from "@/lib/content";
  */
 export function TrustBand() {
   return (
-    <section className="py-16 bg-white border-y border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative isolate overflow-hidden border-y border-gray-100 bg-white py-16">
+      <div className="actros-ribbon absolute -left-44 top-8 h-10 w-[31rem] rotate-[-11deg] rounded-full opacity-[0.12]" aria-hidden="true" />
+      <div className="actros-dots absolute -right-12 bottom-0 h-56 w-56 opacity-[0.1]" aria-hidden="true" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal className="text-center mb-10">
           <p className="text-sm text-gray-400 font-medium uppercase tracking-widest mb-6">
             Todos tus canales, un solo lugar
@@ -26,7 +28,7 @@ export function TrustBand() {
           {trustSignals.map((s) => (
             <StaggerItem
               key={s.title}
-              className="flex flex-col items-center text-center gap-3 rounded-2xl border border-gray-100 bg-gray-50/60 p-6"
+              className="flex flex-col items-center text-center gap-3 rounded-2xl border border-gray-100 bg-white/80 p-6 shadow-sm shadow-[#001f34]/5"
             >
               <IconBadge icon={s.icon} size="md" />
               <div>
