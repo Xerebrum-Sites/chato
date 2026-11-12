@@ -174,14 +174,55 @@
   mask-image: radial-gradient(ellipse 70% 85% at 100% 100%, #000 0%, transparent 76%);
 }
 
+/* Estelas luminosas para el hero: abstracción de flujo y conexión, sin personaje. */
+.actros-hero-glow {
+  background:
+    radial-gradient(ellipse 52% 50% at 78% 36%, rgba(238, 125, 22, 0.34), transparent 68%),
+    radial-gradient(ellipse 48% 46% at 67% 79%, rgba(198, 18, 97, 0.36), transparent 71%),
+    linear-gradient(90deg, rgba(0, 31, 52, 0.32), transparent 54%);
+}
+
+.actros-hero-trail {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(238, 125, 22, 0), #ee7d16 26%, #c61261 65%, rgba(198, 18, 97, 0));
+  box-shadow: 0 0 20px rgba(238, 125, 22, 0.62), 0 0 46px rgba(198, 18, 97, 0.45);
+  transform-origin: center;
+  animation: hero-trail-drift 8s ease-in-out infinite alternate;
+}
+
+.actros-hero-trail-one {
+  bottom: 7.3rem;
+  left: -10%;
+  width: 86%;
+  height: 3px;
+  rotate: -8deg;
+}
+
+.actros-hero-trail-two {
+  bottom: 1.9rem;
+  right: -10%;
+  width: 76%;
+  height: 4px;
+  rotate: 10deg;
+  animation-delay: -3s;
+}
+
 @keyframes orbit-drift {
   from { translate: 0 0; rotate: 0deg; }
   to { translate: 1.5rem -1rem; rotate: 7deg; }
 }
 
+@keyframes hero-trail-drift {
+  from { transform: translate3d(-1.2rem, 0, 0) scaleX(0.95); opacity: 0.54; }
+  to { transform: translate3d(1.7rem, -0.8rem, 0) scaleX(1.05); opacity: 0.95; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero-orbit { animation: none; }
+  .actros-hero-trail { animation: none; }
 }
 
 /* Privacy policy prose styles */
