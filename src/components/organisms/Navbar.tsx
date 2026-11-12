@@ -87,11 +87,11 @@ export function Navbar() {
         }`}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0" aria-label="Cható — inicio">
+        <Link href="/" className="flex items-center shrink-0" aria-label="Actros — inicio">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo.svg?v=2"
-            alt="Cható"
+            src="/actros-logo.svg?v=1"
+            alt="Actros"
             className={`w-auto transition-all duration-300 ${scrolled ? "h-9" : "h-11 lg:h-14"}`}
           />
         </Link>

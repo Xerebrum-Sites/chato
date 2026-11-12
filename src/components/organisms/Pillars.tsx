@@ -32,7 +32,7 @@ const pillars = [
 ];
 
 /**
- * Tres pilares del producto en la home. Equilibra la comunicación: Cható no es
+ * Tres pilares del producto en la home. Equilibra la comunicación: Actros no es
  * solo el Hub, también son los Agentes IA y un Marketplace extensible.
  */
 export function Pillars() {
@@ -40,13 +40,13 @@ export function Pillars() {
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Todo lo que Cható hace por vos"
+          badge="Todo lo que Actros hace por vos"
           title={
             <>
               Mucho más que <span className="gradient-text">centralizar mensajes</span>
             </>
           }
-          subtitle="Cható combina tres piezas que trabajan juntas —y activás solo lo que necesitás."
+          subtitle="Actros combina tres piezas que trabajan juntas —y activás solo lo que necesitás."
           className="mb-14"
         />
 

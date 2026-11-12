@@ -16,9 +16,9 @@ export function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Marca */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center mb-4" aria-label="Cható — inicio">
+            <Link href="/" className="flex items-center mb-4" aria-label="Actros — inicio">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo_negative.svg?v=2" alt="Cható" className="h-10 w-auto" />
+              <img src="/actros-logo-negative.svg?v=1" alt="Actros" className="h-10 w-auto" />
             </Link>
             <p className="text-sm leading-relaxed mb-6 max-w-xs">
               Centralizá WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar. Pensado para
@@ -72,7 +72,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs">
-            © {new Date().getFullYear()} Cható. Todos los derechos reservados.
+            © {new Date().getFullYear()} Actros. Todos los derechos reservados.
           </p>
           <p className="text-xs">Hecho con ❤️ para quienes atienden clientes todos los días.</p>
         </div>

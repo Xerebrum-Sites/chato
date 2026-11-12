@@ -15,11 +15,11 @@ const OG_IMAGE = `${SITE_URL}/og-image-v2.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Cható – Bandeja omnicanal para pequeños comercios",
-    template: "%s – Cható",
+    default: "Actros – Bandeja omnicanal para pequeños comercios",
+    template: "%s – Actros",
   },
   description:
-    "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja. Responde a todos tus clientes desde Cható.",
+    "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja. Responde a todos tus clientes desde Actros.",
   keywords: [
     "omnicanalidad",
     "telegram para empresas",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     "bandeja de entrada unificada",
     "CRM para pymes",
   ],
-  authors: [{ name: "Cható", url: SITE_URL }],
-  creator: "Cható",
-  publisher: "Cható",
+  authors: [{ name: "Actros", url: SITE_URL }],
+  creator: "Actros",
+  publisher: "Actros",
   robots: {
     index: true,
     follow: true,
@@ -43,12 +43,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    shortcut: ["/icon.svg"],
+  },
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "Cható",
+    siteName: "Actros",
     locale: "es_419",
-    title: "Cható – Todos tus canales, un solo lugar",
+    title: "Actros – Todos tus canales, un solo lugar",
     description:
       "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja de atención.",
     images: [
@@ -57,14 +61,13 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "Cható – Bandeja omnicanal para equipos",
+        alt: "Actros – Bandeja omnicanal para equipos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@ChatoApp",
-    title: "Cható – Todos tus canales, un solo lugar",
+    title: "Actros – Todos tus canales, un solo lugar",
     description:
       "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar.",
     images: [OG_IMAGE],
@@ -74,7 +77,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Cható",
+  name: "Actros",
   url: SITE_URL,
   description:
     "Plataforma de mensajería omnicanal que centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat para pequeños comercios y emprendedores.",
@@ -98,7 +101,7 @@ const jsonLd = {
   ],
   publisher: {
     "@type": "Organization",
-    name: "Cható",
+    name: "Actros",
     url: SITE_URL,
   },
 };

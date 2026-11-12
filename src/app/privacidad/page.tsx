@@ -3,8 +3,8 @@ import Link from "next/link";
 import { URLS, EMAILS } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidad – Cható",
-  description: "Política de privacidad de Cható. Conocé cómo recopilamos, usamos y protegemos tus datos.",
+  title: "Política de Privacidad – Actros",
+  description: "Política de privacidad de Actros. Conocé cómo recopilamos, usamos y protegemos tus datos.",
 };
 
 const UPDATED = "12 de octubre de 2026";
@@ -16,10 +16,10 @@ const sections = [
     id: "responsable",
     title: "1. Responsable del tratamiento",
     content: `
-      <p>El responsable del tratamiento de los datos personales recabados a través de este sitio web y de la plataforma Cható es:</p>
+      <p>El responsable del tratamiento de los datos personales recabados a través de este sitio web y de la plataforma Actros es:</p>
       <ul>
-        <li><strong>Nombre comercial:</strong> Cható</li>
-        <li><strong>Operado por:</strong> Cható</li>
+        <li><strong>Nombre comercial:</strong> Actros</li>
+        <li><strong>Operado por:</strong> Actros</li>
         <li><strong>Sitio web:</strong> ${SITE}</li>
         <li><strong>Correo de contacto:</strong> <a href="mailto:${EMAIL}">${EMAIL}</a></li>
       </ul>
@@ -40,7 +40,7 @@ const sections = [
       </ul>
 
       <h3>2.2 Mensajes y conversaciones</h3>
-      <p>Cható centraliza en una bandeja de atención unificada las conversaciones entre el negocio y sus clientes provenientes de distintos canales (WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email). Para prestar el servicio, <strong>almacenamos el contenido de los mensajes</strong> (entrantes y salientes) y sus adjuntos en el espacio de datos privado de cada negocio, de modo que pueda leer, responder y dar seguimiento a cada conversación, con la asistencia opcional de un asistente de IA. El negocio también puede escalar una conversación a un operador humano.</p>
+      <p>Actros centraliza en una bandeja de atención unificada las conversaciones entre el negocio y sus clientes provenientes de distintos canales (WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email). Para prestar el servicio, <strong>almacenamos el contenido de los mensajes</strong> (entrantes y salientes) y sus adjuntos en el espacio de datos privado de cada negocio, de modo que pueda leer, responder y dar seguimiento a cada conversación, con la asistencia opcional de un asistente de IA. El negocio también puede escalar una conversación a un operador humano.</p>
       <p>Los mensajes se conservan según la política de retención vigente (ver sección 6) y pueden eliminarse a pedido siguiendo nuestra página de <a href="/eliminar-datos">Eliminación de datos</a>.</p>
 
       <h3>2.3 Metadatos de mensajes</h3>
@@ -64,7 +64,7 @@ const sections = [
     id: "plataformas-meta",
     title: "3. Integración con plataformas de Meta",
     content: `
-      <p>Cható se integra con las siguientes plataformas de Meta Platforms, Inc. mediante sus APIs oficiales:</p>
+      <p>Actros se integra con las siguientes plataformas de Meta Platforms, Inc. mediante sus APIs oficiales:</p>
       <ul>
         <li><strong>WhatsApp Business API</strong> – Para recibir y enviar mensajes de WhatsApp en nombre del negocio.</li>
         <li><strong>Instagram Graph API / Messenger Platform</strong> – Para recibir y responder mensajes directos de Instagram.</li>
@@ -83,7 +83,7 @@ const sections = [
       <p>Estos datos se utilizan exclusivamente para atender la conversación entre el negocio y su cliente: mostrar el mensaje en la bandeja del negocio, permitir la respuesta (manual o asistida por IA) y enviarla de vuelta al usuario final por el mismo canal. No utilizamos estos datos para publicidad, perfilado ni los compartimos con terceros fuera del flujo de atención del mensaje.</p>
 
       <h3>3.3 Cumplimiento de políticas de Meta</h3>
-      <p>Cható cumple con las <a href="https://developers.facebook.com/policy/" target="_blank" rel="noopener noreferrer">Políticas para Desarrolladores de Meta</a> y con los <a href="https://www.whatsapp.com/legal/business-policy/" target="_blank" rel="noopener noreferrer">Términos del Servicio de WhatsApp Business</a>. No utilizamos los datos obtenidos a través de estas plataformas para ningún fin distinto al especificado en estas políticas.</p>
+      <p>Actros cumple con las <a href="https://developers.facebook.com/policy/" target="_blank" rel="noopener noreferrer">Políticas para Desarrolladores de Meta</a> y con los <a href="https://www.whatsapp.com/legal/business-policy/" target="_blank" rel="noopener noreferrer">Términos del Servicio de WhatsApp Business</a>. No utilizamos los datos obtenidos a través de estas plataformas para ningún fin distinto al especificado en estas políticas.</p>
 
       <h3>3.4 Eliminación de datos de Meta</h3>
       <p>Si un usuario final desea que eliminemos los datos asociados a su identificador de Meta (contenido de los mensajes, adjuntos e identificadores), puede solicitarlo siguiendo nuestra página de <a href="/eliminar-datos">Eliminación de datos</a> o enviando un correo a <a href="mailto:${EMAIL}">${EMAIL}</a> indicando la plataforma y el número/ID correspondiente. Procesamos las solicitudes en un plazo máximo de 30 días.</p>
@@ -109,7 +109,7 @@ const sections = [
     id: "comparticion",
     title: "5. Compartición de datos con terceros",
     content: `
-      <p>Cható no vende ni alquila datos personales. Podemos compartir datos únicamente en estos casos:</p>
+      <p>Actros no vende ni alquila datos personales. Podemos compartir datos únicamente en estos casos:</p>
       <ul>
         <li><strong>Proveedores de infraestructura:</strong> Servicios de hosting, almacenamiento y base de datos que procesan datos en nuestro nombre bajo acuerdos de confidencialidad.</li>
         <li><strong>Procesadores de pago:</strong> Para gestionar transacciones de suscripción (no compartimos datos de mensajes).</li>
@@ -182,7 +182,7 @@ const sections = [
     id: "menores",
     title: "10. Menores de edad",
     content: `
-      <p>Cható no está dirigido a menores de 18 años. No recopilamos datos de menores de forma intencional. Si detectamos que hemos recibido datos de un menor sin consentimiento parental, los eliminaremos de inmediato. Si sos padre/madre o tutor y creés que tu hijo/a nos ha proporcionado datos personales, contactanos en <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
+      <p>Actros no está dirigido a menores de 18 años. No recopilamos datos de menores de forma intencional. Si detectamos que hemos recibido datos de un menor sin consentimiento parental, los eliminaremos de inmediato. Si sos padre/madre o tutor y creés que tu hijo/a nos ha proporcionado datos personales, contactanos en <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
     `,
   },
   {
@@ -214,7 +214,7 @@ export default function PrivacidadPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg?v=2" alt="Cható" className="h-9 w-auto" />
+            <img src="/actros-logo.svg?v=1" alt="Actros" className="h-9 w-auto" />
           </Link>
           <Link href="/" className="text-sm text-gray-500 hover:text-violet-600 transition-colors">
             ← Volver al inicio
@@ -230,7 +230,7 @@ export default function PrivacidadPage() {
           <h1 className="text-4xl font-black text-gray-900 mb-4">Política de Privacidad</h1>
           <p className="text-gray-500 text-sm">Última actualización: <strong className="text-gray-700">{UPDATED}</strong></p>
           <p className="mt-4 text-gray-600 leading-relaxed max-w-2xl">
-            En Cható nos tomamos tu privacidad en serio. Esta política explica qué datos recopilamos, cómo los usamos y qué derechos tenés sobre ellos, incluyendo información específica sobre nuestra integración con las plataformas de Meta (WhatsApp, Instagram y Facebook).
+            En Actros nos tomamos tu privacidad en serio. Esta política explica qué datos recopilamos, cómo los usamos y qué derechos tenés sobre ellos, incluyendo información específica sobre nuestra integración con las plataformas de Meta (WhatsApp, Instagram y Facebook).
           </p>
         </div>
 
@@ -271,7 +271,7 @@ export default function PrivacidadPage() {
           <p className="text-sm text-gray-400">
             Esta política aplica a{" "}
             <a href={SITE} className="text-violet-600 hover:underline">{SITE}</a>{" "}
-            y a la plataforma Cható.
+            y a la plataforma Actros.
           </p>
           <Link
             href="/"

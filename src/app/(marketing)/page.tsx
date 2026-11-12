@@ -55,7 +55,7 @@ function HumanValueBand() {
             Atendé a todos tus clientes <span className="gradient-text">como si tuvieras un equipo entero</span>
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-6">
-            Cható reúne WhatsApp, Instagram, Facebook, Telegram y tu web en una única estación de trabajo.
+            Actros reúne WhatsApp, Instagram, Facebook, Telegram y tu web en una única estación de trabajo.
             Cada agente opera desde desktop con el historial, las asignaciones y la ayuda de IA a la vista.
           </p>
           <ul className="space-y-3 mb-8">
