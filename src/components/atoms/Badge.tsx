@@ -6,7 +6,7 @@ interface BadgeProps {
 
 const variantStyles = {
   violet: "bg-violet-100 text-violet-700 border border-violet-200",
-  cyan: "bg-cyan-50 text-cyan-700 border border-cyan-200",
+  cyan: "bg-[#fff1e8] text-[#c61261] border border-[#ee7d16]/30",
   green: "bg-emerald-50 text-emerald-700 border border-emerald-200",
   gray: "bg-gray-100 text-gray-600 border border-gray-200",
 };

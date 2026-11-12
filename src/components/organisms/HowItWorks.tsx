@@ -34,11 +34,11 @@ export function HowItWorks() {
           className="mb-16"
         />
         <div className="relative">
-          <div className="absolute left-[calc(16.66%+2rem)] right-[calc(16.66%+2rem)] top-8 hidden h-0.5 bg-gradient-to-r from-violet-200 via-violet-400 to-fuchsia-300 lg:block" />
+          <div className="absolute left-[calc(16.66%+2rem)] right-[calc(16.66%+2rem)] top-8 hidden h-0.5 gradient-primary lg:block" />
           <Stagger className="grid gap-10 lg:grid-cols-3">
             {steps.map((step, index) => (
               <StaggerItem key={step.title} className="relative flex flex-col items-center text-center">
-                <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-violet-800 text-white shadow-lg shadow-violet-200">
+                <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-2xl gradient-primary text-white shadow-lg shadow-violet-200">
                   <step.icon className="h-6 w-6" strokeWidth={1.75} />
                   <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-violet-200 bg-white text-xs font-black text-violet-700">{index + 1}</span>
                 </div>

@@ -26,7 +26,7 @@ const sizeMap: Record<Size, { box: string; icon: string }> = {
 
 const toneMap: Record<Tone, string> = {
   brand: "bg-violet-50 text-violet-600",
-  cyan: "bg-cyan-50 text-cyan-600",
+  cyan: "bg-[#fff1e8] text-[#ee7d16]",
   neutral: "bg-gray-100 text-gray-500",
   solid: "gradient-primary text-white shadow-sm",
 };

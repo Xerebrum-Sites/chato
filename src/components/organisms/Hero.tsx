@@ -38,8 +38,11 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-[#fffaf5] pt-20 lg:pt-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_18%,rgba(6,182,212,0.12),transparent_26%),radial-gradient(circle_at_17%_80%,rgba(255,150,0,0.12),transparent_28%)]" />
+    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-[#fffaf8] pt-20 lg:pt-24">
+      <div className="actros-wave absolute inset-0 opacity-[0.16]" aria-hidden="true" />
+      <div className="actros-grid absolute inset-0 opacity-[0.14]" aria-hidden="true" />
+      <div className="actros-dots absolute -right-10 top-20 h-72 w-72 opacity-[0.12]" aria-hidden="true" />
+      <div className="actros-ribbon absolute -right-20 top-28 h-16 w-[32rem] rotate-[-18deg] rounded-full opacity-25 blur-[1px]" aria-hidden="true" />
       <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
       <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
 
@@ -68,12 +71,12 @@ export function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-20 max-w-xl"
         >
-          <Badge variant="violet" className="mb-6 bg-white/80 backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-violet-500 animate-pulse" />
+          <Badge variant="violet" className="mb-6 bg-white/85 backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-actros-orange animate-pulse" />
             Operación omnicanal desde tu escritorio
           </Badge>
 
-          <h1 className="mb-6 text-balance text-[2.75rem] font-black leading-[0.98] tracking-[-0.045em] text-gray-950 sm:text-6xl lg:text-[4.7rem]">
+          <h1 className="mb-6 text-balance text-[2.75rem] font-black leading-[0.98] tracking-[-0.045em] text-[#001f34] sm:text-6xl lg:text-[4.7rem]">
             {titleLines.map((line, lineIndex) => (
               <span key={line.join("-")} className="block overflow-hidden pb-1">
                 {line.map((word, wordIndex) => {
@@ -94,7 +97,7 @@ export function Hero() {
             ))}
           </h1>
 
-          <p className="mb-8 max-w-xl text-lg leading-relaxed text-gray-600 sm:text-xl">
+          <p className="mb-8 max-w-xl text-lg leading-relaxed text-[#001f34]/72 sm:text-xl">
             WhatsApp, Instagram, Facebook, Telegram y tu web llegan a una única estación de trabajo.
             Tu equipo y tus agentes IA atienden con contexto, orden y seguimiento real.
           </p>
@@ -105,7 +108,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => setDemoOpen(true)}
-                className="inline-flex items-center justify-center rounded-full border-2 border-violet-600 bg-white/70 px-6 py-3.5 text-base font-semibold text-violet-700 backdrop-blur transition-colors hover:bg-white"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#c61261]/35 bg-white/80 px-6 py-3.5 text-base font-semibold text-violet-700 backdrop-blur transition-colors hover:bg-white"
               >
                 Solicitar demo
               </button>
@@ -115,10 +118,10 @@ export function Hero() {
           </div>
           <DemoForm open={demoOpen} onClose={() => setDemoOpen(false)} />
 
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-600">
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#001f34]/70">
             {["14 días gratis", "Sin tarjeta de crédito", "Sin permanencia"].map((item) => (
               <span key={item} className="inline-flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-emerald-500" strokeWidth={2.5} />
+                <Check className="h-4 w-4 text-actros-orange" strokeWidth={2.5} />
                 {item}
               </span>
             ))}
