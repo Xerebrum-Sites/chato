@@ -160,7 +160,7 @@ export function AdvancedModeShowcase() {
             </div>
 
             <Button href={URLS.signIn} size="lg">
-              Probar Cható
+              Probar Actros
               <svg
                 className="w-5 h-5"
                 fill="none"

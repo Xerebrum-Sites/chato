@@ -37,7 +37,7 @@ export const productLinks: NavLink[] = [
   {
     label: "Marketplace",
     href: "/herramientas/",
-    description: "Módulos para expandir Cható cuando los necesitás",
+    description: "Módulos para expandir Actros cuando los necesitás",
     icon: Blocks,
   },
 ];

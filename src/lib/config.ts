@@ -48,7 +48,7 @@ export const CONTACT = {
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? WHATSAPP_NUMBER_DEFAULT,
   /** Link listo para usar a WhatsApp con un mensaje inicial. */
   get whatsappUrl(): string {
-    const text = encodeURIComponent("¡Hola! Quiero saber más sobre Cható.");
+    const text = encodeURIComponent("¡Hola! Quiero saber más sobre Actros.");
     return `https://wa.me/${this.whatsappNumber}?text=${text}`;
   },
 } as const;

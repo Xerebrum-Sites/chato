@@ -9,11 +9,11 @@ const root = join(__dir, "..");
 const W = 1200;
 const H = 630;
 const LOGO_W = 340;
-const LOGO_H = Math.round(340 * (248 / 602)); // ~140px
+const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Actros horizontal logo ratio
 
 async function main() {
   // Render logo (negative = white text) to transparent PNG
-  const logoSvg = readFileSync(join(root, "public/logo_negative.svg"));
+  const logoSvg = readFileSync(join(root, "public/actros-logo-negative.svg"));
   const logoPng = await sharp(logoSvg)
     .resize(LOGO_W, LOGO_H, {
       fit: "contain",
@@ -140,7 +140,7 @@ async function main() {
     font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
     font-size="17" font-weight="400"
     fill="#ffffff" fill-opacity="0.40" text-anchor="start"
-  >chato.xerebrumgroup.com</text>
+  >heychato.com</text>
 </svg>`;
 
   // Render background SVG to PNG

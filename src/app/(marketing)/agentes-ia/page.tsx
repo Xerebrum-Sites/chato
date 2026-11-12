@@ -8,7 +8,7 @@ import { URLS } from "@/lib/config";
 export const metadata: Metadata = {
   title: "Agentes IA — Un asistente que atiende por vos",
   description:
-    "El Agente IA de Cható responde con la información de tu negocio, en tu tono, y escala a una persona cuando hace falta. Sumá agentes especializados: Recepcionista, Ventas, Soporte, Reservas y Cualificador.",
+    "El Agente IA de Actros responde con la información de tu negocio, en tu tono, y escala a una persona cuando hace falta. Sumá agentes especializados: Recepcionista, Ventas, Soporte, Reservas y Cualificador.",
   alternates: { canonical: "/agentes-ia/" },
 };
 

@@ -19,7 +19,7 @@ const stages = [
     icon: Rocket,
     eyebrow: "03 · Expansión continua",
     title: "Escalás sin migrar",
-    description: "Cada nueva capacidad se integra al mismo contexto. El catálogo se amplía y Cható evoluciona junto con tu negocio.",
+    description: "Cada nueva capacidad se integra al mismo contexto. El catálogo se amplía y Actros evoluciona junto con tu negocio.",
   },
 ];
 
@@ -35,7 +35,7 @@ export function MarketplaceValue() {
               Una base común. <span className="gradient-text">Más capacidades con el tiempo.</span>
             </>
           }
-          subtitle="El Marketplace convierte a Cható en una plataforma extensible: cada módulo aprovecha los canales, los clientes y el historial que ya organizaste."
+          subtitle="El Marketplace convierte a Actros en una plataforma extensible: cada módulo aprovecha los canales, los clientes y el historial que ya organizaste."
           className="mb-14"
         />
 
