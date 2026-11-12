@@ -15,11 +15,11 @@ const OG_IMAGE = `${SITE_URL}/og-image-v2.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Actros – Bandeja omnicanal para pequeños comercios",
-    template: "%s – Actros",
+    default: "Actroos – Bandeja omnicanal para pequeños comercios",
+    template: "%s – Actroos",
   },
   description:
-    "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja. Responde a todos tus clientes desde Actros.",
+    "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja. Responde a todos tus clientes desde Actroos.",
   keywords: [
     "omnicanalidad",
     "telegram para empresas",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     "bandeja de entrada unificada",
     "CRM para pymes",
   ],
-  authors: [{ name: "Actros", url: SITE_URL }],
-  creator: "Actros",
-  publisher: "Actros",
+  authors: [{ name: "Actroos", url: SITE_URL }],
+  creator: "Actroos",
+  publisher: "Actroos",
   robots: {
     index: true,
     follow: true,
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "Actros",
+    siteName: "Actroos",
     locale: "es_419",
-    title: "Actros – Todos tus canales, un solo lugar",
+    title: "Actroos – Todos tus canales, un solo lugar",
     description:
       "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja de atención.",
     images: [
@@ -61,13 +61,13 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "Actros – Bandeja omnicanal para equipos",
+        alt: "Actroos – Bandeja omnicanal para equipos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Actros – Todos tus canales, un solo lugar",
+    title: "Actroos – Todos tus canales, un solo lugar",
     description:
       "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar.",
     images: [OG_IMAGE],
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Actros",
+  name: "Actroos",
   url: SITE_URL,
   description:
     "Plataforma de mensajería omnicanal que centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat para pequeños comercios y emprendedores.",
@@ -101,7 +101,7 @@ const jsonLd = {
   ],
   publisher: {
     "@type": "Organization",
-    name: "Actros",
+    name: "Actroos",
     url: SITE_URL,
   },
 };

@@ -3,7 +3,7 @@ import { Pricing } from "@/components/organisms/Pricing";
 import { CtaSection } from "@/components/organisms/CtaSection";
 
 export const metadata: Metadata = {
-  title: "Precios — Plan base de Actros con prueba gratis",
+  title: "Precios — Plan base de Actroos con prueba gratis",
   description:
     "Un solo plan base con bandeja omnicanal, canales y usuarios sin cargo adicional. Sumá módulos del Marketplace cuando los necesites. Prueba gratis, sin tarjeta de crédito.",
   alternates: { canonical: "/precios/" },

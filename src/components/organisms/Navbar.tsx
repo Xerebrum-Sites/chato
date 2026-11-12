@@ -87,12 +87,12 @@ export function Navbar() {
         }`}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0" aria-label="Actros — inicio">
+        <Link href="/" className="flex items-center shrink-0" aria-label="Actroos — inicio">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/actros-logo.svg?v=1"
-            alt="Actros"
-            className={`w-auto transition-all duration-300 ${scrolled ? "h-9" : "h-11 lg:h-14"}`}
+            alt="Actroos"
+            className={`w-auto transition-all duration-300 ${scrolled ? "h-7" : "h-8 lg:h-9"}`}
           />
         </Link>
 

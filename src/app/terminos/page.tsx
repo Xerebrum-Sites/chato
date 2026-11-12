@@ -3,9 +3,9 @@ import Link from "next/link";
 import { URLS, EMAILS } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Términos y Condiciones – Actros",
+  title: "Términos y Condiciones – Actroos",
   description:
-    "Términos y condiciones de uso de Actros: cuentas, suscripción y facturación, uso aceptable, inteligencia artificial, integraciones y responsabilidad.",
+    "Términos y condiciones de uso de Actroos: cuentas, suscripción y facturación, uso aceptable, inteligencia artificial, integraciones y responsabilidad.",
 };
 
 const UPDATED = "12 de octubre de 2026";
@@ -18,8 +18,8 @@ const sections = [
     id: "aceptacion",
     title: "1. Aceptación de los términos",
     content: `
-      <p>Estos Términos y Condiciones (los "Términos") rigen el acceso y uso de la plataforma Actros ("nosotros", "nuestro"), disponible a través de <a href="${SITE}">${SITE}</a> y de la aplicación en <a href="${APP}">${APP}</a>.</p>
-      <p>Al crear una cuenta, iniciar sesión o utilizar Actros de cualquier forma, aceptás quedar obligado por estos Términos y por nuestra <a href="/privacidad">Política de Privacidad</a>. Si estás aceptando estos Términos en nombre de una empresa u organización, declarás tener la autoridad para vincularla y las referencias a "vos" incluyen a dicha organización.</p>
+      <p>Estos Términos y Condiciones (los "Términos") rigen el acceso y uso de la plataforma Actroos ("nosotros", "nuestro"), disponible a través de <a href="${SITE}">${SITE}</a> y de la aplicación en <a href="${APP}">${APP}</a>.</p>
+      <p>Al crear una cuenta, iniciar sesión o utilizar Actroos de cualquier forma, aceptás quedar obligado por estos Términos y por nuestra <a href="/privacidad">Política de Privacidad</a>. Si estás aceptando estos Términos en nombre de una empresa u organización, declarás tener la autoridad para vincularla y las referencias a "vos" incluyen a dicha organización.</p>
       <p>Si no estás de acuerdo con alguna parte de estos Términos, no debés utilizar el servicio.</p>
     `,
   },
@@ -27,7 +27,7 @@ const sections = [
     id: "descripcion",
     title: "2. Descripción del servicio",
     content: `
-      <p>Actros es una plataforma de mensajería omnicanal que centraliza conversaciones provenientes de WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email en una única bandeja de entrada, con dos modos de uso:</p>
+      <p>Actroos es una plataforma de mensajería omnicanal que centraliza conversaciones provenientes de WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email en una única bandeja de entrada, con dos modos de uso:</p>
       <ul>
         <li><strong>Modo Simple:</strong> gestión de la bandeja directamente desde Telegram, sin necesidad de instalar una app adicional.</li>
         <li><strong>Modo Avanzado:</strong> panel de control web con gestión de equipos, automatizaciones, analíticas y agentes de inteligencia artificial.</li>
@@ -39,7 +39,7 @@ const sections = [
     id: "cuentas",
     title: "3. Cuentas de usuario y registro",
     content: `
-      <p>Para usar Actros necesitás crear una cuenta proporcionando información precisa, completa y actualizada (nombre, email, teléfono y datos del negocio). Sos responsable de:</p>
+      <p>Para usar Actroos necesitás crear una cuenta proporcionando información precisa, completa y actualizada (nombre, email, teléfono y datos del negocio). Sos responsable de:</p>
       <ul>
         <li>Mantener la confidencialidad de tus credenciales de acceso.</li>
         <li>Toda actividad que ocurra bajo tu cuenta, incluida la de los miembros de tu equipo que invites.</li>
@@ -55,7 +55,7 @@ const sections = [
       <h3>4.1 Prueba gratuita</h3>
       <p>Ofrecemos un período de prueba de 14 días sin necesidad de tarjeta de crédito. Al finalizar la prueba, deberás contratar la suscripción para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
       <h3>4.2 Suscripción y precios</h3>
-      <p>Actros se contrata mediante una suscripción, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para tarjetas emitidas en Argentina, los precios y cobros se realizan en pesos argentinos (ARS); para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout según el país emisor de la tarjeta. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
+      <p>Actroos se contrata mediante una suscripción, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para tarjetas emitidas en Argentina, los precios y cobros se realizan en pesos argentinos (ARS); para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout según el país emisor de la tarjeta. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
       <h3>4.3 Add-ons</h3>
       <p>Podés activar add-ons desde tu cuenta. Los add-ons se facturan de forma adicional según los que actives.</p>
       <h3>4.4 Pagos y renovación</h3>
@@ -68,7 +68,7 @@ const sections = [
     id: "uso-aceptable",
     title: "5. Uso aceptable",
     content: `
-      <p>Al usar Actros te comprometés a no:</p>
+      <p>Al usar Actroos te comprometés a no:</p>
       <ul>
         <li>Enviar spam, mensajes masivos no solicitados o contenido que infrinja las políticas de WhatsApp, Instagram, Facebook o Telegram.</li>
         <li>Utilizar la plataforma para actividades ilegales, fraudulentas, difamatorias o que violen derechos de terceros.</li>
@@ -85,7 +85,7 @@ const sections = [
     id: "contenido-datos",
     title: "6. Contenido del usuario y datos de tus clientes",
     content: `
-      <p>Vos sos el titular y responsable del contenido que cargás en Actros (mensajes, adjuntos, catálogos, bases de conocimiento, datos de contactos) y de contar con las bases legales necesarias para tratar los datos personales de tus propios clientes que gestionás a través de la plataforma.</p>
+      <p>Vos sos el titular y responsable del contenido que cargás en Actroos (mensajes, adjuntos, catálogos, bases de conocimiento, datos de contactos) y de contar con las bases legales necesarias para tratar los datos personales de tus propios clientes que gestionás a través de la plataforma.</p>
       <p>Nos otorgás una licencia limitada, no exclusiva y revocable para almacenar, procesar y mostrar dicho contenido únicamente con el fin de prestarte el servicio. No usamos tu contenido para entrenar modelos de terceros ni lo compartimos fuera del flujo de atención descrito en nuestra <a href="/privacidad">Política de Privacidad</a>.</p>
       <p>Si cancelás tu cuenta o dejás de pagar, tu contenido se conserva según el período indicado en la sección 6 de la Política de Privacidad y luego se elimina, salvo solicitud expresa de eliminación anticipada a través de nuestra página de <a href="/eliminar-datos">Eliminación de datos</a>.</p>
     `,
@@ -94,7 +94,7 @@ const sections = [
     id: "inteligencia-artificial",
     title: "7. Inteligencia artificial y automatizaciones",
     content: `
-      <p>Actros ofrece agentes de inteligencia artificial y automatizaciones opcionales que pueden responder mensajes, sugerir respuestas o ejecutar acciones (por ejemplo, mediante bases de conocimiento propias del negocio) según la configuración que definas.</p>
+      <p>Actroos ofrece agentes de inteligencia artificial y automatizaciones opcionales que pueden responder mensajes, sugerir respuestas o ejecutar acciones (por ejemplo, mediante bases de conocimiento propias del negocio) según la configuración que definas.</p>
       <ul>
         <li>Las respuestas generadas por IA son asistidas por modelos de lenguaje y <strong>pueden contener errores o imprecisiones</strong>. Sos responsable de revisar y supervisar el comportamiento del asistente configurado para tu negocio.</li>
         <li>Podés escalar cualquier conversación a un operador humano en cualquier momento.</li>
@@ -107,20 +107,20 @@ const sections = [
     id: "integraciones",
     title: "8. Integraciones con terceros",
     content: `
-      <p>Actros se integra con plataformas de terceros, incluyendo Meta (WhatsApp Business API, Instagram y Facebook Messenger), Telegram y proveedores de pago. El uso de estas integraciones está sujeto también a los términos y políticas propios de cada plataforma, incluyendo:</p>
+      <p>Actroos se integra con plataformas de terceros, incluyendo Meta (WhatsApp Business API, Instagram y Facebook Messenger), Telegram y proveedores de pago. El uso de estas integraciones está sujeto también a los términos y políticas propios de cada plataforma, incluyendo:</p>
       <ul>
         <li><a href="https://developers.facebook.com/policy/" target="_blank" rel="noopener noreferrer">Políticas para Desarrolladores de Meta</a></li>
         <li><a href="https://www.whatsapp.com/legal/business-policy/" target="_blank" rel="noopener noreferrer">Términos del Servicio de WhatsApp Business</a></li>
         <li>Términos de servicio de Telegram (Bot API)</li>
       </ul>
-      <p>No somos responsables por interrupciones, cambios de API o suspensiones de cuenta impuestas directamente por estas plataformas de terceros. Es tu responsabilidad cumplir con las políticas de uso de cada canal que conectes a tu cuenta de Actros.</p>
+      <p>No somos responsables por interrupciones, cambios de API o suspensiones de cuenta impuestas directamente por estas plataformas de terceros. Es tu responsabilidad cumplir con las políticas de uso de cada canal que conectes a tu cuenta de Actroos.</p>
     `,
   },
   {
     id: "propiedad-intelectual",
     title: "9. Propiedad intelectual",
     content: `
-      <p>La plataforma Actros, su código, diseño, marca, logotipos y documentación están protegidos por leyes de propiedad intelectual. Estos Términos no te otorgan ningún derecho de propiedad sobre el software, solo una licencia de uso limitada, no exclusiva e intransferible mientras mantengas una cuenta activa.</p>
+      <p>La plataforma Actroos, su código, diseño, marca, logotipos y documentación están protegidos por leyes de propiedad intelectual. Estos Términos no te otorgan ningún derecho de propiedad sobre el software, solo una licencia de uso limitada, no exclusiva e intransferible mientras mantengas una cuenta activa.</p>
       <p>Conservás todos los derechos sobre tu propio contenido (marca de tu negocio, catálogos, mensajes) según lo descrito en la sección 6.</p>
     `,
   },
@@ -128,7 +128,7 @@ const sections = [
     id: "disponibilidad",
     title: "10. Disponibilidad del servicio y soporte",
     content: `
-      <p>Nos esforzamos por mantener Actros disponible de forma continua, pero no garantizamos un servicio ininterrumpido o libre de errores. Podemos realizar mantenimientos programados o de emergencia que impliquen interrupciones temporales, procurando notificarlos con antelación cuando sea posible.</p>
+      <p>Nos esforzamos por mantener Actroos disponible de forma continua, pero no garantizamos un servicio ininterrumpido o libre de errores. Podemos realizar mantenimientos programados o de emergencia que impliquen interrupciones temporales, procurando notificarlos con antelación cuando sea posible.</p>
       <p>El nivel de soporte (tiempos de respuesta, canales disponibles) varía según lo contratado; cualquier SLA personalizado se acuerda por separado.</p>
     `,
   },
@@ -151,7 +151,7 @@ const sections = [
     id: "responsabilidad",
     title: "12. Limitación de responsabilidad",
     content: `
-      <p>Actros se ofrece "tal cual" y "según disponibilidad". En la medida máxima permitida por la ley aplicable, no garantizamos que el servicio sea ininterrumpido, libre de errores o que cumpla con requisitos específicos no acordados por escrito.</p>
+      <p>Actroos se ofrece "tal cual" y "según disponibilidad". En la medida máxima permitida por la ley aplicable, no garantizamos que el servicio sea ininterrumpido, libre de errores o que cumpla con requisitos específicos no acordados por escrito.</p>
       <p>No seremos responsables por daños indirectos, incidentales, especiales, consecuentes o lucro cesante derivados del uso o la imposibilidad de uso del servicio, incluyendo pérdidas causadas por interrupciones de plataformas de terceros (Meta, Telegram, proveedores de pago) o por respuestas generadas por agentes de IA.</p>
       <p>Nuestra responsabilidad total frente a vos por cualquier reclamo relacionado con el servicio se limita al monto efectivamente abonado por vos en los 6 meses previos al hecho que originó el reclamo.</p>
     `,
@@ -160,7 +160,7 @@ const sections = [
     id: "indemnizacion",
     title: "13. Indemnización",
     content: `
-      <p>Te comprometés a mantener indemne a Actros, sus directivos, empleados y colaboradores frente a cualquier reclamo, daño o gasto (incluidos honorarios legales razonables) que surja de: (i) tu uso indebido del servicio, (ii) tu incumplimiento de estos Términos, (iii) contenido que hayas cargado a la plataforma, o (iv) tu infracción de derechos de terceros, incluyendo las políticas de las plataformas integradas (Meta, Telegram).</p>
+      <p>Te comprometés a mantener indemne a Actroos, sus directivos, empleados y colaboradores frente a cualquier reclamo, daño o gasto (incluidos honorarios legales razonables) que surja de: (i) tu uso indebido del servicio, (ii) tu incumplimiento de estos Términos, (iii) contenido que hayas cargado a la plataforma, o (iv) tu infracción de derechos de terceros, incluyendo las políticas de las plataformas integradas (Meta, Telegram).</p>
     `,
   },
   {
@@ -200,7 +200,7 @@ export default function TerminosPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/actros-logo.svg?v=1" alt="Actros" className="h-9 w-auto" />
+            <img src="/actros-logo.svg?v=1" alt="Actroos" className="h-9 w-auto" />
           </Link>
           <Link href="/" className="text-sm text-gray-500 hover:text-violet-600 transition-colors">
             ← Volver al inicio
@@ -216,7 +216,7 @@ export default function TerminosPage() {
           <h1 className="text-4xl font-black text-gray-900 mb-4">Términos y Condiciones</h1>
           <p className="text-gray-500 text-sm">Última actualización: <strong className="text-gray-700">{UPDATED}</strong></p>
           <p className="mt-4 text-gray-600 leading-relaxed max-w-2xl">
-            Estos son los términos que rigen el uso de Actros: cómo funcionan las cuentas, la suscripción y la facturación, qué podés y no podés hacer en la plataforma, y cómo tratamos las respuestas generadas por inteligencia artificial y las integraciones con WhatsApp, Instagram, Facebook y Telegram.
+            Estos son los términos que rigen el uso de Actroos: cómo funcionan las cuentas, la suscripción y la facturación, qué podés y no podés hacer en la plataforma, y cómo tratamos las respuestas generadas por inteligencia artificial y las integraciones con WhatsApp, Instagram, Facebook y Telegram.
           </p>
         </div>
 
@@ -257,7 +257,7 @@ export default function TerminosPage() {
           <p className="text-sm text-gray-400">
             Estos términos aplican a{" "}
             <a href={SITE} className="text-violet-600 hover:underline">{SITE}</a>{" "}
-            y a la plataforma Actros.
+            y a la plataforma Actroos.
           </p>
           <Link
             href="/"

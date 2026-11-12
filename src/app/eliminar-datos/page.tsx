@@ -3,9 +3,9 @@ import Link from "next/link";
 import { URLS, EMAILS } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Eliminación de datos – Actros",
+  title: "Eliminación de datos – Actroos",
   description:
-    "Cómo solicitar la eliminación de tus datos personales en Actros, incluidos los datos obtenidos a través de Instagram, Messenger y WhatsApp.",
+    "Cómo solicitar la eliminación de tus datos personales en Actroos, incluidos los datos obtenidos a través de Instagram, Messenger y WhatsApp.",
 };
 
 const UPDATED = "21 de julio de 2026";
@@ -18,11 +18,11 @@ const sections = [
     id: "resumen",
     title: "1. Resumen",
     content: `
-      <p>En Actros podés solicitar la eliminación de tus datos personales en cualquier momento. Esta página explica <strong>qué datos podemos eliminar</strong>, <strong>cómo pedirlo</strong> y <strong>en cuánto tiempo</strong> lo hacemos, incluyendo los datos que recibimos a través de las plataformas de Meta (Instagram, Facebook Messenger y WhatsApp).</p>
+      <p>En Actroos podés solicitar la eliminación de tus datos personales en cualquier momento. Esta página explica <strong>qué datos podemos eliminar</strong>, <strong>cómo pedirlo</strong> y <strong>en cuánto tiempo</strong> lo hacemos, incluyendo los datos que recibimos a través de las plataformas de Meta (Instagram, Facebook Messenger y WhatsApp).</p>
       <p>Hay dos tipos de solicitantes:</p>
       <ul>
-        <li><strong>Negocios (titulares de cuenta):</strong> empresas que usan Actros para atender a sus clientes.</li>
-        <li><strong>Usuarios finales:</strong> personas que escribieron a un negocio por WhatsApp, Instagram, Messenger o el chat web y cuyos mensajes pasaron por Actros.</li>
+        <li><strong>Negocios (titulares de cuenta):</strong> empresas que usan Actroos para atender a sus clientes.</li>
+        <li><strong>Usuarios finales:</strong> personas que escribieron a un negocio por WhatsApp, Instagram, Messenger o el chat web y cuyos mensajes pasaron por Actroos.</li>
       </ul>
     `,
   },
@@ -45,7 +45,7 @@ const sections = [
     id: "como-solicitar",
     title: "3. Cómo solicitar la eliminación",
     content: `
-      <h3>3.1 Si sos un negocio con cuenta en Actros</h3>
+      <h3>3.1 Si sos un negocio con cuenta en Actroos</h3>
       <ul>
         <li><strong>Desde la plataforma:</strong> iniciá sesión en <a href="${APP}">${APP}</a> y solicitá la baja y eliminación de tu cuenta desde <em>Configuración</em>, o escribinos.</li>
         <li><strong>Por correo:</strong> enviá un email a <a href="mailto:${EMAIL}">${EMAIL}</a> desde la dirección de tu cuenta, con el asunto <strong>"Eliminar mis datos"</strong>.</li>
@@ -112,7 +112,7 @@ export default function EliminarDatosPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/actros-logo.svg?v=1" alt="Actros" className="h-9 w-auto" />
+            <img src="/actros-logo.svg?v=1" alt="Actroos" className="h-9 w-auto" />
           </Link>
           <Link href="/" className="text-sm text-gray-500 hover:text-violet-600 transition-colors">
             ← Volver al inicio
@@ -128,7 +128,7 @@ export default function EliminarDatosPage() {
           <h1 className="text-4xl font-black text-gray-900 mb-4">Eliminación de datos</h1>
           <p className="text-gray-500 text-sm">Última actualización: <strong className="text-gray-700">{UPDATED}</strong></p>
           <p className="mt-4 text-gray-600 leading-relaxed max-w-2xl">
-            Cómo pedir que eliminemos tus datos personales en Actros, incluidos los datos que recibimos a través de Instagram, Messenger y WhatsApp.
+            Cómo pedir que eliminemos tus datos personales en Actroos, incluidos los datos que recibimos a través de Instagram, Messenger y WhatsApp.
           </p>
         </div>
 
@@ -169,7 +169,7 @@ export default function EliminarDatosPage() {
           <p className="text-sm text-gray-400">
             Esta página aplica a{" "}
             <a href={SITE} className="text-violet-600 hover:underline">{SITE}</a>{" "}
-            y a la plataforma Actros.
+            y a la plataforma Actroos.
           </p>
           <Link
             href="/"

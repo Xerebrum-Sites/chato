@@ -32,21 +32,23 @@ const pillars = [
 ];
 
 /**
- * Tres pilares del producto en la home. Equilibra la comunicación: Actros no es
+ * Tres pilares del producto en la home. Equilibra la comunicación: Actroos no es
  * solo el Hub, también son los Agentes IA y un Marketplace extensible.
  */
 export function Pillars() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative isolate overflow-hidden bg-[#fffaf8] py-24">
+      <div className="actros-dots absolute -left-24 top-0 h-72 w-72 opacity-[0.14]" aria-hidden="true" />
+      <div className="actros-contours absolute -right-20 bottom-0 h-80 w-[42rem] opacity-35" aria-hidden="true" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Todo lo que Actros hace por vos"
+          badge="Todo lo que Actroos hace por vos"
           title={
             <>
               Mucho más que <span className="gradient-text">centralizar mensajes</span>
             </>
           }
-          subtitle="Actros combina tres piezas que trabajan juntas —y activás solo lo que necesitás."
+          subtitle="Actroos combina tres piezas que trabajan juntas —y activás solo lo que necesitás."
           className="mb-14"
         />
 
@@ -55,7 +57,7 @@ export function Pillars() {
             <StaggerItem key={p.title}>
               <Link
                 href={p.href}
-                className="group flex h-full flex-col rounded-3xl border border-gray-100 bg-white p-8 transition-all duration-300 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-50"
+                className="group flex h-full flex-col rounded-3xl border border-white/90 bg-white/90 p-8 shadow-sm shadow-[#001f34]/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-violet-200 hover:shadow-xl hover:shadow-violet-50"
               >
                 <IconBadge icon={p.icon} size="lg" className="mb-5" />
                 <h3 className="text-xl font-black text-gray-900 mb-2">{p.title}</h3>

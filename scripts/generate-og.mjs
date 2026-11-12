@@ -9,7 +9,7 @@ const root = join(__dir, "..");
 const W = 1200;
 const H = 630;
 const LOGO_W = 340;
-const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Actros horizontal logo ratio
+const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Actroos horizontal logo ratio
 
 async function main() {
   // Render logo (negative = white text) to transparent PNG
