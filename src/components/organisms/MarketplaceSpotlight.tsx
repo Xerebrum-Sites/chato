@@ -6,10 +6,10 @@ import { Reveal } from "@/components/atoms/Reveal";
 
 export function MarketplaceSpotlight() {
   return (
-    <section className="actros-night relative overflow-hidden py-24 text-white">
-      <div className="actros-wave absolute inset-0 opacity-75" aria-hidden="true" />
-      <div className="actros-grid absolute inset-0 opacity-45" aria-hidden="true" />
-      <div className="actros-ribbon absolute -left-40 bottom-6 h-20 w-[38rem] rotate-[13deg] rounded-full opacity-55" aria-hidden="true" />
+    <section className="marketplace-atmosphere relative overflow-hidden py-24 text-white">
+      <div className="actros-grid absolute inset-0 opacity-35" aria-hidden="true" />
+      <div className="actros-flow actros-flow-marketplace-one" aria-hidden="true" />
+      <div className="actros-flow actros-flow-marketplace-two" aria-hidden="true" />
       <div className="actros-dots absolute right-5 top-4 h-60 w-60 opacity-25" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
