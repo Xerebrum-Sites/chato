@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 const SITE_URL = URLS.landing;
-const OG_IMAGE = `${SITE_URL}/og-axtroos-v1.png`;
+const OG_IMAGE = `${SITE_URL}/og-axtroos-v2.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
