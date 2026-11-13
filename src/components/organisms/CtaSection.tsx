@@ -29,9 +29,11 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
   }, []);
 
   return (
-    <section id="registro" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 gradient-primary opacity-95" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,255,255,0.15),transparent)]" />
+    <section id="registro" className="actros-night relative overflow-hidden py-24">
+      <div className="actros-wave absolute inset-0 opacity-90" aria-hidden="true" />
+      <div className="actros-grid absolute inset-0 opacity-50" aria-hidden="true" />
+      <div className="actros-ribbon absolute -right-36 top-12 h-24 w-[42rem] rotate-[-18deg] rounded-full opacity-70" aria-hidden="true" />
+      <div className="actros-ribbon absolute -left-36 bottom-4 h-16 w-[34rem] rotate-[13deg] rounded-full opacity-50" aria-hidden="true" />
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{
@@ -59,7 +61,7 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
           )}
         </h2>
 
-        <p className="text-violet-100 text-lg mb-10 max-w-lg mx-auto">
+        <p className="text-white/72 text-lg mb-10 max-w-lg mx-auto">
           {subtitle ?? "14 días gratis. Sin tarjeta de crédito. Cancelás cuando quieras."}
         </p>
 
@@ -72,7 +74,7 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
             <button
               type="button"
               onClick={() => setDemoOpen(true)}
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-full text-base font-semibold text-white hover:bg-white/10 transition-colors border-2 border-white/30"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-full text-base font-semibold text-white hover:bg-white/10 transition-colors border-2 border-white/40"
             >
               Solicitar demo
             </button>
@@ -80,7 +82,7 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
         </div>
         <DemoForm open={demoOpen} onClose={() => setDemoOpen(false)} />
 
-        <p className="mt-8 text-violet-100/80 text-sm">
+        <p className="mt-8 text-white/65 text-sm">
           ¿Tenés dudas?{" "}
           <a
             href={CONTACT.whatsappUrl}

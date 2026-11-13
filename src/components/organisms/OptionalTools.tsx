@@ -171,7 +171,7 @@ export function OptionalTools() {
               {[
                 ["Módulos independientes:", "activás solo las capacidades que tu negocio necesita."],
                 ["Una plataforma compartida:", "cada módulo aprovecha los mismos clientes, canales e historial."],
-                ["Expansión continua:", "el catálogo suma nuevas soluciones a medida que Actros evoluciona."],
+                ["Expansión continua:", "el catálogo suma nuevas soluciones a medida que Actroos evoluciona."],
               ].map(([bold, rest]) => (
                 <li key={bold} className="flex items-start gap-3">
                   <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />

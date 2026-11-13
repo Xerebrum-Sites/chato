@@ -37,8 +37,10 @@ function HumanValueBand() {
     "Sumá a tu equipo cuando lo necesites, ordenado",
   ];
   return (
-    <section className="bg-[#fffaf5] py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="relative isolate overflow-hidden bg-[#fffaf8] py-24">
+      <div className="actros-contours absolute -left-56 bottom-0 h-80 w-[46rem] rotate-180 opacity-30" aria-hidden="true" />
+      <div className="actros-dots absolute right-0 top-0 h-64 w-64 opacity-[0.1]" aria-hidden="true" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal direction="right">
           <div className="relative min-h-[24rem] p-2 sm:min-h-[32rem] sm:p-4">
             <Image
@@ -55,7 +57,7 @@ function HumanValueBand() {
             Atendé a todos tus clientes <span className="gradient-text">como si tuvieras un equipo entero</span>
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-6">
-            Actros reúne WhatsApp, Instagram, Facebook, Telegram y tu web en una única estación de trabajo.
+            Actroos reúne WhatsApp, Instagram, Facebook, Telegram y tu web en una única estación de trabajo.
             Cada agente opera desde desktop con el historial, las asignaciones y la ayuda de IA a la vista.
           </p>
           <ul className="space-y-3 mb-8">

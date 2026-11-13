@@ -9,7 +9,7 @@ const root = join(__dir, "..");
 const W = 1200;
 const H = 630;
 const LOGO_W = 340;
-const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Actros horizontal logo ratio
+const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Actroos horizontal logo ratio
 
 async function main() {
   // Render logo (negative = white text) to transparent PNG
@@ -28,33 +28,33 @@ async function main() {
   <defs>
     <!-- Background gradient: dark navy with subtle warmth -->
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#07071f"/>
-      <stop offset="100%" stop-color="#0d0825"/>
+      <stop offset="0%" stop-color="#0b0b17"/>
+      <stop offset="100%" stop-color="#001f34"/>
     </linearGradient>
 
     <!-- Brand gradient (orange → magenta) -->
     <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ff9600"/>
-      <stop offset="50%" stop-color="#e65a64"/>
-      <stop offset="100%" stop-color="#be146e"/>
+      <stop offset="0%" stop-color="#ee7d16"/>
+      <stop offset="50%" stop-color="#df4b46"/>
+      <stop offset="100%" stop-color="#c61261"/>
     </linearGradient>
 
     <!-- Diagonal brand gradient for text/accents -->
     <linearGradient id="brand-diag" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ff9600"/>
-      <stop offset="100%" stop-color="#be146e"/>
+      <stop offset="0%" stop-color="#ee7d16"/>
+      <stop offset="100%" stop-color="#c61261"/>
     </linearGradient>
 
     <!-- Corner glow top-right -->
     <radialGradient id="glow-tr" cx="100%" cy="0%" r="60%">
-      <stop offset="0%" stop-color="#be146e" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="#be146e" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#c61261" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#c61261" stop-opacity="0"/>
     </radialGradient>
 
     <!-- Corner glow bottom-left -->
     <radialGradient id="glow-bl" cx="0%" cy="100%" r="55%">
-      <stop offset="0%" stop-color="#ff9600" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#ff9600" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ee7d16" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ee7d16" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
@@ -77,13 +77,13 @@ async function main() {
 
   <!-- ── Abstract decorative circles (corners, don't crowd center) ── -->
   <!-- Top right -->
-  <circle cx="1130" cy="60" r="80" fill="none" stroke="#be146e" stroke-width="1.5" stroke-opacity="0.18"/>
-  <circle cx="1130" cy="60" r="130" fill="none" stroke="#e65a64" stroke-width="1" stroke-opacity="0.10"/>
+  <circle cx="1130" cy="60" r="80" fill="none" stroke="#c61261" stroke-width="1.5" stroke-opacity="0.18"/>
+  <circle cx="1130" cy="60" r="130" fill="none" stroke="#df4b46" stroke-width="1" stroke-opacity="0.10"/>
   <!-- Bottom left -->
-  <circle cx="70" cy="570" r="70" fill="none" stroke="#ff9600" stroke-width="1.5" stroke-opacity="0.18"/>
-  <circle cx="70" cy="570" r="120" fill="none" stroke="#ff9600" stroke-width="1" stroke-opacity="0.09"/>
+  <circle cx="70" cy="570" r="70" fill="none" stroke="#ee7d16" stroke-width="1.5" stroke-opacity="0.18"/>
+  <circle cx="70" cy="570" r="120" fill="none" stroke="#ee7d16" stroke-width="1" stroke-opacity="0.09"/>
   <!-- Bottom right -->
-  <circle cx="1140" cy="600" r="60" fill="none" stroke="#be146e" stroke-width="1" stroke-opacity="0.13"/>
+  <circle cx="1140" cy="600" r="60" fill="none" stroke="#c61261" stroke-width="1" stroke-opacity="0.13"/>
 
   <!-- ── Content — fully centered ── -->
 
@@ -92,7 +92,7 @@ async function main() {
     x="${W / 2}" y="248"
     font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
     font-size="16" font-weight="600" letter-spacing="5"
-    fill="#ff9600" fill-opacity="0.85" text-anchor="middle"
+    fill="#ee7d16" fill-opacity="0.85" text-anchor="middle"
   >OMNICANALIDAD  ·  MENSAJERÍA</text>
 
   <!-- Headline line 1 -->
@@ -108,7 +108,7 @@ async function main() {
     x="${W / 2}" y="398"
     font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
     font-size="68" font-weight="800"
-    fill="#ff9600" text-anchor="middle"
+    fill="#ee7d16" text-anchor="middle"
   >un solo lugar.</text>
 
   <!-- Divider -->
@@ -126,12 +126,12 @@ async function main() {
   <!-- Bottom row: price + domain -->
   <!-- Price badge background -->
   <rect x="${W / 2 - 280}" y="502" width="168" height="40" rx="20"
-        fill="#ff9600" fill-opacity="0.15" stroke="#ff9600" stroke-opacity="0.45" stroke-width="1.5"/>
+        fill="#ee7d16" fill-opacity="0.15" stroke="#ee7d16" stroke-opacity="0.45" stroke-width="1.5"/>
   <text
     x="${W / 2 - 196}" y="527"
     font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
     font-size="17" font-weight="700"
-    fill="#ff9600" text-anchor="middle"
+    fill="#ee7d16" text-anchor="middle"
   >Desde $9 / mes</text>
 
   <!-- Domain -->

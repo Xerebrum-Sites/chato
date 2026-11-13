@@ -6,21 +6,22 @@ import { Reveal } from "@/components/atoms/Reveal";
 
 export function MarketplaceSpotlight() {
   return (
-    <section className="relative overflow-hidden bg-[#180b18] py-24 text-white">
-      <div className="absolute -left-32 top-0 h-80 w-80 rounded-full bg-orange-500/20 blur-3xl" />
-      <div className="absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-fuchsia-600/25 blur-3xl" />
-      <div className="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/15 blur-3xl" />
+    <section className="actros-night relative overflow-hidden py-24 text-white">
+      <div className="actros-wave absolute inset-0 opacity-75" aria-hidden="true" />
+      <div className="actros-grid absolute inset-0 opacity-45" aria-hidden="true" />
+      <div className="actros-ribbon absolute -left-40 bottom-6 h-20 w-[38rem] rotate-[13deg] rounded-full opacity-55" aria-hidden="true" />
+      <div className="actros-dots absolute right-5 top-4 h-60 w-60 opacity-25" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <Reveal direction="right">
-          <Badge variant="cyan" className="mb-5 border-white/15 bg-white/10 text-cyan-200">
-            Marketplace Actros
+          <Badge variant="violet" className="mb-5 border-white/20 bg-white/10 text-white">
+            Marketplace Actroos
           </Badge>
           <h2 className="max-w-xl text-4xl font-black leading-[1.08] tracking-tight text-balance sm:text-5xl">
-            Una plataforma que <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-rose-400 to-fuchsia-400">crece con tu negocio</span>
+            Una plataforma que <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ee7d16] via-[#e54746] to-[#c61261]">crece con tu negocio</span>
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-            Empezás con el núcleo de Actros y sumás capacidades cuando las necesitás. Reservas, catálogo, ventas, campañas y agentes especializados viven en la misma plataforma, con el mismo historial de cada cliente.
+            Empezás con el núcleo de Actroos y sumás capacidades cuando las necesitás. Reservas, catálogo, ventas, campañas y agentes especializados viven en la misma plataforma, con el mismo historial de cada cliente.
           </p>
           <div className="mt-8 grid gap-3 text-sm text-white/75 sm:grid-cols-2">
             {[
@@ -30,14 +31,14 @@ export function MarketplaceSpotlight() {
               "Accedé a nuevos módulos",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5">
-                <Sparkles className="h-4 w-4 flex-none text-orange-400" />
+                <Sparkles className="h-4 w-4 flex-none text-actros-orange" />
                 {item}
               </div>
             ))}
           </div>
           <Link
             href="/herramientas/"
-            className="mt-9 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-bold text-[#180b18] transition hover:-translate-y-0.5 hover:bg-orange-50"
+            className="mt-9 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-bold text-[#001f34] transition hover:-translate-y-0.5 hover:bg-[#fff1e8]"
           >
             Explorar el Marketplace
             <ArrowRight className="h-4 w-4" />
@@ -47,7 +48,7 @@ export function MarketplaceSpotlight() {
         <Reveal direction="left" delay={0.1}>
           <div
             role="img"
-            aria-label="Marketplace de Actros representado por una estación de trabajo conectada a reservas, catálogo, ventas, campañas, reseñas, encuestas y agentes de inteligencia artificial"
+            aria-label="Marketplace de Actroos representado por una estación de trabajo conectada a reservas, catálogo, ventas, campañas, reseñas, encuestas y agentes de inteligencia artificial"
             className="relative mx-auto aspect-[1.598] w-full max-w-[44rem]"
           >
             <Image
