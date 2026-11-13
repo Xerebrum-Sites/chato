@@ -8,12 +8,18 @@ const root = join(__dir, "..");
 
 const W = 1200;
 const H = 630;
-const LOGO_W = 340;
-const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Actroos horizontal logo ratio
+const LOGO_W = 242;
+const LOGO_H = Math.round(LOGO_W * (126.21 / 800)); // Axtroos horizontal logo ratio
 
 async function main() {
-  // Render logo (negative = white text) to transparent PNG
-  const logoSvg = readFileSync(join(root, "public/actros-logo-negative.svg"));
+  const [logoSvg, peoplePhoto] = await Promise.all([
+    readFileSync(join(root, "public/actros-logo-negative.svg")),
+    sharp(join(root, "public/images/brand/og-social-people-v1.png"))
+      .resize(W, H, { fit: "cover", position: "centre" })
+      .png()
+      .toBuffer(),
+  ]);
+
   const logoPng = await sharp(logoSvg)
     .resize(LOGO_W, LOGO_H, {
       fit: "contain",
@@ -22,144 +28,66 @@ async function main() {
     .png()
     .toBuffer();
 
-  // Full centered design SVG
-  const bg = `<?xml version="1.0" encoding="UTF-8"?>
+  const overlay = Buffer.from(`<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <!-- Background gradient: dark navy with subtle warmth -->
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0b0b17"/>
-      <stop offset="100%" stop-color="#001f34"/>
+    <linearGradient id="copy-bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#07081c" stop-opacity="0.98"/>
+      <stop offset="44%" stop-color="#111033" stop-opacity="0.92"/>
+      <stop offset="66%" stop-color="#1d1034" stop-opacity="0.46"/>
+      <stop offset="100%" stop-color="#120a20" stop-opacity="0.04"/>
     </linearGradient>
-
-    <!-- Brand gradient (orange → magenta) -->
-    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ee7d16"/>
-      <stop offset="50%" stop-color="#df4b46"/>
-      <stop offset="100%" stop-color="#c61261"/>
+    <linearGradient id="headline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffab16"/>
+      <stop offset="52%" stop-color="#ff6d34"/>
+      <stop offset="100%" stop-color="#f51a90"/>
     </linearGradient>
-
-    <!-- Diagonal brand gradient for text/accents -->
-    <linearGradient id="brand-diag" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ee7d16"/>
-      <stop offset="100%" stop-color="#c61261"/>
+    <linearGradient id="trail-a" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff981d" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#ff9b1d"/>
+      <stop offset="54%" stop-color="#ff317e"/>
+      <stop offset="78%" stop-color="#cc2bea"/>
+      <stop offset="100%" stop-color="#ff831f" stop-opacity="0"/>
     </linearGradient>
-
-    <!-- Corner glow top-right -->
-    <radialGradient id="glow-tr" cx="100%" cy="0%" r="60%">
-      <stop offset="0%" stop-color="#c61261" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="#c61261" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Corner glow bottom-left -->
-    <radialGradient id="glow-bl" cx="0%" cy="100%" r="55%">
-      <stop offset="0%" stop-color="#ee7d16" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#ee7d16" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="trail-b" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d530ee" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#ce30ec"/>
+      <stop offset="54%" stop-color="#ff3588"/>
+      <stop offset="78%" stop-color="#ffa01a"/>
+      <stop offset="100%" stop-color="#ff9b1e" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="32"/></filter>
   </defs>
+  <rect width="${W}" height="${H}" fill="url(#copy-bg)"/>
+  <ellipse cx="430" cy="110" rx="275" ry="125" fill="#b82aab" fill-opacity="0.2" filter="url(#soft)"/>
+  <rect width="${W}" height="${H}" fill="none" stroke="#ffffff" stroke-opacity="0.12"/>
+  <path d="M -90 540 C 110 356, 282 680, 487 505 C 695 328, 898 678, 1108 492 C 1208 404, 1280 376, 1310 350" fill="none" stroke="url(#trail-a)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M -70 588 C 118 704, 315 349, 497 530 C 690 708, 896 354, 1081 542 C 1175 638, 1241 614, 1300 552" fill="none" stroke="url(#trail-b)" stroke-width="5" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <text x="76" y="210" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="3.2" fill="#ff9c1c">PLATAFORMA B2B OMNICANAL</text>
+  <text x="76" y="291" font-family="Arial, Helvetica, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.8" fill="#ffffff">Conectá conversaciones.</text>
+  <text x="76" y="357" font-family="Arial, Helvetica, sans-serif" font-size="55" font-weight="800" letter-spacing="-1.8" fill="url(#headline)">Potenciá equipos.</text>
+  <text x="76" y="403" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#ffffff" fill-opacity="0.78">Una plataforma para transformar cada interacción</text>
+  <text x="76" y="433" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#ffffff" fill-opacity="0.78">en oportunidades para tu negocio.</text>
+  <line x1="76" y1="466" x2="417" y2="466" stroke="#ffffff" stroke-opacity="0.25"/>
+  <text x="76" y="502" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">axtroos.com</text>
+</svg>`);
 
-  <!-- ── Background ── -->
-  <rect width="${W}" height="${H}" fill="url(#bg)"/>
-  <rect width="${W}" height="${H}" fill="url(#glow-tr)"/>
-  <rect width="${W}" height="${H}" fill="url(#glow-bl)"/>
-
-  <!-- Subtle dot grid -->
-  <pattern id="dots" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
-    <circle cx="18" cy="18" r="1.2" fill="#ffffff" fill-opacity="0.04"/>
-  </pattern>
-  <rect width="${W}" height="${H}" fill="url(#dots)"/>
-
-  <!-- ── Decorative accent lines (horizontal, brand colors) ── -->
-  <line x1="0" y1="${H - 1}" x2="${W}" y2="${H - 1}" stroke="url(#brand)" stroke-width="2" stroke-opacity="0.3"/>
-
-  <!-- ── Top brand stripe ── -->
-  <rect x="0" y="0" width="${W}" height="6" fill="url(#brand)"/>
-
-  <!-- ── Abstract decorative circles (corners, don't crowd center) ── -->
-  <!-- Top right -->
-  <circle cx="1130" cy="60" r="80" fill="none" stroke="#c61261" stroke-width="1.5" stroke-opacity="0.18"/>
-  <circle cx="1130" cy="60" r="130" fill="none" stroke="#df4b46" stroke-width="1" stroke-opacity="0.10"/>
-  <!-- Bottom left -->
-  <circle cx="70" cy="570" r="70" fill="none" stroke="#ee7d16" stroke-width="1.5" stroke-opacity="0.18"/>
-  <circle cx="70" cy="570" r="120" fill="none" stroke="#ee7d16" stroke-width="1" stroke-opacity="0.09"/>
-  <!-- Bottom right -->
-  <circle cx="1140" cy="600" r="60" fill="none" stroke="#c61261" stroke-width="1" stroke-opacity="0.13"/>
-
-  <!-- ── Content — fully centered ── -->
-
-  <!-- LABEL above headline -->
-  <text
-    x="${W / 2}" y="248"
-    font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
-    font-size="16" font-weight="600" letter-spacing="5"
-    fill="#ee7d16" fill-opacity="0.85" text-anchor="middle"
-  >OMNICANALIDAD  ·  MENSAJERÍA</text>
-
-  <!-- Headline line 1 -->
-  <text
-    x="${W / 2}" y="320"
-    font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
-    font-size="68" font-weight="800"
-    fill="#ffffff" text-anchor="middle"
-  >Todos tus canales,</text>
-
-  <!-- Headline line 2 — brand orange -->
-  <text
-    x="${W / 2}" y="398"
-    font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
-    font-size="68" font-weight="800"
-    fill="#ee7d16" text-anchor="middle"
-  >un solo lugar.</text>
-
-  <!-- Divider -->
-  <line x1="${W / 2 - 260}" y1="428" x2="${W / 2 + 260}" y2="428"
-        stroke="#ffffff" stroke-width="1" stroke-opacity="0.10"/>
-
-  <!-- Channel row -->
-  <text
-    x="${W / 2}" y="468"
-    font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
-    font-size="22" font-weight="400"
-    fill="#ffffff" fill-opacity="0.60" text-anchor="middle"
-  >WhatsApp  ·  Instagram  ·  Facebook  ·  Telegram  ·  Web Chat</text>
-
-  <!-- Bottom row: price + domain -->
-  <!-- Price badge background -->
-  <rect x="${W / 2 - 280}" y="502" width="168" height="40" rx="20"
-        fill="#ee7d16" fill-opacity="0.15" stroke="#ee7d16" stroke-opacity="0.45" stroke-width="1.5"/>
-  <text
-    x="${W / 2 - 196}" y="527"
-    font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
-    font-size="17" font-weight="700"
-    fill="#ee7d16" text-anchor="middle"
-  >Desde $9 / mes</text>
-
-  <!-- Domain -->
-  <text
-    x="${W / 2 - 90}" y="527"
-    font-family="Ubuntu Sans,Ubuntu,DejaVu Sans,sans-serif"
-    font-size="17" font-weight="400"
-    fill="#ffffff" fill-opacity="0.40" text-anchor="start"
-  >heychato.com</text>
-</svg>`;
-
-  // Render background SVG to PNG
-  const bgPng = await sharp(Buffer.from(bg)).png().toBuffer();
-
-  // Logo horizontal center, vertical position: between top stripe and label
-  const logoLeft = Math.round((W - LOGO_W) / 2);
-  const logoTop = 76;
-
-  // Composite logo onto background
-  await sharp(bgPng)
-    .composite([{ input: logoPng, top: logoTop, left: logoLeft }])
+  await sharp(peoplePhoto)
+    .composite([
+      { input: overlay, top: 0, left: 0 },
+      { input: logoPng, top: 62, left: 76 },
+    ])
     .png({ quality: 100, compressionLevel: 6 })
     .toFile(join(root, "public/og-image-v2.png"));
 
   console.log(`✓ public/og-image-v2.png generated (${W}×${H})`);
 }
 
-main().catch((e) => {
-  console.error(e);
+main().catch((error) => {
+  console.error(error);
   process.exit(1);
 });

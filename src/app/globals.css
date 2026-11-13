@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Sistema Actroos: valores oficiales de Paleta-01.svg */
+  /* Sistema Axtroos: valores oficiales de Paleta-01.svg */
   --color-actros-night: #0b0b17;
   --color-actros-navy: #001f34;
   --color-actros-orange: #ee7d16;
@@ -130,7 +130,7 @@
   display: none;
 }
 
-/* Texturas abstractas del sistema Actroos. No representan al personaje Volt. */
+/* Texturas abstractas del sistema Axtroos. No representan al personaje Volt. */
 .actros-night {
   background-color: #0b0b17;
   color: #ffffff;

@@ -21,8 +21,8 @@ export function IndustriesTeaser() {
         <SectionHeader
           badge="Para tu industria"
           badgeVariant="green"
-          title={<>Cada rubro tiene su forma de atender. <span className="gradient-text">Actroos se adapta.</span></>}
-          subtitle="Elegí un sector y mirá una operación concreta: personas reales, en su contexto y con Actroos como puesto de trabajo."
+          title={<>Cada rubro tiene su forma de atender. <span className="gradient-text">Axtroos se adapta.</span></>}
+          subtitle="Elegí un sector y mirá una operación concreta: personas reales, en su contexto y con Axtroos como puesto de trabajo."
           className="mb-10"
         />
 
@@ -111,7 +111,7 @@ export function IndustriesShowcase() {
                     <p className="italic leading-relaxed text-gray-600">{industry.problem}</p>
                   </div>
                   <div className="mb-5">
-                    <p className="mb-2 text-xs font-bold uppercase tracking-wide text-violet-700">Cómo ayuda Actroos</p>
+                    <p className="mb-2 text-xs font-bold uppercase tracking-wide text-violet-700">Cómo ayuda Axtroos</p>
                     <p className="leading-relaxed text-gray-600">{industry.solution}</p>
                   </div>
                   <div className="flex items-start gap-2.5 rounded-xl border border-emerald-100 bg-emerald-50 p-4">
