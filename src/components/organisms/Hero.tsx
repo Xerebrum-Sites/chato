@@ -52,12 +52,12 @@ export function Hero() {
           sizes="(min-width: 1024px) 70vw, 100vw"
           className="object-cover object-[62%_center]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#08091a_0%,rgba(8,9,26,.94)_12%,rgba(8,9,26,.27)_52%,rgba(8,9,26,.07)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,9,26,.58),transparent_48%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(20,16,59,.76)_0%,rgba(31,19,64,.57)_17%,rgba(32,16,50,.2)_52%,rgba(26,9,37,.04)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(24,9,43,.38),transparent_48%)]" />
       </motion.div>
       <HeroSignals reduceMotion={reduceMotion} />
 
-      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid min-h-[37rem] items-center gap-7 py-8 lg:min-h-[25rem] lg:grid-cols-[.82fr_1.18fr] lg:py-6">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, x: -32 }}
@@ -65,12 +65,12 @@ export function Hero() {
             transition={{ duration: 0.72, ease: EASE }}
             className="relative z-20 max-w-[35rem]"
           >
-            <h1 className="mb-5 text-balance text-[2.65rem] font-black leading-[.95] tracking-[-.055em] sm:text-6xl lg:text-[3.25rem]">
+            <h1 className="mb-5 text-balance text-[2.4rem] font-black leading-[.97] tracking-[-.05em] sm:text-5xl lg:text-[2.85rem]">
               <span className="block">Conectá conversaciones.</span>
               <span className="block">Potenciá equipos.</span>
               <span className="actros-headline-gradient block italic">Multiplicá oportunidades.</span>
             </h1>
-            <p className="mb-7 max-w-xl text-lg leading-relaxed text-white/88 sm:text-[1.08rem]">
+            <p className="mb-7 max-w-xl text-base leading-relaxed text-white/88 sm:text-[1.02rem]">
               Una plataforma omnicanal con inteligencia artificial que conecta personas, automatiza procesos y transforma cada interacción en resultados.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -133,7 +133,7 @@ function HeroSignals({ reduceMotion }: { reduceMotion: boolean | null }) {
         initial={motionEnabled ? { opacity: 0, y: -16 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.54, duration: 0.58, ease: EASE }}
-        className="absolute left-[43%] top-28 z-20 hidden w-[14rem] rounded-2xl border border-white/55 bg-[#431e57]/75 p-3 shadow-[0_12px_38px_rgba(252,56,160,.34)] backdrop-blur-xl lg:block"
+        className="absolute left-[39%] top-28 z-20 hidden w-[14rem] rounded-2xl border border-white/55 bg-[#431e57]/75 p-3 shadow-[0_12px_38px_rgba(252,56,160,.34)] backdrop-blur-xl lg:block"
       >
         <div className="flex items-center gap-2 border-b border-white/20 pb-2 text-xs font-semibold"><MessagesSquare className="h-5 w-5 text-emerald-300" /> Nuevos mensajes <span className="ml-auto rounded-full bg-actros-magenta px-1.5 py-0.5 text-[10px]">+12</span></div>
         <div className="flex items-center gap-2 pt-2 text-xs font-medium"><Check className="h-5 w-5 rounded-full bg-emerald-500 p-1" /> Reserva confirmada</div>
@@ -143,7 +143,7 @@ function HeroSignals({ reduceMotion }: { reduceMotion: boolean | null }) {
         initial={motionEnabled ? { opacity: 0, x: 18 } : false}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.68, duration: 0.58, ease: EASE }}
-        className="absolute right-[6%] top-24 z-20 hidden w-[13rem] rounded-2xl border border-white/55 bg-[#591f53]/75 p-3 shadow-[0_12px_38px_rgba(252,56,160,.34)] backdrop-blur-xl lg:block"
+        className="absolute right-[3%] top-[20rem] z-20 hidden w-[13rem] rounded-2xl border border-white/55 bg-[#591f53]/75 p-3 shadow-[0_12px_38px_rgba(252,56,160,.34)] backdrop-blur-xl 2xl:right-[6%] 2xl:top-24 lg:block"
       >
         <p className="text-sm font-bold">Resultados del mes</p>
         <div className="mt-3 flex h-11 items-end gap-2 border-b border-white/25 pb-1">
@@ -156,7 +156,7 @@ function HeroSignals({ reduceMotion }: { reduceMotion: boolean | null }) {
         initial={motionEnabled ? { opacity: 0, y: 14 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.82, duration: 0.58, ease: EASE }}
-        className="absolute left-[43%] top-[17rem] z-20 hidden items-center gap-2 rounded-2xl border border-white/55 bg-[#491c4a]/75 px-4 py-3 text-sm font-semibold shadow-[0_12px_38px_rgba(252,56,160,.34)] backdrop-blur-xl lg:flex"
+        className="absolute left-[39%] top-[17rem] z-20 hidden items-center gap-2 rounded-2xl border border-white/55 bg-[#491c4a]/75 px-4 py-3 text-sm font-semibold shadow-[0_12px_38px_rgba(252,56,160,.34)] backdrop-blur-xl lg:flex"
       >
         <Sparkles className="h-5 w-5 text-[#ffca39]" /> Automatización activa
         <span className="ml-1 flex h-5 w-9 items-center justify-end rounded-full bg-gradient-to-r from-actros-magenta to-[#ff376c] p-0.5"><span className="h-4 w-4 rounded-full bg-white shadow" /></span>
