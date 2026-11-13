@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
@@ -23,6 +24,7 @@ const panelMotion = {
 };
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -70,7 +72,8 @@ export function Navbar() {
     closeTimer.current = setTimeout(() => setOpen(null), 120);
   }, []);
 
-  const solid = scrolled || open !== null;
+  const menusEnabled = pathname !== "/";
+  const solid = scrolled || (menusEnabled && open !== null);
 
   return (
     <header
@@ -101,17 +104,17 @@ export function Navbar() {
           {/* Producto */}
           <li
             className="relative"
-            onMouseEnter={() => openMenu("producto")}
-            onMouseLeave={scheduleClose}
+            onMouseEnter={() => { if (menusEnabled) openMenu("producto"); }}
+            onMouseLeave={() => { if (menusEnabled) scheduleClose(); }}
           >
             <MenuTrigger
               label="Producto"
               expanded={open === "producto"}
               inverted={!solid}
-              onClick={() => setOpen((o) => (o === "producto" ? null : "producto"))}
+              onClick={() => { if (menusEnabled) setOpen((o) => (o === "producto" ? null : "producto")); }}
             />
             <AnimatePresence>
-              {open === "producto" && (
+              {menusEnabled && open === "producto" && (
                 <motion.div {...panelMotion} className="absolute left-0 top-full pt-3">
                   <div className="w-[620px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="grid grid-cols-2 gap-1 p-3">
@@ -162,17 +165,17 @@ export function Navbar() {
           {/* Soluciones */}
           <li
             className="relative"
-            onMouseEnter={() => openMenu("soluciones")}
-            onMouseLeave={scheduleClose}
+            onMouseEnter={() => { if (menusEnabled) openMenu("soluciones"); }}
+            onMouseLeave={() => { if (menusEnabled) scheduleClose(); }}
           >
             <MenuTrigger
               label="Soluciones"
               expanded={open === "soluciones"}
               inverted={!solid}
-              onClick={() => setOpen((o) => (o === "soluciones" ? null : "soluciones"))}
+              onClick={() => { if (menusEnabled) setOpen((o) => (o === "soluciones" ? null : "soluciones")); }}
             />
             <AnimatePresence>
-              {open === "soluciones" && (
+              {menusEnabled && open === "soluciones" && (
                 <motion.div {...panelMotion} className="absolute left-0 top-full pt-3">
                   <div className="w-[680px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="px-5 pt-4 pb-1">

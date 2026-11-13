@@ -11,9 +11,8 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#001f34] text-white/60">
-      <div className="actros-wave absolute inset-0 opacity-35" aria-hidden="true" />
-      <div className="actros-grid absolute inset-0 opacity-35" aria-hidden="true" />
+    <footer className="footer-atmosphere relative overflow-hidden text-white/60">
+      <div className="actros-grid absolute inset-0 opacity-25" aria-hidden="true" />
       <div className="actros-contours absolute -right-20 bottom-0 h-72 w-[42rem] opacity-35" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
