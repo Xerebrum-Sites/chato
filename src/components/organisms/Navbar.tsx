@@ -92,7 +92,7 @@ export function Navbar() {
           <img
             src={solid ? "/actros-logo.svg?v=1" : "/actros-logo-negative.svg?v=1"}
             alt="Actroos"
-            className={`w-auto transition-all duration-300 ${scrolled ? "h-7" : "h-8 lg:h-9"}`}
+            className={`w-auto transition-all duration-300 ${scrolled ? "h-6" : "h-7 lg:h-8"}`}
           />
         </Link>
 

@@ -212,14 +212,15 @@
 /* Hero principal aprobado: imagen humana, señales de producto y estelas de conexión. */
 .actros-approved-hero {
   background:
-    radial-gradient(circle at 73% 20%, rgba(221, 23, 146, 0.26), transparent 31%),
-    linear-gradient(106deg, #08091a 0%, #101129 44%, #3a1b3d 100%);
+    radial-gradient(ellipse 58% 84% at 5% 64%, rgba(117, 48, 172, 0.72), transparent 74%),
+    radial-gradient(circle at 73% 20%, rgba(238, 61, 144, 0.33), transparent 34%),
+    linear-gradient(106deg, #19154a 0%, #39205a 48%, #5a263e 100%);
 }
 
 .actros-hero-vignette {
   background:
-    radial-gradient(ellipse 52% 72% at 1% 52%, rgba(0, 0, 0, 0.38), transparent 74%),
-    linear-gradient(90deg, rgba(8, 9, 26, 0.2), transparent 56%);
+    radial-gradient(ellipse 44% 60% at 0% 50%, rgba(9, 11, 46, 0.22), transparent 78%),
+    linear-gradient(90deg, rgba(24, 17, 69, 0.06), transparent 54%);
 }
 
 .actros-headline-gradient {
@@ -232,17 +233,17 @@
 .actros-hero-ribbon {
   position: absolute;
   z-index: 1;
-  height: 5px;
+  height: 8px;
   border-radius: 999px;
   pointer-events: none;
   background: linear-gradient(90deg, rgba(255, 136, 18, 0), #ff9c16 17%, #ff3f88 51%, #cc21f1 72%, rgba(255, 66, 150, 0));
-  box-shadow: 0 0 11px rgba(255, 150, 21, 0.9), 0 0 28px rgba(252, 25, 154, 0.76), 0 0 48px rgba(201, 32, 235, 0.46);
+  box-shadow: 0 0 12px rgba(255, 150, 21, 1), 0 0 32px rgba(252, 25, 154, 0.9), 0 0 62px rgba(201, 32, 235, 0.62);
   animation: hero-ribbon-drift 9s ease-in-out infinite alternate;
 }
 
-.actros-hero-ribbon-one { bottom: 10.2rem; left: -14%; width: 79%; rotate: 8deg; }
-.actros-hero-ribbon-two { bottom: 7.1rem; right: -11%; width: 76%; rotate: -10deg; animation-delay: -3.4s; }
-.actros-hero-ribbon-three { bottom: 4.4rem; left: 18%; width: 78%; opacity: 0.78; rotate: 4deg; animation-delay: -6.1s; }
+.actros-hero-ribbon-one { bottom: 11.1rem; left: -14%; width: 82%; rotate: 8deg; }
+.actros-hero-ribbon-two { bottom: 7.5rem; right: -11%; width: 79%; rotate: -10deg; animation-delay: -3.4s; }
+.actros-hero-ribbon-three { bottom: 3.7rem; left: 13%; width: 82%; opacity: 0.92; rotate: 4deg; animation-delay: -6.1s; }
 
 @keyframes hero-ribbon-drift {
   from { transform: translate3d(-1.2rem, 0, 0) scaleX(0.96); opacity: 0.63; }
