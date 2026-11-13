@@ -69,7 +69,7 @@ export function Navbar() {
 
   const scheduleClose = useCallback(() => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpen(null), 120);
+    closeTimer.current = setTimeout(() => setOpen(null), 260);
   }, []);
 
   const menusEnabled = pathname !== "/";
@@ -90,11 +90,11 @@ export function Navbar() {
         }`}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0" aria-label="Actroos — inicio">
+        <Link href="/" className="flex items-center shrink-0" aria-label="Axtroos — inicio">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={solid ? "/actros-logo.svg?v=1" : "/actros-logo-negative.svg?v=1"}
-            alt="Actroos"
+            alt="Axtroos"
             className={`w-auto transition-all duration-300 ${scrolled ? "h-6" : "h-7 lg:h-8"}`}
           />
         </Link>
@@ -105,6 +105,7 @@ export function Navbar() {
           <li
             className="relative"
             onMouseEnter={() => { if (menusEnabled) openMenu("producto"); }}
+            onPointerEnter={() => { if (menusEnabled) openMenu("producto"); }}
             onMouseLeave={() => { if (menusEnabled) scheduleClose(); }}
           >
             <MenuTrigger
@@ -115,7 +116,7 @@ export function Navbar() {
             />
             <AnimatePresence>
               {menusEnabled && open === "producto" && (
-                <motion.div {...panelMotion} className="absolute left-0 top-full pt-3">
+                <motion.div {...panelMotion} onPointerEnter={() => openMenu("producto")} className="absolute left-0 top-[calc(100%-1px)] pt-3">
                   <div className="w-[620px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="grid grid-cols-2 gap-1 p-3">
                       {productLinks.map((link) => (
@@ -166,6 +167,7 @@ export function Navbar() {
           <li
             className="relative"
             onMouseEnter={() => { if (menusEnabled) openMenu("soluciones"); }}
+            onPointerEnter={() => { if (menusEnabled) openMenu("soluciones"); }}
             onMouseLeave={() => { if (menusEnabled) scheduleClose(); }}
           >
             <MenuTrigger
@@ -176,7 +178,7 @@ export function Navbar() {
             />
             <AnimatePresence>
               {menusEnabled && open === "soluciones" && (
-                <motion.div {...panelMotion} className="absolute left-0 top-full pt-3">
+                <motion.div {...panelMotion} onPointerEnter={() => openMenu("soluciones")} className="absolute left-0 top-[calc(100%-1px)] pt-3">
                   <div className="w-[680px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="px-5 pt-4 pb-1">
                       <p className="text-xs font-bold uppercase tracking-wider text-gray-400">

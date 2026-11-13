@@ -31,8 +31,7 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
   return (
     <section id="registro" className="cta-atmosphere relative overflow-hidden py-24">
       <div className="actros-grid absolute inset-0 opacity-45" aria-hidden="true" />
-      <div className="actros-flow actros-flow-cta-one" aria-hidden="true" />
-      <div className="actros-flow actros-flow-cta-two" aria-hidden="true" />
+      <div className="cta-infinity-loop" aria-hidden="true" />
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{

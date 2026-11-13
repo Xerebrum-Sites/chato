@@ -32,7 +32,7 @@ const pillars = [
 ];
 
 /**
- * Tres pilares del producto en la home. Equilibra la comunicación: Actroos no es
+ * Tres pilares del producto en la home. Equilibra la comunicación: Axtroos no es
  * solo el Hub, también son los Agentes IA y un Marketplace extensible.
  */
 export function Pillars() {
@@ -42,13 +42,13 @@ export function Pillars() {
       <div className="actros-contours absolute -right-20 bottom-0 h-80 w-[42rem] opacity-35" aria-hidden="true" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          badge="Todo lo que Actroos hace por vos"
+          badge="Todo lo que Axtroos hace por vos"
           title={
             <>
               Mucho más que <span className="gradient-text">centralizar mensajes</span>
             </>
           }
-          subtitle="Actroos combina tres piezas que trabajan juntas —y activás solo lo que necesitás."
+          subtitle="Axtroos combina tres piezas que trabajan juntas —y activás solo lo que necesitás."
           className="mb-14"
         />
 
