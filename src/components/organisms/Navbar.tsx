@@ -90,7 +90,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center shrink-0" aria-label="Actroos — inicio">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/actros-logo.svg?v=1"
+            src={solid ? "/actros-logo.svg?v=1" : "/actros-logo-negative.svg?v=1"}
             alt="Actroos"
             className={`w-auto transition-all duration-300 ${scrolled ? "h-7" : "h-8 lg:h-9"}`}
           />
@@ -107,6 +107,7 @@ export function Navbar() {
             <MenuTrigger
               label="Producto"
               expanded={open === "producto"}
+              inverted={!solid}
               onClick={() => setOpen((o) => (o === "producto" ? null : "producto"))}
             />
             <AnimatePresence>
@@ -167,6 +168,7 @@ export function Navbar() {
             <MenuTrigger
               label="Soluciones"
               expanded={open === "soluciones"}
+              inverted={!solid}
               onClick={() => setOpen((o) => (o === "soluciones" ? null : "soluciones"))}
             />
             <AnimatePresence>
@@ -213,7 +215,9 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-violet-600 rounded-lg hover:bg-violet-50 transition-colors duration-150"
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
+                  solid ? "text-gray-600 hover:text-violet-600 hover:bg-violet-50" : "text-white/85 hover:text-white hover:bg-white/10"
+                }`}
               >
                 {link.label}
               </Link>
@@ -225,18 +229,20 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <a
             href={URLS.signIn}
-            className="text-sm font-medium text-gray-600 hover:text-violet-600 transition-colors"
+            className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              solid ? "text-gray-600 hover:text-violet-600" : "border border-white/70 text-white hover:bg-white/10"
+            }`}
           >
             Iniciar sesión
           </a>
-          <Button href={URLS.signIn} size="sm">
-            Empezar gratis
+          <Button href="/contacto/" size="sm">
+            Solicitar demo
           </Button>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+          className={`lg:hidden p-2 rounded-lg transition-colors ${solid ? "text-gray-700 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={mobileOpen}
@@ -304,10 +310,12 @@ export function Navbar() {
 function MenuTrigger({
   label,
   expanded,
+  inverted,
   onClick,
 }: {
   label: string;
   expanded: boolean;
+  inverted: boolean;
   onClick: () => void;
 }) {
   return (
@@ -316,7 +324,7 @@ function MenuTrigger({
       onClick={onClick}
       aria-expanded={expanded}
       className={`inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
-        expanded ? "text-violet-700 bg-violet-50" : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
+        expanded ? "text-violet-700 bg-violet-50" : inverted ? "text-white/85 hover:text-white hover:bg-white/10" : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
       }`}
     >
       {label}
