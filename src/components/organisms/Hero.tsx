@@ -21,9 +21,7 @@ export function Hero() {
       <div className="actros-grid absolute inset-0 opacity-20" aria-hidden="true" />
       <div className="actros-dots absolute -left-12 top-12 h-80 w-80 opacity-20" aria-hidden="true" />
       <div className="actros-hero-vignette absolute inset-0" aria-hidden="true" />
-      <div className="actros-hero-ribbon actros-hero-ribbon-one" aria-hidden="true" />
-      <div className="actros-hero-ribbon actros-hero-ribbon-two" aria-hidden="true" />
-      <div className="actros-hero-ribbon actros-hero-ribbon-three" aria-hidden="true" />
+      <HeroTrails reduceMotion={reduceMotion} />
 
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, scale: 1.035 }}
@@ -32,7 +30,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
         <Image
-          src="/images/brand/hero-collaboration-v1.png"
+          src="/images/brand/hero-collaboration-v2.png"
           alt="Dos profesionales colaborando desde una computadora portátil"
           fill
           priority
@@ -55,7 +53,7 @@ export function Hero() {
           >
             <h1 className="text-balance text-[2.35rem] font-black leading-[.98] tracking-[-.048em] sm:text-5xl lg:text-[3.15rem]">
               <span className="block">Conectá tus conversaciones.</span>
-              <span className="actros-headline-gradient block italic">Multiplicá oportunidades.</span>
+              <span className="actros-headline-gradient block">Multiplicá oportunidades.</span>
             </h1>
             <p className="mt-5 max-w-md text-base leading-relaxed text-white/88 sm:text-[1.02rem]">
               Omnicanalidad e inteligencia para convertir cada conversación en una oportunidad.
@@ -85,9 +83,67 @@ export function Hero() {
   );
 }
 
+function HeroTrails({ reduceMotion }: { reduceMotion: boolean | null }) {
+  const animation = reduceMotion
+    ? { opacity: 0.92 }
+    : { opacity: [0.64, 1, 0.76], x: [0, 14, 0], y: [0, -5, 0] };
+
+  return (
+    <motion.svg
+      viewBox="0 0 1440 370"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      animate={animation}
+      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[17rem] w-full overflow-visible sm:h-[22rem]"
+    >
+      <defs>
+        <linearGradient id="hero-infinity-primary" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#ff8d1c" stopOpacity="0" />
+          <stop offset="0.14" stopColor="#ff9e1c" />
+          <stop offset="0.45" stopColor="#ff317f" />
+          <stop offset="0.7" stopColor="#ca28ed" />
+          <stop offset="1" stopColor="#ff8c1b" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="hero-infinity-secondary" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#c52cef" stopOpacity="0" />
+          <stop offset="0.2" stopColor="#ca28ed" />
+          <stop offset="0.52" stopColor="#ff3b8f" />
+          <stop offset="0.82" stopColor="#ff9f1a" />
+          <stop offset="1" stopColor="#ff9f1a" stopOpacity="0" />
+        </linearGradient>
+        <filter id="hero-trail-glow" x="-20%" y="-60%" width="140%" height="220%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <motion.path
+        d="M -120 285 C 105 78, 348 438, 588 250 C 825 66, 1035 430, 1270 244 C 1370 165, 1460 132, 1560 80"
+        fill="none"
+        stroke="url(#hero-infinity-primary)"
+        strokeLinecap="round"
+        strokeWidth="10"
+        filter="url(#hero-trail-glow)"
+        initial={reduceMotion ? false : { pathLength: 0.35, pathOffset: 0.65 }}
+        animate={reduceMotion ? undefined : { pathLength: 1, pathOffset: 0 }}
+        transition={{ duration: 2.1, ease: EASE }}
+      />
+      <path
+        d="M -120 330 C 102 468, 355 72, 588 269 C 817 462, 1048 81, 1270 278 C 1390 383, 1470 355, 1570 270"
+        fill="none"
+        stroke="url(#hero-infinity-secondary)"
+        strokeLinecap="round"
+        strokeWidth="5"
+        opacity="0.88"
+        filter="url(#hero-trail-glow)"
+      />
+    </motion.svg>
+  );
+}
+
 function HeroSignals({ reduceMotion }: { reduceMotion: boolean | null }) {
   return (
-    <div className="pointer-events-none">
+    <div className="pointer-events-none absolute inset-0 z-20">
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: -16 }}
         animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, -8, 0] }}
