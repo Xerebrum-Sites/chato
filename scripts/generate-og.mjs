@@ -82,9 +82,9 @@ async function main() {
       { input: logoPng, top: 62, left: 76 },
     ])
     .png({ quality: 100, compressionLevel: 6 })
-    .toFile(join(root, "public/og-image-v2.png"));
+    .toFile(join(root, "public/og-axtroos-v1.png"));
 
-  console.log(`✓ public/og-image-v2.png generated (${W}×${H})`);
+  console.log(`✓ public/og-axtroos-v1.png generated (${W}×${H})`);
 }
 
 main().catch((error) => {

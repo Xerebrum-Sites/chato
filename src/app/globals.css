@@ -255,25 +255,28 @@
   z-index: 0;
   width: 38rem;
   height: 19rem;
-  border: 2px solid rgba(255, 132, 20, 0.66);
+  border: 18px solid transparent;
   border-radius: 50%;
   pointer-events: none;
-  box-shadow: 0 0 30px rgba(255, 130, 15, 0.28), inset 0 0 30px rgba(216, 28, 146, 0.12);
-  filter: blur(0.25px);
+  background:
+    linear-gradient(#0d1025, #0d1025) padding-box,
+    linear-gradient(118deg, rgba(255, 150, 25, 0), #ff9d1a 24%, #ff3b85 56%, #ce31ef 77%, rgba(255, 151, 25, 0)) border-box;
+  box-shadow: 0 0 42px rgba(255, 130, 15, 0.34), 0 0 90px rgba(224, 25, 150, 0.24);
+  filter: blur(0.45px);
   animation: marketplace-orbit-drift 14s ease-in-out infinite alternate;
 }
 
 .marketplace-orbit::after {
   content: "";
   position: absolute;
-  inset: 1.15rem;
-  border: 1px solid rgba(222, 41, 162, 0.45);
+  inset: 1.45rem;
+  border: 4px solid rgba(255, 135, 29, 0.36);
   border-radius: inherit;
   box-shadow: 0 0 20px rgba(196, 31, 215, 0.22);
 }
 
-.marketplace-orbit-one { bottom: -11rem; left: -14rem; rotate: 13deg; opacity: 0.76; }
-.marketplace-orbit-two { top: -11rem; right: -19rem; width: 48rem; height: 23rem; rotate: -21deg; opacity: 0.5; animation-delay: -5s; }
+.marketplace-orbit-one { bottom: -11rem; left: -14rem; rotate: 13deg; opacity: 0.84; }
+.marketplace-orbit-two { top: -11rem; right: -19rem; width: 48rem; height: 23rem; rotate: -21deg; opacity: 0.64; animation-delay: -5s; }
 
 .cta-infinity-loop {
   position: absolute;
@@ -283,7 +286,7 @@
   width: 44rem;
   height: 20rem;
   pointer-events: none;
-  filter: blur(0.2px) drop-shadow(0 0 22px rgba(255, 72, 148, 0.38));
+  filter: blur(0.35px) drop-shadow(0 0 34px rgba(255, 72, 148, 0.54));
   animation: cta-infinity-drift 13s ease-in-out infinite alternate;
 }
 
@@ -294,12 +297,12 @@
   top: 2.7rem;
   width: 59%;
   height: 10.7rem;
-  border: 12px solid transparent;
+  border: 25px solid transparent;
   border-radius: 50%;
   background:
     linear-gradient(#111027, #111027) padding-box,
     linear-gradient(118deg, rgba(255, 148, 22, 0), #ff9d1c 23%, #ff3182 58%, #d42df0 76%, rgba(255, 108, 27, 0)) border-box;
-  box-shadow: 0 0 22px rgba(255, 112, 33, 0.36);
+  box-shadow: 0 0 36px rgba(255, 112, 33, 0.48), 0 0 78px rgba(222, 20, 150, 0.3);
 }
 
 .cta-infinity-loop::before { left: 0; rotate: 21deg; }

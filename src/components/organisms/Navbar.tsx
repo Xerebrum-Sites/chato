@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,8 +29,6 @@ export function Navbar() {
   const [open, setOpen] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<MenuKey | null>("producto");
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -51,33 +49,15 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Cerrar el mega menú al hacer click afuera
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setOpen(null);
-      }
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
-
   const openMenu = useCallback((key: MenuKey) => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpen(key);
   }, []);
 
-  const scheduleClose = useCallback(() => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpen(null), 260);
-  }, []);
-
-  const menusEnabled = pathname !== "/";
-  const solid = scrolled || (menusEnabled && open !== null);
+  const isHome = pathname === "/";
+  const solid = !isHome || scrolled || open !== null;
 
   return (
     <header
-      ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         solid
           ? "bg-white/95 backdrop-blur-md border-gray-100 shadow-sm"
@@ -104,19 +84,18 @@ export function Navbar() {
           {/* Producto */}
           <li
             className="relative"
-            onMouseEnter={() => { if (menusEnabled) openMenu("producto"); }}
-            onPointerEnter={() => { if (menusEnabled) openMenu("producto"); }}
-            onMouseLeave={() => { if (menusEnabled) scheduleClose(); }}
+            onMouseEnter={() => openMenu("producto")}
+            onPointerEnter={() => openMenu("producto")}
           >
             <MenuTrigger
               label="Producto"
               expanded={open === "producto"}
               inverted={!solid}
-              onClick={() => { if (menusEnabled) setOpen((o) => (o === "producto" ? null : "producto")); }}
+              onClick={() => openMenu("producto")}
             />
             <AnimatePresence>
-              {menusEnabled && open === "producto" && (
-                <motion.div {...panelMotion} onPointerEnter={() => openMenu("producto")} className="absolute left-0 top-[calc(100%-1px)] pt-3">
+              {open === "producto" && (
+                <motion.div {...panelMotion} onPointerEnter={() => openMenu("producto")} className="absolute left-0 top-[calc(100%-1px)] z-[60] pt-3">
                   <div className="w-[620px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="grid grid-cols-2 gap-1 p-3">
                       {productLinks.map((link) => (
@@ -166,19 +145,18 @@ export function Navbar() {
           {/* Soluciones */}
           <li
             className="relative"
-            onMouseEnter={() => { if (menusEnabled) openMenu("soluciones"); }}
-            onPointerEnter={() => { if (menusEnabled) openMenu("soluciones"); }}
-            onMouseLeave={() => { if (menusEnabled) scheduleClose(); }}
+            onMouseEnter={() => openMenu("soluciones")}
+            onPointerEnter={() => openMenu("soluciones")}
           >
             <MenuTrigger
               label="Soluciones"
               expanded={open === "soluciones"}
               inverted={!solid}
-              onClick={() => { if (menusEnabled) setOpen((o) => (o === "soluciones" ? null : "soluciones")); }}
+              onClick={() => openMenu("soluciones")}
             />
             <AnimatePresence>
-              {menusEnabled && open === "soluciones" && (
-                <motion.div {...panelMotion} onPointerEnter={() => openMenu("soluciones")} className="absolute left-0 top-[calc(100%-1px)] pt-3">
+              {open === "soluciones" && (
+                <motion.div {...panelMotion} onPointerEnter={() => openMenu("soluciones")} className="absolute left-0 top-[calc(100%-1px)] z-[60] pt-3">
                   <div className="w-[680px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="px-5 pt-4 pb-1">
                       <p className="text-xs font-bold uppercase tracking-wider text-gray-400">
