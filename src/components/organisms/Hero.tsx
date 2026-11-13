@@ -90,12 +90,12 @@ function HeroTrails({ reduceMotion }: { reduceMotion: boolean | null }) {
 
   return (
     <motion.svg
-      viewBox="0 0 1440 370"
+      viewBox="0 0 1440 460"
       preserveAspectRatio="none"
       aria-hidden="true"
       animate={animation}
       transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[17rem] w-full overflow-visible sm:h-[22rem]"
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[20rem] w-full overflow-visible sm:h-[27rem]"
     >
       <defs>
         <linearGradient id="hero-infinity-primary" x1="0" x2="1" y1="0" y2="0">
@@ -113,28 +113,38 @@ function HeroTrails({ reduceMotion }: { reduceMotion: boolean | null }) {
           <stop offset="1" stopColor="#ff9f1a" stopOpacity="0" />
         </linearGradient>
         <filter id="hero-trail-glow" x="-20%" y="-60%" width="140%" height="220%">
-          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feGaussianBlur stdDeviation="12" result="blur" />
           <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
       <motion.path
-        d="M -120 285 C 105 78, 348 438, 588 250 C 825 66, 1035 430, 1270 244 C 1370 165, 1460 132, 1560 80"
+        d="M -140 350 C 88 132, 312 558, 578 330 C 830 115, 1026 535, 1260 302 C 1364 198, 1462 174, 1570 130"
         fill="none"
         stroke="url(#hero-infinity-primary)"
         strokeLinecap="round"
-        strokeWidth="10"
+        strokeWidth="31"
+        opacity="0.86"
         filter="url(#hero-trail-glow)"
         initial={reduceMotion ? false : { pathLength: 0.35, pathOffset: 0.65 }}
         animate={reduceMotion ? undefined : { pathLength: 1, pathOffset: 0 }}
         transition={{ duration: 2.1, ease: EASE }}
       />
       <path
-        d="M -120 330 C 102 468, 355 72, 588 269 C 817 462, 1048 81, 1270 278 C 1390 383, 1470 355, 1570 270"
+        d="M -100 404 C 118 588, 342 108, 584 348 C 820 585, 1054 113, 1270 340 C 1392 468, 1474 425, 1570 330"
         fill="none"
         stroke="url(#hero-infinity-secondary)"
         strokeLinecap="round"
-        strokeWidth="5"
-        opacity="0.88"
+        strokeWidth="15"
+        opacity="0.78"
+        filter="url(#hero-trail-glow)"
+      />
+      <path
+        d="M -90 445 C 155 286, 350 604, 602 415 C 824 250, 1054 564, 1290 385 C 1390 307, 1480 286, 1570 248"
+        fill="none"
+        stroke="url(#hero-infinity-primary)"
+        strokeLinecap="round"
+        strokeWidth="7"
+        opacity="0.72"
         filter="url(#hero-trail-glow)"
       />
     </motion.svg>
