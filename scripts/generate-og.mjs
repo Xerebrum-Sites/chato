@@ -79,36 +79,36 @@ async function main() {
     <rect x="510" y="102" width="230" height="96" rx="18" fill="url(#card)" stroke="#ffb5dc" stroke-opacity="0.78"/>
     <circle cx="538" cy="132" r="13" fill="#25d366"/>
     <path d="M532 132h12m-6-6v12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-    <text x="560" y="137" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff">Nuevos mensajes</text>
+    <text x="560" y="137" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff">Nuevos mensajes</text>
     <rect x="674" y="120" width="43" height="22" rx="11" fill="#ed1682"/>
-    <text x="685" y="136" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff">+12</text>
+    <text x="685" y="136" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#fff">+12</text>
     <line x1="528" y1="158" x2="721" y2="158" stroke="#fff" stroke-opacity="0.24"/>
     <circle cx="538" cy="177" r="10" fill="#12bd7d"/>
     <path d="M533 177l3 3 6-7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="560" y="182" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#fff">Reserva confirmada</text>
+    <text x="560" y="182" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="14" font-weight="600" fill="#fff">Reserva confirmada</text>
   </g>
   <g filter="url(#card-shadow)">
     <rect x="825" y="88" width="256" height="52" rx="18" fill="url(#card)" stroke="#ffb5dc" stroke-opacity="0.72"/>
-    <text x="849" y="121" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff">✦  Automatización activa</text>
+    <text x="849" y="121" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#fff">✦  Automatización activa</text>
     <rect x="1014" y="102" width="42" height="24" rx="12" fill="#f21c91"/>
     <circle cx="1043" cy="114" r="9" fill="#fff"/>
   </g>
   <g filter="url(#card-shadow)">
     <rect x="908" y="338" width="224" height="106" rx="18" fill="url(#card-result)" stroke="#ffcfed" stroke-opacity="0.78"/>
-    <text x="930" y="370" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff">Resultados del mes</text>
+    <text x="930" y="370" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff">Resultados del mes</text>
     <rect x="931" y="405" width="20" height="13" rx="2" fill="#ff9d18"/><rect x="963" y="392" width="20" height="26" rx="2" fill="#ff7e30"/><rect x="995" y="376" width="20" height="42" rx="2" fill="#ff4c65"/><rect x="1027" y="360" width="20" height="58" rx="2" fill="#f321a4"/>
     <path d="M928 420 C966 396 982 409 1005 385 S1052 390 1102 357" fill="none" stroke="#fff" stroke-opacity="0.75" stroke-width="2"/>
   </g>
   <path d="M -116 548 C 102 294, 310 690, 558 464 C 804 238, 1002 700, 1253 425 C 1342 327, 1437 291, 1522 246" fill="none" stroke="url(#trail-a)" stroke-width="32" stroke-linecap="round" filter="url(#glow)" opacity="0.92"/>
   <path d="M -102 614 C 125 747, 344 298, 582 521 C 817 730, 1031 294, 1270 502 C 1382 598, 1450 582, 1520 529" fill="none" stroke="url(#trail-b)" stroke-width="16" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
   <path d="M -78 571 C 129 389, 311 641, 565 485 C 797 342, 1000 632, 1260 445 C 1352 379, 1442 363, 1515 327" fill="none" stroke="url(#trail-a)" stroke-width="7" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
-  <text x="76" y="194" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2.8" fill="#ffac1d">PLATAFORMA B2B OMNICANAL</text>
-  <text x="76" y="270" font-family="Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.6" fill="#ffffff">Conectá conversaciones.</text>
-  <text x="76" y="328" font-family="Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.6" fill="#ffffff">Potenciá equipos.</text>
-  <text x="76" y="385" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="800" font-style="normal" letter-spacing="-1.6" fill="url(#headline)">Multiplicá oportunidades.</text>
-  <text x="76" y="426" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#ffffff" fill-opacity="0.84">Una plataforma omnicanal con IA que conecta, automatiza</text>
-  <text x="76" y="452" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#ffffff" fill-opacity="0.84">y transforma cada interacción en resultados.</text>
-  <text x="76" y="505" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#ffffff">axtroos.com</text>
+  <text x="76" y="194" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2.8" fill="#ffac1d">PLATAFORMA B2B OMNICANAL</text>
+  <text x="76" y="270" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.6" fill="#ffffff">Conectá conversaciones.</text>
+  <text x="76" y="328" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="49" font-weight="800" letter-spacing="-1.6" fill="#ffffff">Potenciá equipos.</text>
+  <text x="76" y="385" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="48" font-weight="800" font-style="normal" letter-spacing="-1.6" fill="url(#headline)">Multiplicá oportunidades.</text>
+  <text x="76" y="426" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#ffffff" fill-opacity="0.84">Una plataforma omnicanal con IA que conecta, automatiza</text>
+  <text x="76" y="452" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#ffffff" fill-opacity="0.84">y transforma cada interacción en resultados.</text>
+  <text x="76" y="505" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#ffffff">axtroos.com</text>
 </svg>`);
 
   await sharp(peoplePhoto)
