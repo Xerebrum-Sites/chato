@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
@@ -23,11 +24,11 @@ const panelMotion = {
 };
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<MenuKey | null>("producto");
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -36,6 +37,24 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // El panel no debe quedar persistente: se cierra al salir del encabezado
+  // o cuando la navegación termina en otra sección.
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setOpen(null);
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
+
+  useEffect(() => {
+    setOpen(null);
+    setMobileOpen(false);
+  }, [pathname]);
 
   // Cerrar con Escape
   useEffect(() => {
@@ -49,28 +68,12 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Cerrar el mega menú al hacer click afuera
-  useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setOpen(null);
-      }
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, []);
-
   const openMenu = useCallback((key: MenuKey) => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpen(key);
   }, []);
 
-  const scheduleClose = useCallback(() => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpen(null), 120);
-  }, []);
-
-  const solid = scrolled || open !== null;
+  const isHome = pathname === "/";
+  const solid = !isHome || scrolled || open !== null;
 
   return (
     <header
@@ -87,12 +90,12 @@ export function Navbar() {
         }`}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0" aria-label="Actroos — inicio">
+        <Link href="/" className="flex items-center shrink-0" aria-label="Axtroos — inicio">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/actros-logo.svg?v=1"
-            alt="Actroos"
-            className={`w-auto transition-all duration-300 ${scrolled ? "h-7" : "h-8 lg:h-9"}`}
+            src={solid ? "/actros-logo.svg?v=1" : "/actros-logo-negative.svg?v=1"}
+            alt="Axtroos"
+            className={`w-auto transition-all duration-300 ${scrolled ? "h-6" : "h-7 lg:h-8"}`}
           />
         </Link>
 
@@ -102,16 +105,17 @@ export function Navbar() {
           <li
             className="relative"
             onMouseEnter={() => openMenu("producto")}
-            onMouseLeave={scheduleClose}
+            onPointerEnter={() => openMenu("producto")}
           >
             <MenuTrigger
               label="Producto"
               expanded={open === "producto"}
-              onClick={() => setOpen((o) => (o === "producto" ? null : "producto"))}
+              inverted={!solid}
+              onClick={() => openMenu("producto")}
             />
             <AnimatePresence>
               {open === "producto" && (
-                <motion.div {...panelMotion} className="absolute left-0 top-full pt-3">
+                <motion.div {...panelMotion} onPointerEnter={() => openMenu("producto")} className="absolute left-0 top-[calc(100%-1px)] z-[60] pt-3">
                   <div className="w-[620px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="grid grid-cols-2 gap-1 p-3">
                       {productLinks.map((link) => (
@@ -162,16 +166,17 @@ export function Navbar() {
           <li
             className="relative"
             onMouseEnter={() => openMenu("soluciones")}
-            onMouseLeave={scheduleClose}
+            onPointerEnter={() => openMenu("soluciones")}
           >
             <MenuTrigger
               label="Soluciones"
               expanded={open === "soluciones"}
-              onClick={() => setOpen((o) => (o === "soluciones" ? null : "soluciones"))}
+              inverted={!solid}
+              onClick={() => openMenu("soluciones")}
             />
             <AnimatePresence>
               {open === "soluciones" && (
-                <motion.div {...panelMotion} className="absolute left-0 top-full pt-3">
+                <motion.div {...panelMotion} onPointerEnter={() => openMenu("soluciones")} className="absolute left-0 top-[calc(100%-1px)] z-[60] pt-3">
                   <div className="w-[680px] rounded-2xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 overflow-hidden">
                     <div className="px-5 pt-4 pb-1">
                       <p className="text-xs font-bold uppercase tracking-wider text-gray-400">
@@ -213,7 +218,9 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-violet-600 rounded-lg hover:bg-violet-50 transition-colors duration-150"
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
+                  solid ? "text-gray-600 hover:text-violet-600 hover:bg-violet-50" : "text-white/85 hover:text-white hover:bg-white/10"
+                }`}
               >
                 {link.label}
               </Link>
@@ -225,18 +232,20 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <a
             href={URLS.signIn}
-            className="text-sm font-medium text-gray-600 hover:text-violet-600 transition-colors"
+            className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              solid ? "text-gray-600 hover:text-violet-600" : "border border-white/70 text-white hover:bg-white/10"
+            }`}
           >
             Iniciar sesión
           </a>
-          <Button href={URLS.signIn} size="sm">
-            Empezar gratis
+          <Button href="/contacto/" size="sm">
+            Solicitar demo
           </Button>
         </div>
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+          className={`lg:hidden p-2 rounded-lg transition-colors ${solid ? "text-gray-700 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={mobileOpen}
@@ -304,10 +313,12 @@ export function Navbar() {
 function MenuTrigger({
   label,
   expanded,
+  inverted,
   onClick,
 }: {
   label: string;
   expanded: boolean;
+  inverted: boolean;
   onClick: () => void;
 }) {
   return (
@@ -316,7 +327,7 @@ function MenuTrigger({
       onClick={onClick}
       aria-expanded={expanded}
       className={`inline-flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-150 ${
-        expanded ? "text-violet-700 bg-violet-50" : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
+        expanded ? "text-violet-700 bg-violet-50" : inverted ? "text-white/85 hover:text-white hover:bg-white/10" : "text-gray-600 hover:text-violet-600 hover:bg-violet-50"
       }`}
     >
       {label}

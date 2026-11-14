@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Sistema Actroos: valores oficiales de Paleta-01.svg */
+  /* Sistema Axtroos: valores oficiales de Paleta-01.svg */
   --color-actros-night: #0b0b17;
   --color-actros-navy: #001f34;
   --color-actros-orange: #ee7d16;
@@ -130,7 +130,7 @@
   display: none;
 }
 
-/* Texturas abstractas del sistema Actroos. No representan al personaje Volt. */
+/* Texturas abstractas del sistema Axtroos. No representan al personaje Volt. */
 .actros-night {
   background-color: #0b0b17;
   color: #ffffff;
@@ -174,15 +174,179 @@
   mask-image: radial-gradient(ellipse 70% 85% at 100% 100%, #000 0%, transparent 76%);
 }
 
+/* Estelas luminosas para el hero: abstracción de flujo y conexión, sin personaje. */
+.actros-hero-glow {
+  background:
+    radial-gradient(ellipse 52% 50% at 78% 36%, rgba(238, 125, 22, 0.34), transparent 68%),
+    radial-gradient(ellipse 48% 46% at 67% 79%, rgba(198, 18, 97, 0.36), transparent 71%),
+    linear-gradient(90deg, rgba(0, 31, 52, 0.32), transparent 54%);
+}
+
+.actros-hero-trail {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(100deg, rgba(238, 125, 22, 0), #ee7d16 26%, #c61261 65%, rgba(198, 18, 97, 0));
+  box-shadow: 0 0 20px rgba(238, 125, 22, 0.62), 0 0 46px rgba(198, 18, 97, 0.45);
+  transform-origin: center;
+  animation: hero-trail-drift 8s ease-in-out infinite alternate;
+}
+
+.actros-hero-trail-one {
+  bottom: 7.3rem;
+  left: -10%;
+  width: 86%;
+  height: 3px;
+  rotate: -8deg;
+}
+
+.actros-hero-trail-two {
+  bottom: 1.9rem;
+  right: -10%;
+  width: 76%;
+  height: 4px;
+  rotate: 10deg;
+  animation-delay: -3s;
+}
+
+/* Hero principal aprobado: imagen humana, señales de producto y estelas de conexión. */
+.actros-approved-hero {
+  background:
+    radial-gradient(ellipse 58% 84% at 5% 64%, rgba(117, 48, 172, 0.72), transparent 74%),
+    radial-gradient(circle at 73% 20%, rgba(238, 61, 144, 0.33), transparent 34%),
+    linear-gradient(106deg, #19154a 0%, #39205a 48%, #5a263e 100%);
+}
+
+.hero-soft-transition {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.28) 43%, #ffffff 100%);
+}
+
+.actros-hero-vignette {
+  background:
+    radial-gradient(ellipse 44% 60% at 0% 50%, rgba(9, 11, 46, 0.22), transparent 78%),
+    linear-gradient(90deg, rgba(24, 17, 69, 0.06), transparent 54%);
+}
+
+.actros-headline-gradient {
+  background: linear-gradient(96deg, #ffad14 0%, #ff6a2b 39%, #fa168e 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Superficies oscuras y variantes de textura que conectan la home. */
+.marketplace-atmosphere,
+.cta-atmosphere {
+  background:
+    radial-gradient(ellipse 58% 78% at 90% 5%, rgba(238, 125, 22, 0.38), transparent 56%),
+    radial-gradient(ellipse 46% 68% at 67% 36%, rgba(198, 18, 97, 0.35), transparent 64%),
+    linear-gradient(125deg, #08091a 0%, #0d1025 54%, #1b1230 100%);
+  color: #fff;
+}
+
+.footer-atmosphere {
+  background:
+    radial-gradient(ellipse 48% 70% at 96% 6%, rgba(90, 38, 102, 0.34), transparent 63%),
+    linear-gradient(135deg, #060716 0%, #090a1b 58%, #11091d 100%);
+}
+
+.marketplace-orbit {
+  position: absolute;
+  z-index: 0;
+  width: 38rem;
+  height: 19rem;
+  border: 18px solid transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    linear-gradient(#0d1025, #0d1025) padding-box,
+    linear-gradient(118deg, rgba(255, 150, 25, 0), #ff9d1a 24%, #ff3b85 56%, #ce31ef 77%, rgba(255, 151, 25, 0)) border-box;
+  box-shadow: 0 0 42px rgba(255, 130, 15, 0.34), 0 0 90px rgba(224, 25, 150, 0.24);
+  filter: blur(0.45px);
+  animation: marketplace-orbit-drift 14s ease-in-out infinite alternate;
+}
+
+.marketplace-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 1.45rem;
+  border: 4px solid rgba(255, 135, 29, 0.36);
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(196, 31, 215, 0.22);
+}
+
+.marketplace-orbit-one { bottom: -11rem; left: -14rem; rotate: 13deg; opacity: 0.84; }
+.marketplace-orbit-two { top: -11rem; right: -19rem; width: 48rem; height: 23rem; rotate: -21deg; opacity: 0.64; animation-delay: -5s; }
+
+.cta-infinity-loop {
+  position: absolute;
+  right: -11rem;
+  top: -7.6rem;
+  z-index: 0;
+  width: 44rem;
+  height: 20rem;
+  pointer-events: none;
+  filter: blur(0.35px) drop-shadow(0 0 34px rgba(255, 72, 148, 0.54));
+  animation: cta-infinity-drift 13s ease-in-out infinite alternate;
+}
+
+.cta-infinity-loop::before,
+.cta-infinity-loop::after {
+  content: "";
+  position: absolute;
+  top: 2.7rem;
+  width: 59%;
+  height: 10.7rem;
+  border: 25px solid transparent;
+  border-radius: 50%;
+  background:
+    linear-gradient(#111027, #111027) padding-box,
+    linear-gradient(118deg, rgba(255, 148, 22, 0), #ff9d1c 23%, #ff3182 58%, #d42df0 76%, rgba(255, 108, 27, 0)) border-box;
+  box-shadow: 0 0 36px rgba(255, 112, 33, 0.48), 0 0 78px rgba(222, 20, 150, 0.3);
+}
+
+.cta-infinity-loop::before { left: 0; rotate: 21deg; }
+.cta-infinity-loop::after { right: 0; rotate: -21deg; }
+
+@keyframes marketplace-orbit-drift {
+  from { transform: translate3d(-0.6rem, 0, 0) rotate(-1deg); opacity: 0.38; }
+  to { transform: translate3d(1.2rem, -0.9rem, 0) rotate(3deg); opacity: 0.78; }
+}
+
+@keyframes cta-infinity-drift {
+  from { transform: translate3d(-0.7rem, 0.5rem, 0) rotate(-2deg); opacity: 0.54; }
+  to { transform: translate3d(1.2rem, -0.6rem, 0) rotate(3deg); opacity: 0.92; }
+}
+
 @keyframes orbit-drift {
   from { translate: 0 0; rotate: 0deg; }
   to { translate: 1.5rem -1rem; rotate: 7deg; }
 }
 
+@keyframes hero-trail-drift {
+  from { transform: translate3d(-1.2rem, 0, 0) scaleX(0.95); opacity: 0.54; }
+  to { transform: translate3d(1.7rem, -0.8rem, 0) scaleX(1.05); opacity: 0.95; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .hero-orbit { animation: none; }
+  .actros-hero-trail { animation: none; }
+  .marketplace-orbit,
+  .cta-infinity-loop { animation: none; }
 }
+
+.how-it-works-rail {
+  background: linear-gradient(90deg, transparent, #ff8e19 16%, #f31c8e 50%, #c936ef 82%, transparent);
+  box-shadow: 0 0 18px rgba(235, 37, 151, 0.28);
+}
+
+.how-it-works-emblem {
+  background: linear-gradient(135deg, #ff9b16, #fa287d 53%, #c92deb);
+  box-shadow: 0 12px 30px rgba(223, 35, 133, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.how-it-works-emblem svg { position: relative; z-index: 1; }
 
 /* Privacy policy prose styles */
 .prose-policy p { color: #4b5563; line-height: 1.75; margin-bottom: 0.875rem; }

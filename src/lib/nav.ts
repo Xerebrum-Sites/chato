@@ -37,7 +37,7 @@ export const productLinks: NavLink[] = [
   {
     label: "Marketplace",
     href: "/herramientas/",
-    description: "Módulos para expandir Actroos cuando los necesitás",
+    description: "Módulos para expandir Axtroos cuando los necesitás",
     icon: Blocks,
   },
 ];

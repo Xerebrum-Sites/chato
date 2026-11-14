@@ -102,7 +102,7 @@ export function AiHeroVisual() {
           <ArrowRight className="h-5 w-5 text-violet-400" />
           <div className="rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-600 p-4 text-white shadow-xl shadow-violet-200">
             <Bot className="mb-3 h-7 w-7" />
-            <p className="text-xs font-black">Agente IA Actroos</p>
+            <p className="text-xs font-black">Agente IA Axtroos</p>
             <p className="mt-2 text-[10px] leading-relaxed text-white/75">Responde con el conocimiento real del negocio.</p>
           </div>
         </div>
@@ -145,13 +145,13 @@ export function FeaturesHeroVisual() {
   ];
 
   return (
-    <VisualShell label="Capacidades incluidas en Actroos organizadas alrededor de una única plataforma de escritorio">
+    <VisualShell label="Capacidades incluidas en Axtroos organizadas alrededor de una única plataforma de escritorio">
       <div className="w-full max-w-[31rem]">
         <div className="relative mx-auto mb-5 flex h-32 w-32 items-center justify-center rounded-[2rem] bg-[#18111f] text-white shadow-2xl shadow-violet-200 sm:h-36 sm:w-36">
           <div className="absolute inset-2 rounded-[1.55rem] border border-white/10" />
           <div className="text-center">
             <Sparkles className="mx-auto mb-2 h-7 w-7 text-orange-400" />
-            <span className="text-sm font-black">Todo en Actroos</span>
+            <span className="text-sm font-black">Todo en Axtroos</span>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -173,7 +173,7 @@ export function FeaturesHeroVisual() {
 
 export function ContactHeroVisual() {
   return (
-    <VisualShell label="Tres formas de contactar al equipo de Actroos: WhatsApp, email o una demostración">
+    <VisualShell label="Tres formas de contactar al equipo de Axtroos: WhatsApp, email o una demostración">
       <div className="w-full max-w-[30rem]">
         <div className="grid grid-cols-3 gap-3">
           <div className="rounded-2xl border border-gray-100 bg-white px-2 py-4 text-center shadow-lg">
@@ -197,7 +197,7 @@ export function ContactHeroVisual() {
             </div>
             <div>
               <p className="text-sm font-black">Hablás con una persona</p>
-              <p className="mt-1 text-xs leading-relaxed text-white/65">Te ayudamos a encontrar la mejor forma de usar Actroos.</p>
+              <p className="mt-1 text-xs leading-relaxed text-white/65">Te ayudamos a encontrar la mejor forma de usar Axtroos.</p>
             </div>
           </div>
           <div className="mt-5 flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-[10px] font-bold text-white/75">

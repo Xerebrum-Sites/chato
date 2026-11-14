@@ -78,7 +78,7 @@ export function PageHero({
             <div className="relative min-h-[22rem] p-2 sm:min-h-[28rem] sm:p-4 lg:min-h-[31rem]">
               <Image
                 src={imageSrc}
-                alt={imageLabel ?? "Visual conceptual de Actroos"}
+                alt={imageLabel ?? "Visual conceptual de Axtroos"}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
