@@ -1,13 +1,7 @@
-name = "chato-site"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
+name = "axtroos-landing"
+compatibility_date = "2026-11-14"
+workers_dev = true
 
-[build]
-command = "npm run build"
-
-[[routes]]
-pattern = "chato.app/*"
-zone_name = "chato.app"
-
-[vars]
-ENVIRONMENT = "production"
+[assets]
+directory = "./out"
+not_found_handling = "404-page"
