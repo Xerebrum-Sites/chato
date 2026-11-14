@@ -10,7 +10,8 @@ const inter = Inter({
 });
 
 const SITE_URL = URLS.landing;
-const OG_IMAGE = `${SITE_URL}/og-axtroos-v2.png`;
+// Versioned asset: social networks cache Open Graph images aggressively.
+const OG_IMAGE = `${SITE_URL}/og-axtroos-v3.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
