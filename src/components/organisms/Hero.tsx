@@ -1,222 +1,191 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { BarChart3, Check, Inbox, Sparkles, Users } from "lucide-react";
-import { Badge } from "@/components/atoms/Badge";
-import { Button } from "@/components/atoms/Button";
-import { ChannelIcon } from "@/components/atoms/ChannelIcon";
-import { DemoForm } from "@/components/organisms/DemoForm";
-import { URLS } from "@/lib/config";
+import { motion, useReducedMotion } from "framer-motion";
+import { BarChart3, Check, Layers3, MessagesSquare, Sparkles, Zap } from "lucide-react";
 
-const conversations = [
-  { channel: "whatsapp" as const, name: "Lucía", text: "¿Tienen la talla M?", age: "ahora" },
-  { channel: "instagram" as const, name: "Marcos", text: "Quiero reservar para mañana", age: "2 min" },
-  { channel: "telegram" as const, name: "Sofía", text: "¿Hacen envíos?", age: "5 min" },
+const pillars = [
+  { icon: MessagesSquare, title: "Todos tus canales", detail: "en un solo lugar" },
+  { icon: Zap, title: "Automatizaciones", detail: "inteligentes" },
+  { icon: Layers3, title: "Módulos que se", detail: "adaptan a tu operación" },
+  { icon: BarChart3, title: "Resultados", detail: "medibles" },
 ];
 
-const titleLines = [
-  ["Todos", "tus", "canales"],
-  ["en", "una", "sola", "bandeja"],
-];
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export function Hero() {
-  const [demoOpen, setDemoOpen] = useState(false);
-  const [demoEnabled, setDemoEnabled] = useState(true);
-  const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const photoY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 72]);
-  const productY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -34]);
-
-  useEffect(() => {
-    fetch(`${URLS.api}/api/public/demo/config`, { cache: "no-store" })
-      .then((response) => (response.ok ? response.json() : { enabled: true }))
-      .then((data) => setDemoEnabled(data.enabled !== false))
-      .catch(() => setDemoEnabled(true));
-  }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-[#fffaf8] pt-20 lg:pt-24">
-      <div className="actros-wave absolute inset-0 opacity-[0.16]" aria-hidden="true" />
-      <div className="actros-grid absolute inset-0 opacity-[0.14]" aria-hidden="true" />
-      <div className="actros-dots absolute -right-10 top-20 h-72 w-72 opacity-[0.12]" aria-hidden="true" />
-      <div className="actros-ribbon absolute -right-20 top-28 h-16 w-[32rem] rotate-[-18deg] rounded-full opacity-25 blur-[1px]" aria-hidden="true" />
-      <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
-      <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
+    <section className="actros-approved-hero relative isolate overflow-hidden pb-6 pt-20 text-white sm:pb-10 lg:pt-24">
+      <div className="actros-grid absolute inset-0 opacity-20" aria-hidden="true" />
+      <div className="actros-dots absolute -left-12 top-12 h-80 w-80 opacity-20" aria-hidden="true" />
+      <div className="actros-hero-vignette absolute inset-0" aria-hidden="true" />
+      <HeroTrails reduceMotion={reduceMotion} />
 
-      <div className="relative mx-auto min-h-[calc(100vh-5rem)] max-w-7xl px-4 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-8">
-        <motion.div
-          style={{ y: photoY }}
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.97, x: 28 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none absolute inset-x-4 inset-y-3 hidden sm:inset-x-6 lg:inset-x-8 lg:block"
-        >
-          <Image
-            src="/images/brand/hero-desktop-owner-v3.webp"
-            alt="Responsable de atención trabajando con Actroos desde una estación de escritorio"
-            fill
-            priority
-            sizes="(min-width: 1024px) 1280px, 100vw"
-            className="object-contain object-center"
-          />
-        </motion.div>
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, scale: 1.035 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.05, ease: EASE }}
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <Image
+          src="/images/brand/hero-collaboration-v2.png"
+          alt="Dos profesionales colaborando desde una computadora portátil"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[68%_center]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,76,.94)_0%,rgba(48,23,85,.78)_27%,rgba(42,17,62,.34)_53%,rgba(23,9,40,.08)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(20,10,43,.46),transparent_48%)]" />
+      </motion.div>
 
-        <div className="relative grid min-h-[calc(100vh-9rem)] items-center gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-4">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, x: -34 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-20 max-w-xl"
-        >
-          <Badge variant="violet" className="mb-6 bg-white/85 backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-actros-orange animate-pulse" />
-            Operación omnicanal desde tu escritorio
-          </Badge>
+      <HeroSignals reduceMotion={reduceMotion} />
 
-          <h1 className="mb-6 text-balance text-[2.75rem] font-black leading-[0.98] tracking-[-0.045em] text-[#001f34] sm:text-6xl lg:text-[4.7rem]">
-            {titleLines.map((line, lineIndex) => (
-              <span key={line.join("-")} className="block overflow-hidden pb-1">
-                {line.map((word, wordIndex) => {
-                  const gradient = lineIndex === 1 && wordIndex > 0;
-                  return (
-                    <motion.span
-                      key={word}
-                      initial={reduceMotion ? false : { opacity: 0, x: lineIndex === 0 ? -70 : 70, y: 14 }}
-                      animate={{ opacity: 1, x: 0, y: 0 }}
-                      transition={{ delay: 0.12 + lineIndex * 0.28 + wordIndex * 0.09, duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
-                      className={`mr-[0.22em] inline-block ${gradient ? "gradient-text" : ""}`}
-                    >
-                      {word}
-                    </motion.span>
-                  );
-                })}
-              </span>
-            ))}
-          </h1>
-
-          <p className="mb-8 max-w-xl text-lg leading-relaxed text-[#001f34]/72 sm:text-xl">
-            WhatsApp, Instagram, Facebook, Telegram y tu web llegan a una única estación de trabajo.
-            Tu equipo y tus agentes IA atienden con contexto, orden y seguimiento real.
-          </p>
-
-          <div className="mb-9 flex flex-col gap-3 sm:flex-row">
-            <Button href={URLS.signIn} size="lg">Empezar gratis 14 días</Button>
-            {demoEnabled ? (
-              <button
-                type="button"
-                onClick={() => setDemoOpen(true)}
-                className="inline-flex items-center justify-center rounded-full border-2 border-[#c61261]/35 bg-white/80 px-6 py-3.5 text-base font-semibold text-violet-700 backdrop-blur transition-colors hover:bg-white"
-              >
-                Solicitar demo
-              </button>
-            ) : (
-              <Button href="/bandeja-omnicanal/" variant="outline" size="lg">Ver cómo funciona</Button>
-            )}
-          </div>
-          <DemoForm open={demoOpen} onClose={() => setDemoOpen(false)} />
-
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#001f34]/70">
-            {["14 días gratis", "Sin tarjeta de crédito", "Sin permanencia"].map((item) => (
-              <span key={item} className="inline-flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-actros-orange" strokeWidth={2.5} />
-                {item}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        <div className="relative flex min-h-[34rem] flex-col gap-4 sm:min-h-[41rem] sm:gap-5 lg:block lg:min-h-full">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid min-h-[32rem] items-center py-8 lg:min-h-[27rem] lg:grid-cols-[.82fr_1.18fr] lg:py-8">
           <motion.div
-            style={{ y: photoY }}
-            initial={reduceMotion ? false : { opacity: 0, scale: 0.94, x: 60 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.95, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="relative h-52 w-full shrink-0 sm:h-72 lg:hidden"
+            initial={reduceMotion ? false : { opacity: 0, x: -28 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.72, ease: EASE }}
+            className="relative z-20 max-w-[32rem]"
           >
-            <Image
-              src="/images/brand/hero-desktop-owner-v3.webp"
-              alt="Responsable de atención trabajando con Actroos desde una estación de escritorio"
-              fill
-              priority
-              sizes="100vw"
-              className="object-contain object-center"
-            />
-          </motion.div>
-
-          <motion.div
-            style={{ y: productY }}
-            initial={reduceMotion ? false : { opacity: 0, y: 54, rotate: 1.4 }}
-            animate={{ opacity: 1, y: 0, rotate: -1.1 }}
-            transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full self-center sm:w-[88%] lg:absolute lg:bottom-7 lg:right-2 lg:w-[74%] lg:self-auto"
-          >
-            <InboxPreview />
+            <h1 className="text-balance text-[2.35rem] font-black leading-[.98] tracking-[-.048em] sm:text-5xl lg:text-[3.15rem]">
+              <span className="block">Conectá tus conversaciones.</span>
+              <span className="actros-headline-gradient block">Multiplicá oportunidades.</span>
+            </h1>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-white/88 sm:text-[1.02rem]">
+              Omnicanalidad e inteligencia para convertir cada conversación en una oportunidad.
+            </p>
           </motion.div>
         </div>
-        </div>
+
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.56, ease: EASE }}
+          className="relative z-30 grid overflow-hidden rounded-[1.7rem] border border-white/80 bg-white/[.97] text-[#071642] shadow-[0_22px_64px_rgba(5,4,25,.32)] sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {pillars.map(({ icon: Icon, title, detail }) => (
+            <div key={title} className="flex items-center gap-3 border-b border-[#071642]/10 px-5 py-4 last:border-b-0 sm:even:border-l lg:border-b-0 lg:border-l lg:first:border-l-0">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#fff2e9] text-actros-orange">
+                <Icon className="h-6 w-6" strokeWidth={2.15} />
+              </span>
+              <span className="text-[.93rem] font-black leading-[1.08] tracking-[-.025em]">{title}<br />{detail}</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
+
+      <div className="hero-soft-transition absolute inset-x-0 -bottom-px z-10 h-36" aria-hidden="true" />
     </section>
   );
 }
 
-function InboxPreview() {
+function HeroTrails({ reduceMotion }: { reduceMotion: boolean | null }) {
+  const animation = reduceMotion
+    ? { opacity: 0.92 }
+    : { opacity: [0.64, 1, 0.76], x: [0, 14, 0], y: [0, -5, 0] };
+
   return (
-    <div className="overflow-hidden rounded-[1.7rem] border border-white/80 bg-white/92 shadow-[0_30px_80px_rgba(77,5,48,0.22)] backdrop-blur-xl">
-      <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3 sm:px-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 text-white"><Inbox className="h-4 w-4" /></div>
-          <div>
-            <p className="text-sm font-bold text-gray-900 sm:text-base">Bandeja omnicanal</p>
-            <p className="text-[10px] text-gray-500 sm:text-xs">Operación de escritorio · en tiempo real</p>
-          </div>
-        </div>
-        <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 sm:text-xs">4 nuevas</span>
-      </div>
+    <motion.svg
+      viewBox="0 0 1440 460"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      animate={animation}
+      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[20rem] w-full overflow-visible sm:h-[27rem]"
+    >
+      <defs>
+        <linearGradient id="hero-infinity-primary" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#ff8d1c" stopOpacity="0" />
+          <stop offset="0.14" stopColor="#ff9e1c" />
+          <stop offset="0.45" stopColor="#ff317f" />
+          <stop offset="0.7" stopColor="#ca28ed" />
+          <stop offset="1" stopColor="#ff8c1b" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="hero-infinity-secondary" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#c52cef" stopOpacity="0" />
+          <stop offset="0.2" stopColor="#ca28ed" />
+          <stop offset="0.52" stopColor="#ff3b8f" />
+          <stop offset="0.82" stopColor="#ff9f1a" />
+          <stop offset="1" stopColor="#ff9f1a" stopOpacity="0" />
+        </linearGradient>
+        <filter id="hero-trail-glow" x="-20%" y="-60%" width="140%" height="220%">
+          <feGaussianBlur stdDeviation="12" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <motion.path
+        d="M -140 350 C 88 132, 312 558, 578 330 C 830 115, 1026 535, 1260 302 C 1364 198, 1462 174, 1570 130"
+        fill="none"
+        stroke="url(#hero-infinity-primary)"
+        strokeLinecap="round"
+        strokeWidth="31"
+        opacity="0.86"
+        filter="url(#hero-trail-glow)"
+        initial={reduceMotion ? false : { pathLength: 0.35, pathOffset: 0.65 }}
+        animate={reduceMotion ? undefined : { pathLength: 1, pathOffset: 0 }}
+        transition={{ duration: 2.1, ease: EASE }}
+      />
+      <path
+        d="M -100 404 C 118 588, 342 108, 584 348 C 820 585, 1054 113, 1270 340 C 1392 468, 1474 425, 1570 330"
+        fill="none"
+        stroke="url(#hero-infinity-secondary)"
+        strokeLinecap="round"
+        strokeWidth="15"
+        opacity="0.78"
+        filter="url(#hero-trail-glow)"
+      />
+      <path
+        d="M -90 445 C 155 286, 350 604, 602 415 C 824 250, 1054 564, 1290 385 C 1390 307, 1480 286, 1570 248"
+        fill="none"
+        stroke="url(#hero-infinity-primary)"
+        strokeLinecap="round"
+        strokeWidth="7"
+        opacity="0.72"
+        filter="url(#hero-trail-glow)"
+      />
+    </motion.svg>
+  );
+}
 
-      <div className="grid grid-cols-[0.9fr_1.1fr]">
-        <div className="border-r border-gray-100 p-2 sm:p-3">
-          {conversations.map((conversation, index) => (
-            <div key={conversation.name} className={`flex items-center gap-2 rounded-xl p-2 ${index === 0 ? "bg-violet-50 ring-1 ring-violet-100" : ""}`}>
-              <ChannelIcon channel={conversation.channel} size="sm" />
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-1">
-                  <p className="truncate text-[11px] font-semibold text-gray-900 sm:text-xs">{conversation.name}</p>
-                  <span className="hidden text-[9px] text-gray-400 sm:block">{conversation.age}</span>
-                </div>
-                <p className="truncate text-[9px] text-gray-500 sm:text-[10px]">{conversation.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+function HeroSignals({ reduceMotion }: { reduceMotion: boolean | null }) {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-20">
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, y: -16 }}
+        animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: [0, -8, 0] }}
+        transition={{ opacity: { delay: 0.5, duration: 0.55, ease: EASE }, y: { delay: 0.7, duration: 4.8, repeat: Infinity, ease: "easeInOut" } }}
+        className="absolute left-[32%] top-28 z-20 hidden w-[14rem] rounded-2xl border border-white/60 bg-[#4b255f]/78 p-3 shadow-[0_12px_42px_rgba(252,56,160,.45)] backdrop-blur-xl lg:block"
+      >
+        <div className="flex items-center gap-2 border-b border-white/20 pb-2 text-xs font-semibold"><MessagesSquare className="h-5 w-5 text-emerald-300" /> Nuevos mensajes <span className="ml-auto rounded-full bg-actros-magenta px-1.5 py-0.5 text-[10px]">+12</span></div>
+        <div className="flex items-center gap-2 pt-2 text-xs font-medium"><Check className="h-5 w-5 rounded-full bg-emerald-500 p-1" /> Reserva confirmada</div>
+      </motion.div>
 
-        <div className="flex min-h-48 flex-col p-3 sm:min-h-56 sm:p-4">
-          <div className="mb-3 flex items-center justify-between">
-            <div>
-              <p className="text-xs font-bold text-gray-900 sm:text-sm">Lucía</p>
-              <p className="text-[9px] text-emerald-600 sm:text-[10px]">WhatsApp · en línea</p>
-            </div>
-            <div className="flex -space-x-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-violet-100 text-[9px] font-bold text-violet-700">IA</span>
-              <span className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-amber-100 text-[9px] font-bold text-amber-700">AM</span>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <div className="max-w-[86%] rounded-xl rounded-tl-sm bg-gray-100 px-3 py-2 text-[9px] text-gray-700 sm:text-[11px]">¿Tienen la talla M?</div>
-            <div className="ml-auto max-w-[90%] rounded-xl rounded-tr-sm bg-violet-600 px-3 py-2 text-[9px] text-white sm:text-[11px]">Sí, en azul y negro. ¿Te reservo una?</div>
-          </div>
-          <div className="mt-auto grid grid-cols-3 gap-1.5 pt-3">
-            {[{ icon: Sparkles, label: "IA" }, { icon: Users, label: "Equipo" }, { icon: BarChart3, label: "Métricas" }].map(({ icon: Icon, label }) => (
-              <div key={label} className="rounded-lg bg-gray-50 p-1.5 text-center text-[8px] font-semibold text-gray-600 sm:text-[9px]">
-                <Icon className="mx-auto mb-0.5 h-3 w-3 text-violet-600" />
-                {label}
-              </div>
-            ))}
-          </div>
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+        animate={reduceMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0, y: [0, 7, 0] }}
+        transition={{ opacity: { delay: 0.72, duration: 0.55, ease: EASE }, x: { delay: 0.72, duration: 0.55, ease: EASE }, y: { delay: 1.1, duration: 5.4, repeat: Infinity, ease: "easeInOut" } }}
+        className="absolute bottom-[8.6rem] right-[3%] z-20 hidden w-[13rem] rounded-2xl border border-white/60 bg-[#692957]/80 p-3 shadow-[0_12px_42px_rgba(252,56,160,.45)] backdrop-blur-xl lg:block"
+      >
+        <p className="text-sm font-bold">Resultados del mes</p>
+        <div className="mt-3 flex h-11 items-end gap-2 border-b border-white/25 pb-1">
+          {[14, 22, 29, 38].map((height) => <span key={height} style={{ height }} className="flex-1 rounded-t bg-gradient-to-t from-actros-orange to-actros-magenta" />)}
+          <span className="mb-1 text-actros-magenta">↗</span>
         </div>
-      </div>
+      </motion.div>
+
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+        animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, x: [0, 8, 0] }}
+        transition={{ opacity: { delay: 0.88, duration: 0.55, ease: EASE }, y: { delay: 0.88, duration: 0.55, ease: EASE }, x: { delay: 1.2, duration: 5.1, repeat: Infinity, ease: "easeInOut" } }}
+        className="absolute left-[40%] top-[16.5rem] z-20 hidden items-center gap-2 rounded-2xl border border-white/60 bg-[#52234f]/80 px-4 py-3 text-sm font-semibold shadow-[0_12px_42px_rgba(252,56,160,.45)] backdrop-blur-xl lg:flex"
+      >
+        <Sparkles className="h-5 w-5 text-[#ffca39]" /> Automatización activa
+        <span className="ml-1 flex h-5 w-9 items-center justify-end rounded-full bg-gradient-to-r from-actros-magenta to-[#ff376c] p-0.5"><span className="h-4 w-4 rounded-full bg-white shadow" /></span>
+      </motion.div>
     </div>
   );
 }

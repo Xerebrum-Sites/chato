@@ -10,31 +10,32 @@ const inter = Inter({
 });
 
 const SITE_URL = URLS.landing;
-const OG_IMAGE = `${SITE_URL}/og-image-v2.png`;
+// Versioned asset: social networks cache Open Graph images aggressively.
+const OG_IMAGE = `${SITE_URL}/og-axtroos-v3.png`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Actroos – Bandeja omnicanal para pequeños comercios",
-    template: "%s – Actroos",
+    default: "Axtroos – Plataforma B2B omnicanal para equipos",
+    template: "%s – Axtroos",
   },
   description:
-    "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja. Responde a todos tus clientes desde Actroos.",
+    "La plataforma B2B omnicanal para conectar conversaciones, automatizar operaciones y potenciar equipos.",
   keywords: [
     "omnicanalidad",
     "telegram para empresas",
     "whatsapp business",
     "instagram mensajes",
     "atención al cliente",
-    "pequeños comercios",
+    "plataforma B2B",
     "chat multicanal",
     "centralizar mensajes",
     "bandeja de entrada unificada",
     "CRM para pymes",
   ],
-  authors: [{ name: "Actroos", url: SITE_URL }],
-  creator: "Actroos",
-  publisher: "Actroos",
+  authors: [{ name: "Axtroos", url: SITE_URL }],
+  creator: "Axtroos",
+  publisher: "Axtroos",
   robots: {
     index: true,
     follow: true,
@@ -50,26 +51,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "Actroos",
+    siteName: "Axtroos",
     locale: "es_419",
-    title: "Actroos – Todos tus canales, un solo lugar",
+    title: "Axtroos – Conversaciones que impulsan equipos",
     description:
-      "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en una sola bandeja de atención.",
+      "Conectá conversaciones, automatizá operaciones y potenciá a tu equipo desde una plataforma B2B.",
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "Actroos – Bandeja omnicanal para equipos",
+        alt: "Axtroos – Plataforma B2B omnicanal para equipos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Actroos – Todos tus canales, un solo lugar",
+    title: "Axtroos – Conversaciones que impulsan equipos",
     description:
-      "Centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat en un solo lugar.",
+      "Conectá conversaciones, automatizá operaciones y potenciá a tu equipo desde una plataforma B2B.",
     images: [OG_IMAGE],
   },
 };
@@ -77,10 +78,10 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Actroos",
+  name: "Axtroos",
   url: SITE_URL,
   description:
-    "Plataforma de mensajería omnicanal que centraliza WhatsApp, Instagram, Facebook, Telegram y Web Chat para pequeños comercios y emprendedores.",
+    "Plataforma B2B omnicanal para conectar conversaciones, automatizar operaciones y potenciar equipos.",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   inLanguage: "es",
@@ -101,7 +102,7 @@ const jsonLd = {
   ],
   publisher: {
     "@type": "Organization",
-    name: "Actroos",
+    name: "Axtroos",
     url: SITE_URL,
   },
 };

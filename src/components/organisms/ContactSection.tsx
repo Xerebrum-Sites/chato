@@ -46,7 +46,7 @@ export function ContactSection() {
     {
       icon: CalendarClock,
       title: "Agendá una demo",
-      description: "Te mostramos Actroos en vivo y respondemos todo lo que necesites.",
+      description: "Te mostramos Axtroos en vivo y respondemos todo lo que necesites.",
       action: (
         <button
           type="button"

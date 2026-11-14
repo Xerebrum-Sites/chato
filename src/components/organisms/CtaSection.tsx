@@ -29,11 +29,9 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
   }, []);
 
   return (
-    <section id="registro" className="actros-night relative overflow-hidden py-24">
-      <div className="actros-wave absolute inset-0 opacity-90" aria-hidden="true" />
-      <div className="actros-grid absolute inset-0 opacity-50" aria-hidden="true" />
-      <div className="actros-ribbon absolute -right-36 top-12 h-24 w-[42rem] rotate-[-18deg] rounded-full opacity-70" aria-hidden="true" />
-      <div className="actros-ribbon absolute -left-36 bottom-4 h-16 w-[34rem] rotate-[13deg] rounded-full opacity-50" aria-hidden="true" />
+    <section id="registro" className="cta-atmosphere relative overflow-hidden py-24">
+      <div className="actros-grid absolute inset-0 opacity-45" aria-hidden="true" />
+      <div className="cta-infinity-loop" aria-hidden="true" />
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{

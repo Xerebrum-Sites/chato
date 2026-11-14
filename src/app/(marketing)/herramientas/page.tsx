@@ -6,9 +6,9 @@ import { CtaSection } from "@/components/organisms/CtaSection";
 import { URLS } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Marketplace Actroos — Módulos para expandir tu plataforma",
+  title: "Marketplace Axtroos — Módulos para expandir tu plataforma",
   description:
-    "Activá reservas, catálogo, pipeline, campañas, encuestas, agentes especializados y los próximos módulos que se sumen a Actroos.",
+    "Activá reservas, catálogo, pipeline, campañas, encuestas, agentes especializados y los próximos módulos que se sumen a Axtroos.",
   alternates: { canonical: "/herramientas/" },
 };
 
@@ -16,18 +16,18 @@ export default function HerramientasPage() {
   return (
     <>
       <PageHero
-        badge="Marketplace Actroos"
+        badge="Marketplace Axtroos"
         badgeVariant="green"
         title={
           <>
             El núcleo que usás hoy. <span className="gradient-text">Las capacidades que sumás mañana.</span>
           </>
         }
-        subtitle="Actroos crece sin obligarte a cambiar de plataforma: sumá módulos cuando tu operación los necesite y mantené canales, clientes e historial siempre conectados."
+        subtitle="Axtroos crece sin obligarte a cambiar de plataforma: sumá módulos cuando tu operación los necesite y mantené canales, clientes e historial siempre conectados."
         primaryCta={{ label: "Explorar módulos", href: "#modulos" }}
         secondaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
         imageSrc="/images/brand/hero-marketplace-v1.webp"
-        imageLabel="Marketplace modular de Actroos con reservas, catálogo, pipeline, campañas, encuestas, agentes de IA y espacios para futuras capacidades"
+        imageLabel="Marketplace modular de Axtroos con reservas, catálogo, pipeline, campañas, encuestas, agentes de IA y espacios para futuras capacidades"
       />
       <MarketplaceValue />
       <OptionalTools />

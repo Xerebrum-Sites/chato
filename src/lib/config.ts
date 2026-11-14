@@ -3,7 +3,7 @@
  *
  * Change the domain/emails in ONE place: set the NEXT_PUBLIC_* vars per
  * environment (in Dokploy as Build Arguments — they are inlined at build time).
- * The defaults use the public HeyChato domains. Deployment values can still be
+ * The defaults use the public Axtroos domains. Deployment values can still be
  * set per environment as build arguments. These values feed the landing, legal
  * pages (/privacidad, /eliminar-datos) and the URLs copied into Meta.
  */
@@ -12,12 +12,12 @@ function trimTrailingSlash(s: string): string {
   return s.replace(/\/$/, "");
 }
 
-const APP_URL_DEFAULT = "https://app.heychato.com";
-const API_URL_DEFAULT = "https://api.heychato.com";
-const LANDING_URL_DEFAULT = "https://heychato.com";
+const APP_URL_DEFAULT = "https://app.axtroos.com";
+const API_URL_DEFAULT = "https://api.axtroos.com";
+const LANDING_URL_DEFAULT = "https://axtroos.com";
 
-const LEGAL_EMAIL_DEFAULT = "privacidad@heychato.com";
-const CONTACT_EMAIL_DEFAULT = "hola@heychato.com";
+const LEGAL_EMAIL_DEFAULT = "privacidad@axtroos.com";
+const CONTACT_EMAIL_DEFAULT = "hola@axtroos.com";
 
 export const URLS = {
   app: trimTrailingSlash(process.env.NEXT_PUBLIC_APP_URL ?? APP_URL_DEFAULT),
@@ -48,7 +48,7 @@ export const CONTACT = {
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? WHATSAPP_NUMBER_DEFAULT,
   /** Link listo para usar a WhatsApp con un mensaje inicial. */
   get whatsappUrl(): string {
-    const text = encodeURIComponent("¡Hola! Quiero saber más sobre Actroos.");
+    const text = encodeURIComponent("¡Hola! Quiero saber más sobre Axtroos.");
     return `https://wa.me/${this.whatsappNumber}?text=${text}`;
   },
 } as const;
