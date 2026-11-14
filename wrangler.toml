@@ -5,3 +5,19 @@ workers_dev = true
 [assets]
 directory = "./out"
 not_found_handling = "404-page"
+
+[[routes]]
+pattern = "axtroos.com/*"
+zone_name = "axtroos.com"
+
+[[routes]]
+pattern = "www.axtroos.com/*"
+zone_name = "axtroos.com"
+
+[[routes]]
+pattern = "heychato.com/*"
+zone_name = "heychato.com"
+
+[[routes]]
+pattern = "www.heychato.com/*"
+zone_name = "heychato.com"
