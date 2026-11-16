@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Política de privacidad de Axtroos. Conocé cómo recopilamos, usamos y protegemos tus datos.",
 };
 
-const UPDATED = "12 de octubre de 2026";
+const UPDATED = "16 de noviembre de 2026";
 const EMAIL = EMAILS.legal;
 const SITE = URLS.landing;
 
@@ -16,10 +16,12 @@ const sections = [
     id: "responsable",
     title: "1. Responsable del tratamiento",
     content: `
-      <p>El responsable del tratamiento de los datos personales recabados a través de este sitio web y de la plataforma Axtroos es:</p>
+      <p>Para las contrataciones en Argentina, el responsable del tratamiento de los datos personales recabados a través de este sitio web y de la plataforma Axtroos es:</p>
       <ul>
         <li><strong>Nombre comercial:</strong> Axtroos</li>
-        <li><strong>Operado por:</strong> Axtroos</li>
+        <li><strong>Titular:</strong> Jose Alberto Guevara</li>
+        <li><strong>CUIT:</strong> 20-28407325-9</li>
+        <li><strong>Domicilio:</strong> Presidente Roca 187, piso 9, departamento B, CP 2000, Rosario, Santa Fe, Argentina</li>
         <li><strong>Sitio web:</strong> ${SITE}</li>
         <li><strong>Correo de contacto:</strong> <a href="mailto:${EMAIL}">${EMAIL}</a></li>
       </ul>
