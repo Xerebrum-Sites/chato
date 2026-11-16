@@ -28,11 +28,7 @@ const sections = [
     id: "descripcion",
     title: "2. Descripción del servicio",
     content: `
-      <p>Axtroos es una plataforma de mensajería omnicanal que centraliza conversaciones provenientes de WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email en una única bandeja de entrada, con dos modos de uso:</p>
-      <ul>
-        <li><strong>Modo Simple:</strong> gestión de la bandeja directamente desde Telegram, sin necesidad de instalar una app adicional.</li>
-        <li><strong>Modo Avanzado:</strong> panel de control web con gestión de equipos, automatizaciones, analíticas y agentes de inteligencia artificial.</li>
-      </ul>
+      <p>Axtroos es una plataforma de mensajería omnicanal que centraliza conversaciones provenientes de WhatsApp, Instagram, Facebook Messenger, chat web, Telegram y email en una única bandeja de entrada. Incluye herramientas para gestionar equipos, automatizaciones, analíticas y agentes de inteligencia artificial.</p>
       <p>El servicio puede incluir herramientas opcionales ("add-ons") como Reservas, Catálogo o Encuestas, activables desde tu cuenta. Nos reservamos el derecho de modificar, agregar o discontinuar funcionalidades del servicio, notificando cambios relevantes con antelación razonable cuando sea posible.</p>
     `,
   },
