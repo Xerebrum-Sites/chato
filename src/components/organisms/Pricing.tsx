@@ -120,6 +120,7 @@ export function Pricing() {
               ))}
             </div>
           </div>
+          <p className="mt-4 text-sm text-gray-600">En Argentina, seleccioná ARS para consultar el precio en pesos antes de contratar. Los cobros procesados por Rebill se realizan en pesos argentinos.</p>
         </div>
 
         <div className="mx-auto max-w-3xl">
