@@ -7,6 +7,7 @@ import { ChannelIcon } from "@/components/atoms/ChannelIcon";
 import { DemoForm } from "@/components/organisms/DemoForm";
 import { URLS, CONTACT } from "@/lib/config";
 import { supportedChannels } from "@/lib/content";
+import { useTrialDays } from "@/hooks/useTrialDays";
 
 interface CtaSectionProps {
   title?: ReactNode;
@@ -20,6 +21,7 @@ interface CtaSectionProps {
 export function CtaSection({ title, subtitle }: CtaSectionProps) {
   const [demoOpen, setDemoOpen] = useState(false);
   const [demoEnabled, setDemoEnabled] = useState(true);
+  const trialDays = useTrialDays();
 
   useEffect(() => {
     fetch(`${URLS.api}/api/public/demo/config`, { cache: "no-store" })
@@ -60,7 +62,7 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
         </h2>
 
         <p className="text-white/72 text-lg mb-10 max-w-lg mx-auto">
-          {subtitle ?? "14 días gratis. Sin tarjeta de crédito. Cancelás cuando quieras."}
+          {subtitle ?? (trialDays ? `${trialDays} días gratis. Sin tarjeta de crédito. Cancelás cuando quieras.` : "Prueba gratis. Sin tarjeta de crédito. Cancelás cuando quieras.")}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

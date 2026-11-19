@@ -10,7 +10,7 @@ import { Reveal } from "@/components/atoms/Reveal";
  */
 
 interface CtaConfig {
-  label: string;
+  label: ReactNode;
   href: string;
 }
 

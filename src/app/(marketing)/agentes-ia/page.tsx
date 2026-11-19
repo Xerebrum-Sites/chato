@@ -4,6 +4,7 @@ import { AiAgents } from "@/components/organisms/AiAgents";
 import { CtaSection } from "@/components/organisms/CtaSection";
 import { AiHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
+import { TrialCopy } from "@/components/atoms/TrialCopy";
 
 export const metadata: Metadata = {
   title: "Agentes IA — Un asistente que atiende por vos",
@@ -23,14 +24,14 @@ export default function AgentesIaPage() {
           </>
         }
         subtitle="Respuestas al instante 24/7 con la información real de tu negocio. La IA resuelve lo repetitivo y te pasa la conversación cuando se necesita una persona."
-        primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
+        primaryCta={{ label: <TrialCopy />, href: URLS.signIn }}
         secondaryCta={{ label: "Ver herramientas", href: "/herramientas/" }}
         visual={<AiHeroVisual />}
       />
       <AiAgents />
       <CtaSection
         title={<>Dejá que la IA se ocupe de lo repetitivo</>}
-        subtitle="El Agente IA está disponible desde el plan Pro. Probalo 14 días gratis, sin tarjeta."
+        subtitle={<>El Agente IA está disponible para tu equipo. <TrialCopy variant="sentence" /></>}
       />
     </>
   );
