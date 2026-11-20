@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Check } from "lucide-react";
+import { ArrowUpRight, Blocks, Check, Database, MessagesSquare, Smartphone, Sparkles, Users } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
 import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { Button } from "@/components/atoms/Button";
@@ -86,9 +86,31 @@ const limits: Record<string, [string, string]> = {
   max_faqs: ["Preguntas frecuentes", "Preguntas frecuentes sin límite"],
   max_bot_channels: ["Canales con bot", "Canales con bot sin límite"],
 };
-function coreFeatures(plan: PlanData | null) {
-  const items = ["Bandeja omnicanal con historial por cliente", "Asignación y seguimiento de conversaciones", "Trabajo en equipo con usuarios sin cargo adicional"];
-  for (const [key, value] of Object.entries(plan?.features ?? {})) {
+const coreGroups = [
+  {
+    title: "Atención y canales",
+    icon: MessagesSquare,
+    standard: ["Bandeja omnicanal con historial por cliente"],
+    keys: ["webchat_enabled", "max_channels", "schedules_enabled"],
+  },
+  {
+    title: "Equipo y operación",
+    icon: Users,
+    standard: ["Asignación y seguimiento de conversaciones", "Usuarios sin cargo adicional"],
+    keys: ["departments_enabled", "max_departments", "agent_routing_llm_enabled", "priority_support"],
+  },
+  {
+    title: "IA y conocimiento",
+    icon: Sparkles,
+    standard: [],
+    keys: ["bot_enabled", "rag_enabled", "custom_prompt", "agent_tools_enabled", "max_ai_agents", "max_faqs", "max_bot_channels"],
+  },
+];
+
+function featureLabels(keys: string[], plan: PlanData | null) {
+  const items: string[] = [];
+  for (const key of keys) {
+    const value = plan?.features?.[key];
     if (value === true && capabilities[key]) items.push(capabilities[key]);
     if (typeof value === "number" && limits[key]) {
       const [label, unlimited] = limits[key];
@@ -172,6 +194,11 @@ export function Pricing() {
   const format = (value: number) => value.toLocaleString(currency === "ARS" ? "es-AR" : "en-US", { maximumFractionDigits: 2 });
   const money = (value: number) => currency + " $" + format(value);
   const missing = quote?.missing_required_families.length;
+  const mobileOptions = catalog?.options.filter(option => option.family === "mobile") ?? [];
+  const groups = coreGroups.map(group => ({
+    ...group,
+    items: [...group.standard, ...featureLabels(group.keys, plan)],
+  })).filter(group => group.items.length > 0);
   return (
     <section id="precios" className="relative isolate overflow-hidden bg-[#fffaf5] pb-24 pt-32">
       <div className="pointer-events-none absolute inset-0 opacity-15"><InfinityTrails tone="light" /></div>
@@ -179,7 +206,7 @@ export function Pricing() {
         <Badge variant="green">Precios transparentes</Badge>
         <h1 className="mt-4 text-3xl font-black sm:text-4xl">Tu <span className="gradient-text">Axtroos Workstation</span>, a medida</h1>
         <p className="mt-3 text-gray-600">Configurá los recursos de tu equipo y consultá el costo de tu plataforma.</p>
-        <div className="my-7 inline-flex flex-wrap gap-1 rounded-3xl border border-violet-100 bg-white p-1" role="group" aria-label="Contrato">
+        <div className="mb-10 mt-7 inline-flex flex-wrap gap-1 rounded-3xl border border-violet-100 bg-white p-1" role="group" aria-label="Contrato">
           {(["monthly", "annual"] as const).map(value => (
             <button key={value} type="button" aria-pressed={cycle === value} onClick={() => setCycle(value)}
               className={`rounded-full px-4 py-2.5 text-sm font-bold ${cycle === value ? "bg-violet-700 text-white" : "text-gray-700"}`}>
@@ -187,46 +214,82 @@ export function Pricing() {
             </button>
           ))}
         </div>
-        <div className="grid items-start gap-6 lg:grid-cols-[3fr_2fr]">
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <div className="divide-y divide-gray-100 rounded-3xl bg-white px-6 shadow-sm sm:px-8">
-            <div className="py-6">
+            <div className="py-8 sm:py-10">
               <h2 className="text-2xl font-bold">{WORKSTATION_NAME}</h2>
               <p className="mt-1 text-sm text-gray-600">Precio de la estación de trabajo</p>
-              <p className="mt-3 font-bold">{available ? <>{currency} $ <span className="text-3xl">{format(monthlyDisplay!)}</span> /mes</> : loading ? "Cargando…" : "Precio por confirmar"}</p>
+              <p className="mt-5 font-bold">{available ? <>{currency} $ <span className="text-3xl">{format(monthlyDisplay!)}</span> /mes</> : loading ? "Cargando…" : "Precio por confirmar"}</p>
               {annual && available && annualBase != null && <p className="mt-1 text-sm text-gray-600">{money(annualBase)} al año{plan?.annual_discount_pct ? " · " + plan.annual_discount_pct + "% de ahorro en Workstation" : ""}</p>}
             </div>
-            {families.map(family => {
-              const optional = family === "mobile";
+            {(["credits", "storage"] as const).map(family => {
               const options = (catalog?.options ?? []).filter(o => o.family === family).sort((a,b) => (a.quantity ?? 0) - (b.quantity ?? 0));
               const [label, help] = copy[family];
+              const Icon = family === "credits" ? Sparkles : Database;
               return (
-                <div key={family} className="py-5">
-                  <label htmlFor={"option-" + family} className="flex items-center gap-3 font-bold">{label}
-                    <span className="rounded-full bg-violet-50 px-2 py-1 text-xs text-violet-700">{optional ? "Opcional" : "Obligatorio"}</span>
-                  </label>
-                  <p id={"help-" + family} className="my-2 text-sm text-gray-600">{help}</p>
-                  <select id={"option-" + family} aria-describedby={"help-" + family} required={!optional} value={selection[family]}
-                    disabled={!options.length} onChange={e => setSelection({ ...selection, [family]: e.target.value })}
-                    className="w-full rounded-xl border border-gray-200 bg-white p-3 text-sm disabled:bg-gray-50">
-                    <option value="">{loading ? "Cargando…" : !options.length ? "Sin opciones publicadas" : optional ? "Sin app móvil" : "Elegí una opción"}</option>
-                    {options.map(o => <option key={o.id} value={o.id}>{o.name}{o.quantity != null ? " · " + o.quantity.toLocaleString("es-AR") + " " + (o.unit ?? "") : ""}</option>)}
-                  </select>
-                </div>
+                <fieldset key={family} aria-labelledby={"label-" + family} aria-describedby={"help-" + family} className="min-w-0 py-8">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <Icon aria-hidden className="size-5 text-violet-600" />
+                    <h3 id={"label-" + family} className="text-xl font-bold">{label}</h3>
+                    <span className="rounded-full bg-violet-50 px-2.5 py-1 text-xs font-medium text-violet-700">Obligatorio</span>
+                  </div>
+                  <p id={"help-" + family} className="mt-3 max-w-prose text-sm leading-relaxed text-gray-600">{help}</p>
+                  <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                    {options.map(o => (
+                      <label key={o.id} className="flex min-w-0 cursor-pointer items-start gap-2 rounded-xl border border-gray-200 p-3 has-checked:border-violet-500 has-checked:bg-violet-50 has-focus-visible:ring-2">
+                        <input type="radio" name={family} checked={selection[family] === o.id}
+                          onChange={() => setSelection(current => ({ ...current, [family]: o.id }))}
+                          className="mt-1 shrink-0 accent-violet-600" />
+                        <span className="min-w-0 text-sm leading-snug [overflow-wrap:anywhere]">
+                          <strong className="block">{o.name}</strong>
+                          {o.quantity != null && <span className="mt-1 block text-gray-600">{o.quantity.toLocaleString("es-AR")} {o.unit}</span>}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                  {!options.length && <p className="text-sm text-gray-500">{loading ? "Cargando opciones…" : "Sin opciones publicadas"}</p>}
+                </fieldset>
               );
             })}
+            <div className="py-8">
+              <label className="flex items-start gap-4 rounded-2xl border border-gray-200 p-5 has-checked:border-violet-500 has-checked:bg-violet-50">
+                <Smartphone aria-hidden className="mt-1 size-5 shrink-0 text-violet-600" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xl font-bold">App móvil</span>
+                  <span className="mt-1 block text-xs font-semibold text-violet-700">Opcional</span>
+                  <span className="mt-3 block text-sm leading-relaxed text-gray-600">{copy.mobile[1]}</span>
+                  {!loading && !mobileOptions.length && <span className="mt-2 block text-sm text-gray-600">Actualmente fuera del catálogo.</span>}
+                </span>
+                <input type="checkbox" aria-label="Incluir app móvil" checked={Boolean(selection.mobile)} disabled={!mobileOptions.length}
+                  onChange={event => {
+                    const id = event.target.checked ? mobileOptions[0].id : "";
+                    setSelection(current => ({ ...current, mobile: id }));
+                  }}
+                  className="mt-1 size-5 shrink-0 accent-violet-600" />
+              </label>
+              {selection.mobile && mobileOptions.length > 1 && (
+                <select aria-label="Variante de app móvil" className="mt-3 w-full rounded-xl border border-gray-200 p-3"
+                  value={selection.mobile} onChange={event => setSelection({ ...selection, mobile: event.target.value })}>
+                  {mobileOptions.map(option => <option key={option.id} value={option.id}>{option.name}</option>)}
+                </select>
+              )}
+            </div>
           </div>
           <aside className="rounded-3xl bg-actros-navy p-6 text-white lg:sticky lg:top-24 sm:p-8">
             <h2 className="text-xl font-bold">Tu contratación</h2>
             <div aria-live="polite" aria-atomic="true">
-              {quote && <ul className="my-5 space-y-3">{quote.lines.map(line => (
-                <li key={line.id} className="flex justify-between gap-3 text-sm">
-                  <span>{line.name}</span><span className="shrink-0">{money(annual ? line.annual_amount : line.monthly_amount)}</span>
+              {quote && <ul className="my-7 space-y-4">{quote.lines.map(line => (
+                <li key={line.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm leading-relaxed">
+                  <span>{line.name}</span><span className="ml-auto shrink-0 font-semibold tabular-nums">{money(annual ? line.annual_amount : line.monthly_amount)}</span>
                 </li>
               ))}</ul>}
-              <p className="mt-5 border-t border-white/20 pt-5 text-sm">{missing ? "Subtotal de la selección" : "Total de tu configuración"}</p>
+              <p className="mt-7 border-t border-white/20 pt-6 text-sm">{missing ? "Subtotal de la selección" : "Total de tu configuración"}</p>
               {quote ? <>
                 <p className="mt-1 text-sm font-semibold">{currency} $ <strong className="text-4xl">{format(annual ? quote.annual_total / 12 : quote.monthly_total)}</strong> /mes</p>
-                {annual && <p className="mt-2 text-sm">{money(quote.annual_total)} facturados al año{quote.annual_savings > 0 && " · Ahorrás " + money(quote.annual_savings)}</p>}
+                {annual && <div className="mt-4 space-y-2 text-sm">
+                  <p>{money(quote.annual_total)} facturados al año</p>
+                  {quote.annual_savings > 0 && <p className="font-semibold text-orange-200">Ahorrás {money(quote.annual_savings)} al año</p>}
+                </div>}
                 {Boolean(missing) && <p className="mt-3 text-sm text-white/80">Para completar el total, elegí {quote.missing_required_families.map(f => f === "credits" ? "créditos IA" : "almacenamiento").join(" y ")}.</p>}
               </> : <p className="mt-3">{loading || (request && !failed) ? "Calculando…" : "No pudimos obtener la cotización."}</p>}
             </div>
@@ -236,12 +299,31 @@ export function Pricing() {
             </div>
           </aside>
         </div>
-        <section className="mt-12 rounded-3xl bg-white p-6 sm:p-8">
-          <h2 className="text-2xl font-bold">Qué incluye el Core de Axtroos Workstation</h2>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{coreFeatures(plan).map(item => (
-            <li className="flex items-start gap-2 text-sm" key={item}><Check aria-hidden className="h-4 w-4 shrink-0 text-violet-600" />{item}</li>
-          ))}</ul>
-          <a className="mt-6 inline-block font-semibold text-violet-700 underline" href="/herramientas/">Explorar módulos adicionales del Marketplace</a>
+        <section aria-labelledby="core-title" className="relative isolate mt-16 overflow-hidden rounded-[2rem] border border-orange-100 bg-white px-5 py-9 sm:mt-20 sm:p-10">
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,#ffeadc,transparent_52%)]" />
+          <h2 id="core-title" className="max-w-2xl text-balance text-3xl font-black tracking-tight text-actros-navy sm:text-4xl">
+            Qué incluye el Core de <span className="gradient-text">Axtroos Workstation</span>
+          </h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {groups.map(({ title, icon: Icon, items }) => (
+              <div key={title} className="rounded-2xl border border-orange-100 bg-white/90 p-5 sm:p-6">
+                <span className="inline-flex rounded-xl bg-violet-50 p-3 text-violet-700"><Icon aria-hidden className="size-5" /></span>
+                <h3 className="mt-4 text-lg font-bold text-actros-navy">{title}</h3>
+                <ul className="mt-4 space-y-3">
+                  {items.map(item => <li className="flex gap-2 text-sm leading-relaxed text-gray-700" key={item}>
+                    <Check aria-hidden className="mt-1 size-4 shrink-0 text-violet-600" />{item}
+                  </li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 border-t border-orange-100 pt-6">
+            <Button href="/herramientas/#modulos" className="max-w-full">
+              <Blocks aria-hidden className="size-5 shrink-0" />
+              <span>Explorar módulos del Marketplace</span>
+              <ArrowUpRight aria-hidden className="size-4 shrink-0" />
+            </Button>
+          </div>
         </section>
         <div className="mt-8 grid gap-5 sm:grid-cols-3">
           {[
