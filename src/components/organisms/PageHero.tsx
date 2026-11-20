@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Badge } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { Reveal } from "@/components/atoms/Reveal";
 
 /**
@@ -10,7 +11,7 @@ import { Reveal } from "@/components/atoms/Reveal";
  */
 
 interface CtaConfig {
-  label: string;
+  label: ReactNode;
   href: string;
 }
 
@@ -40,11 +41,15 @@ export function PageHero({
   visual,
 }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[#fffaf5] pt-28 pb-14 lg:pt-32 lg:pb-20">
+    <section className="relative isolate overflow-hidden bg-[#fffaf5] pt-28 pb-14 lg:pt-32 lg:pb-20">
       <div className="absolute inset-0 gradient-bg opacity-70" />
       <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-white pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.18]" aria-hidden="true">
+        <InfinityTrails tone="light" />
+      </div>
+      <div className="absolute -right-28 top-16 h-72 w-72 rounded-full bg-[#ee7d16]/10 blur-3xl" aria-hidden="true" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal direction="right">
           {badge ? (
             <Badge variant={badgeVariant} className="mb-5">

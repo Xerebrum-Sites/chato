@@ -4,6 +4,8 @@ RUN apk add --no-cache fontconfig ttf-dejavu
 COPY package*.json ./
 RUN npm ci
 COPY . .
+ARG NEXT_PUBLIC_API_URL=https://api.axtroos.com
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ARG NEXT_PUBLIC_LANDING_URL
 ENV NEXT_PUBLIC_LANDING_URL=${NEXT_PUBLIC_LANDING_URL}
 RUN npm run build

@@ -5,19 +5,23 @@ import { useEffect, useState } from "react";
 export type PricingCurrency = "ARS" | "USD";
 
 async function detectCountry(): Promise<string> {
-  try {
-    // Cloudflare expone el país de la conexión sin pedir datos personales.
-    // Es una pista de presentación: el checkout valida la tarjeta emisora.
-    const response = await fetch("/cdn-cgi/trace", { cache: "no-store" });
-    if (!response.ok) throw new Error("country trace unavailable");
-
-    const trace = await response.text();
-    return trace.match(/loc=([A-Z]{2})/)?.[1] ?? "XX";
-  } catch {
-    // El fallback permite que previews y navegadores sin Cloudflare sigan
-    // mostrando ARS a visitantes argentinos. Ante duda, mostramos USD.
-    return navigator.language?.toUpperCase().startsWith("ES-AR") ? "AR" : "XX";
+  const paths = new Set([
+    new URL("/cdn-cgi/trace", window.location.origin).href,
+    "https://axtroos.com/cdn-cgi/trace",
+  ]);
+  for (const url of paths) {
+    try {
+      const response = await fetch(url, {
+        credentials: "omit", cache: "no-store", signal: AbortSignal.timeout(3500),
+      });
+      if (!response.ok) continue;
+      const country = (await response.text()).match(/^loc=([A-Z]{2})$/m)?.[1];
+      if (country) return country;
+    } catch {
+      // En previews locales consultamos el dominio público si no hay traza propia.
+    }
   }
+  return "XX";
 }
 
 /**

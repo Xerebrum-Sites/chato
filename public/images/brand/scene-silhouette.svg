@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" preserveAspectRatio="none">
+  <defs>
+    <filter id="feather" x="-10%" y="-12%" width="120%" height="124%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <path fill="white" filter="url(#feather)" d="M41 198C61 93 146 33 250 42C346 52 378 15 493 30C609 44 646 100 662 199C685 325 620 405 530 411C436 417 410 389 315 421C212 456 117 454 68 389C35 346 24 276 41 198Z"/>
+</svg>

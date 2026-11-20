@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { BarChart3, Check, Layers3, MessagesSquare, Sparkles, Zap } from "lucide-react";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 
 const pillars = [
   { icon: MessagesSquare, title: "Todos tus canales", detail: "en un solo lugar" },
@@ -89,65 +90,13 @@ function HeroTrails({ reduceMotion }: { reduceMotion: boolean | null }) {
     : { opacity: [0.64, 1, 0.76], x: [0, 14, 0], y: [0, -5, 0] };
 
   return (
-    <motion.svg
-      viewBox="0 0 1440 460"
-      preserveAspectRatio="none"
-      aria-hidden="true"
+    <motion.div
       animate={animation}
       transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[20rem] w-full overflow-visible sm:h-[27rem]"
     >
-      <defs>
-        <linearGradient id="hero-infinity-primary" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stopColor="#ff8d1c" stopOpacity="0" />
-          <stop offset="0.14" stopColor="#ff9e1c" />
-          <stop offset="0.45" stopColor="#ff317f" />
-          <stop offset="0.7" stopColor="#ca28ed" />
-          <stop offset="1" stopColor="#ff8c1b" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="hero-infinity-secondary" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stopColor="#c52cef" stopOpacity="0" />
-          <stop offset="0.2" stopColor="#ca28ed" />
-          <stop offset="0.52" stopColor="#ff3b8f" />
-          <stop offset="0.82" stopColor="#ff9f1a" />
-          <stop offset="1" stopColor="#ff9f1a" stopOpacity="0" />
-        </linearGradient>
-        <filter id="hero-trail-glow" x="-20%" y="-60%" width="140%" height="220%">
-          <feGaussianBlur stdDeviation="12" result="blur" />
-          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-        </filter>
-      </defs>
-      <motion.path
-        d="M -140 350 C 88 132, 312 558, 578 330 C 830 115, 1026 535, 1260 302 C 1364 198, 1462 174, 1570 130"
-        fill="none"
-        stroke="url(#hero-infinity-primary)"
-        strokeLinecap="round"
-        strokeWidth="31"
-        opacity="0.86"
-        filter="url(#hero-trail-glow)"
-        initial={reduceMotion ? false : { pathLength: 0.35, pathOffset: 0.65 }}
-        animate={reduceMotion ? undefined : { pathLength: 1, pathOffset: 0 }}
-        transition={{ duration: 2.1, ease: EASE }}
-      />
-      <path
-        d="M -100 404 C 118 588, 342 108, 584 348 C 820 585, 1054 113, 1270 340 C 1392 468, 1474 425, 1570 330"
-        fill="none"
-        stroke="url(#hero-infinity-secondary)"
-        strokeLinecap="round"
-        strokeWidth="15"
-        opacity="0.78"
-        filter="url(#hero-trail-glow)"
-      />
-      <path
-        d="M -90 445 C 155 286, 350 604, 602 415 C 824 250, 1054 564, 1290 385 C 1390 307, 1480 286, 1570 248"
-        fill="none"
-        stroke="url(#hero-infinity-primary)"
-        strokeLinecap="round"
-        strokeWidth="7"
-        opacity="0.72"
-        filter="url(#hero-trail-glow)"
-      />
-    </motion.svg>
+      <InfinityTrails tone="hero" />
+    </motion.div>
   );
 }
 
