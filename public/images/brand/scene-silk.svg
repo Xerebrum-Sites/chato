@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="silk" x1="0" y1=".35" x2="1" y2=".64">
+      <stop stop-color="#ee7d16" stop-opacity="0"/>
+      <stop offset=".22" stop-color="#ee7d16" stop-opacity=".82"/>
+      <stop offset=".44" stop-color="#ffd9ae" stop-opacity=".52"/>
+      <stop offset=".64" stop-color="#c61261" stop-opacity=".77"/>
+      <stop offset="1" stop-color="#c61261" stop-opacity="0"/>
+    </linearGradient>
+    <path id="fold" d="M-16 94C114 211 202 197 333 112S527 14 637 99S756 177 820 128C756 198 696 174 608 112S461 61 337 137S100 232-16 94Z"/>
+    <filter id="mist" x="-.2" y="-.6" width="1.4" height="2.2"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <use href="#fold" fill="url(#silk)" filter="url(#mist)"/>
+  <use href="#fold" fill="url(#silk)"/>
+  <path d="M-10 103C114 209 213 194 337 118S516 23 631 103S758 181 814 135" fill="none" stroke="url(#silk)" stroke-width="2"/>
+</svg>

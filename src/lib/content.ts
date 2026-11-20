@@ -183,7 +183,7 @@ export const industries: Industry[] = [
       "Cada solicitud de turno llega ordenada en una sola bandeja. Confirmás respondiendo y el paciente recibe la confirmación —y un recordatorio— en su canal preferido.",
     result: "Agenda ordenada sin sumar personal solo para atender mensajes.",
     photoLabel: "Recepcionista atendiendo a una paciente en una clínica de barrio",
-    image: "/images/brand/industry-salud-v4.png",
+    image: "/images/brand/industry-salud-v5.webp",
     imageAlt: "Recepcionista de clínica atendiendo una consulta de turno en el mostrador",
   },
   {
@@ -198,7 +198,7 @@ export const industries: Industry[] = [
     result: "Atención profesional aunque trabajes solo, sin dejar gente esperando.",
     photoLabel: "Mecánico explicando una reparación a un cliente en su taller",
     image: "/images/brand/industry-servicios-v4.png",
-    imageAlt: "Mecánico revisando el motor de un auto con un cliente en el taller",
+    imageAlt: "Asesor de servicio conversando con un cliente junto a un auto",
   },
   {
     id: "belleza",
@@ -239,7 +239,7 @@ export const industries: Industry[] = [
       "Unificás preventa y posventa en una bandeja, con etiquetas por estado (#consulta, #pagado, #envío) y respuestas rápidas para las dudas típicas.",
     result: "Seguimiento claro de cada cliente, del carrito a la entrega.",
     photoLabel: "Equipo de ecommerce preparando pedidos en su espacio de despacho",
-    image: "/images/brand/industry-ecommerce-v4.png",
+    image: "/images/brand/industry-ecommerce-v5.webp",
     imageAlt: "Dos personas preparando y escaneando pedidos en un depósito de ecommerce",
   },
   {
@@ -266,9 +266,9 @@ export const industries: Industry[] = [
     solution:
       "Reunís todas las consultas en una bandeja, usás respuestas rápidas para disponibilidad y precios, y derivás a tu equipo cuando hace falta.",
     result: "Respondés a tiempo y con información consistente en cada canal.",
-    photoLabel: "Recepcionista haciendo el check-in de viajeros en un hostel",
-    image: "/images/brand/industry-turismo-v4.png",
-    imageAlt: "Recepcionista atendiendo a viajeros en un hostel urbano",
+    photoLabel: "Equipo de hotelería orientando a viajeros en la recepción",
+    image: "/images/brand/industry-turismo-v5.webp",
+    imageAlt: "Un conserje señala un recorrido en un mapa a dos huéspedes en la recepción del hotel",
   },
 ];
 

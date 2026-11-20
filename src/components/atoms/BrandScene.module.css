@@ -1,0 +1,41 @@
+.scene {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1.5;
+}
+
+.halo {
+  position: absolute;
+  inset: -8% -16%;
+  mask-image: radial-gradient(ellipse closest-side, #000 52%, transparent);
+  background: radial-gradient(ellipse at 28% 56%, #ee7d162c, transparent 50%),
+    radial-gradient(ellipse at 72% 62%, #c612612c, transparent 49%);
+}
+
+.exposure {
+  position: absolute;
+  inset: -2% -4%;
+  mask: url("/images/brand/scene-silhouette.svg") center / 100% 100% no-repeat;
+}
+
+.exposure img { object-fit: cover; }
+
+.silk {
+  position: absolute;
+  pointer-events: none;
+  inset: 61% -10% -4%;
+  background: url("/images/brand/scene-silk.svg") center / 100% 100% no-repeat;
+}
+
+.scene[data-placement="left"] .silk {
+  transform: scaleX(-1) rotate(-4deg);
+}
+
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 68% -5% 0 65%;
+  pointer-events: none;
+  background: radial-gradient(#c6126180 .8px, transparent 1px) 0 0 / 6px 6px;
+  mask-image: radial-gradient(ellipse, #0009, transparent 68%);
+}

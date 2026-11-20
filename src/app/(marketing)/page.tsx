@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BrandScene } from "@/components/atoms/BrandScene";
 import { Check } from "lucide-react";
 import { Hero } from "@/components/organisms/Hero";
 import { TrustBand } from "@/components/organisms/TrustBand";
@@ -44,16 +44,11 @@ function HumanValueBand() {
       <div className="actros-dots absolute right-0 top-0 h-64 w-64 opacity-[0.1]" aria-hidden="true" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal direction="right">
-          <div className="relative min-h-[24rem] overflow-hidden sm:min-h-[32rem]">
-            <Image
-              src="/images/brand/team-operations-v5.png"
-              alt="Equipo operativo internacional colaborando desde estaciones de trabajo de escritorio"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-center [mask-image:radial-gradient(ellipse_76%_72%_at_52%_48%,#000_53%,transparent_100%)]"
-            />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#fffaf8] via-[#fffaf8]/30 to-transparent" aria-hidden="true" />
-          </div>
+          <BrandScene
+            src="/images/brand/team-operations-v5.png"
+            alt="Tres colegas revisan juntos la atención a clientes en una computadora"
+            placement="left"
+          />
         </Reveal>
         <Reveal direction="left" delay={0.1}>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-5 leading-tight text-balance">

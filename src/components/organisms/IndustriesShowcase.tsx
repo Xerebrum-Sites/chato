@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { BrandScene } from "@/components/atoms/BrandScene";
 import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -48,7 +48,7 @@ export function IndustriesTeaser() {
           })}
         </div>
 
-        <div id="industry-panel" role="tabpanel" className="relative min-h-[38rem] lg:min-h-[32rem]">
+        <div id="industry-panel" role="tabpanel" className="relative lg:min-h-[32rem]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
@@ -56,7 +56,7 @@ export function IndustriesTeaser() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
               transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 grid items-center gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12"
+              className="relative grid items-center gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12"
             >
               <div className="relative z-10 order-2 lg:order-1 lg:pl-8">
                 <div className="mb-5 flex items-center gap-3">
@@ -77,7 +77,7 @@ export function IndustriesTeaser() {
               </div>
 
               <div className="relative order-1 lg:order-2">
-                <IndustryVisual industry={active} priority />
+                <BrandScene src={active.image} alt={active.imageAlt} />
               </div>
             </motion.div>
           </AnimatePresence>
@@ -98,7 +98,7 @@ export function IndustriesShowcase() {
             <div key={industry.id} id={industry.id} className="scroll-mt-28">
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
                 <Reveal direction={reversed ? "left" : "right"} className={reversed ? "lg:order-2" : ""}>
-                  <IndustryVisual industry={industry} />
+                  <BrandScene src={industry.image} alt={industry.imageAlt} placement={reversed ? "right" : "left"} />
                 </Reveal>
 
                 <Reveal direction={reversed ? "right" : "left"} delay={0.1} className={reversed ? "lg:order-1" : ""}>
@@ -122,33 +122,5 @@ export function IndustriesShowcase() {
         })}
       </div>
     </section>
-  );
-}
-
-function IndustryVisual({ industry, priority = false }: { industry: (typeof industries)[number]; priority?: boolean }) {
-  return (
-    <div className="relative isolate min-h-[22rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-[#fffdf9] shadow-[0_24px_60px_rgba(0,31,52,.09)] sm:min-h-[30rem]">
-      <div className="absolute inset-0 opacity-[0.3]" aria-hidden="true"><InfinityTrails tone="light" /></div>
-      <div className="absolute right-[7%] top-[6%] h-[76%] w-[76%] rounded-[42%] bg-gradient-to-br from-[#ee7d16]/18 via-[#c61261]/10 to-transparent blur-2xl" aria-hidden="true" />
-      <Image
-        src={industry.image}
-        alt={industry.imageAlt}
-        fill
-        priority={priority}
-        sizes="(max-width: 1024px) 100vw, 58vw"
-        className="object-contain object-center p-6 sm:p-10 [mask-image:radial-gradient(ellipse_78%_76%_at_57%_48%,#000_51%,transparent_100%)]"
-      />
-      <div className="pointer-events-none absolute inset-x-[-8%] bottom-[-11%] h-[48%] opacity-[0.3]" aria-hidden="true">
-        <InfinityTrails tone="light" />
-      </div>
-      <div className="pointer-events-none absolute inset-x-7 bottom-0 h-24 bg-gradient-to-t from-[#fffdf9]/85 via-[#fffdf9]/20 to-transparent" aria-hidden="true" />
-      <div className="absolute bottom-5 left-5 flex items-center gap-2.5 rounded-full border border-white/80 bg-white/90 px-4 py-2.5 shadow-lg backdrop-blur">
-        <IconBadge icon={industry.icon} size="sm" />
-        <span className="text-xs font-bold uppercase tracking-wide text-violet-700">{industry.sector}</span>
-      </div>
-      <div className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/70 bg-white/75 text-actros-magenta shadow-lg backdrop-blur" aria-hidden="true">
-        <industry.icon className="h-5 w-5" strokeWidth={1.8} />
-      </div>
-    </div>
   );
 }
