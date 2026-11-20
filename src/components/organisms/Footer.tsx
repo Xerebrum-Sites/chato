@@ -68,6 +68,16 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a href={`mailto:${EMAILS.legal}?subject=Solicitud%20de%20arrepentimiento`} className="text-sm font-semibold text-white underline hover:text-[#ee7d16]">
+                  Botón de arrepentimiento
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${EMAILS.contact}?subject=Solicitud%20de%20baja%20de%20servicio`} className="text-sm font-semibold text-white underline hover:text-[#ee7d16]">
+                  Botón de baja de servicio
+                </a>
+              </li>
             </ul>
           </div>
         </div>
