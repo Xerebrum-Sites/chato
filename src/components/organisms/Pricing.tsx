@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Puzzle } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { PricingCard, type PriceDisplay } from "@/components/molecules/PricingCard";
 import { URLS } from "@/lib/config";
 import { type PricingCurrency, usePricingCurrency } from "@/hooks/usePricingCurrency";
@@ -171,8 +172,11 @@ export function Pricing() {
   }
 
   return (
-    <section id="precios" className="bg-gray-50 pb-24 pt-32 lg:pt-40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="precios" className="relative isolate overflow-hidden bg-[#fffaf5] pb-24 pt-32 lg:pt-40">
+      <div className="absolute inset-0 opacity-[0.18]" aria-hidden="true"><InfinityTrails tone="light" /></div>
+      <div className="absolute -right-32 top-16 h-96 w-96 rounded-full bg-[#c61261]/10 blur-3xl" aria-hidden="true" />
+      <div className="absolute -left-36 bottom-12 h-80 w-80 rounded-full bg-[#ee7d16]/10 blur-3xl" aria-hidden="true" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <Badge variant="green" className="mb-4">Precios transparentes</Badge>
           <h2 className="mb-4 text-3xl font-black text-gray-900 sm:text-4xl">Tu <span className="gradient-text">Axtroos Workstation</span>, a medida</h2>
@@ -188,10 +192,10 @@ export function Pricing() {
           </div>
         </div>
 
-        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-5xl gap-6 rounded-[2rem] border border-white/80 bg-white/55 p-3 shadow-[0_24px_70px_rgba(0,31,52,.08)] backdrop-blur-sm lg:grid-cols-[1.1fr_0.9fr] sm:p-5">
           <PricingCard name={WORKSTATION_NAME} description="La base de tu operación, con los recursos que elegís para tu equipo." price={hasPrice && currency ? priceDisplay(quotePrice, currency, cycle === "annual" ? "/año" : "/mes") : null} loading={resolving} annualSavings={cycle === "annual" && quote && quote.annual_savings > 0 && currency ? `Ahorrás ${currency} $${formatAmount(quote.annual_savings, currency)} al año` : null} annualHint={cycle === "monthly" && quote && quote.annual_savings > 0 && currency ? `Pagando anual ahorrás ${currency} $${formatAmount(quote.annual_savings, currency)}` : cycle === "monthly" && discountLabel ? `Pagando anual ahorrás ${discountLabel}` : null} unpricedLabel="Consultanos" unpricedNote="Estamos preparando el precio de esta configuración. Escribinos y te ayudamos a armarla." includes={PLAN_INCLUDES} trialLabel={trialLabel} cta={hasPrice || resolving ? "Empezar gratis" : "Hablar con nosotros"} ctaHref={hasPrice || resolving ? URLS.signIn : "/contacto/"} />
 
-          <aside className="rounded-2xl border border-violet-100 bg-white p-6 shadow-lg shadow-violet-100 sm:p-8" aria-label="Cotizador de Axtroos Workstation">
+          <aside className="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-lg shadow-violet-100/70 sm:p-8" aria-label="Cotizador de Axtroos Workstation">
             <div className="mb-6"><p className="text-sm font-black uppercase tracking-wider text-violet-700">Configurá tu plataforma</p><h3 className="mt-2 text-2xl font-black text-gray-900">Cotizador</h3><p className="mt-2 text-sm leading-relaxed text-gray-500">Elegí los recursos que necesita tu operación. Los importes se consultan al catálogo de Axtroos.</p></div>
             <div className="space-y-5">
               {(["credits", "storage"] as const).map((family) => {
@@ -201,11 +205,16 @@ export function Pricing() {
               {optionsByFamily.mobile.length > 0 && <label className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-gray-100 bg-gray-50 p-4"><span><span className="block text-sm font-bold text-gray-800">App móvil</span><span className="mt-1 block text-xs text-gray-500">Sumala si tu equipo también necesita operar desde el celular.</span></span><input type="checkbox" checked={selectedOptionIds.some((id) => optionsByFamily.mobile.some((option) => option.id === id))} onChange={(event) => selectOption("mobile", event.target.checked ? optionsByFamily.mobile[0].id : null)} className="h-5 w-5 rounded border-gray-300 text-violet-600 focus:ring-violet-500" /></label>}
             </div>
             {quote && <div className="mt-6 border-t border-gray-100 pt-5"><p className="mb-3 text-xs font-black uppercase tracking-wider text-gray-500">Tu configuración</p><ul className="space-y-2">{quote.lines.map((line) => <li key={line.id} className="flex items-start justify-between gap-3 text-sm"><span className="text-gray-600">{line.name}{line.quantity ? ` · ${line.quantity.toLocaleString("es-AR")} ${line.unit ?? ""}` : ""}</span><span className="shrink-0 font-semibold text-gray-900">{currency} ${formatAmount(cycle === "annual" ? line.annual_amount : line.monthly_amount, currency ?? "USD")}{cycle === "annual" ? "/año" : "/mes"}</span></li>)}</ul>{quote.missing_required_families.length > 0 && <p className="mt-4 rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium text-amber-800">Elegí las opciones obligatorias para completar tu configuración.</p>}</div>}
+            <div className="mt-6 rounded-2xl bg-[#0b0b17] p-5 text-white shadow-lg" aria-live="polite" aria-atomic="true">
+              <p className="text-[11px] font-black uppercase tracking-[0.16em] text-white/60">Total de tu configuración</p>
+              {hasPrice && currency ? <div className="mt-2 flex items-end justify-between gap-3"><p className="text-3xl font-black tracking-tight">{currency} <span className="text-4xl">${formatAmount(quotePrice, currency)}</span></p><span className="mb-1 text-sm font-semibold text-white/70">{cycle === "annual" ? "/año" : "/mes"}</span></div> : <p className="mt-2 text-sm font-medium text-white/70">Estamos preparando el total de tu configuración.</p>}
+              <p className="mt-2 text-xs leading-relaxed text-white/60">{quote?.missing_required_families.length ? "Seleccioná los recursos obligatorios para completar el total." : quote ? "El total se actualiza automáticamente al cambiar cada recurso." : "Incluye Axtroos Workstation. Sumá recursos para ver el total final."}</p>
+            </div>
           </aside>
         </div>
 
-        <div className="mx-auto mt-6 flex max-w-5xl items-start gap-4 rounded-2xl border border-gray-200 bg-white p-5 sm:items-center"><span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600"><Puzzle className="h-5 w-5" aria-hidden="true" /></span><p className="text-sm text-gray-600"><strong className="text-gray-900">Expandí tu operación cuando lo necesites.</strong> Los módulos del Marketplace se activan sobre tu plataforma sin perder el historial ni el contexto. <a href="/herramientas/" className="font-semibold text-violet-700 underline underline-offset-2 hover:text-violet-900">Ver módulos</a></p></div>
-        <div className="mt-14 grid gap-6 text-center sm:grid-cols-3">{[{ q: "¿Necesito tarjeta para probar?", a: trialDays ? `No. Los ${trialDays} días de prueba son completamente gratis y sin tarjeta de crédito.` : "No. La prueba es completamente gratis y sin tarjeta de crédito." }, { q: "¿Pago por canal o por usuario?", a: "No. Los canales y los usuarios no tienen cargo adicional en Axtroos Workstation." }, { q: "¿Cómo se calcula el total?", a: "Es la suma de la Workstation y los recursos que elegís desde el catálogo vigente." }].map(({ q, a }) => <div key={q} className="rounded-2xl border border-gray-100 bg-white p-5"><p className="mb-2 text-sm font-semibold text-gray-900">{q}</p><p className="text-sm text-gray-500">{a}</p></div>)}</div>
+        <div className="mx-auto mt-6 flex max-w-5xl items-start gap-4 rounded-2xl border border-white/80 bg-white/80 p-5 shadow-sm backdrop-blur sm:items-center"><span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600"><Puzzle className="h-5 w-5" aria-hidden="true" /></span><p className="text-sm text-gray-600"><strong className="text-gray-900">Expandí tu operación cuando lo necesites.</strong> Los módulos del Marketplace se activan sobre tu plataforma sin perder el historial ni el contexto. <a href="/herramientas/" className="font-semibold text-violet-700 underline underline-offset-2 hover:text-violet-900">Ver módulos</a></p></div>
+        <div className="mt-14 grid gap-6 text-center sm:grid-cols-3">{[{ q: "¿Necesito tarjeta para probar?", a: trialDays ? `No. Los ${trialDays} días de prueba son completamente gratis y sin tarjeta de crédito.` : "No. La prueba es completamente gratis y sin tarjeta de crédito." }, { q: "¿Pago por canal o por usuario?", a: "No. Los canales y los usuarios no tienen cargo adicional en Axtroos Workstation." }, { q: "¿Cómo se calcula el total?", a: "Es la suma de la Workstation y los recursos que elegís desde el catálogo vigente." }].map(({ q, a }) => <div key={q} className="rounded-2xl border border-white/80 bg-white/80 p-5 shadow-sm backdrop-blur"><p className="mb-2 text-sm font-semibold text-gray-900">{q}</p><p className="text-sm text-gray-500">{a}</p></div>)}</div>
       </div>
     </section>
   );

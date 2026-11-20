@@ -46,7 +46,7 @@ function HumanValueBand() {
         <Reveal direction="right">
           <div className="relative min-h-[24rem] overflow-hidden sm:min-h-[32rem]">
             <Image
-              src="/images/brand/team-operations-v4.png"
+              src="/images/brand/team-operations-v5.png"
               alt="Equipo operativo internacional colaborando desde estaciones de trabajo de escritorio"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
