@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Términos y condiciones de uso de Axtroos: cuentas, suscripción y facturación, uso aceptable, inteligencia artificial, integraciones y responsabilidad.",
 };
 
-const UPDATED = "12 de octubre de 2026";
+const UPDATED = "16 de noviembre de 2026";
 const EMAIL = EMAILS.legal;
 const SITE = URLS.landing;
 const APP = URLS.app;
@@ -19,6 +19,7 @@ const sections = [
     title: "1. Aceptación de los términos",
     content: `
       <p>Estos Términos y Condiciones (los "Términos") rigen el acceso y uso de la plataforma Axtroos ("nosotros", "nuestro"), disponible a través de <a href="${SITE}">${SITE}</a> y de la aplicación en <a href="${APP}">${APP}</a>.</p>
+      <p>Para las contrataciones en Argentina, el titular y proveedor del servicio es Jose Alberto Guevara, CUIT 20-28407325-9, con domicilio en Presidente Roca 187, piso 9, departamento B, CP 2000, Rosario, Santa Fe, Argentina. Contacto: <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
       <p>Al crear una cuenta, iniciar sesión o utilizar Axtroos de cualquier forma, aceptás quedar obligado por estos Términos y por nuestra <a href="/privacidad">Política de Privacidad</a>. Si estás aceptando estos Términos en nombre de una empresa u organización, declarás tener la autoridad para vincularla y las referencias a "vos" incluyen a dicha organización.</p>
       <p>Si no estás de acuerdo con alguna parte de estos Términos, no debés utilizar el servicio.</p>
     `,
@@ -55,13 +56,22 @@ const sections = [
       <h3>4.1 Prueba gratuita</h3>
       <p>Ofrecemos un período de prueba sin necesidad de tarjeta de crédito. Su duración vigente se informa durante el registro y puede actualizarse desde la configuración comercial de Axtroos. Al finalizar la prueba, deberás contratar la suscripción para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
       <h3>4.2 Suscripción y precios</h3>
-      <p>Axtroos se contrata mediante una suscripción, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para tarjetas emitidas en Argentina, los precios y cobros se realizan en pesos argentinos (ARS); para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout según el país emisor de la tarjeta. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
+      <p>Axtroos se contrata mediante una suscripción, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para contrataciones en Argentina, el precio en pesos argentinos (ARS) se informa en la página de precios antes de contratar y los cobros procesados por Rebill se realizan en pesos. Para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
       <h3>4.3 Add-ons</h3>
       <p>Podés activar add-ons desde tu cuenta. Los add-ons se facturan de forma adicional según los que actives.</p>
       <h3>4.4 Pagos y renovación</h3>
       <p>Las suscripciones se renuevan automáticamente al final de cada ciclo salvo que canceles antes de la fecha de renovación. El procesamiento de pagos lo realizan proveedores externos; no almacenamos datos completos de tarjetas de crédito.</p>
       <h3>4.5 Reembolsos</h3>
-      <p>Los pagos no son reembolsables salvo que la ley aplicable indique lo contrario o que ofrezcamos una excepción a nuestro exclusivo criterio (por ejemplo, un cobro duplicado o un error de facturación).</p>
+      <p>Los reembolsos se rigen por el derecho de arrepentimiento cuando corresponda y por las demás disposiciones legales aplicables. También podremos realizar un reembolso en otros casos, por ejemplo, ante un cobro duplicado o un error de facturación.</p>
+    `,
+  },
+  {
+    id: "arrepentimiento",
+    title: "Derecho de arrepentimiento",
+    content: `
+      <p>Cuando corresponda conforme a la legislación argentina de defensa del consumidor, podés revocar la aceptación de una contratación a distancia dentro de los 10 días corridos desde la celebración del contrato o la entrega del bien, lo que ocurra después, sin responsabilidad ni costo para vos.</p>
+      <p>Para solicitarlo, escribinos a <a href="mailto:${EMAIL}?subject=Solicitud%20de%20arrepentimiento">${EMAIL}</a> con el asunto “Solicitud de arrepentimiento” y los datos necesarios para identificar la contratación. También podés utilizar el botón de arrepentimiento disponible en el sitio. No necesitás iniciar sesión ni registrarte para hacer la solicitud.</p>
+      <p>Te informaremos un código de identificación de la solicitud por el mismo medio dentro de las 24 horas siguientes y gestionaremos la revocación y el reintegro que corresponda conforme a la normativa aplicable. Las excepciones legales se evaluarán según las circunstancias de cada contratación.</p>
     `,
   },
   {
@@ -136,7 +146,7 @@ const sections = [
     id: "cancelacion",
     title: "11. Cancelación y terminación",
     content: `
-      <p>Podés cancelar tu suscripción en cualquier momento desde tu cuenta en <a href="${APP}">${APP}</a> o escribiéndonos a <a href="mailto:${EMAIL}">${EMAIL}</a>. La cancelación tiene efecto al final del ciclo de facturación vigente; no se realizan reembolsos por el período ya iniciado, salvo lo indicado en la sección 4.5.</p>
+      <p>Podés solicitar la baja de tu suscripción en cualquier momento desde tu cuenta en <a href="${APP}">${APP}</a>, mediante el botón de baja del sitio o escribiéndonos a <a href="mailto:${EMAIL}">${EMAIL}</a>. La solicitud de baja es distinta del ejercicio del derecho de arrepentimiento y se tramita conforme a la normativa aplicable.</p>
       <p>Podemos suspender o cancelar tu cuenta, con o sin previo aviso, si:</p>
       <ul>
         <li>Incumplís estos Términos o nuestra Política de Privacidad.</li>

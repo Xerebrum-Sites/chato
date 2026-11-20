@@ -106,6 +106,7 @@ export function Navbar() {
             className="relative"
             onMouseEnter={() => openMenu("producto")}
             onPointerEnter={() => openMenu("producto")}
+            onPointerLeave={() => setOpen(null)}
           >
             <MenuTrigger
               label="Producto"
@@ -167,6 +168,7 @@ export function Navbar() {
             className="relative"
             onMouseEnter={() => openMenu("soluciones")}
             onPointerEnter={() => openMenu("soluciones")}
+            onPointerLeave={() => setOpen(null)}
           >
             <MenuTrigger
               label="Soluciones"

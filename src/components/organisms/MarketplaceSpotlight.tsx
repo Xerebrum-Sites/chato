@@ -3,13 +3,13 @@ import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
 import { Reveal } from "@/components/atoms/Reveal";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 
 export function MarketplaceSpotlight() {
   return (
     <section className="marketplace-atmosphere relative overflow-hidden py-24 text-white">
       <div className="actros-grid absolute inset-0 opacity-35" aria-hidden="true" />
-      <div className="marketplace-orbit marketplace-orbit-one" aria-hidden="true" />
-      <div className="marketplace-orbit marketplace-orbit-two" aria-hidden="true" />
+      <div className="absolute inset-0 opacity-70" aria-hidden="true"><InfinityTrails tone="dark" /></div>
       <div className="actros-dots absolute right-5 top-4 h-60 w-60 opacity-25" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">

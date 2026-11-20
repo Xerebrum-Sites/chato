@@ -8,6 +8,7 @@ import { DemoForm } from "@/components/organisms/DemoForm";
 import { URLS, CONTACT } from "@/lib/config";
 import { supportedChannels } from "@/lib/content";
 import { useTrialDays } from "@/hooks/useTrialDays";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 
 interface CtaSectionProps {
   title?: ReactNode;
@@ -33,7 +34,7 @@ export function CtaSection({ title, subtitle }: CtaSectionProps) {
   return (
     <section id="registro" className="cta-atmosphere relative overflow-hidden py-24">
       <div className="actros-grid absolute inset-0 opacity-45" aria-hidden="true" />
-      <div className="cta-infinity-loop" aria-hidden="true" />
+      <div className="absolute inset-0 opacity-55" aria-hidden="true"><InfinityTrails tone="dark" /></div>
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{
