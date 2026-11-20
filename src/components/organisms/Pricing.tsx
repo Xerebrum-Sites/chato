@@ -5,6 +5,7 @@ import { ArrowUpRight, Blocks, Check, Database, MessagesSquare, Smartphone, Spar
 import { Badge } from "@/components/atoms/Badge";
 import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { Button } from "@/components/atoms/Button";
+import { CorporateWorkstation } from "./CorporateWorkstation";
 import { URLS } from "@/lib/config";
 import { type PricingCurrency, usePricingCurrency } from "@/hooks/usePricingCurrency";
 import { useTrialDays } from "@/hooks/useTrialDays";
@@ -299,6 +300,7 @@ export function Pricing() {
             </div>
           </aside>
         </div>
+        <div className="mt-10"><CorporateWorkstation /></div>
         <section aria-labelledby="core-title" className="relative isolate mt-16 overflow-hidden rounded-[2rem] border border-orange-100 bg-white px-5 py-9 sm:mt-20 sm:p-10">
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,#ffeadc,transparent_52%)]" />
           <h2 id="core-title" className="max-w-2xl text-balance text-3xl font-black tracking-tight text-actros-navy sm:text-4xl">

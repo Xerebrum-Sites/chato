@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { Features } from "@/components/organisms/Features";
+import { CorporateWorkstation } from "@/components/organisms/CorporateWorkstation";
 import { CtaSection } from "@/components/organisms/CtaSection";
 import { FeaturesHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
@@ -29,6 +30,7 @@ export default function CaracteristicasPage() {
         visual={<FeaturesHeroVisual />}
       />
       <Features />
+      <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8"><CorporateWorkstation /></div>
       <CtaSection />
     </>
   );
