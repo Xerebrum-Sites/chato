@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 type InfinityTrailsProps = {
   tone?: "hero" | "dark" | "light";
   className?: string;
@@ -8,7 +10,8 @@ type InfinityTrailsProps = {
  * sin convertirlo en una figura literal ni competir con el contenido.
  */
 export function InfinityTrails({ tone = "dark", className = "" }: InfinityTrailsProps) {
-  const id = `infinity-${tone}`;
+  const instanceId = useId().replace(/:/g, "");
+  const id = `infinity-${tone}-${instanceId}`;
   const opacity = tone === "light" ? 0.42 : tone === "hero" ? 0.9 : 0.7;
 
   return (

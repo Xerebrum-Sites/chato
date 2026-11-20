@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check, Quote } from "lucide-react";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { IconBadge } from "@/components/atoms/IconBadge";
 import { Reveal } from "@/components/atoms/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
@@ -16,8 +17,9 @@ export function IndustriesTeaser() {
   const active = industries.find((industry) => industry.id === activeId) ?? industries[0];
 
   return (
-    <section className="overflow-hidden bg-[#fffaf5] py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative isolate overflow-hidden bg-[#fffaf5] py-24">
+      <div className="absolute inset-0 opacity-[0.14]" aria-hidden="true"><InfinityTrails tone="light" /></div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Para tu industria"
           badgeVariant="green"
@@ -74,8 +76,8 @@ export function IndustriesTeaser() {
                 </div>
               </div>
 
-              <div className="relative order-1 min-h-[22rem] p-2 lg:order-2 lg:min-h-[32rem] lg:p-3">
-                <Image src={active.image} alt={active.imageAlt} fill sizes="(max-width: 1024px) 100vw, 58vw" className="object-contain p-1 sm:p-2" />
+              <div className="relative order-1 lg:order-2">
+                <IndustryVisual industry={active} priority />
               </div>
             </motion.div>
           </AnimatePresence>
@@ -87,21 +89,16 @@ export function IndustriesTeaser() {
 
 export function IndustriesShowcase() {
   return (
-    <section className="overflow-hidden bg-[#fffaf5] py-8 lg:py-12">
-      <div className="mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:space-y-28 lg:px-8">
+    <section className="relative isolate overflow-hidden bg-[#fffaf5] py-8 lg:py-12">
+      <div className="absolute inset-0 opacity-[0.11]" aria-hidden="true"><InfinityTrails tone="light" /></div>
+      <div className="relative mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:space-y-28 lg:px-8">
         {industries.map((industry, index) => {
           const reversed = index % 2 === 1;
           return (
             <div key={industry.id} id={industry.id} className="scroll-mt-28">
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
                 <Reveal direction={reversed ? "left" : "right"} className={reversed ? "lg:order-2" : ""}>
-                  <div className="relative min-h-[22rem] p-2 sm:min-h-[30rem] sm:p-4">
-                    <Image src={industry.image} alt={industry.imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain p-1 sm:p-2" />
-                    <div className="absolute bottom-4 left-4 flex items-center gap-2.5 rounded-full border border-white/80 bg-white/90 px-4 py-2.5 shadow-lg backdrop-blur">
-                      <IconBadge icon={industry.icon} size="sm" />
-                      <span className="text-xs font-bold uppercase tracking-wide text-violet-700">{industry.sector}</span>
-                    </div>
-                  </div>
+                  <IndustryVisual industry={industry} />
                 </Reveal>
 
                 <Reveal direction={reversed ? "right" : "left"} delay={0.1} className={reversed ? "lg:order-1" : ""}>
@@ -125,5 +122,33 @@ export function IndustriesShowcase() {
         })}
       </div>
     </section>
+  );
+}
+
+function IndustryVisual({ industry, priority = false }: { industry: (typeof industries)[number]; priority?: boolean }) {
+  return (
+    <div className="relative isolate min-h-[22rem] overflow-hidden rounded-[2.25rem] border border-white/80 bg-[#fffdf9] shadow-[0_24px_60px_rgba(0,31,52,.09)] sm:min-h-[30rem]">
+      <div className="absolute inset-0 opacity-[0.3]" aria-hidden="true"><InfinityTrails tone="light" /></div>
+      <div className="absolute right-[7%] top-[6%] h-[76%] w-[76%] rounded-[42%] bg-gradient-to-br from-[#ee7d16]/18 via-[#c61261]/10 to-transparent blur-2xl" aria-hidden="true" />
+      <Image
+        src={industry.image}
+        alt={industry.imageAlt}
+        fill
+        priority={priority}
+        sizes="(max-width: 1024px) 100vw, 58vw"
+        className="object-contain object-center p-6 sm:p-10 [mask-image:radial-gradient(ellipse_78%_76%_at_57%_48%,#000_51%,transparent_100%)]"
+      />
+      <div className="pointer-events-none absolute inset-x-[-8%] bottom-[-11%] h-[48%] opacity-[0.3]" aria-hidden="true">
+        <InfinityTrails tone="light" />
+      </div>
+      <div className="pointer-events-none absolute inset-x-7 bottom-0 h-24 bg-gradient-to-t from-[#fffdf9]/85 via-[#fffdf9]/20 to-transparent" aria-hidden="true" />
+      <div className="absolute bottom-5 left-5 flex items-center gap-2.5 rounded-full border border-white/80 bg-white/90 px-4 py-2.5 shadow-lg backdrop-blur">
+        <IconBadge icon={industry.icon} size="sm" />
+        <span className="text-xs font-bold uppercase tracking-wide text-violet-700">{industry.sector}</span>
+      </div>
+      <div className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/70 bg-white/75 text-actros-magenta shadow-lg backdrop-blur" aria-hidden="true">
+        <industry.icon className="h-5 w-5" strokeWidth={1.8} />
+      </div>
+    </div>
   );
 }

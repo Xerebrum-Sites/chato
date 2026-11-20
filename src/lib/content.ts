@@ -154,9 +154,9 @@ export const industries: Industry[] = [
     solution:
       "Todos los mensajes de tus canales llegan a un solo lugar. Etiquetás las consultas de talle, respondés con fotos del producto y el cliente recibe la respuesta en el canal donde escribió.",
     result: "Respondés más rápido y dejás de perder consultas entre pestañas.",
-    photoLabel: "Equipo de moda atendiendo consultas desde una computadora de escritorio",
-    image: "/images/brand/industry-moda-v3.webp",
-    imageAlt: "Encargado de una tienda de moda resolviendo consultas desde su computadora",
+    photoLabel: "Vendedora asesorando a una clienta en una tienda de indumentaria",
+    image: "/images/brand/industry-moda-v4.png",
+    imageAlt: "Vendedora asesorando a una clienta entre percheros de una tienda de ropa",
   },
   {
     id: "gastronomia",
@@ -168,9 +168,9 @@ export const industries: Industry[] = [
     solution:
       "Configurás respuestas rápidas como /menu para enviar tu carta al instante. Los pedidos entran etiquetados y los seguís de #nuevo a #en_camino sin cambiar de app.",
     result: "Ningún pedido se pierde y confirmás por el mismo canal del cliente.",
-    photoLabel: "Encargado gastronómico coordinando pedidos desde una computadora de escritorio",
-    image: "/images/brand/industry-gastronomia-v3.webp",
-    imageAlt: "Encargado gastronómico coordinando pedidos y entregas en el local",
+    photoLabel: "Equipo gastronómico preparando y entregando pedidos en un local de comidas",
+    image: "/images/brand/industry-gastronomia-v4.png",
+    imageAlt: "Cocinero entregando un pedido de delivery en un local gastronómico",
   },
   {
     id: "salud",
@@ -182,9 +182,9 @@ export const industries: Industry[] = [
     solution:
       "Cada solicitud de turno llega ordenada en una sola bandeja. Confirmás respondiendo y el paciente recibe la confirmación —y un recordatorio— en su canal preferido.",
     result: "Agenda ordenada sin sumar personal solo para atender mensajes.",
-    photoLabel: "Recepcionista de salud organizando turnos desde una computadora",
-    image: "/images/brand/industry-salud-v3.webp",
-    imageAlt: "Recepcionista de un centro de salud organizando turnos en una computadora",
+    photoLabel: "Recepcionista atendiendo a una paciente en una clínica de barrio",
+    image: "/images/brand/industry-salud-v4.png",
+    imageAlt: "Recepcionista de clínica atendiendo una consulta de turno en el mostrador",
   },
   {
     id: "servicios",
@@ -196,9 +196,9 @@ export const industries: Industry[] = [
     solution:
       "Recibís todos los mensajes en un único hub con notificaciones. Los priorizás con etiquetas y respondés cuando terminás el trabajo en curso.",
     result: "Atención profesional aunque trabajes solo, sin dejar gente esperando.",
-    photoLabel: "Técnica coordinando trabajos desde su puesto de escritorio",
-    image: "/images/brand/industry-servicios-v3.webp",
-    imageAlt: "Técnica de servicios coordinando trabajos desde una estación de escritorio",
+    photoLabel: "Mecánico explicando una reparación a un cliente en su taller",
+    image: "/images/brand/industry-servicios-v4.png",
+    imageAlt: "Mecánico revisando el motor de un auto con un cliente en el taller",
   },
   {
     id: "belleza",
@@ -210,9 +210,9 @@ export const industries: Industry[] = [
     solution:
       "Sumás a tu equipo como agentes: cada persona atiende su canal asignado con el historial compartido, sin mezclar cuentas personales.",
     result: "Todo el equipo atiende desde sus estaciones de escritorio, ordenado y sin compartir cuentas personales.",
-    photoLabel: "Equipo de un salón coordinando turnos desde recepción",
-    image: "/images/brand/industry-belleza-v3.webp",
-    imageAlt: "Equipo diverso de un salón coordinando turnos desde la recepción",
+    photoLabel: "Estilista asesorando a una clienta en un salón de belleza",
+    image: "/images/brand/industry-belleza-v4.png",
+    imageAlt: "Estilista trabajando con una clienta en un salón de belleza",
   },
   {
     id: "educacion",
@@ -224,9 +224,9 @@ export const industries: Industry[] = [
     solution:
       "Creás respuestas rápidas para las preguntas frecuentes (/horarios, /precios, /inscripcion) y resolvés lo repetitivo en segundos.",
     result: "Menos tiempo respondiendo lo mismo, más tiempo enseñando.",
-    photoLabel: "Coordinador académico respondiendo consultas desde una computadora",
-    image: "/images/brand/industry-educacion-v3.webp",
-    imageAlt: "Coordinador académico gestionando inscripciones desde una computadora",
+    photoLabel: "Coordinadora atendiendo a una madre en la recepción de una academia",
+    image: "/images/brand/industry-educacion-v4.png",
+    imageAlt: "Coordinadora educativa conversando con una madre en la recepción de una academia",
   },
   {
     id: "ecommerce",
@@ -238,9 +238,9 @@ export const industries: Industry[] = [
     solution:
       "Unificás preventa y posventa en una bandeja, con etiquetas por estado (#consulta, #pagado, #envío) y respuestas rápidas para las dudas típicas.",
     result: "Seguimiento claro de cada cliente, del carrito a la entrega.",
-    photoLabel: "Operador de ecommerce gestionando pedidos desde una computadora",
-    image: "/images/brand/industry-ecommerce-v3.webp",
-    imageAlt: "Operador de ecommerce gestionando pedidos en una estación de despacho",
+    photoLabel: "Equipo de ecommerce preparando pedidos en su espacio de despacho",
+    image: "/images/brand/industry-ecommerce-v4.png",
+    imageAlt: "Dos personas preparando y escaneando pedidos en un depósito de ecommerce",
   },
   {
     id: "inmobiliaria",
@@ -252,9 +252,9 @@ export const industries: Industry[] = [
     solution:
       "Centralizás todas las consultas de propiedades en un lugar, las etiquetás por interés y coordinás visitas respondiendo desde el mismo hub.",
     result: "Cada consulta queda registrada y con seguimiento.",
-    photoLabel: "Equipo inmobiliario coordinando visitas desde una computadora",
-    image: "/images/brand/industry-inmobiliaria-v3.webp",
-    imageAlt: "Equipo inmobiliario coordinando consultas y visitas desde su escritorio",
+    photoLabel: "Agente inmobiliario mostrando un departamento a una pareja",
+    image: "/images/brand/industry-inmobiliaria-v4.png",
+    imageAlt: "Agente inmobiliario acompañando una visita a un departamento",
   },
   {
     id: "turismo",
@@ -266,9 +266,9 @@ export const industries: Industry[] = [
     solution:
       "Reunís todas las consultas en una bandeja, usás respuestas rápidas para disponibilidad y precios, y derivás a tu equipo cuando hace falta.",
     result: "Respondés a tiempo y con información consistente en cada canal.",
-    photoLabel: "Recepcionista de hotel gestionando reservas desde una computadora",
-    image: "/images/brand/industry-turismo-v3.webp",
-    imageAlt: "Recepcionista de hotel gestionando una reserva desde la computadora",
+    photoLabel: "Recepcionista haciendo el check-in de viajeros en un hostel",
+    image: "/images/brand/industry-turismo-v4.png",
+    imageAlt: "Recepcionista atendiendo a viajeros en un hostel urbano",
   },
 ];
 
