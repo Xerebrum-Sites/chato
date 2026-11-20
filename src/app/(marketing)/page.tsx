@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BrandScene } from "@/components/atoms/BrandScene";
 import { Check } from "lucide-react";
 import { Hero } from "@/components/organisms/Hero";
 import { TrustBand } from "@/components/organisms/TrustBand";
@@ -8,8 +8,10 @@ import { HowItWorks } from "@/components/organisms/HowItWorks";
 import { IndustriesTeaser } from "@/components/organisms/IndustriesShowcase";
 import { CtaSection } from "@/components/organisms/CtaSection";
 import { Button } from "@/components/atoms/Button";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { Reveal } from "@/components/atoms/Reveal";
 import { URLS } from "@/lib/config";
+import { TrialCopy } from "@/components/atoms/TrialCopy";
 
 /**
  * Home liviana: muestra "un poco de todo" con enlaces profundos a cada sección,
@@ -38,19 +40,15 @@ function HumanValueBand() {
   ];
   return (
     <section className="relative isolate overflow-hidden bg-[#fffaf8] py-24">
-      <div className="actros-contours absolute -left-56 bottom-0 h-80 w-[46rem] rotate-180 opacity-30" aria-hidden="true" />
+      <div className="absolute inset-0 opacity-[0.24]" aria-hidden="true"><InfinityTrails tone="light" /></div>
       <div className="actros-dots absolute right-0 top-0 h-64 w-64 opacity-[0.1]" aria-hidden="true" />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <Reveal direction="right">
-          <div className="relative min-h-[24rem] p-2 sm:min-h-[32rem] sm:p-4">
-            <Image
-              src="/images/brand/team-desktop-v3.webp"
-              alt="Equipo latino y europeo atendiendo clientes desde estaciones de trabajo de escritorio"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain p-2 sm:p-3"
-            />
-          </div>
+          <BrandScene
+            src="/images/brand/team-operations-v5.png"
+            alt="Tres colegas revisan juntos la atención a clientes en una computadora"
+            placement="left"
+          />
         </Reveal>
         <Reveal direction="left" delay={0.1}>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-5 leading-tight text-balance">
@@ -70,7 +68,7 @@ function HumanValueBand() {
           </ul>
           <div className="flex flex-col sm:flex-row gap-3">
             <Button href={URLS.signIn} size="lg">
-              Empezar gratis 14 días
+              <TrialCopy />
             </Button>
             <Button href="/contacto/" variant="outline" size="lg">
               Hablar con nosotros

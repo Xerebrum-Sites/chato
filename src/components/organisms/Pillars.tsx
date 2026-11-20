@@ -70,6 +70,12 @@ export function Pillars() {
             </StaggerItem>
           ))}
         </Stagger>
+        <div className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-orange-100 pt-6">
+          <p className="font-semibold text-actros-navy">¿Tu empresa necesita una configuración de alto volumen?</p>
+          <Link href="/caracteristicas/#corporativo" className="inline-flex items-center gap-2 font-semibold text-violet-700 hover:underline">
+            Conocé la Workstation corporativa <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );

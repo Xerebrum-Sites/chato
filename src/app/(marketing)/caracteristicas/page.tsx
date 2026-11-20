@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { Features } from "@/components/organisms/Features";
+import { CorporateWorkstation } from "@/components/organisms/CorporateWorkstation";
 import { CtaSection } from "@/components/organisms/CtaSection";
 import { FeaturesHeroVisual } from "@/components/organisms/ConceptVisuals";
 import { URLS } from "@/lib/config";
+import { TrialCopy } from "@/components/atoms/TrialCopy";
 
 export const metadata: Metadata = {
   title: "Características — Todo lo que incluye Axtroos",
@@ -23,11 +25,12 @@ export default function CaracteristicasPage() {
           </>
         }
         subtitle="Las herramientas que tu negocio necesita para atender mejor, sin funciones de más ni curvas de aprendizaje."
-        primaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
+        primaryCta={{ label: <TrialCopy />, href: URLS.signIn }}
         secondaryCta={{ label: "Ver precios", href: "/precios/" }}
         visual={<FeaturesHeroVisual />}
       />
       <Features />
+      <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8"><CorporateWorkstation /></div>
       <CtaSection />
     </>
   );

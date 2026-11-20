@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import { BrandScene } from "@/components/atoms/BrandScene";
 import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check, Quote } from "lucide-react";
+import { InfinityTrails } from "@/components/atoms/InfinityTrails";
 import { IconBadge } from "@/components/atoms/IconBadge";
 import { Reveal } from "@/components/atoms/Reveal";
 import { SectionHeader } from "@/components/molecules/SectionHeader";
@@ -16,8 +17,9 @@ export function IndustriesTeaser() {
   const active = industries.find((industry) => industry.id === activeId) ?? industries[0];
 
   return (
-    <section className="overflow-hidden bg-[#fffaf5] py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative isolate overflow-hidden bg-[#fffaf5] py-24">
+      <div className="absolute inset-0 opacity-[0.14]" aria-hidden="true"><InfinityTrails tone="light" /></div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Para tu industria"
           badgeVariant="green"
@@ -46,7 +48,7 @@ export function IndustriesTeaser() {
           })}
         </div>
 
-        <div id="industry-panel" role="tabpanel" className="relative min-h-[38rem] lg:min-h-[32rem]">
+        <div id="industry-panel" role="tabpanel" className="relative lg:min-h-[32rem]">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
@@ -54,7 +56,7 @@ export function IndustriesTeaser() {
               animate={{ opacity: 1, y: 0 }}
               exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
               transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 grid items-center gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12"
+              className="relative grid items-center gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12"
             >
               <div className="relative z-10 order-2 lg:order-1 lg:pl-8">
                 <div className="mb-5 flex items-center gap-3">
@@ -74,8 +76,8 @@ export function IndustriesTeaser() {
                 </div>
               </div>
 
-              <div className="relative order-1 min-h-[22rem] p-2 lg:order-2 lg:min-h-[32rem] lg:p-3">
-                <Image src={active.image} alt={active.imageAlt} fill sizes="(max-width: 1024px) 100vw, 58vw" className="object-contain p-1 sm:p-2" />
+              <div className="relative order-1 lg:order-2">
+                <BrandScene src={active.image} alt={active.imageAlt} />
               </div>
             </motion.div>
           </AnimatePresence>
@@ -87,21 +89,16 @@ export function IndustriesTeaser() {
 
 export function IndustriesShowcase() {
   return (
-    <section className="overflow-hidden bg-[#fffaf5] py-8 lg:py-12">
-      <div className="mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:space-y-28 lg:px-8">
+    <section className="relative isolate overflow-hidden bg-[#fffaf5] py-8 lg:py-12">
+      <div className="absolute inset-0 opacity-[0.11]" aria-hidden="true"><InfinityTrails tone="light" /></div>
+      <div className="relative mx-auto max-w-7xl space-y-20 px-4 sm:px-6 lg:space-y-28 lg:px-8">
         {industries.map((industry, index) => {
           const reversed = index % 2 === 1;
           return (
             <div key={industry.id} id={industry.id} className="scroll-mt-28">
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
                 <Reveal direction={reversed ? "left" : "right"} className={reversed ? "lg:order-2" : ""}>
-                  <div className="relative min-h-[22rem] p-2 sm:min-h-[30rem] sm:p-4">
-                    <Image src={industry.image} alt={industry.imageAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain p-1 sm:p-2" />
-                    <div className="absolute bottom-4 left-4 flex items-center gap-2.5 rounded-full border border-white/80 bg-white/90 px-4 py-2.5 shadow-lg backdrop-blur">
-                      <IconBadge icon={industry.icon} size="sm" />
-                      <span className="text-xs font-bold uppercase tracking-wide text-violet-700">{industry.sector}</span>
-                    </div>
-                  </div>
+                  <BrandScene src={industry.image} alt={industry.imageAlt} placement={reversed ? "right" : "left"} />
                 </Reveal>
 
                 <Reveal direction={reversed ? "right" : "left"} delay={0.1} className={reversed ? "lg:order-1" : ""}>

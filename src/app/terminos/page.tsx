@@ -50,7 +50,7 @@ const sections = [
     title: "4. Prueba gratuita, suscripción y facturación",
     content: `
       <h3>4.1 Prueba gratuita</h3>
-      <p>Ofrecemos un período de prueba de 14 días sin necesidad de tarjeta de crédito. Al finalizar la prueba, deberás contratar la suscripción para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
+      <p>Ofrecemos un período de prueba sin necesidad de tarjeta de crédito. Su duración vigente se informa durante el registro y puede actualizarse desde la configuración comercial de Axtroos. Al finalizar la prueba, deberás contratar la suscripción para continuar usando el servicio; de lo contrario, tu cuenta pasará a modo restringido conforme a la sección 6.</p>
       <h3>4.2 Suscripción y precios</h3>
       <p>Axtroos se contrata mediante una suscripción, con precios publicados en <a href="${SITE}/precios/">${SITE}/precios/</a> y facturables en ciclo mensual o anual. Para contrataciones en Argentina, el precio en pesos argentinos (ARS) se informa en la página de precios antes de contratar y los cobros procesados por Rebill se realizan en pesos. Para el resto del mundo, los precios y cobros se realizan en dólares estadounidenses (USD). La moneda y el medio de pago aplicables se confirman durante el checkout. Los precios pueden actualizarse; los cambios no afectan el ciclo de facturación ya abonado y se notificarán con al menos 15 días de anticipación antes de aplicarse a renovaciones futuras.</p>
       <h3>4.3 Add-ons</h3>

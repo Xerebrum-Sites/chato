@@ -87,7 +87,7 @@ const jsonLd = {
   inLanguage: "es",
   offers: {
     "@type": "Offer",
-    category: "Prueba gratuita de 14 días",
+    category: "Prueba gratuita",
     availability: "https://schema.org/InStock",
     url: `${SITE_URL}/precios/`,
   },

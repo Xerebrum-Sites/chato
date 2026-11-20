@@ -25,6 +25,10 @@ const panelMotion = {
 
 export function Navbar() {
   const pathname = usePathname();
+  return <Navigation key={pathname} pathname={pathname} />;
+}
+
+function Navigation({ pathname }: { pathname: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<MenuKey | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,11 +54,6 @@ export function Navbar() {
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, []);
-
-  useEffect(() => {
-    setOpen(null);
-    setMobileOpen(false);
-  }, [pathname]);
 
   // Cerrar con Escape
   useEffect(() => {
@@ -106,6 +105,7 @@ export function Navbar() {
             className="relative"
             onMouseEnter={() => openMenu("producto")}
             onPointerEnter={() => openMenu("producto")}
+            onPointerLeave={() => setOpen(null)}
           >
             <MenuTrigger
               label="Producto"
@@ -167,6 +167,7 @@ export function Navbar() {
             className="relative"
             onMouseEnter={() => openMenu("soluciones")}
             onPointerEnter={() => openMenu("soluciones")}
+            onPointerLeave={() => setOpen(null)}
           >
             <MenuTrigger
               label="Soluciones"

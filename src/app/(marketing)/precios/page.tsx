@@ -3,9 +3,9 @@ import { Pricing } from "@/components/organisms/Pricing";
 import { CtaSection } from "@/components/organisms/CtaSection";
 
 export const metadata: Metadata = {
-  title: "Precios — Plan base de Axtroos con prueba gratis",
+  title: "Precios — Axtroos Workstation con prueba gratis",
   description:
-    "Un solo plan base con bandeja omnicanal, canales y usuarios sin cargo adicional. Sumá módulos del Marketplace cuando los necesites. Prueba gratis, sin tarjeta de crédito.",
+    "Axtroos Workstation reúne la bandeja omnicanal, canales y usuarios sin cargo adicional. Configurá créditos IA, almacenamiento y app móvil según tu operación. Prueba gratis, sin tarjeta de crédito.",
   alternates: { canonical: "/precios/" },
 };
 
