@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Puzzle } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Check } from "lucide-react";
 import { Badge } from "@/components/atoms/Badge";
 import { InfinityTrails } from "@/components/atoms/InfinityTrails";
-import { PricingCard, type PriceDisplay } from "@/components/molecules/PricingCard";
+import { Button } from "@/components/atoms/Button";
 import { URLS } from "@/lib/config";
 import { type PricingCurrency, usePricingCurrency } from "@/hooks/usePricingCurrency";
 import { useTrialDays } from "@/hooks/useTrialDays";
@@ -17,6 +17,7 @@ interface PlanData {
   id: string;
   name: string;
   slug: string;
+  features: Record<string, unknown>;
   price_ars: number | null;
   price_usd: number | null;
   annual_discount_pct?: number | null;
@@ -60,161 +61,199 @@ interface Quote {
 
 type BillingCycle = "monthly" | "annual";
 
-const PLAN_INCLUDES = [
-  "Bandeja omnicanal para tu operación",
-  "Canales y usuarios sin cargo adicional",
-  "Departamentos y trabajo en equipo",
-  "Recursos configurables según tu operación",
-];
-
-const CURRENCIES: PricingCurrency[] = ["ARS", "USD"];
-
-const FAMILY_COPY: Record<QuoteOption["family"], { label: string; placeholder: string; required: boolean }> = {
-  credits: { label: "Créditos IA", placeholder: "Elegí créditos para tu operación", required: true },
-  storage: { label: "Almacenamiento", placeholder: "Elegí almacenamiento", required: true },
-  mobile: { label: "App móvil", placeholder: "Sin app móvil", required: false },
+const families = ["credits", "storage", "mobile"] as const;
+const copy = {
+  credits: ["Créditos IA", "Elegí un cupo mensual. Los agentes consumen créditos cuando procesan consultas y generan respuestas."],
+  storage: ["Almacenamiento", "Elegí la capacidad que necesita tu equipo para conservar los archivos y adjuntos de las conversaciones."],
+  mobile: ["App móvil", "Sumá el acceso desde el celular para quienes atienden fuera del escritorio."],
 };
 
-function priceFor(plan: PlanData | null, currency: PricingCurrency | null, annual: boolean): number | null {
-  if (!plan || !currency) return null;
-  const value = currency === "ARS" ? (annual ? plan.price_annual_ars : plan.price_ars) : annual ? plan.price_annual_usd : plan.price_usd;
-  return typeof value === "number" && value > 0 ? value : null;
+const capabilities: Record<string, string> = {
+  webchat_enabled: "Chat en vivo para tu sitio web",
+  departments_enabled: "Organización por departamentos",
+  schedules_enabled: "Horarios de atención",
+  bot_enabled: "Atención con agentes de IA",
+  rag_enabled: "Base de conocimiento para respuestas con contexto",
+  custom_prompt: "Instrucciones personalizadas para la IA",
+  agent_tools_enabled: "Herramientas para agentes de IA",
+  agent_routing_llm_enabled: "Enrutamiento inteligente de conversaciones",
+  priority_support: "Soporte prioritario",
+};
+const limits: Record<string, [string, string]> = {
+  max_channels: ["Canales conectados", "Canales sin límite"],
+  max_departments: ["Departamentos", "Departamentos sin límite"],
+  max_ai_agents: ["Agentes IA", "Agentes IA sin límite"],
+  max_faqs: ["Preguntas frecuentes", "Preguntas frecuentes sin límite"],
+  max_bot_channels: ["Canales con bot", "Canales con bot sin límite"],
+};
+function coreFeatures(plan: PlanData | null) {
+  const items = ["Bandeja omnicanal con historial por cliente", "Asignación y seguimiento de conversaciones", "Trabajo en equipo con usuarios sin cargo adicional"];
+  for (const [key, value] of Object.entries(plan?.features ?? {})) {
+    if (value === true && capabilities[key]) items.push(capabilities[key]);
+    if (typeof value === "number" && limits[key]) {
+      const [label, unlimited] = limits[key];
+      if (value === -1) items.push(unlimited);
+      if (value > 0) items.push(label + " · hasta " + value);
+    }
+  }
+  return items;
 }
 
-function formatAmount(price: number, currency: PricingCurrency): string {
-  return price.toLocaleString(currency === "ARS" ? "es-AR" : "en-US", currency === "ARS" ? { maximumFractionDigits: 0 } : { minimumFractionDigits: Number.isInteger(price) ? 0 : 2, maximumFractionDigits: 2 });
-}
-
-function priceDisplay(price: number | null, currency: PricingCurrency, period: string): PriceDisplay | null {
-  if (price === null) return null;
-  return { currency, symbol: "$", amount: formatAmount(price, currency), period };
-}
-
-function toggleClass(active: boolean): string {
-  return `inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-40 ${
-    active ? "bg-violet-600 text-white shadow-md" : "text-gray-600 hover:text-gray-900"
-  }`;
-}
-
-function optionLabel(option: QuoteOption): string {
-  return option.quantity ? `${option.name} · ${option.quantity.toLocaleString("es-AR")} ${option.unit ?? ""}` : option.name;
+async function getPublic<T>(path: string, signal: AbortSignal): Promise<T> {
+  const response = await fetch(API_URL + "/api/public/" + path, { signal, cache: "no-store" });
+  if (!response.ok) throw new Error("Catálogo no disponible");
+  return response.json();
 }
 
 export function Pricing() {
-  const [plans, setPlans] = useState<PlanData[]>([]);
-  const [catalog, setCatalog] = useState<QuoteCatalog | null>(null);
-  const [quote, setQuote] = useState<Quote | null>(null);
-  const [selectedOptionIds, setSelectedOptionIds] = useState<string[]>([]);
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
-  const [currencyChoice, setCurrencyChoice] = useState<PricingCurrency | null>(null);
-  const [loading, setLoading] = useState(true);
-  const quoteRequest = useRef(0);
-  const detectedCurrency = usePricingCurrency();
+  const currency = usePricingCurrency();
   const trialDays = useTrialDays();
-  const currency = currencyChoice ?? detectedCurrency;
+  const [cycle, setCycle] = useState<BillingCycle>("monthly");
+  const [plan, setPlan] = useState<PlanData | null>(null);
+  const [catalog, setCatalog] = useState<QuoteCatalog | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [selection, setSelection] = useState({ credits: "", storage: "", mobile: "" });
+  const [result, setResult] = useState<{ key: string; quote: Quote | null } | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    async function loadPricing() {
-      const [plansResult, catalogResult] = await Promise.all([
-        fetch(`${API_URL}/api/public/plans`).then((response) => response.json()).then((data) => Array.isArray(data) ? data : []).catch(() => []) as Promise<PlanData[]>,
-        fetch(`${API_URL}/api/public/quote-catalog`).then((response) => response.ok ? response.json() : null).catch(() => null) as Promise<QuoteCatalog | null>,
-      ]);
-      setPlans(plansResult);
-      setCatalog(catalogResult);
-      setLoading(false);
+    const controller = new AbortController();
+    const { signal } = controller;
+    async function load() {
+      try {
+        const data = await getPublic<QuoteCatalog>("quote-catalog", signal);
+        if (signal.aborted) return;
+        setPlan(data.workstation);
+        setCatalog(data);
+      } catch {
+        if (signal.aborted) return;
+        const plans = await getPublic<PlanData[]>("plans", signal).catch(() => []);
+        if (!signal.aborted) setPlan(plans.find(p => p.slug === BASE_PLAN_SLUG) ?? null);
+      } finally {
+        if (!signal.aborted) setLoading(false);
+      }
     }
-    loadPricing();
+    void load();
+    return () => controller.abort();
   }, []);
 
-  const plan = catalog?.workstation ?? plans.find((item) => item.slug === BASE_PLAN_SLUG && item.is_visible_landing !== false) ?? null;
-  const monthlyPrice = priceFor(plan, currency, false);
-  const annualPrice = priceFor(plan, currency, true);
-  const cycle: BillingCycle = billingCycle === "annual" && (quote || annualPrice !== null) ? "annual" : "monthly";
-  const fallbackPrice = cycle === "annual" ? annualPrice : monthlyPrice;
-  const discount = plan?.annual_discount_pct ?? 0;
-  const discountLabel = discount > 0 ? `${discount.toFixed(0)}%` : null;
-  const resolving = loading || currency === null;
-  const quotePrice = quote ? (cycle === "annual" ? quote.annual_total : quote.monthly_total) : fallbackPrice;
-  const hasPrice = !resolving && quotePrice !== null && currency !== null;
-  const trialLabel = trialDays ? `${trialDays} días gratis, sin tarjeta` : "Prueba gratis, sin tarjeta";
-
-  const optionsByFamily = useMemo(() => {
-    const groups: Record<QuoteOption["family"], QuoteOption[]> = { credits: [], storage: [], mobile: [] };
-    catalog?.options.forEach((option) => groups[option.family].push(option));
-    return groups;
-  }, [catalog]);
-
+  const request = catalog && currency ? JSON.stringify({
+    plan_id: catalog.workstation.id,
+    option_ids: families.map(family => selection[family]).filter(Boolean),
+    currency, billing_cycle: cycle,
+  }) : "";
   useEffect(() => {
-    if (!catalog || !currency) return;
+    if (!request) return;
     const controller = new AbortController();
-    const requestId = ++quoteRequest.current;
-    fetch(`${API_URL}/api/public/quote`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ plan_id: catalog.workstation.id, option_ids: selectedOptionIds, currency, billing_cycle: billingCycle }),
-      signal: controller.signal,
-    })
-      .then((response) => response.ok ? response.json() : null)
-      .then((data: Quote | null) => {
-        if (requestId === quoteRequest.current) setQuote(data);
-      })
-      .catch(() => {
-        if (!controller.signal.aborted && requestId === quoteRequest.current) setQuote(null);
-      })
+    async function calculate() {
+      try {
+        const response = await fetch(API_URL + "/api/public/quote", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: request, signal: controller.signal,
+        });
+        if (!response.ok) throw new Error("Cotización no disponible");
+        const quote: Quote = await response.json();
+        if (!controller.signal.aborted) setResult({ key: request, quote });
+      } catch {
+        if (!controller.signal.aborted) setResult({ key: request, quote: null });
+      }
+    }
+    void calculate();
     return () => controller.abort();
-  }, [billingCycle, catalog, currency, selectedOptionIds]);
+  }, [request, attempt]);
 
-  function selectOption(family: QuoteOption["family"], id: string | null) {
-    setSelectedOptionIds((current) => [
-      ...current.filter((optionId) => !optionsByFamily[family].some((option) => option.id === optionId)),
-      ...(id ? [id] : []),
-    ]);
-  }
-
+  const annual = cycle === "annual";
+  const quote = result?.key === request ? result.quote : null;
+  const failed = Boolean(request && result?.key === request && !quote);
+  const monthlyBase = currency === "ARS" ? plan?.price_ars : plan?.price_usd;
+  const annualBase = currency === "ARS" ? plan?.price_annual_ars : plan?.price_annual_usd;
+  const monthlyDisplay = annual && annualBase != null ? annualBase / 12 : monthlyBase;
+  const available = currency && monthlyDisplay != null && (!annual || annualBase != null);
+  const format = (value: number) => value.toLocaleString(currency === "ARS" ? "es-AR" : "en-US", { maximumFractionDigits: 2 });
+  const money = (value: number) => currency + " $" + format(value);
+  const missing = quote?.missing_required_families.length;
   return (
-    <section id="precios" className="relative isolate overflow-hidden bg-[#fffaf5] pb-24 pt-32 lg:pt-40">
-      <div className="absolute inset-0 opacity-[0.18]" aria-hidden="true"><InfinityTrails tone="light" /></div>
-      <div className="absolute -right-32 top-16 h-96 w-96 rounded-full bg-[#c61261]/10 blur-3xl" aria-hidden="true" />
-      <div className="absolute -left-36 bottom-12 h-80 w-80 rounded-full bg-[#ee7d16]/10 blur-3xl" aria-hidden="true" />
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <Badge variant="green" className="mb-4">Precios transparentes</Badge>
-          <h2 className="mb-4 text-3xl font-black text-gray-900 sm:text-4xl">Tu <span className="gradient-text">Axtroos Workstation</span>, a medida</h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-500">La estación de trabajo omnicanal para tu equipo. Configurá los recursos de tu operación y conocé el costo de tu plataforma.{trialDays ? ` ${trialDays} días gratis para probar, sin tarjeta.` : " Prueba gratis, sin tarjeta."}</p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <div role="group" aria-label="Ciclo de facturación" className="inline-flex items-center rounded-full border border-gray-200 bg-white p-1 shadow-sm">
-              <button type="button" aria-pressed={cycle === "monthly"} onClick={() => setBillingCycle("monthly")} className={toggleClass(cycle === "monthly")}>Mensual</button>
-              <button type="button" aria-pressed={cycle === "annual"} disabled={!resolving && annualPrice === null && !quote} title={!resolving && annualPrice === null && !quote ? "Facturación anual no disponible" : undefined} onClick={() => setBillingCycle("annual")} className={toggleClass(cycle === "annual")}>Anual{cycle !== "annual" && discountLabel && <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-emerald-700">Ahorrás {discountLabel}</span>}</button>
-            </div>
-            <div role="group" aria-label="Moneda" className="inline-flex items-center rounded-full border border-gray-200 bg-white p-1 shadow-sm">
-              {CURRENCIES.map((option) => <button key={option} type="button" aria-pressed={currency === option} onClick={() => setCurrencyChoice(option)} className={toggleClass(currency === option)}>{option}</button>)}
-            </div>
-          </div>
+    <section id="precios" className="relative isolate overflow-hidden bg-[#fffaf5] pb-24 pt-32">
+      <div className="pointer-events-none absolute inset-0 opacity-15"><InfinityTrails tone="light" /></div>
+      <div className="relative mx-auto max-w-6xl px-5">
+        <Badge variant="green">Precios transparentes</Badge>
+        <h1 className="mt-4 text-3xl font-black sm:text-4xl">Tu <span className="gradient-text">Axtroos Workstation</span>, a medida</h1>
+        <p className="mt-3 text-gray-600">Configurá los recursos de tu equipo y consultá el costo de tu plataforma.</p>
+        <div className="my-7 inline-flex flex-wrap gap-1 rounded-3xl border border-violet-100 bg-white p-1" role="group" aria-label="Contrato">
+          {(["monthly", "annual"] as const).map(value => (
+            <button key={value} type="button" aria-pressed={cycle === value} onClick={() => setCycle(value)}
+              className={`rounded-full px-4 py-2.5 text-sm font-bold ${cycle === value ? "bg-violet-700 text-white" : "text-gray-700"}`}>
+              {value === "monthly" ? "Contrato mensual" : "Contrato anual"}
+            </button>
+          ))}
         </div>
-
-        <div className="mx-auto grid max-w-5xl gap-6 rounded-[2rem] border border-white/80 bg-white/55 p-3 shadow-[0_24px_70px_rgba(0,31,52,.08)] backdrop-blur-sm lg:grid-cols-[1.1fr_0.9fr] sm:p-5">
-          <PricingCard name={WORKSTATION_NAME} description="La base de tu operación, con los recursos que elegís para tu equipo." price={hasPrice && currency ? priceDisplay(quotePrice, currency, cycle === "annual" ? "/año" : "/mes") : null} loading={resolving} annualSavings={cycle === "annual" && quote && quote.annual_savings > 0 && currency ? `Ahorrás ${currency} $${formatAmount(quote.annual_savings, currency)} al año` : null} annualHint={cycle === "monthly" && quote && quote.annual_savings > 0 && currency ? `Pagando anual ahorrás ${currency} $${formatAmount(quote.annual_savings, currency)}` : cycle === "monthly" && discountLabel ? `Pagando anual ahorrás ${discountLabel}` : null} unpricedLabel="Consultanos" unpricedNote="Estamos preparando el precio de esta configuración. Escribinos y te ayudamos a armarla." includes={PLAN_INCLUDES} trialLabel={trialLabel} cta={hasPrice || resolving ? "Empezar gratis" : "Hablar con nosotros"} ctaHref={hasPrice || resolving ? URLS.signIn : "/contacto/"} />
-
-          <aside className="rounded-2xl border border-white/80 bg-white/90 p-6 shadow-lg shadow-violet-100/70 sm:p-8" aria-label="Cotizador de Axtroos Workstation">
-            <div className="mb-6"><p className="text-sm font-black uppercase tracking-wider text-violet-700">Configurá tu plataforma</p><h3 className="mt-2 text-2xl font-black text-gray-900">Cotizador</h3><p className="mt-2 text-sm leading-relaxed text-gray-500">Elegí los recursos que necesita tu operación. Los importes se consultan al catálogo de Axtroos.</p></div>
-            <div className="space-y-5">
-              {(["credits", "storage"] as const).map((family) => {
-                const selected = selectedOptionIds.find((id) => optionsByFamily[family].some((option) => option.id === id)) ?? "";
-                return <label key={family} className="block"><span className="mb-2 flex items-center justify-between text-sm font-bold text-gray-800"><span>{FAMILY_COPY[family].label}</span><span className="text-xs font-semibold text-violet-600">Obligatorio</span></span><select value={selected} onChange={(event) => selectOption(family, event.target.value || null)} disabled={loading || optionsByFamily[family].length === 0} className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100 disabled:cursor-not-allowed disabled:bg-gray-50"><option value="">{optionsByFamily[family].length ? FAMILY_COPY[family].placeholder : "No disponible por ahora"}</option>{optionsByFamily[family].map((option) => <option key={option.id} value={option.id}>{optionLabel(option)}</option>)}</select></label>;
-              })}
-              {optionsByFamily.mobile.length > 0 && <label className="flex cursor-pointer items-center justify-between gap-4 rounded-xl border border-gray-100 bg-gray-50 p-4"><span><span className="block text-sm font-bold text-gray-800">App móvil</span><span className="mt-1 block text-xs text-gray-500">Sumala si tu equipo también necesita operar desde el celular.</span></span><input type="checkbox" checked={selectedOptionIds.some((id) => optionsByFamily.mobile.some((option) => option.id === id))} onChange={(event) => selectOption("mobile", event.target.checked ? optionsByFamily.mobile[0].id : null)} className="h-5 w-5 rounded border-gray-300 text-violet-600 focus:ring-violet-500" /></label>}
+        <div className="grid items-start gap-6 lg:grid-cols-[3fr_2fr]">
+          <div className="divide-y divide-gray-100 rounded-3xl bg-white px-6 shadow-sm sm:px-8">
+            <div className="py-6">
+              <h2 className="text-2xl font-bold">{WORKSTATION_NAME}</h2>
+              <p className="mt-1 text-sm text-gray-600">Precio de la estación de trabajo</p>
+              <p className="mt-3 font-bold">{available ? <>{currency} $ <span className="text-3xl">{format(monthlyDisplay!)}</span> /mes</> : loading ? "Cargando…" : "Precio por confirmar"}</p>
+              {annual && available && annualBase != null && <p className="mt-1 text-sm text-gray-600">{money(annualBase)} al año{plan?.annual_discount_pct ? " · " + plan.annual_discount_pct + "% de ahorro en Workstation" : ""}</p>}
             </div>
-            {quote && <div className="mt-6 border-t border-gray-100 pt-5"><p className="mb-3 text-xs font-black uppercase tracking-wider text-gray-500">Tu configuración</p><ul className="space-y-2">{quote.lines.map((line) => <li key={line.id} className="flex items-start justify-between gap-3 text-sm"><span className="text-gray-600">{line.name}{line.quantity ? ` · ${line.quantity.toLocaleString("es-AR")} ${line.unit ?? ""}` : ""}</span><span className="shrink-0 font-semibold text-gray-900">{currency} ${formatAmount(cycle === "annual" ? line.annual_amount : line.monthly_amount, currency ?? "USD")}{cycle === "annual" ? "/año" : "/mes"}</span></li>)}</ul>{quote.missing_required_families.length > 0 && <p className="mt-4 rounded-lg bg-amber-50 px-3 py-2 text-xs font-medium text-amber-800">Elegí las opciones obligatorias para completar tu configuración.</p>}</div>}
-            <div className="mt-6 rounded-2xl bg-[#0b0b17] p-5 text-white shadow-lg" aria-live="polite" aria-atomic="true">
-              <p className="text-[11px] font-black uppercase tracking-[0.16em] text-white/60">Total de tu configuración</p>
-              {hasPrice && currency ? <div className="mt-2 flex items-end justify-between gap-3"><p className="text-3xl font-black tracking-tight">{currency} <span className="text-4xl">${formatAmount(quotePrice, currency)}</span></p><span className="mb-1 text-sm font-semibold text-white/70">{cycle === "annual" ? "/año" : "/mes"}</span></div> : <p className="mt-2 text-sm font-medium text-white/70">Estamos preparando el total de tu configuración.</p>}
-              <p className="mt-2 text-xs leading-relaxed text-white/60">{quote?.missing_required_families.length ? "Seleccioná los recursos obligatorios para completar el total." : quote ? "El total se actualiza automáticamente al cambiar cada recurso." : "Incluye Axtroos Workstation. Sumá recursos para ver el total final."}</p>
+            {families.map(family => {
+              const optional = family === "mobile";
+              const options = (catalog?.options ?? []).filter(o => o.family === family).sort((a,b) => (a.quantity ?? 0) - (b.quantity ?? 0));
+              const [label, help] = copy[family];
+              return (
+                <div key={family} className="py-5">
+                  <label htmlFor={"option-" + family} className="flex items-center gap-3 font-bold">{label}
+                    <span className="rounded-full bg-violet-50 px-2 py-1 text-xs text-violet-700">{optional ? "Opcional" : "Obligatorio"}</span>
+                  </label>
+                  <p id={"help-" + family} className="my-2 text-sm text-gray-600">{help}</p>
+                  <select id={"option-" + family} aria-describedby={"help-" + family} required={!optional} value={selection[family]}
+                    disabled={!options.length} onChange={e => setSelection({ ...selection, [family]: e.target.value })}
+                    className="w-full rounded-xl border border-gray-200 bg-white p-3 text-sm disabled:bg-gray-50">
+                    <option value="">{loading ? "Cargando…" : !options.length ? "Sin opciones publicadas" : optional ? "Sin app móvil" : "Elegí una opción"}</option>
+                    {options.map(o => <option key={o.id} value={o.id}>{o.name}{o.quantity != null ? " · " + o.quantity.toLocaleString("es-AR") + " " + (o.unit ?? "") : ""}</option>)}
+                  </select>
+                </div>
+              );
+            })}
+          </div>
+          <aside className="rounded-3xl bg-actros-navy p-6 text-white lg:sticky lg:top-24 sm:p-8">
+            <h2 className="text-xl font-bold">Tu contratación</h2>
+            <div aria-live="polite" aria-atomic="true">
+              {quote && <ul className="my-5 space-y-3">{quote.lines.map(line => (
+                <li key={line.id} className="flex justify-between gap-3 text-sm">
+                  <span>{line.name}</span><span className="shrink-0">{money(annual ? line.annual_amount : line.monthly_amount)}</span>
+                </li>
+              ))}</ul>}
+              <p className="mt-5 border-t border-white/20 pt-5 text-sm">{missing ? "Subtotal de la selección" : "Total de tu configuración"}</p>
+              {quote ? <>
+                <p className="mt-1 text-sm font-semibold">{currency} $ <strong className="text-4xl">{format(annual ? quote.annual_total / 12 : quote.monthly_total)}</strong> /mes</p>
+                {annual && <p className="mt-2 text-sm">{money(quote.annual_total)} facturados al año{quote.annual_savings > 0 && " · Ahorrás " + money(quote.annual_savings)}</p>}
+                {Boolean(missing) && <p className="mt-3 text-sm text-white/80">Para completar el total, elegí {quote.missing_required_families.map(f => f === "credits" ? "créditos IA" : "almacenamiento").join(" y ")}.</p>}
+              </> : <p className="mt-3">{loading || (request && !failed) ? "Calculando…" : "No pudimos obtener la cotización."}</p>}
+            </div>
+            {failed && <button className="mt-3 underline" onClick={() => { setResult(null); setAttempt(n => n + 1); }}>Reintentar cálculo</button>}
+            <div className="mt-6"><Button href={URLS.signIn} variant="secondary">Empezar gratis</Button>
+              <p className="mt-2 text-sm text-white/75">{trialDays ? trialDays + " días gratis, sin tarjeta" : "Prueba gratis, sin tarjeta"}</p>
             </div>
           </aside>
         </div>
-
-        <div className="mx-auto mt-6 flex max-w-5xl items-start gap-4 rounded-2xl border border-white/80 bg-white/80 p-5 shadow-sm backdrop-blur sm:items-center"><span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600"><Puzzle className="h-5 w-5" aria-hidden="true" /></span><p className="text-sm text-gray-600"><strong className="text-gray-900">Expandí tu operación cuando lo necesites.</strong> Los módulos del Marketplace se activan sobre tu plataforma sin perder el historial ni el contexto. <a href="/herramientas/" className="font-semibold text-violet-700 underline underline-offset-2 hover:text-violet-900">Ver módulos</a></p></div>
-        <div className="mt-14 grid gap-6 text-center sm:grid-cols-3">{[{ q: "¿Necesito tarjeta para probar?", a: trialDays ? `No. Los ${trialDays} días de prueba son completamente gratis y sin tarjeta de crédito.` : "No. La prueba es completamente gratis y sin tarjeta de crédito." }, { q: "¿Pago por canal o por usuario?", a: "No. Los canales y los usuarios no tienen cargo adicional en Axtroos Workstation." }, { q: "¿Cómo se calcula el total?", a: "Es la suma de la Workstation y los recursos que elegís desde el catálogo vigente." }].map(({ q, a }) => <div key={q} className="rounded-2xl border border-white/80 bg-white/80 p-5 shadow-sm backdrop-blur"><p className="mb-2 text-sm font-semibold text-gray-900">{q}</p><p className="text-sm text-gray-500">{a}</p></div>)}</div>
+        <section className="mt-12 rounded-3xl bg-white p-6 sm:p-8">
+          <h2 className="text-2xl font-bold">Qué incluye el Core de Axtroos Workstation</h2>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{coreFeatures(plan).map(item => (
+            <li className="flex items-start gap-2 text-sm" key={item}><Check aria-hidden className="h-4 w-4 shrink-0 text-violet-600" />{item}</li>
+          ))}</ul>
+          <a className="mt-6 inline-block font-semibold text-violet-700 underline" href="/herramientas/">Explorar módulos adicionales del Marketplace</a>
+        </section>
+        <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          {[
+            ["¿Necesito tarjeta para probar?", "Podés iniciar la prueba sin tarjeta de crédito."],
+            ["¿Pago por canal o por usuario?", "Los canales y los usuarios están incluidos en Workstation."],
+            ["¿Cómo se calcula el total?", "El catálogo vigente determina el precio de la estación y de los recursos seleccionados."],
+          ].map(([question, answer]) => (
+            <div key={question} className="rounded-2xl bg-white p-5 text-sm">
+              <h3 className="font-bold">{question}</h3><p className="mt-2 text-gray-600">{answer}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

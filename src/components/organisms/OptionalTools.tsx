@@ -13,49 +13,16 @@ interface AddonResponse {
   id: string;
   slug: string;
   name: string;
-  description: string | null;
-  price_ars: number;
-  price_usd: number;
-  included_in_plans: string[] | Record<string, boolean>;
-  is_active?: boolean;
+  short_description: string | null;
+  included_features: string[];
+  price_monthly_ars: number;
+  price_monthly_usd: number;
 }
 
-// Los nombres/precios los define la API; los iconos y bullets viven acá porque
-// son presentación y no pertenecen al catálogo.
-const SLUG_PRESENTATION: Record<string, { icon: LucideIcon; features: string[] }> = {
-  booking: {
-    icon: CalendarCheck,
-    features: ["Agenda de servicios y staff", "Reserva de citas online", "Recordatorios automáticos", "Sincroniza con Google y Calendly"],
-  },
-  catalog: {
-    icon: ShoppingBag,
-    features: ["Productos y categorías", "Carrito con link de pago", "Variantes de producto", "Pedidos directos desde el chat"],
-  },
-  surveys: {
-    icon: ClipboardList,
-    features: ["Encuestas post-conversación", "Scoring NPS y CSAT", "Reportes automáticos", "Detectás clientes insatisfechos a tiempo"],
-  },
-  reviews: {
-    icon: Star,
-    features: ["Pedido automático de reseñas", "En Google Maps y redes", "Mejor reputación online", "Alertas ante críticas"],
-  },
-  sales_pipeline: {
-    icon: Filter,
-    features: ["Funnel con etapas configurables", "Leads con monto y responsable", "Automatizaciones por regla", "Métricas de conversión"],
-  },
-  broadcast: {
-    icon: Megaphone,
-    features: ["Envío masivo por WhatsApp (HSM)", "Segmentación por tags y etapa", "Secuencias drip programadas", "Opt-out automático y métricas de entrega"],
-  },
-  multi_agent: {
-    icon: Bot,
-    features: ["Agentes IA especializados por área", "Router de intenciones automático", "Handoff transparente entre agentes", "Base de conocimiento (RAG) por agente"],
-  },
+const icons: Record<string, LucideIcon> = {
+  booking: CalendarCheck, catalog: ShoppingBag, surveys: ClipboardList, reviews: Star,
+  sales_pipeline: Filter, broadcast: Megaphone, multi_agent: Bot,
 };
-
-function presentationFor(slug: string): { icon: LucideIcon; features: string[] } {
-  return SLUG_PRESENTATION[slug] ?? { icon: Puzzle, features: [] };
-}
 
 function fmtPrice(priceArs: number, priceUsd: number, currency: PricingCurrency | null): string {
   if (currency === "ARS" && priceArs > 0) {
@@ -69,20 +36,24 @@ function fmtPrice(priceArs: number, priceUsd: number, currency: PricingCurrency 
 export function OptionalTools() {
   const [addons, setAddons] = useState<AddonResponse[]>([]);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
   const currency = usePricingCurrency();
 
   useEffect(() => {
     let alive = true;
-    fetch(`${URLS.api}/api/public/addons`, { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : []))
+    fetch(`${URLS.api}/api/public/marketplace-products`, { cache: "no-store" })
+      .then((r) => {
+        if (!r.ok) throw new Error("Catálogo no disponible");
+        return r.json();
+      })
       .then((d) => {
         if (!alive) return;
-        const list = Array.isArray(d) ? d : [];
-        setAddons(list.filter((x) => x.is_active !== false));
+        if (!Array.isArray(d)) throw new Error("Catálogo inválido");
+        setAddons(d);
         setLoading(false);
       })
       .catch(() => {
-        if (alive) setLoading(false);
+        if (alive) { setFailed(true); setLoading(false); }
       });
     return () => {
       alive = false;
@@ -121,29 +92,29 @@ export function OptionalTools() {
             ))}
           </div>
         ) : sorted.length === 0 ? (
-          <p className="text-center text-gray-500">No hay herramientas disponibles por ahora.</p>
+          <p className="text-center text-gray-500">{failed ? "No pudimos cargar el catálogo. Volvé a intentar en unos minutos." : "Todavía no hay módulos publicados."}</p>
         ) : (
           <Stagger className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {sorted.map((addon) => {
-              const pres = presentationFor(addon.slug);
+              const features = addon.included_features ?? [];
               return (
                 <StaggerItem
                   key={addon.id}
                   className="flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:border-violet-200 transition-all duration-300"
                 >
                   <div className="px-6 py-8 text-center border-b border-gray-100 bg-gradient-to-br from-violet-50 to-cyan-50">
-                    <IconBadge icon={pres.icon} size="lg" className="mx-auto mb-3" />
+                    <IconBadge icon={icons[addon.slug] ?? Puzzle} size="lg" className="mx-auto mb-3" />
                     <h3 className="text-xl font-black text-gray-900">{addon.name}</h3>
                   </div>
 
                   <div className="p-6 flex flex-col flex-1">
-                    <p className="text-sm text-gray-600 leading-relaxed mb-6">{addon.description ?? ""}</p>
+                    <p className="text-sm text-gray-600 leading-relaxed mb-6">{addon.short_description ?? ""}</p>
 
-                    {pres.features.length > 0 && (
+                    {features.length > 0 && (
                       <div className="mb-8 flex-1">
                         <p className="text-xs font-black text-gray-600 uppercase tracking-wider mb-3">Incluye</p>
                         <ul className="space-y-2">
-                          {pres.features.map((feature, i) => (
+                          {features.map((feature, i) => (
                             <li key={i} className="flex items-start gap-2">
                               <Check className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
                               <span className="text-xs text-gray-700">{feature}</span>
@@ -154,7 +125,7 @@ export function OptionalTools() {
                     )}
 
                     <div className="pt-6 border-t border-gray-100 mt-auto">
-                      <p className="text-sm font-bold text-gray-900">{fmtPrice(addon.price_ars, addon.price_usd, currency)}</p>
+                      <p className="text-sm font-bold text-gray-900">{fmtPrice(addon.price_monthly_ars, addon.price_monthly_usd, currency)}</p>
                       <p className="text-xs text-gray-500 mt-1">Se suma a tu Axtroos Workstation</p>
                     </div>
                   </div>
