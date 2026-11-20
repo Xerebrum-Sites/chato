@@ -6,6 +6,7 @@ import { IconBadge } from "@/components/atoms/IconBadge";
 import { Stagger, StaggerItem, Reveal } from "@/components/atoms/Reveal";
 import { DemoForm } from "@/components/organisms/DemoForm";
 import { CONTACT, EMAILS } from "@/lib/config";
+import { useTrialDays } from "@/hooks/useTrialDays";
 
 /**
  * Opciones de contacto comercial: WhatsApp directo, email y agenda de demo.
@@ -13,6 +14,7 @@ import { CONTACT, EMAILS } from "@/lib/config";
  */
 export function ContactSection() {
   const [demoOpen, setDemoOpen] = useState(false);
+  const trialDays = useTrialDays();
 
   const cards = [
     {
@@ -77,7 +79,7 @@ export function ContactSection() {
         </Stagger>
 
         <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-600">
-          {["14 días gratis", "Sin tarjeta de crédito", "Sin permanencia"].map((t) => (
+          {[trialDays ? `${trialDays} días gratis` : "Prueba gratis", "Sin tarjeta de crédito", "Sin permanencia"].map((t) => (
             <span key={t} className="inline-flex items-center gap-1.5">
               <Check className="w-4 h-4 text-emerald-500" strokeWidth={2.5} />
               {t}

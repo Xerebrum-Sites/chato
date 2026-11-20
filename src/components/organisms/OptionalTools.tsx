@@ -155,7 +155,7 @@ export function OptionalTools() {
 
                     <div className="pt-6 border-t border-gray-100 mt-auto">
                       <p className="text-sm font-bold text-gray-900">{fmtPrice(addon.price_ars, addon.price_usd, currency)}</p>
-                      <p className="text-xs text-gray-500 mt-1">Se suma a tu plan base</p>
+                      <p className="text-xs text-gray-500 mt-1">Se suma a tu Axtroos Workstation</p>
                     </div>
                   </div>
                 </StaggerItem>

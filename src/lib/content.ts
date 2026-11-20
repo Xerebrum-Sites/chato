@@ -54,7 +54,7 @@ export interface Signal {
 export const trustSignals: Signal[] = [
   {
     icon: CreditCard,
-    title: "14 días gratis, sin tarjeta",
+    title: "Prueba gratis, sin tarjeta",
     description: "Probás todas las funciones sin ingresar datos de pago.",
   },
   {

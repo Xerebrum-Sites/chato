@@ -4,6 +4,7 @@ import { OptionalTools } from "@/components/organisms/OptionalTools";
 import { MarketplaceValue } from "@/components/organisms/MarketplaceValue";
 import { CtaSection } from "@/components/organisms/CtaSection";
 import { URLS } from "@/lib/config";
+import { TrialCopy } from "@/components/atoms/TrialCopy";
 
 export const metadata: Metadata = {
   title: "Marketplace Axtroos — Módulos para expandir tu plataforma",
@@ -25,7 +26,7 @@ export default function HerramientasPage() {
         }
         subtitle="Axtroos crece sin obligarte a cambiar de plataforma: sumá módulos cuando tu operación los necesite y mantené canales, clientes e historial siempre conectados."
         primaryCta={{ label: "Explorar módulos", href: "#modulos" }}
-        secondaryCta={{ label: "Empezar gratis 14 días", href: URLS.signIn }}
+        secondaryCta={{ label: <TrialCopy />, href: URLS.signIn }}
         imageSrc="/images/brand/hero-marketplace-v1.webp"
         imageLabel="Marketplace modular de Axtroos con reservas, catálogo, pipeline, campañas, encuestas, agentes de IA y espacios para futuras capacidades"
       />

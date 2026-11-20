@@ -10,6 +10,7 @@ import { CtaSection } from "@/components/organisms/CtaSection";
 import { Button } from "@/components/atoms/Button";
 import { Reveal } from "@/components/atoms/Reveal";
 import { URLS } from "@/lib/config";
+import { TrialCopy } from "@/components/atoms/TrialCopy";
 
 /**
  * Home liviana: muestra "un poco de todo" con enlaces profundos a cada sección,
@@ -70,7 +71,7 @@ function HumanValueBand() {
           </ul>
           <div className="flex flex-col sm:flex-row gap-3">
             <Button href={URLS.signIn} size="lg">
-              Empezar gratis 14 días
+              <TrialCopy />
             </Button>
             <Button href="/contacto/" variant="outline" size="lg">
               Hablar con nosotros
