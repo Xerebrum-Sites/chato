@@ -203,7 +203,7 @@ export function Pricing() {
   return (
     <section id="precios" className="relative isolate overflow-hidden bg-[#fffaf5] pb-24 pt-32">
       <div className="pointer-events-none absolute inset-0 opacity-15"><InfinityTrails tone="light" /></div>
-      <div className="relative mx-auto max-w-6xl px-5">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Badge variant="green">Precios transparentes</Badge>
         <h1 className="mt-4 text-3xl font-black sm:text-4xl">Tu <span className="gradient-text">Axtroos Workstation</span>, a medida</h1>
         <p className="mt-3 text-gray-600">Configurá los recursos de tu equipo y consultá el costo de tu plataforma.</p>

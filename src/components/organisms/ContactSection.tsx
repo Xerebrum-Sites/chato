@@ -55,7 +55,7 @@ export function ContactSection() {
       <div className="absolute inset-0 opacity-[0.16]" aria-hidden="true"><InfinityTrails tone="light" /></div>
       <div className="absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[#ee7d16]/10 blur-3xl" aria-hidden="true" />
       <div className="absolute -right-24 top-0 h-80 w-80 rounded-full bg-[#c61261]/10 blur-3xl" aria-hidden="true" />
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
           <ContactForm />
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
