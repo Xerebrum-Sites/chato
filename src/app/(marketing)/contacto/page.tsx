@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/organisms/PageHero";
 import { ContactSection } from "@/components/organisms/ContactSection";
 import { ContactHeroVisual } from "@/components/organisms/ConceptVisuals";
-import { CONTACT, URLS } from "@/lib/config";
+import { URLS } from "@/lib/config";
 import { TrialCopy } from "@/components/atoms/TrialCopy";
 
 export const metadata: Metadata = {
   title: "Contacto — Hablemos de tu negocio",
   description:
-    "Escribinos por WhatsApp, mandanos un email o agendá una demo en vivo. Empezá a centralizar tus canales con Axtroos con una prueba gratis, sin tarjeta.",
+    "Envianos tu consulta desde el formulario, escribinos por WhatsApp o agendá una demo en vivo. Empezá a centralizar tus canales con Axtroos con una prueba gratis, sin tarjeta.",
   alternates: { canonical: "/contacto/" },
 };
 
@@ -24,7 +24,7 @@ export default function ContactoPage() {
         }
         subtitle="¿Querés contratar Axtroos o tenés dudas? Estamos para ayudarte. Elegí el canal que más te convenga y te respondemos enseguida."
         primaryCta={{ label: <TrialCopy />, href: URLS.signIn }}
-        secondaryCta={{ label: "Escribinos por WhatsApp", href: CONTACT.whatsappUrl }}
+        secondaryCta={{ label: "Enviar una consulta", href: "#consulta" }}
         visual={<ContactHeroVisual />}
       />
       <ContactSection />
