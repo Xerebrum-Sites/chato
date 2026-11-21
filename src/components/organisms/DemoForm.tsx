@@ -11,6 +11,7 @@ interface Props {
 interface DemoConfig {
   enabled: boolean;
   email_blocklist: string[];
+  booking_url?: string | null;
 }
 
 type Step = 1 | 2;
@@ -42,6 +43,53 @@ const TIME_SLOTS = [
 ];
 
 export function DemoForm({ open, onClose }: Props) {
+  return open ? <DemoDialog onClose={onClose} /> : null;
+}
+
+function DemoDialog({ onClose }: Pick<Props, "onClose">) {
+  const [config, setConfig] = useState<DemoConfig | null>(null);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(`${URLS.api}/api/public/demo/config`, { cache: "no-store", signal: controller.signal })
+      .then(async response => {
+        if (!response.ok) throw new Error();
+        return response.json() as Promise<DemoConfig>;
+      })
+      .then(setConfig)
+      .catch(() => { if (!controller.signal.aborted) setFailed(true); });
+    return () => controller.abort();
+  }, []);
+  useEffect(() => {
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [onClose]);
+
+  if (config?.enabled && !config.booking_url) return <DemoRequest config={config} onClose={onClose} />;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 backdrop-blur-sm"
+      onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
+      <section role="dialog" aria-modal="true" aria-labelledby="demo-calendar-title"
+        className="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <header className="flex items-center justify-between gap-4 border-b border-gray-100 px-5 py-3">
+          <h2 id="demo-calendar-title" className="text-lg font-bold text-gray-900">Agendá una demo</h2>
+          <button type="button" autoFocus onClick={onClose} className="rounded-full px-3 py-2 text-sm font-semibold text-gray-700">Cerrar</button>
+        </header>
+        {config?.enabled && config.booking_url ? (
+          <>
+            <iframe title="Calendario de demos de Axtroos" src={config.booking_url}
+              className="block h-[min(65dvh,42rem)] w-full border-0" />
+            <a href={config.booking_url} target="_blank" rel="noopener noreferrer"
+              className="block px-5 py-3 text-sm font-semibold text-violet-700 underline">Abrir la agenda en otra pestaña</a>
+          </>
+        ) : <p role="status" className="p-6 text-gray-700">{failed ? "No pudimos cargar la agenda. Cerrá y volvé a intentarlo." : config ? "La agenda de demos está desactivada." : "Cargando la agenda…"}</p>}
+      </section>
+    </div>
+  );
+}
+
+function DemoRequest({ config, onClose }: Pick<Props, "onClose"> & { config: DemoConfig }) {
   const [step, setStep] = useState<Step>(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -52,32 +100,6 @@ export function DemoForm({ open, onClose }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [config, setConfig] = useState<DemoConfig>({
-    enabled: true,
-    email_blocklist: [],
-  });
-
-  useEffect(() => {
-    if (!open) return;
-    fetch(`${URLS.api}/api/public/demo/config`, { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : { enabled: true, email_blocklist: [] }))
-      .then((d) => setConfig(d))
-      .catch(() => {
-        // keep defaults
-      });
-  }, [open]);
-
-  useEffect(() => {
-    if (!open) return;
-    function onEsc(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    window.addEventListener("keydown", onEsc);
-    return () => window.removeEventListener("keydown", onEsc);
-  }, [open, onClose]);
-
-  if (!open) return null;
-
   function reset() {
     setStep(1);
     setName("");
