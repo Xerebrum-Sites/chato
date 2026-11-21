@@ -2,7 +2,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 RUN apk add --no-cache fontconfig ttf-dejavu
 COPY package*.json ./
-RUN npm ci
+RUN --mount=type=cache,id=axtroos-landing-npm,target=/root/.npm npm ci --prefer-offline --no-audit --no-fund --fetch-retries=4
 COPY . .
 ARG NEXT_PUBLIC_API_URL=https://api.axtroos.com
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
