@@ -173,7 +173,7 @@ export function FeaturesHeroVisual() {
 
 export function ContactHeroVisual() {
   return (
-    <VisualShell label="Tres formas de contactar al equipo de Axtroos: WhatsApp, email o una demostración">
+    <VisualShell label="Tres formas de contactar al equipo de Axtroos: WhatsApp, formulario o una demostración">
       <div className="w-full max-w-[30rem]">
         <div className="grid grid-cols-3 gap-3">
           <div className="rounded-2xl border border-gray-100 bg-white px-2 py-4 text-center shadow-lg">
@@ -182,7 +182,7 @@ export function ContactHeroVisual() {
           </div>
           <div className="rounded-2xl border border-gray-100 bg-white px-2 py-4 text-center shadow-lg">
             <Mail className="mx-auto mb-3 h-9 w-9 rounded-xl bg-violet-100 p-2 text-violet-700" />
-            <span className="text-[10px] font-black text-gray-700">Email</span>
+            <span className="text-[10px] font-black text-gray-700">Formulario</span>
           </div>
           <div className="rounded-2xl border border-gray-100 bg-white px-2 py-4 text-center shadow-lg">
             <MessageSquareText className="mx-auto mb-3 h-9 w-9 rounded-xl bg-violet-100 p-2 text-violet-700" />
